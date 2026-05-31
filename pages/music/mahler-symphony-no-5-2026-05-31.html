@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mahler — Symphony No. 5 in C-sharp minor · Musical Analysis</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --panel:#ffffff;
+    --ink:#1c1a17;
+    --ink-soft:#55504a;
+    --ink-faint:#8a8279;
+    --line:#e8e2d8;
+    --line-strong:#d8cfc0;
+    --accent:#9a5b2e;       /* warm terracotta — faun / afternoon heat */
+    --accent-soft:#f3e6d8;
+    --accent-ink:#7a4220;
+    --gold:#b8893b;
+    --teal:#2f6b6b;
+    --code-bg:#2b2722;
+    --green:#2f7d4f;
+    --amber:#b07d18;
+    --red:#a8392f;
+    /* themeable extras (overridden by JS palettes) */
+    --header-grad:linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%);
+    --th-bg:#f3ede3;
+    --row-hover:#fbf7f0;
+    --epi-ink:#5b3c20;
+    --warm-bg:#fbf3e2; --warm-bd:#ecd9b0; --warm-ink:#6b4e1e;
+    --cool-bg:#e8f2f1; --cool-bd:#bfdcda; --cool-ink:#1f4f4f;
+    --ml-grad:linear-gradient(150deg,#fbf3e7,#f6e7d4); --ml-bd:#ebd7b8; --ml-ink:#6b3f1c;
+    --radius:12px;
+    --shadow:0 1px 2px rgba(40,30,15,.04),0 6px 22px rgba(40,30,15,.06);
+  }
+  html{transition:none}
+  body,.card,table,.tldr,.callout,.mustlisten,nav.toc a,.svgcard,.pp-panel,.pp-toggle,.pp-sw{
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+    line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  /* ---- header ---- */
+  header.top{
+    background:var(--header-grad);
+    color:#f4ece1;position:relative;overflow:hidden;
+    border-bottom:3px solid var(--accent);
+  }
+  header.top .glow{position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(212,160,90,.35),transparent 65%);pointer-events:none;}
+  header.top .wrap{padding:46px 28px 40px;position:relative;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#d9b384;font-weight:600;margin:0 0 14px}
+  header.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;
+    font-size:40px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+  header.top h1 em{font-style:italic;color:#f0cfa0}
+  header.top .sub{font-size:17px;color:#d8cab8;margin:10px 0 0;max-width:760px}
+  .metarow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-size:13.5px;color:#cdbca6}
+  .metarow b{color:#f4ece1;font-weight:600}
+  .stamp{font-size:12px;color:#b39c80;margin-top:18px;font-family:"SF Mono",Menlo,monospace}
+
+  /* ---- layout ---- */
+  .layout{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0 80px;align-items:start}
+  nav.toc{position:sticky;top:24px;font-size:14px}
+  nav.toc .title{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 12px}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border-radius:7px;border-left:2px solid transparent;line-height:1.35}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+  nav.toc a .n{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;margin-right:7px}
+  nav.toc a.active{background:var(--accent-soft);color:var(--accent-ink);border-left-color:var(--accent)}
+
+  main{min-width:0}
+  section{margin:0 0 50px;scroll-margin-top:24px}
+  h2{font-family:Georgia,serif;font-size:25px;font-weight:600;letter-spacing:-.01em;
+    margin:0 0 4px;display:flex;align-items:baseline;gap:12px}
+  h2 .secn{font-size:14px;font-weight:700;color:#fff;background:var(--accent);
+    width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:-apple-system,system-ui;}
+  .lead{color:var(--ink-soft);margin:2px 0 22px 42px;font-size:15px}
+  h3{font-size:17px;font-weight:650;margin:26px 0 8px;color:var(--ink)}
+  p{margin:0 0 14px}
+  strong{font-weight:650}
+  a.inline{color:var(--accent-ink);text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+
+  /* ---- tl;dr box ---- */
+  .tldr{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow);margin-bottom:8px}
+  .tldr h2{font-size:18px;margin-bottom:10px}
+  .tldr p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+  .tldr p:last-child{margin-bottom:0}
+
+  blockquote.epi{margin:0 0 30px;padding:18px 24px;background:var(--accent-soft);
+    border-radius:var(--radius);font-family:Georgia,serif;font-style:italic;font-size:16px;color:var(--epi-ink)}
+  blockquote.epi .who{display:block;font-style:normal;font-family:-apple-system,system-ui;
+    font-size:13px;color:var(--accent-ink);margin-top:10px;font-weight:600}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 24px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin:6px 0}
+  .keyval{margin:0;padding:0;list-style:none}
+  .keyval li{display:grid;grid-template-columns:165px 1fr;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);margin:0}
+  .keyval li:last-child{border-bottom:none}
+  .keyval .k{color:var(--ink-faint);font-size:13.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+
+  /* ---- tables ---- */
+  table{width:100%;border-collapse:collapse;margin:6px 0 20px;font-size:14.5px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  th{background:var(--th-bg);text-align:left;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line-strong)}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--row-hover)}
+  td.sec{font-weight:650;color:var(--accent-ink);white-space:nowrap}
+  .time{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);white-space:nowrap}
+
+  /* ---- pull callout ---- */
+  .callout{border-radius:var(--radius);padding:16px 20px;margin:18px 0;font-size:15px;border:1px solid}
+  .callout.gold{background:var(--warm-bg);border-color:var(--warm-bd);color:var(--warm-ink)}
+  .callout.teal{background:var(--cool-bg);border-color:var(--cool-bd);color:var(--cool-ink)}
+  .callout .lbl{font-weight:700;text-transform:uppercase;font-size:11.5px;letter-spacing:.1em;display:block;margin-bottom:4px;opacity:.8}
+
+  /* ---- timeline ---- */
+  .tl{list-style:none;margin:8px 0 0;padding:0;position:relative}
+  .tl:before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+  .tl li{position:relative;padding:10px 0 10px 86px;margin:0}
+  .tl .t{position:absolute;left:0;top:11px;width:52px;text-align:right;font-family:"SF Mono",Menlo,monospace;
+    font-size:12.5px;color:var(--teal);font-weight:600}
+  .tl .dot{position:absolute;left:57px;top:15px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--accent)}
+  .tl li.peak .dot{background:var(--accent);width:14px;height:14px;left:56px;top:14px;box-shadow:0 0 0 4px var(--accent-soft)}
+  .tl b{color:var(--ink)}
+
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:2px 8px;border-radius:20px;vertical-align:middle}
+  .b-heart{background:#fbe3df;color:var(--red)}
+  .b-key{background:#e6efe9;color:var(--green)}
+
+  figure{margin:18px 0 24px}
+  figcaption{font-size:13px;color:var(--ink-faint);margin-top:10px;text-align:center;font-style:italic}
+  .svgcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  /* theme-aware SVG strokes/fills */
+  .svgcard svg .sv-axis{stroke:var(--line-strong)}
+  .svgcard svg .sv-grid{stroke:var(--line)}
+  .svgcard svg .sv-curve{stroke:var(--accent)}
+  .svgcard svg .sv-area{fill:var(--accent);opacity:.13}
+  .svgcard svg .sv-gold-line{stroke:var(--gold)}
+  .svgcard svg .sv-gold,.svgcard svg .sv-gold-dot{fill:var(--gold)}
+  .svgcard svg .sv-accent,.svgcard svg .sv-accent-dot{fill:var(--accent)}
+  .svgcard svg .sv-lbl{fill:var(--ink-soft)}
+  .svgcard svg .sv-faint{fill:var(--ink-faint)}
+
+  code{font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:5px}
+
+  /* ---- palette picker ---- */
+  .palette-picker{position:fixed;top:14px;right:14px;z-index:60;font-size:13px;
+    font-family:-apple-system,system-ui,sans-serif}
+  .pp-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    background:rgba(255,255,255,.92);color:#241c14;border:1px solid rgba(0,0,0,.12);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    padding:8px 13px;border-radius:30px;font-weight:600;font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,.16)}
+  .pp-toggle svg{display:block}
+  .pp-toggle .chev{transition:transform .2s ease}
+  .palette-picker.open .pp-toggle .chev{transform:rotate(180deg)}
+  .pp-panel{position:absolute;top:46px;right:0;width:248px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.22);padding:14px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);
+    transform-origin:top right;transition:opacity .16s ease,transform .16s ease,visibility .16s}
+  .palette-picker.open .pp-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+  .pp-group{margin-bottom:12px}
+  .pp-group:last-child{margin-bottom:0}
+  .pp-label{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 2px 8px}
+  .pp-label .ico{width:13px;height:13px;opacity:.7}
+  .pp-swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pp-sw{cursor:pointer;border:1.5px solid var(--line);background:var(--panel);
+    border-radius:10px;padding:7px;display:flex;flex-direction:column;gap:6px;text-align:left;
+    transition:border-color .15s,transform .1s}
+  .pp-sw:hover{transform:translateY(-1px)}
+  .pp-sw .bars{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .pp-sw .bars span{flex:1}
+  .pp-sw .nm{font-size:11.5px;font-weight:600;color:var(--ink-soft);display:flex;
+    align-items:center;justify-content:space-between;gap:4px}
+  .pp-sw.active{border-color:var(--accent)}
+  .pp-sw.active .nm{color:var(--ink)}
+  .pp-sw .tick{width:13px;height:13px;color:var(--accent);opacity:0}
+  .pp-sw.active .tick{opacity:1}
+
+  .rec{display:grid;grid-template-columns:1fr;gap:0}
+  .rec .who{font-weight:650;color:var(--accent-ink)}
+
+  .mustlisten{background:var(--ml-grad);border:1px solid var(--ml-bd);
+    border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow)}
+  .mustlisten h3{margin-top:0;font-family:Georgia,serif;font-size:20px;color:var(--ml-ink)}
+  .mustlisten .span{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--ink-faint);font-size:13.5px}
+  footer a{color:var(--accent-ink);text-decoration:none}
+
+  @media (max-width:720px){
+    .layout{grid-template-columns:1fr;gap:0;padding:24px 0 60px}
+    nav.toc{display:none}
+    .wrap{padding:0 18px}
+    header.top h1{font-size:30px}
+    header.top .wrap{padding:34px 18px 30px}
+    .keyval li{grid-template-columns:1fr;gap:2px}
+    .lead{margin-left:0}
+    h2{font-size:21px}
+    .palette-picker{top:10px;right:10px}
+    .pp-toggle .pp-txt{display:none}
+    .pp-toggle{padding:9px;border-radius:50%}
+    .pp-panel{width:230px}
+  }
+</style>
+</head>
+<body>
+
+<div class="palette-picker" id="picker">
+  <button class="pp-toggle" id="ppToggle" aria-expanded="false" aria-label="Change color theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    <span class="pp-txt">Theme</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pp-panel" role="menu" aria-label="Color palettes">
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>Light</span>
+      <div class="pp-swatches" id="pp-light"></div>
+    </div>
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark</span>
+      <div class="pp-swatches" id="pp-dark"></div>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <p class="eyebrow">Musical Analysis · Symphony</p>
+    <h1>Symphony No. 5 in C-sharp minor</h1>
+    <p class="sub">Mahler · 1901</p>
+    <div class="metarow">
+      <span><b>Composed</b> 1901</span>
+      <span><b>Premiere</b> 18 October 1904, Cologne, conducted by the composer</span>
+    </div>
+    <p class="stamp">Generated 2026-05-31 · musical-analysis</p>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <p class="title">Contents</p>
+    <a href="#tldr"><span class="n">·</span>In brief</a>
+    <a href="#sec0"><span class="n">1</span>Identity &amp; Context</a>
+    <a href="#sec1"><span class="n">2</span>Formal Structure</a>
+    <a href="#sec2"><span class="n">3</span>Melodic &amp; Thematic Content</a>
+    <a href="#sec3"><span class="n">4</span>Harmony &amp; Tonality</a>
+    <a href="#sec4"><span class="n">5</span>Rhythm, Meter &amp; Tempo</a>
+    <a href="#sec5"><span class="n">6</span>Orchestration, Texture &amp; Timbre</a>
+    <a href="#sec6"><span class="n">7</span>Emotional Arc &amp; Dramaturgy</a>
+    <a href="#sec7"><span class="n">8</span>Historical Significance &amp; Influence</a>
+    <a href="#sec8"><span class="n">9</span>Performance Practice &amp; Notable Recordings</a>
+    <a href="#sec9"><span class="n">10</span>Listening Guide</a>
+    <a href="#sec10"><span class="n">11</span>Must-Listen Tracks</a>
+  </nav>
+
+  <main>
+    <section id="tldr"><div class="tldr"><h2>In brief</h2><p>This symphony marks a hinge in Mahler's output. The first four symphonies belong to his "Wunderhorn period" — saturated with vocal music, folk-song quotation, and the imaginative world of the <em>Des Knaben Wunderhorn</em> texts. The Fifth begins his "middle trilogy" (Five, Six, Seven), all purely instrumental, all symphonies of mature contrapuntal craft, and all preoccupied — in different ways — with the problem of how an adult mind constructs meaning from chaos.</p></div></section>
+    <section id="sec0">
+  <h2><span class="secn">1</span>Identity &amp; Context</h2>
+<ul class="keyval">
+<li><span class="k">Full title</span><span>Symphony No. 5 (in C-sharp minor — though Mahler resisted this label, since the symphony does not end in C-sharp minor and the key applies essentially only to the first movement)</span></li>
+<li><span class="k">Composer</span><span>Gustav Mahler (1860–1911)</span></li>
+<li><span class="k">Composition</span><span>Summers of 1901 and 1902, in Mahler's lakeside <em>Komponierhäuschen</em> at Maiernigg on the Wörthersee</span></li>
+<li><span class="k">Premiere</span><span>18 October 1904, Cologne, conducted by the composer</span></li>
+<li><span class="k">Dedicatee</span><span>None formal, but the <em>Adagietto</em> is universally understood — and was confirmed by Willem Mengelberg's annotation in his score, citing Mahler's own words — as a love letter to <strong>Alma Schindler</strong>, whom Mahler met in November 1901, married in March 1902, and to whom he sent the bare melodic line of the Adagietto with no accompanying text. (Alma reported, with characteristic self-mythologizing flair, that she understood the message and replied "come.")</span></li>
+</ul>
+<p>It was also written across the most consequential biographical fissure of Mahler's life. He began the Fifth a bachelor of forty-one, the most powerful conductor in the German-speaking world (Hofoper director since 1897), recovering from a near-fatal hemorrhage in February 1901. He finished it a married man with an infant daughter and a wife twenty years his junior whose own compositional ambitions he had — controversially — required her to suspend.</p>
+<p>The historical moment matters too: 1901–02 is the threshold of musical modernism. Schoenberg's <em>Verklärte Nacht</em> (1899) had just been heard; Debussy's <em>Pelléas et Mélisande</em> premiered in 1902; Strauss had completed <em>Heldenleben</em> (1898). Mahler's Fifth is poised on this threshold — late-Romantic in expression, but reaching forward in its contrapuntal density and harmonic plasticity.</p>
+</section>
+
+    <section id="sec1">
+  <h2><span class="secn">2</span>Formal Structure</h2>
+<p>The symphony is in <strong>five movements grouped into three Parts</strong>, an architectural innovation Mahler explicitly notated in the score. The work runs approximately 70 minutes.</p>
+<p><strong>Part I</strong>: I. Trauermarsch — II. Stürmisch bewegt <strong>Part II</strong>: III. Scherzo <strong>Part III</strong>: IV. Adagietto — V. Rondo-Finale</p>
+<p>This is not a four- or five-movement symphony but a <em>three-act drama</em>. The funeral march and storm of Part I are a dialectical pair; the gigantic Scherzo of Part II stands alone as the symphony's structural keystone; the Adagietto and Rondo-Finale of Part III are again a dialectical pair, this time of love-song and triumphant fugato.</p>
+<h3>I. Trauermarsch — <em>In gemessenem Schritt. Streng. Wie ein Kondukt</em> ("In measured tread. Strict. Like a funeral procession") — C-sharp minor</h3>
+<ul>
+<li><strong>Form</strong>: Rondo-like funeral march with two trio episodes</li>
+<li><strong>Duration</strong>: ~13 minutes</li>
+<li><strong>Structure</strong>:</li>
+<li><strong>Trumpet fanfare</strong> (mm. 1–8) — solo trumpet in dotted rhythms, immediately the symphony's signature gesture</li>
+<li><strong>A</strong>: March proper — orchestral funeral cortège</li>
+<li><strong>B (Trio I)</strong>: Plötzlich schneller. Leidenschaftlich. Wild — sudden eruption in B-flat minor, an outburst of grief</li>
+<li><strong>A'</strong>: March returns</li>
+<li><strong>C (Trio II)</strong>: A more lyrical, Mahler-Wunderhorn-tinged episode, briefly major-mode</li>
+<li><strong>A''</strong>: Final return, dissolving</li>
+</ul>
+<h3>II. Stürmisch bewegt, mit grösster Vehemenz ("Stormily agitated, with greatest vehemence") — A minor</h3>
+<ul class="keyval">
+<li><span class="k">Form</span><span>Sonata-allegro of vast proportions</span></li>
+<li><span class="k">Duration</span><span>~14–15 minutes</span></li>
+<li><span class="k">Exposition</span><span>A-minor first subject of demonic energy; F-major second subject of brooding lyricism</span></li>
+<li><span class="k">Development</span><span>Cyclic recall of Movement I's Trio I — the connection is explicit and structural</span></li>
+<li><span class="k">Recapitulation</span><span>Truncated, troubled</span></li>
+<li><span class="k">Coda</span><span>A <em>premonition</em> of Part III's triumph — a brief, blazing D-major chorale on the brass that fades, denied: "not yet"</span></li>
+</ul>
+<h3>III. Scherzo — <em>Kräftig, nicht zu schnell</em> ("Strong, not too fast") — D major</h3>
+<ul>
+<li><strong>Form</strong>: Vastly expanded scherzo with two trios — a freestanding ländler-symphony in itself</li>
+<li><strong>Duration</strong>: ~17–18 minutes (the longest movement)</li>
+<li><strong>Scherzo</strong>: Bumptious Austrian ländler in 3/4, opens with a horn call (Mahler insisted the <strong>obbligato horn part</strong> be played by a soloist standing apart, like a concertante figure)</li>
+<li><strong>Trio I</strong>: A more graceful Viennese waltz</li>
+<li><strong>Scherzo'</strong></li>
+<li><strong>Trio II</strong>: A nostalgic, slower waltz with pizzicato strings — the symphony's most conventionally Viennese moment</li>
+<li><strong>Scherzo''</strong>: Returns transformed, with developmental working</li>
+<li><strong>Coda</strong>: A whirlwind that gathers and releases</li>
+</ul>
+<p>This movement is the symphony's center of gravity — Mahler's homage to the dance-symphony tradition of Beethoven Seven and Brahms Two, but inflated to four times their length.</p>
+<h3>IV. Adagietto — <em>Sehr langsam</em> ("Very slow") — F major</h3>
+<ul class="keyval">
+<li><span class="k">Form</span><span>Through-composed ternary (A-B-A')</span></li>
+<li><span class="k">Forces</span><span><strong>Strings and harp only</strong> — the symphony's only chamber-scaled movement</span></li>
+<li><span class="k">Duration</span><span>~9–11 minutes (Mahler's tempo markings suggest ~9, but post-Visconti tradition has stretched it as long as 12+)</span></li>
+<li><span class="k">A</span><span>Long-breathed melody in violins, harp arpeggiation, sustained warmth</span></li>
+<li><span class="k">B</span><span>A more impassioned middle section in G-flat (the Neapolitan), reaching a climax</span></li>
+<li><span class="k">A'</span><span>Return, even more rarefied, dissolving into stillness — and then, <em>attacca</em>, into the finale</span></li>
+</ul>
+<h3>V. Rondo-Finale — <em>Allegro giocoso. Frisch</em> ("Quick and joyful. Fresh") — D major</h3>
+<ul>
+<li><strong>Form</strong>: Rondo with extensive double fugue — a synthesis of rondo and fugue</li>
+<li><strong>Duration</strong>: ~14–15 minutes</li>
+<li><strong>Bassoon and horn calls</strong> — pastoral introduction</li>
+<li><strong>Rondo theme</strong>: Bouncy D-major subject, contrapuntal in inclination</li>
+<li><strong>Episodes</strong>: Multiple, with fugal exposition of the rondo theme combined with subjects derived from earlier movements (notably the Adagietto melody)</li>
+<li><strong>Climax</strong>: The return — apotheosized — of Movement II's denied D-major chorale, now triumphantly affirmed</li>
+<li><strong>Coda</strong>: Brilliant D-major peroration</li>
+</ul>
+<h3>Macro-architecture</h3>
+<p>The tonal trajectory is the symphony's deepest design. Movement I is in C-sharp minor; the finale ends in D major. The symphony does not "return home" — it travels a <em>semitone upward</em> across seventy minutes, from grief to joy. C-sharp minor is the threshold of D major, separated by the smallest interval, and Mahler exploits this proximity as the structural metaphor: the difference between despair and rejoicing is a half-step, but it requires five movements to traverse.</p>
+<p>The three-part architecture also creates a symmetry: Parts I and III are both pairs (slow/fast or fast/slow), and Part II — the Scherzo — is the single keystone movement. This is golden-ratio thinking, although Mahler avoided strict numerology.</p>
+<p>The cyclic recalls between movements are dense and deliberate:</p>
+<ul>
+<li>Movement II quotes Movement I's Trio I in its development</li>
+<li>Movement V quotes Movement II's denied chorale (now affirmed) and Movement IV's Adagietto melody (now transformed into bouncy counterpoint)</li>
+<li>The trumpet fanfare of Movement I returns transformed in Movement II</li>
+</ul>
+</section>
+
+    <section id="sec2">
+  <h2><span class="secn">3</span>Melodic &amp; Thematic Content</h2>
+<ul>
+<li><strong>The opening trumpet fanfare</strong> (Movement I, mm. 1–8): Solo trumpet, dotted rhythms — <em>triplet figure → long note</em>. Mahler quotes here, knowingly, the funeral fanfare of Beethoven's <em>Eroica</em> second movement, and possibly Schubert's "Great" C-major Symphony introduction. It is the symphony's <em>idée fixe</em>: a rhythmic cell rather than a melody. It returns transformed in II and (vestigially) in V.</li>
+<li><strong>Funeral march theme</strong> (I, A): Stepwise descending minor, dotted-rhythm tread, characteristic of the genre but spiked with chromatic passing tones.</li>
+<li><strong>First trio outburst</strong> (I, B): An anguished, leaping figure in B-flat minor — almost vocal, almost a scream. This is the material that returns in II.</li>
+<li><strong>Movement II first subject</strong>: A jagged, demonic theme, all leaps and tritones.</li>
+<li><strong>Movement II second subject</strong>: A long, brooding F-major lyric — recognizably <em>Mahlerian Sehnsucht</em>, related to the singing themes of his earlier symphonies.</li>
+<li><strong>Scherzo's ländler theme</strong>: A muscular descending motive in 3/4, repeated in sequence.</li>
+<li><strong>Adagietto melody</strong>: One of the most famous melodies ever written. Stepwise, arching, F-major, all white-key sweetness with a single chromatic inflection that gives it its yearning quality. The melodic shape is — astonishingly — also the basis of the Rondo-Finale's main subject, now transformed from a slow lyric into a bouncy contrapuntal theme. This is Mahler's most spectacular act of motivic transformation.</li>
+<li><strong>Rondo-Finale principal subject</strong>: D-major, contrapuntal, derived from the Adagietto.</li>
+<li><strong>Chorale theme</strong>: First glimpsed in II's coda (denied), then triumphantly affirmed in V's climax.</li>
+</ul>
+<p>The symphony exhibits Mahler's characteristic "thematic ecology": themes evolve, transmute, and reappear in new guises. There is no Beethovenian <em>one-cell-generates-all</em>, but rather a network of related material — what Adorno called "the principle of variation."</p>
+</section>
+
+    <section id="sec3">
+  <h2><span class="secn">4</span>Harmony &amp; Tonality</h2>
+<ul class="keyval">
+<li><span class="k">Harmonic language</span><span>Late-Romantic chromaticism on a fully extended diatonic base — much like Strauss but more contrapuntally driven, less harmonically static.</span></li>
+<li><span class="k">Cross-movement progressive tonality</span><span>C-sharp minor → A minor → D major → F major → D major. This is not key-unity but key-narrative.</span></li>
+<li><span class="k">Counterpoint as harmonic engine</span><span>Especially in the Rondo-Finale, harmony emerges from the <em>crossing of voices</em> rather than from chord progressions per se. Mahler had been studying Bach intensively in this period.</span></li>
+<li><span class="k">Modal mixture</span><span>Major and minor are continuously interpenetrated — the funeral march has bright modal moments, the Adagietto has its Neapolitan shadow, the finale has minor-mode digressions in its episodes.</span></li>
+<li><span class="k">Pedal points</span><span>Less prominent than in the First Symphony, but used at key structural moments — notably the long dominant pedal preparing the finale's chorale climax.</span></li>
+<li><span class="k">Cadential plasticity</span><span>Mahler avoids straightforward cadences; many passages slide into their next harmony rather than cadencing into them.</span></li>
+</ul>
+</section>
+
+    <section id="sec4">
+  <h2><span class="secn">5</span>Rhythm, Meter &amp; Tempo</h2>
+<ul class="keyval">
+<li><span class="k">Funeral march tread</span><span>The symphony opens with a fixed, dotted-rhythm pulse that <em>feels</em> metronomic but is meant to breathe. The pulse must be rigorous, not mechanical.</span></li>
+<li><span class="k">Storm rhythm in II</span><span>Rushing eighth-note triplets in the strings, against contrasting lyrical materials in longer note values — polymetric stress without literal polymeter.</span></li>
+<li><span class="k">Ländler character in III</span><span>The 3/4 of the Scherzo is heavily downbeat-accented, with frequent hemiola (3/4 felt as 3/2) — the signature of Austrian peasant dance.</span></li>
+<li><span class="k">Adagietto's stillness</span><span>4/4 marked <em>Sehr langsam</em>. Mahler's metronome marking (quarter note = 60ish, varying) is brisker than the post-Visconti tradition. The movement is <em>not</em> meant to be funereal.</span></li>
+<li><span class="k">Rondo-Finale</span><span>2/2 cut time, vigorous, with frequent fugal stretto compressing rhythmic space.</span></li>
+<li><span class="k">Tempo notation</span><span>Densely annotated. Mahler indicates <em>Drängend, Zurückhaltend, Plötzlich schneller, Wieder etwas ruhiger</em>. The conductor must navigate constant tempo modulation.</span></li>
+</ul>
+</section>
+
+    <section id="sec5">
+  <h2><span class="secn">6</span>Orchestration, Texture &amp; Timbre</h2>
+<ul>
+<li><strong>Forces</strong>: 4 flutes (3rd &amp; 4th doubling piccolo), 3 oboes (3rd doubling English horn), 3 clarinets (2nd doubling bass clarinet, 3rd doubling E-flat clarinet), 3 bassoons (3rd doubling contrabassoon), 6 horns (the principal horn taking a solo <em>obbligato</em> role in the Scherzo), 4 trumpets, 3 trombones, tuba, timpani, percussion (bass drum, cymbals, tam-tam, triangle, glockenspiel, slapstick), harp, strings.</li>
+<li><strong>Notable orchestrational features</strong>:</li>
+<li><strong>Solo trumpet</strong> opens the symphony — exposed, virtuosic</li>
+<li><strong>Obbligato horn</strong> in the Scherzo — Mahler asks for this part to be played as a <em>concertante solo</em>, with the player ideally standing</li>
+<li><strong>Strings and harp only</strong> in the Adagietto — the symphony's most reduced ensemble, the harp's role pivotal</li>
+<li><strong>Counterpoint over orchestral mass</strong>: In the finale, Mahler weaves multi-voice fugato through a full orchestra without sounding congested — a technical triumph</li>
+<li><strong>Mahler's 1909 revision of orchestration</strong>: After conducting the Fifth, Mahler was so dissatisfied with what he heard that he rebalanced and re-marked the score continuously for the rest of his life. He famously said, "Nobody understood it. I wish I could conduct the first performance fifty years after my death." Modern performances use a critical edition that incorporates many of these refinements.</li>
+<li><strong>Dynamic architecture</strong>: Mahler uses subito <em>pp</em> against full orchestral <em>fff</em> with extreme calibration. The Adagietto is essentially a sustained <em>pp-mp</em> movement; the Rondo-Finale climbs to a sustained <em>fff</em> peroration.</li>
+</ul>
+</section>
+
+    <section id="sec6">
+  <h2><span class="secn">7</span>Emotional Arc &amp; Dramaturgy</h2>
+<p>The dramaturgy of the Fifth is Mahler's most explicitly <em>progressive</em> — meaning, his most explicitly oriented toward a final affirmation. Unlike the Sixth (which ends in catastrophe) or the Ninth (which ends in transcendent dissolution), the Fifth ends in unambiguous joy.</p>
+<ul class="keyval">
+<li><span class="k">Part I</span><span>Death and its aftermath. The funeral march is communal mourning; the storm of Movement II is the private interior — rage, struggle, denial. The brief D-major chorale glimpsed at the end of Movement II is the moment when joy is <em>first imagined</em>, only to be withdrawn: "not yet."</span></li>
+<li><span class="k">Part II</span><span>The world. The Scherzo is enormous, almost grotesquely long, deliberately inflated to encompass the entire range of life — work, dance, sex, drunkenness, melancholy, exuberance. Mahler is making a claim: between death and joy lies <em>life itself</em>, and life cannot be skipped past.</span></li>
+<li><span class="k">Part III</span><span>Love and triumph. The Adagietto is a private love song; the Rondo-Finale is its public consummation. The finale takes the Adagietto's intimate melody and transforms it into a contrapuntal celebration of community and craft — Bach reborn as Viennese D-major joy.</span></li>
+</ul>
+<p>Climax placement: the symphony has <em>two</em> climaxes — the Adagietto's tender high point at its central section (around 5–7 minutes in), and the Rondo-Finale's brass chorale near its end (around 13 minutes in). The first is private, the second public; together they constitute the symphony's emotional double-peak.</p>
+</section>
+
+    <section id="sec7">
+  <h2><span class="secn">8</span>Historical Significance &amp; Influence</h2>
+<p>What was new and radical in 1904:</p>
+<ul class="keyval">
+<li><span class="k">The three-part architecture</span><span>Not a four-movement symphony at all. Mahler's explicit Part I / Part II / Part III labeling forces the conductor and listener to hear the work in unconventional groups.</span></li>
+<li><span class="k">The seventeen-minute Scherzo</span><span>No Scherzo had ever been so long. Bruckner's came close (Eighth, Ninth) but were structurally simpler.</span></li>
+<li><span class="k">Bach-counterpoint integrated into late-Romantic orchestral fabric</span><span>The Rondo-Finale's double fugato is unprecedented in the symphonic tradition since Beethoven's Ninth (and Beethoven's fugato is shorter and more local). Mahler claims Bach for the modern symphony orchestra.</span></li>
+<li><span class="k">The Adagietto</span><span>A movement scored for strings and harp alone, embedded in a massive symphony. Bruckner had used reduced forces for slow movements, but never this minimal, never this vulnerable.</span></li>
+<li><span class="k">The motivic transformation between Adagietto and Finale</span><span>Taking a slow, intimate love song and transforming it into the contrapuntal subject of a triumphant fugato is one of the most audacious motivic moves in the repertoire.</span></li>
+</ul>
+<p>Reception history: Cologne 1904 was tepid; the symphony was confused, considered "too long" and "too contrapuntal." It traveled slowly; revivals were rare in the 1920s and 30s. World War II nearly ended Mahler's reputation in German-speaking Europe (his Jewish identity made him persona non grata under National Socialism). The symphony was rediscovered in the 1960s — most famously through <strong>Luchino Visconti's 1971 film <em>Death in Venice</strong></em>, which used the Adagietto as its central musical image, transforming the movement (and the symphony, and Mahler's wider reputation) almost overnight from specialist enthusiasm into mass-cultural icon.</p>
+<p>Influence: enormous on Berg (the <em>Three Pieces for Orchestra</em> and the violin concerto), Shostakovich (the seriocomic scherzo tradition, the cyclic recall), Britten, Schnittke, John Adams. The Adagietto in particular has been borrowed — sampled, paraphrased, quoted — across film, television, and pop, becoming one of the most recognizable orchestral movements ever written.</p>
+</section>
+
+    <section id="sec8">
+  <h2><span class="secn">9</span>Performance Practice &amp; Notable Recordings</h2>
+<p>Interpretive cruxes:</p>
+<ul class="keyval">
+<li><span class="k">Adagietto tempo</span><span>The post-Visconti tradition stretches the movement to 11–13 minutes, treating it as a tragic elegy. Mahler's own marking and Mengelberg's account suggest 7–9 minutes — a love song, not a dirge. Recent practice has begun to swing back to brisker tempos. (Bernstein took 11+ minutes; Boulez takes 9; Abbado takes 10.)</span></li>
+<li><span class="k">The horn obbligato in the Scherzo</span><span>Some conductors place the soloist physically apart from the section. Most do not. Mahler's intention is concertante prominence.</span></li>
+<li><span class="k">The trumpet solo at the opening</span><span>Notoriously exposed; the player must enter cold and be perfect.</span></li>
+<li><span class="k">Tempo flexibility throughout</span><span>Mahler's score is densely annotated. Rigid metronomic readings flatten the work.</span></li>
+<li><span class="k">Repeats</span><span>Generally observed in the Scherzo's opening section.</span></li>
+</ul>
+<p>Landmark recordings:</p>
+<ol>
+<li><strong>Leonard Bernstein / Vienna Philharmonic (1987, DG)</strong>: The benchmark late-Bernstein reading. Slow, weighty, agonized in Part I, ecstatic in Part III. The Adagietto stretches to 11+ minutes, fully Visconti-influenced. Some find this overripe; others find it definitive.</li>
+<li><strong>Sir John Barbirolli / New Philharmonia Orchestra (1969, EMI)</strong>: Older-school, big-hearted, English-Romantic in temperament. The Adagietto is the most famous: 12+ minutes, almost agonizingly tender. A reading of total emotional commitment.</li>
+<li><strong>Claudio Abbado / Berlin Philharmonic (1993, DG) or Lucerne Festival Orchestra (live, 2004)</strong>: Both luminous, transparent, structurally lucid. The Berlin is more polished; the Lucerne, recorded after Abbado's cancer treatment, has a stricken, valedictory quality.</li>
+<li><strong>Pierre Boulez / Vienna Philharmonic (1996, DG)</strong>: Cool, lucid, clarified. Boulez treats Mahler as a proto-modernist and reveals the contrapuntal architecture of the finale with surgical precision. Adagietto is brisk (~9 minutes) and unsentimental.</li>
+<li><strong>Bernard Haitink / Concertgebouw Orchestra (1970, also a great late live with the Berlin Philharmonic, 1988)</strong>: Classical, balanced, structurally lucid. The Concertgebouw's strings in the Adagietto are gold-standard.</li>
+</ol>
+<p>Honorable mention: <strong>Rafael Kubelík / Bavarian Radio Symphony (1971, DG)</strong> — under-recognized, beautifully proportioned, with a fast Adagietto that restores the movement's love-song character.</p>
+</section>
+
+    <section id="sec9">
+  <h2><span class="secn">10</span>Listening Guide</h2>
+<p>(Timings approximate, based on a ~70-minute recording.)</p>
+<p><strong>Movement I — Trauermarsch (~13')</strong></p>
+<ul>
+<li>0:00 — <em>Solo trumpet fanfare</em>. Three calls; the symphony's opening gesture.</li>
+<li>0:30 — Funeral march proper begins; orchestral cortège.</li>
+<li>4:00 — <em>Trio I</em>: sudden eruption in B-flat minor; passionate, anguished.</li>
+<li>7:00 — Return of the march.</li>
+<li>9:00 — Trio II: more lyrical, briefly major.</li>
+<li>11:00 — Final return; dissolves into silence.</li>
+</ul>
+<p><strong>Movement II — Stürmisch bewegt (~14')</strong></p>
+<ul>
+<li>0:00 — Demonic A-minor first subject; rushing strings, jagged outbursts.</li>
+<li>4:00 — F-major lyrical second subject — brooding <em>Sehnsucht</em>.</li>
+<li>7:00 — Development; <em>cyclic recall</em> of Movement I's Trio I material.</li>
+<li>11:00 — Truncated recapitulation.</li>
+<li>12:30 — <em>Premonition of triumph</em>: a brief D-major brass chorale flares — and is denied. Movement ends in collapse.</li>
+</ul>
+<p><strong>Movement III — Scherzo (~17')</strong></p>
+<ul>
+<li>0:00 — Horn call; Austrian ländler theme launches.</li>
+<li>4:00 — Trio I: more graceful waltz.</li>
+<li>7:00 — Scherzo returns.</li>
+<li>10:00 — Trio II: pizzicato strings, nostalgic Viennese waltz — the symphony's most casually beautiful passage.</li>
+<li>13:00 — Scherzo returns transformed; developmental working.</li>
+<li>15:00 — Whirlwind coda.</li>
+</ul>
+<p><strong>Movement IV — Adagietto (~10')</strong></p>
+<ul>
+<li>0:00 — Strings and harp; the famous F-major melody enters in the violins.</li>
+<li>3:00 — Middle section moves to G-flat (Neapolitan); intensifies.</li>
+<li>5:30 — <em>Climax</em> — the symphony's most intimate emotional peak.</li>
+<li>7:00 — Return of the opening; even more rarefied.</li>
+<li>9:30 — Dissolves to <em>attacca</em> into the finale.</li>
+</ul>
+<p><strong>Movement V — Rondo-Finale (~14')</strong></p>
+<ul>
+<li>0:00 — Bassoon and horn calls; pastoral preamble.</li>
+<li>1:00 — Rondo theme launches: bouncy D-major, contrapuntal.</li>
+<li>4:00 — First fugato episode — Bach in the Vienna of 1902.</li>
+<li>7:00 — <em>Adagietto theme returns</em>, transformed into contrapuntal subject. Listen for it: the slow love song now races.</li>
+<li>10:00 — Long dominant pedal preparing climax.</li>
+<li>12:00 — <em>Triumphant chorale</em> — the chorale denied in Movement II is now affirmed. Brass blaze.</li>
+<li>13:30 — Brilliant peroration to D major close.</li>
+</ul>
+</section>
+
+    <section id="sec10">
+  <h2><span class="secn">11</span>Must-Listen Tracks</h2>
+<div class="mustlisten"><p><strong>Movement IV — <em>Adagietto</strong></em>.</p>
+<p>It is the single most famous orchestral movement Mahler ever wrote, and for once popular culture has chosen well. In ten minutes for strings and harp, Mahler gives you everything that makes the Fifth essential: the long-breathed melody (one of the most beautiful ever conceived), the Neapolitan shadow at the central climax, the way silence and stillness are made structural materials, and the private intimacy that the rest of the symphony surrounds and protects. Visconti was right: it is a movement that contains a whole emotional life.</p>
+<p>Listen for the moment around five minutes in when the strings reach upward into G-flat and the harp opens behind them — Mahler's writing here is so transparent that you can hear <em>each individual voice</em> in the violin section breathing. This is the symphony's secret heart, and once you have heard it, the rest of the symphony becomes intelligible: every other movement is, in some sense, a frame around this center.</p>
+<p><strong>Recommended recording for this movement</strong>: Sir John Barbirolli / New Philharmonia Orchestra (1969, EMI). Yes, it is twelve-plus minutes long, slower than Mahler probably intended; yes, Visconti's influence had not yet reshaped tradition (Barbirolli arrived at his tempo independently). But Barbirolli's command of string sound — the way he draws an English-symphonic warmth from the Philharmonia — has never been equaled in this movement. If you want a brisker, closer-to-Mahler's-marking reading, <strong>Boulez/Vienna (1996)</strong> at around 9 minutes is the alternative: cooler, more architectural, and a useful corrective to the slow tradition.</p>
+<p><strong>Bonus must-listen</strong>: If you have an extra fifteen minutes, the <strong>Rondo-Finale</strong> — particularly the climax around 12:00 where the chorale denied in Movement II is finally affirmed — is the symphony's structural payoff. The Adagietto without the finale is half the story; the finale without the Adagietto is unmoored. Together they are one of the great pairs of movements in the repertoire.</p></div>
+</section>
+    <footer>
+      
+      <p>Companion to the Markdown analysis in the Obsidian vault at <code>Musical Analysis/Mahler - Symphony No. 5.md</code>.</p>
+      <p><a href="index.html">← back to music</a></p>
+    </footer>
+  </main>
+</div>
+</div>
+
+<script>
+  /* ---------- color palettes (Squarespace-style) ---------- */
+  const PALETTES = {
+    afternoon:{mode:'light',label:'Afternoon',v:{
+      '--bg':'#faf8f4','--panel':'#ffffff','--ink':'#1c1a17','--ink-soft':'#55504a','--ink-faint':'#8a8279',
+      '--line':'#e8e2d8','--line-strong':'#d8cfc0','--accent':'#9a5b2e','--accent-soft':'#f3e6d8','--accent-ink':'#7a4220',
+      '--gold':'#b8893b','--teal':'#2f6b6b','--code-bg':'#2b2722',
+      '--header-grad':'linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%)',
+      '--th-bg':'#f3ede3','--row-hover':'#fbf7f0','--epi-ink':'#5b3c20',
+      '--warm-bg':'#fbf3e2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f2f1','--cool-bd':'#bfdcda','--cool-ink':'#1f4f4f',
+      '--ml-grad':'linear-gradient(150deg,#fbf3e7,#f6e7d4)','--ml-bd':'#ebd7b8','--ml-ink':'#6b3f1c'}},
+    sage:{mode:'light',label:'Sage',v:{
+      '--bg':'#f5f7f2','--panel':'#ffffff','--ink':'#1c211a','--ink-soft':'#4e544a','--ink-faint':'#828a7c',
+      '--line':'#e3e8dc','--line-strong':'#d3dac8','--accent':'#5c7a52','--accent-soft':'#e6ede0','--accent-ink':'#3f592f',
+      '--gold':'#a98f3c','--teal':'#3a7a6b','--code-bg':'#1f2620',
+      '--header-grad':'linear-gradient(160deg,#1a231a 0%,#283a26 55%,#3a5232 100%)',
+      '--th-bg':'#edf1e7','--row-hover':'#f6f9f2','--epi-ink':'#3c4f30',
+      '--warm-bg':'#f4efdf','--warm-bd':'#e2dba9','--warm-ink':'#5f5520',
+      '--cool-bg':'#e6f1ec','--cool-bd':'#c0dccd','--cool-ink':'#1f4f3e',
+      '--ml-grad':'linear-gradient(150deg,#eef3e4,#e3ecd6)','--ml-bd':'#d2dcb8','--ml-ink':'#3f5224'}},
+    harbor:{mode:'light',label:'Harbor',v:{
+      '--bg':'#f4f6f9','--panel':'#ffffff','--ink':'#1a2026','--ink-soft':'#4b5560','--ink-faint':'#7d8794',
+      '--line':'#e1e7ec','--line-strong':'#cfd8e1','--accent':'#2f6690','--accent-soft':'#e0ebf2','--accent-ink':'#234e6b',
+      '--gold':'#b5862f','--teal':'#2f8682','--code-bg':'#192129',
+      '--header-grad':'linear-gradient(160deg,#121b24 0%,#1d2e3f 55%,#274a63 100%)',
+      '--th-bg':'#e9eef3','--row-hover':'#f4f8fb','--epi-ink':'#234e6b',
+      '--warm-bg':'#f6efe0','--warm-bd':'#e7d6b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e2eef2','--cool-bd':'#bcd6de','--cool-ink':'#1f4f55',
+      '--ml-grad':'linear-gradient(150deg,#e8f1f6,#dbe9f1)','--ml-bd':'#c2d6e4','--ml-ink':'#234e6b'}},
+    plum:{mode:'light',label:'Plum',v:{
+      '--bg':'#f8f5f8','--panel':'#ffffff','--ink':'#221c21','--ink-soft':'#564b54','--ink-faint':'#897e87',
+      '--line':'#e9e0e7','--line-strong':'#dccdd8','--accent':'#7d4a6b','--accent-soft':'#efe2ec','--accent-ink':'#5d3550',
+      '--gold':'#b07d3b','--teal':'#3a7a72','--code-bg':'#241c23',
+      '--header-grad':'linear-gradient(160deg,#201823 0%,#332338 55%,#4e2f53 100%)',
+      '--th-bg':'#f1e9f0','--row-hover':'#faf5f9','--epi-ink':'#5d3550',
+      '--warm-bg':'#f7efe2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f1f0','--cool-bd':'#c4d9d5','--cool-ink':'#1f4f48',
+      '--ml-grad':'linear-gradient(150deg,#f4e9f1,#ecdbe8)','--ml-bd':'#ddc4d6','--ml-ink':'#5d3550'}},
+    midnight:{mode:'dark',label:'Midnight',v:{
+      '--bg':'#0f1620','--panel':'#18212e','--ink':'#e8edf3','--ink-soft':'#a9b5c4','--ink-faint':'#6f7d8d',
+      '--line':'#25303f','--line-strong':'#34414f','--accent':'#5b9bd5','--accent-soft':'#1b2a3b','--accent-ink':'#9cc4e8',
+      '--gold':'#d2a85f','--teal':'#4db1a8','--code-bg':'#0b121b',
+      '--header-grad':'linear-gradient(160deg,#0b1220 0%,#13243a 55%,#1d3a5c 100%)',
+      '--th-bg':'#1f2a38','--row-hover':'#1d2735','--epi-ink':'#9cc4e8',
+      '--warm-bg':'#2a2418','--warm-bd':'#43381f','--warm-ink':'#e0b878',
+      '--cool-bg':'#11302d','--cool-bd':'#1f4a45','--cool-ink':'#7fd6cc',
+      '--ml-grad':'linear-gradient(150deg,#1c2a3b,#16222f)','--ml-bd':'#2c3f55','--ml-ink':'#9cc4e8'}},
+    charcoal:{mode:'dark',label:'Charcoal',v:{
+      '--bg':'#161514','--panel':'#201e1c','--ink':'#ece8e2','--ink-soft':'#b0a99f','--ink-faint':'#766f65',
+      '--line':'#2c2926','--line-strong':'#3a3631','--accent':'#c8895a','--accent-soft':'#2c2420','--accent-ink':'#e3a878',
+      '--gold':'#cda35e','--teal':'#5aada3','--code-bg':'#100f0e',
+      '--header-grad':'linear-gradient(160deg,#141210 0%,#241e18 55%,#3a2c20 100%)',
+      '--th-bg':'#25221f','--row-hover':'#211e1b','--epi-ink':'#e3a878',
+      '--warm-bg':'#2c2418','--warm-bd':'#443720','--warm-ink':'#e0b878',
+      '--cool-bg':'#1a2826','--cool-bd':'#2c4641','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#272019,#1d1814)','--ml-bd':'#3d3124','--ml-ink':'#e3a878'}},
+    forest:{mode:'dark',label:'Forest',v:{
+      '--bg':'#101713','--panel':'#18211b','--ink':'#e6ece6','--ink-soft':'#a6b3a6','--ink-faint':'#6e7c6e',
+      '--line':'#243029','--line-strong':'#324133','--accent':'#6fae7e','--accent-soft':'#1a2a20','--accent-ink':'#9fd3aa',
+      '--gold':'#cda35e','--teal':'#4fb0a0','--code-bg':'#0b110d',
+      '--header-grad':'linear-gradient(160deg,#0c1410 0%,#142a1d 55%,#1d4230 100%)',
+      '--th-bg':'#1d2922','--row-hover':'#1a241d','--epi-ink':'#9fd3aa',
+      '--warm-bg':'#28281a','--warm-bd':'#3f3f24','--warm-ink':'#d8b878',
+      '--cool-bg':'#16302a','--cool-bd':'#274a40','--cool-ink':'#7fd0bc',
+      '--ml-grad':'linear-gradient(150deg,#18271e,#132019)','--ml-bd':'#2a4231','--ml-ink':'#9fd3aa'}},
+    wine:{mode:'dark',label:'Wine',v:{
+      '--bg':'#1a1012','--panel':'#241619','--ink':'#f0e4e6','--ink-soft':'#c2a9af','--ink-faint':'#8c6f76',
+      '--line':'#321f24','--line-strong':'#43292f','--accent':'#c46b7e','--accent-soft':'#2e1a1f','--accent-ink':'#e49aa8',
+      '--gold':'#cda35e','--teal':'#5aa8a0','--code-bg':'#140c0e',
+      '--header-grad':'linear-gradient(160deg,#160c0e 0%,#2a141a 55%,#4a2230 100%)',
+      '--th-bg':'#2c1c20','--row-hover':'#271519','--epi-ink':'#e49aa8',
+      '--warm-bg':'#2e2418','--warm-bd':'#463720','--warm-ink':'#e0b878',
+      '--cool-bg':'#18302d','--cool-bd':'#2a4a45','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#2a181d,#201216)','--ml-bd':'#43272f','--ml-ink':'#e49aa8'}}
+  };
+
+  const root = document.documentElement;
+  function applyPalette(key){
+    const p = PALETTES[key]; if(!p) return;
+    for(const [k,val] of Object.entries(p.v)) root.style.setProperty(k,val);
+    root.setAttribute('data-mode', p.mode);
+    document.querySelectorAll('.pp-sw').forEach(b=>b.classList.toggle('active', b.dataset.pal===key));
+    try{ localStorage.setItem('faune-palette', key); }catch(e){}
+  }
+
+  // build swatches
+  const tick = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  for(const [key,p] of Object.entries(PALETTES)){
+    const btn = document.createElement('button');
+    btn.className = 'pp-sw'; btn.dataset.pal = key; btn.type = 'button';
+    btn.title = p.label;
+    btn.innerHTML =
+      '<div class="bars">'+
+        '<span style="background:'+p.v['--bg']+'"></span>'+
+        '<span style="background:'+p.v['--accent']+'"></span>'+
+        '<span style="background:'+p.v['--accent-ink']+'"></span>'+
+        '<span style="background:'+p.v['--gold']+'"></span>'+
+      '</div>'+
+      '<span class="nm">'+p.label+tick+'</span>';
+    btn.addEventListener('click', ()=>applyPalette(key));
+    document.getElementById(p.mode==='light'?'pp-light':'pp-dark').appendChild(btn);
+  }
+
+  // toggle panel
+  const picker = document.getElementById('picker');
+  const ppToggle = document.getElementById('ppToggle');
+  ppToggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = picker.classList.toggle('open');
+    ppToggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.addEventListener('click', (e)=>{
+    if(!picker.contains(e.target)) picker.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') picker.classList.remove('open'); });
+
+  // restore saved or honor OS dark preference
+  let saved=null; try{ saved = localStorage.getItem('faune-palette'); }catch(e){}
+  if(saved && PALETTES[saved]) applyPalette(saved);
+  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
+  else applyPalette('afternoon');
+
+  // active TOC highlighting
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const map = {};
+  links.forEach(a => { const id = a.getAttribute('href').slice(1); map[id] = a; });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = map[e.target.id];
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Béla Bartók — Piano Concerto No. 3 in E Major, Sz. 119, BB 127 · Musical Analysis</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --panel:#ffffff;
+    --ink:#1c1a17;
+    --ink-soft:#55504a;
+    --ink-faint:#8a8279;
+    --line:#e8e2d8;
+    --line-strong:#d8cfc0;
+    --accent:#9a5b2e;       /* warm terracotta — faun / afternoon heat */
+    --accent-soft:#f3e6d8;
+    --accent-ink:#7a4220;
+    --gold:#b8893b;
+    --teal:#2f6b6b;
+    --code-bg:#2b2722;
+    --green:#2f7d4f;
+    --amber:#b07d18;
+    --red:#a8392f;
+    /* themeable extras (overridden by JS palettes) */
+    --header-grad:linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%);
+    --th-bg:#f3ede3;
+    --row-hover:#fbf7f0;
+    --epi-ink:#5b3c20;
+    --warm-bg:#fbf3e2; --warm-bd:#ecd9b0; --warm-ink:#6b4e1e;
+    --cool-bg:#e8f2f1; --cool-bd:#bfdcda; --cool-ink:#1f4f4f;
+    --ml-grad:linear-gradient(150deg,#fbf3e7,#f6e7d4); --ml-bd:#ebd7b8; --ml-ink:#6b3f1c;
+    --radius:12px;
+    --shadow:0 1px 2px rgba(40,30,15,.04),0 6px 22px rgba(40,30,15,.06);
+  }
+  html{transition:none}
+  body,.card,table,.tldr,.callout,.mustlisten,nav.toc a,.svgcard,.pp-panel,.pp-toggle,.pp-sw{
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+    line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  /* ---- header ---- */
+  header.top{
+    background:var(--header-grad);
+    color:#f4ece1;position:relative;overflow:hidden;
+    border-bottom:3px solid var(--accent);
+  }
+  header.top .glow{position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(212,160,90,.35),transparent 65%);pointer-events:none;}
+  header.top .wrap{padding:46px 28px 40px;position:relative;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#d9b384;font-weight:600;margin:0 0 14px}
+  header.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;
+    font-size:40px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+  header.top h1 em{font-style:italic;color:#f0cfa0}
+  header.top .sub{font-size:17px;color:#d8cab8;margin:10px 0 0;max-width:760px}
+  .metarow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-size:13.5px;color:#cdbca6}
+  .metarow b{color:#f4ece1;font-weight:600}
+  .stamp{font-size:12px;color:#b39c80;margin-top:18px;font-family:"SF Mono",Menlo,monospace}
+
+  /* ---- layout ---- */
+  .layout{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0 80px;align-items:start}
+  nav.toc{position:sticky;top:24px;font-size:14px}
+  nav.toc .title{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 12px}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border-radius:7px;border-left:2px solid transparent;line-height:1.35}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+  nav.toc a .n{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;margin-right:7px}
+  nav.toc a.active{background:var(--accent-soft);color:var(--accent-ink);border-left-color:var(--accent)}
+
+  main{min-width:0}
+  section{margin:0 0 50px;scroll-margin-top:24px}
+  h2{font-family:Georgia,serif;font-size:25px;font-weight:600;letter-spacing:-.01em;
+    margin:0 0 4px;display:flex;align-items:baseline;gap:12px}
+  h2 .secn{font-size:14px;font-weight:700;color:#fff;background:var(--accent);
+    width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:-apple-system,system-ui;}
+  .lead{color:var(--ink-soft);margin:2px 0 22px 42px;font-size:15px}
+  h3{font-size:17px;font-weight:650;margin:26px 0 8px;color:var(--ink)}
+  p{margin:0 0 14px}
+  strong{font-weight:650}
+  a.inline{color:var(--accent-ink);text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+
+  /* ---- tl;dr box ---- */
+  .tldr{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow);margin-bottom:8px}
+  .tldr h2{font-size:18px;margin-bottom:10px}
+  .tldr p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+  .tldr p:last-child{margin-bottom:0}
+
+  blockquote.epi{margin:0 0 30px;padding:18px 24px;background:var(--accent-soft);
+    border-radius:var(--radius);font-family:Georgia,serif;font-style:italic;font-size:16px;color:var(--epi-ink)}
+  blockquote.epi .who{display:block;font-style:normal;font-family:-apple-system,system-ui;
+    font-size:13px;color:var(--accent-ink);margin-top:10px;font-weight:600}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 24px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin:6px 0}
+  .keyval{margin:0;padding:0;list-style:none}
+  .keyval li{display:grid;grid-template-columns:165px 1fr;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);margin:0}
+  .keyval li:last-child{border-bottom:none}
+  .keyval .k{color:var(--ink-faint);font-size:13.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+
+  /* ---- tables ---- */
+  table{width:100%;border-collapse:collapse;margin:6px 0 20px;font-size:14.5px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  th{background:var(--th-bg);text-align:left;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line-strong)}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--row-hover)}
+  td.sec{font-weight:650;color:var(--accent-ink);white-space:nowrap}
+  .time{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);white-space:nowrap}
+
+  /* ---- pull callout ---- */
+  .callout{border-radius:var(--radius);padding:16px 20px;margin:18px 0;font-size:15px;border:1px solid}
+  .callout.gold{background:var(--warm-bg);border-color:var(--warm-bd);color:var(--warm-ink)}
+  .callout.teal{background:var(--cool-bg);border-color:var(--cool-bd);color:var(--cool-ink)}
+  .callout .lbl{font-weight:700;text-transform:uppercase;font-size:11.5px;letter-spacing:.1em;display:block;margin-bottom:4px;opacity:.8}
+
+  /* ---- timeline ---- */
+  .tl{list-style:none;margin:8px 0 0;padding:0;position:relative}
+  .tl:before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+  .tl li{position:relative;padding:10px 0 10px 86px;margin:0}
+  .tl .t{position:absolute;left:0;top:11px;width:52px;text-align:right;font-family:"SF Mono",Menlo,monospace;
+    font-size:12.5px;color:var(--teal);font-weight:600}
+  .tl .dot{position:absolute;left:57px;top:15px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--accent)}
+  .tl li.peak .dot{background:var(--accent);width:14px;height:14px;left:56px;top:14px;box-shadow:0 0 0 4px var(--accent-soft)}
+  .tl b{color:var(--ink)}
+
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:2px 8px;border-radius:20px;vertical-align:middle}
+  .b-heart{background:#fbe3df;color:var(--red)}
+  .b-key{background:#e6efe9;color:var(--green)}
+
+  figure{margin:18px 0 24px}
+  figcaption{font-size:13px;color:var(--ink-faint);margin-top:10px;text-align:center;font-style:italic}
+  .svgcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  /* theme-aware SVG strokes/fills */
+  .svgcard svg .sv-axis{stroke:var(--line-strong)}
+  .svgcard svg .sv-grid{stroke:var(--line)}
+  .svgcard svg .sv-curve{stroke:var(--accent)}
+  .svgcard svg .sv-area{fill:var(--accent);opacity:.13}
+  .svgcard svg .sv-gold-line{stroke:var(--gold)}
+  .svgcard svg .sv-gold,.svgcard svg .sv-gold-dot{fill:var(--gold)}
+  .svgcard svg .sv-accent,.svgcard svg .sv-accent-dot{fill:var(--accent)}
+  .svgcard svg .sv-lbl{fill:var(--ink-soft)}
+  .svgcard svg .sv-faint{fill:var(--ink-faint)}
+
+  code{font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:5px}
+
+  /* ---- palette picker ---- */
+  .palette-picker{position:fixed;top:14px;right:14px;z-index:60;font-size:13px;
+    font-family:-apple-system,system-ui,sans-serif}
+  .pp-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    background:rgba(255,255,255,.92);color:#241c14;border:1px solid rgba(0,0,0,.12);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    padding:8px 13px;border-radius:30px;font-weight:600;font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,.16)}
+  .pp-toggle svg{display:block}
+  .pp-toggle .chev{transition:transform .2s ease}
+  .palette-picker.open .pp-toggle .chev{transform:rotate(180deg)}
+  .pp-panel{position:absolute;top:46px;right:0;width:248px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.22);padding:14px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);
+    transform-origin:top right;transition:opacity .16s ease,transform .16s ease,visibility .16s}
+  .palette-picker.open .pp-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+  .pp-group{margin-bottom:12px}
+  .pp-group:last-child{margin-bottom:0}
+  .pp-label{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 2px 8px}
+  .pp-label .ico{width:13px;height:13px;opacity:.7}
+  .pp-swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pp-sw{cursor:pointer;border:1.5px solid var(--line);background:var(--panel);
+    border-radius:10px;padding:7px;display:flex;flex-direction:column;gap:6px;text-align:left;
+    transition:border-color .15s,transform .1s}
+  .pp-sw:hover{transform:translateY(-1px)}
+  .pp-sw .bars{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .pp-sw .bars span{flex:1}
+  .pp-sw .nm{font-size:11.5px;font-weight:600;color:var(--ink-soft);display:flex;
+    align-items:center;justify-content:space-between;gap:4px}
+  .pp-sw.active{border-color:var(--accent)}
+  .pp-sw.active .nm{color:var(--ink)}
+  .pp-sw .tick{width:13px;height:13px;color:var(--accent);opacity:0}
+  .pp-sw.active .tick{opacity:1}
+
+  .rec{display:grid;grid-template-columns:1fr;gap:0}
+  .rec .who{font-weight:650;color:var(--accent-ink)}
+
+  .mustlisten{background:var(--ml-grad);border:1px solid var(--ml-bd);
+    border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow)}
+  .mustlisten h3{margin-top:0;font-family:Georgia,serif;font-size:20px;color:var(--ml-ink)}
+  .mustlisten .span{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--ink-faint);font-size:13.5px}
+  footer a{color:var(--accent-ink);text-decoration:none}
+
+  @media (max-width:720px){
+    .layout{grid-template-columns:1fr;gap:0;padding:24px 0 60px}
+    nav.toc{display:none}
+    .wrap{padding:0 18px}
+    header.top h1{font-size:30px}
+    header.top .wrap{padding:34px 18px 30px}
+    .keyval li{grid-template-columns:1fr;gap:2px}
+    .lead{margin-left:0}
+    h2{font-size:21px}
+    .palette-picker{top:10px;right:10px}
+    .pp-toggle .pp-txt{display:none}
+    .pp-toggle{padding:9px;border-radius:50%}
+    .pp-panel{width:230px}
+  }
+</style>
+</head>
+<body>
+
+<div class="palette-picker" id="picker">
+  <button class="pp-toggle" id="ppToggle" aria-expanded="false" aria-label="Change color theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    <span class="pp-txt">Theme</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pp-panel" role="menu" aria-label="Color palettes">
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>Light</span>
+      <div class="pp-swatches" id="pp-light"></div>
+    </div>
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark</span>
+      <div class="pp-swatches" id="pp-dark"></div>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <p class="eyebrow">Musical Analysis · Concerto</p>
+    <h1>Piano Concerto No. 3 in E Major, Sz. 119, BB 127</h1>
+    <p class="sub">Béla Bartók · 1945</p>
+    <div class="metarow">
+      <span><b>Composed</b> 1945</span>
+      <span><b>Premiere</b> 8 February 1946, Philadelphia Orchestra under Eugene Ormandy, soloist György …</span>
+    </div>
+    <p class="stamp">Generated 2026-05-31 · musical-analysis</p>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <p class="title">Contents</p>
+    <a href="#tldr"><span class="n">·</span>In brief</a>
+    <a href="#sec0"><span class="n">1</span>Identity &amp; Context</a>
+    <a href="#sec1"><span class="n">2</span>Formal Structure</a>
+    <a href="#sec2"><span class="n">3</span>Melodic &amp; Thematic Content</a>
+    <a href="#sec3"><span class="n">4</span>Harmony &amp; Tonality</a>
+    <a href="#sec4"><span class="n">5</span>Rhythm, Meter &amp; Tempo</a>
+    <a href="#sec5"><span class="n">6</span>Orchestration, Texture &amp; Timbre</a>
+    <a href="#sec6"><span class="n">7</span>Emotional Arc &amp; Dramaturgy</a>
+    <a href="#sec7"><span class="n">8</span>Historical Significance &amp; Influence</a>
+    <a href="#sec8"><span class="n">9</span>Performance Practice &amp; Notable Recordings</a>
+    <a href="#sec9"><span class="n">10</span>Listening Guide</a>
+    <a href="#sec10"><span class="n">11</span>Must-Listen Track</a>
+  </nav>
+
+  <main>
+    <section id="tldr"><div class="tldr"><h2>In brief</h2><p><strong>Title.</strong> Piano Concerto No. 3 in E major, Sz. 119, BB 127. <strong>Composer.</strong> Béla Bartók (1881–1945). <strong>Composed.</strong> Summer–autumn 1945, in Saranac Lake, New York, and at the composer's small apartment on West 57th Street, Manhattan. Bartók was racing leukemia. <strong>Premiere.</strong> 8 February 1946, Philadelphia Orchestra under Eugene Ormandy, soloist György Sándor. Bartók himself never heard a note of it played. <strong>Completion.</strong> Bartók fully drafted the work in short score and orchestrated all but the last seventeen measures of the finale before his death on 26 September 1945. His pupil and friend Tibor Serly completed the orchestration of those bars from Bartók's annotated short score; the textual situation is unusually clean — there is little doubt about Bartók's intentions, only about a few details of doubling.</p></div></section>
+    <section id="sec0">
+  <h2><span class="secn">1</span>Identity &amp; Context</h2>
+<p><strong>Occasion.</strong> Bartók wrote it as a 42nd-birthday present for his wife, the pianist Ditta Pásztory-Bartók — and, more pragmatically, as a vehicle she could play after his death to earn an income. He almost certainly knew he would not finish it as a working composer; the concerto is his attempt to leave her a usable, marketable instrument. It is dedicated to no one explicitly in the score, but the work is universally understood as her piece.</p>
+<p><strong>Where it sits in the output.</strong> This is Bartók's last completed major work (the Viola Concerto, left in fragmentary sketches, was assembled by Serly afterward). It belongs to the late "American" style: lyrical, classically transparent, harmonically warmer, considerably less percussive than the Piano Concertos Nos. 1 (1926) and 2 (1930–31), and more outwardly reconciled in tone than the <em>Concerto for Orchestra</em> (1943) that immediately precedes it. With the <em>Sonata for Solo Violin</em> (1944) and the late <em>Mikrokosmos</em>, it forms a final triptych of works that step back from the savage modernism of the 1920s toward a kind of luminous classicism rooted in folk material.</p>
+<p><strong>Historical moment.</strong> September 1945 is V-J Day. Bartók had fled Nazi Europe in 1940 in protest of fascism, refused to play in Germany or Italy, and spent his American years in poverty and physical decline. The concerto was written as the war ended — much of it at Saranac Lake, an Adirondack tuberculosis-sanatorium town where ASCAP had paid for him to convalesce. The world it leaves behind is at peace; the music knows it.</p>
+</section>
+
+    <section id="sec1">
+  <h2><span class="secn">2</span>Formal Structure</h2>
+<p>The concerto runs roughly 23–25 minutes in three movements. The architecture is classical, almost demonstratively so — Bartók seems to be reaching past his own 1920s modernism back toward Beethoven and Bach.</p>
+<table>
+<thead><tr>
+<th>Mvt.</th>
+<th>Tempo</th>
+<th>Form</th>
+<th>Key center</th>
+<th>Approx. duration</th>
+</tr></thead>
+<tbody>
+<tr><td>I</td><td>Allegretto</td><td>Sonata form</td><td>E major</td><td>~7–8 min</td></tr>
+<tr><td>II</td><td>Adagio religioso – Poco più mosso – Tempo I</td><td>Ternary (A–B–A′)</td><td>C major (outer) / "night music" (middle)</td><td>~10–11 min</td></tr>
+<tr><td>III</td><td>Allegro vivace</td><td>Rondo with fugato episodes</td><td>E major</td><td>~6–7 min</td></tr>
+</tbody></table>
+<h3>I. Allegretto</h3>
+<p><strong>Form.</strong> A textbook sonata-form, perhaps Bartók's most classically lucid first movement. Exposition → development → recapitulation, with no concerto double-exposition (orchestra and soloist enter together, as in Beethoven's Fourth and Fifth concertos).</p>
+<ul>
+<li><strong>Exposition (mm. 1–~95).</strong> The piano enters in the first bar, in unaccompanied octaves, with the principal theme over a tremolando string carpet. The first theme is a long, sinuous melodic paragraph in E major built on a Hungarian folk-modal scale (Lydian inflections — raised fourth — are audible throughout). A bridge passage modulates to B; a quieter, more lyrical second theme arrives in the dominant region.</li>
+<li><strong>Development (~mm. 95–~150).</strong> Compact, motivic, fragmentary; Bartók pulls the head-motif of the first theme through varied keys and registers, with rising sequential pressure.</li>
+<li><strong>Recapitulation (~mm. 150–end).</strong> First theme returns at pitch in E; second theme returns in the tonic. A short cadenza-like flourish leads to a luminous coda.</li>
+</ul>
+<p><strong>Tonal plan.</strong> E major, with Bartók's characteristic modal admixtures. The "axis" relationships he liked are softened here; the movement leans tonally toward classical I–V–I architecture.</p>
+<p><strong>Tempo and meter.</strong> Mostly common time at <em>Allegretto</em> — a remarkably moderate, walking pulse for a concerto first movement. Unlike the percussive driving meters of Concerto No. 2, this is almost neoclassical pastoral.</p>
+<h3>II. Adagio religioso – Poco più mosso – Tempo I</h3>
+<p>The emotional and structural heart of the work. A clear ternary form with an explicit homage at its core.</p>
+<ul>
+<li><strong>A — Adagio religioso (chorale).</strong> Strings present a five-voice chorale in C major; the piano answers with a closely related chorale paragraph of its own, four-square and hymn-like. Bartók writes <em>religioso</em> over the score, and the movement is openly modeled on the <em>Heiliger Dankgesang eines Genesenen an die Gottheit</em> from Beethoven's String Quartet in A minor, Op. 132 — a thanksgiving hymn from one convalescent to another. Bartók had been hospitalized at Saranac Lake; the parallel was deliberate and personal.</li>
+<li><strong>B — Poco più mosso (night music).</strong> A sudden shift into Bartók's signature <em>Nachtmusik</em> idiom: piano trills, chirruping woodwind figurations, glissandi, isolated bird-call gestures, sustained string pedals. This is the interior of a Hungarian/Adirondack forest at night, transposed onto a piano concerto. Bartók was a passionate amateur ornithologist and notated bird songs; the figurations here are heard as transcriptions of specific North American birds, including the rufous-sided towhee he would have heard outside his Saranac Lake cabin.</li>
+<li><strong>A′ — Tempo I.</strong> The chorale returns, now elaborated: piano weaves a contrapuntal commentary above and around the strings, like an organ obbligato. The texture thickens, the harmony is gilded, and the movement closes in a shimmering plagal hush.</li>
+</ul>
+<p><strong>Form proportions.</strong> A and A′ together considerably outweigh B in time, but B is structurally pivotal — the night-music center is what turns the chorale from devotion into actual gratitude (the religious music acquires a <em>world</em> it is grateful for).</p>
+<p><strong>Key.</strong> C major frames the movement; the night-music section is texturally rather than tonally defined and floats above implied pedals.</p>
+<h3>III. Allegro vivace</h3>
+<p>A bright, dancing finale in E major, written in a hybrid rondo / fugato design that overtly evokes Bach.</p>
+<ul>
+<li><strong>Refrain (A).</strong> A fast, leaping principal theme in 2/4, full of folk-dance accent and rhythmic snap. The character is closer to a Hungarian <em>verbunkos</em>-derived dance than to a Western rondo tune.</li>
+<li><strong>First episode (fugato 1).</strong> A vigorous fugal exposition built on a perky, scampering subject — Bartók's tribute to Bachian counterpoint, threaded through orchestra and piano.</li>
+<li><strong>Refrain return.</strong></li>
+<li><strong>Second fugato.</strong> Inversion and stretto treatments deepen the contrapuntal argument.</li>
+<li><strong>Coda.</strong> A brilliant, headlong rush in E major, with the orchestra sweeping up the piano in cascading scales. The last 17 bars of orchestration are the ones Serly completed; the harmonic and motivic material is entirely Bartók's.</li>
+</ul>
+<p><strong>Macro-architecture of the work.</strong></p>
+<ul>
+<li><strong>Key arc.</strong> E major → C major → E major. The drop to C in the slow movement is a flat-mediant relationship — exactly the kind of mediant move that Beethoven uses in Op. 132 and that Bartók favored throughout his career as a softer, more luminous alternative to dominant motion.</li>
+<li><strong>Affect arc.</strong> Pastoral / bittersweet → reverent / awed → joyful / liberated. This is unusually positive for Bartók; nothing here corresponds to the brutal scherzos or barbaric ostinatos of Concertos 1 and 2.</li>
+<li><strong>Scale and proportion.</strong> The slow movement is the largest of the three, almost as long as the outer two combined. This is Beethovenian late-period architecture (cf. the <em>Heiliger Dankgesang</em> anchoring Op. 132), not the conventional classical concerto where the finale is the longest movement.</li>
+</ul>
+</section>
+
+    <section id="sec2">
+  <h2><span class="secn">3</span>Melodic &amp; Thematic Content</h2>
+<p>Compared with Bartók's earlier piano concertos, the Third is generously, almost openly <strong>melodic</strong>. The themes are long-breathed, often modal, and shaped like folk songs even when they aren't quotations.</p>
+<ul>
+<li><strong>Mvt. I, Theme 1.</strong> A wide-ranging E-major/Lydian melody, rising and falling across a tenth, marked by a characteristic raised-fourth (A♯) inflection that gives the theme its piquant tilt. The contour is vocal — it sounds like a Hungarian peasant song stretched onto a concert stage.</li>
+<li><strong>Mvt. I, Theme 2.</strong> Quieter, more chromatic, in the dominant. Built from sighing two-note figures.</li>
+<li><strong>Mvt. II, chorale theme.</strong> Homophonic, four-square, mostly stepwise motion in close harmony — modeled directly on Beethoven's Lydian <em>Heiliger Dankgesang</em> but in C major.</li>
+<li><strong>Mvt. II, night-music gestures.</strong> Short, ornamental, decorative — trills, mordents, repeated notes. Not "themes" in a developmental sense but characteristic figures, including transcribed bird calls.</li>
+<li><strong>Mvt. III, refrain.</strong> A leaping, accented dance melody with strong syncopation and a folk-dance rhythmic kick.</li>
+<li><strong>Mvt. III, fugue subject.</strong> Brisk, rhythmic, perfectly invertible — engineered for contrapuntal use.</li>
+</ul>
+<p><strong>Thematic transformation.</strong> Less aggressive than in Bartók's earlier works. He doesn't mutilate or violently invert his themes here; he varies, ornaments, and transposes them. The final movement's fugue subject is the only theme treated to full Bachian transformation (inversion, stretto). The mood is reconciliation, not deconstruction.</p>
+<p><strong>Motivic economy.</strong> Modest. Each movement has its own thematic world; cross-movement reference is suggestive (the rising-fourth gesture appears in all three movements) but not insisted on as it is in Concerto No. 2.</p>
+</section>
+
+    <section id="sec3">
+  <h2><span class="secn">4</span>Harmony &amp; Tonality</h2>
+<p>This is some of the <strong>warmest, most diatonic music Bartók ever wrote</strong>, and the choice was deliberate. He moves away from the percussive bitonality and dense chromaticism of his middle-period work toward a harmony that is modal, often Lydian, frequently triadic, and tonally centered.</p>
+<ul>
+<li><strong>Modal language.</strong> The first movement leans on E Lydian (E major with a raised fourth, A♯). The slow movement uses pure C major chorale harmony in the outer panels and floating, non-functional sonorities in the night music.</li>
+<li><strong>Key relationships.</strong> I (E) → ♭VI (C) → I (E). The flat-mediant axis is the structural backbone. Within movements, tonic-dominant orthodoxy returns (especially in Mvt. I).</li>
+<li><strong>Cadential patterns.</strong> Bartók writes plagal and modal cadences much more often here than the cutting half-cadences and tritone-axis closes of his middle period. Mvt. II ends with a hushed plagal close that feels almost ecclesiastical.</li>
+<li><strong>Dissonance treatment.</strong> Dissonance is functional and prepared, not emancipated. Even the most pungent harmonies — the chromatic passing chords in Mvt. I's bridge, the dense piano figuration of Mvt. III — resolve audibly into consonance.</li>
+<li><strong>Chord vocabulary.</strong> Triads, modal seventh-chords, occasional quartal voicings in the night music, parallel-chord planing. Almost no clusters, no tone-rows, no aggressive bitonality.</li>
+</ul>
+<p>The harmonic restraint is itself a statement: Bartók, the most fearsome of modernists in his Sonata for Two Pianos and Percussion, here writes music that a conservatory student could analyze with a Roman-numeral pencil. He has earned the right to be simple.</p>
+</section>
+
+    <section id="sec4">
+  <h2><span class="secn">5</span>Rhythm, Meter &amp; Tempo</h2>
+<p>Where Bartók's middle-period work is famous for asymmetric meters and additive Bulgarian rhythms, the Third Concerto is rhythmically classical.</p>
+<ul>
+<li><strong>Mvt. I.</strong> Mostly common time, <em>Allegretto</em>. The pulse is moderate, song-like, with occasional written-out rubato figures (triplets crossing duplets) but no metric modulation.</li>
+<li><strong>Mvt. II.</strong> Slow common time in the chorale; the night-music section dissolves the meter into shimmer (not a metric modulation so much as a metric haze, with sustained pedals supporting unmeasured-feeling figuration).</li>
+<li><strong>Mvt. III.</strong> Crisp 2/4 with strong syncopated accents in the refrains; the fugatos use steady eighth-note motion. There are passages in 3/8 and brief asymmetric inserts, but nothing approaching the savage ostinatos of <em>Allegro barbaro</em> or the Sonata for Two Pianos and Percussion.</li>
+</ul>
+<p><strong>Rhythmic motifs.</strong> Most prominent is a galloping dotted-rhythm + sixteenth-note figure in the finale that descends from Hungarian <em>verbunkos</em> dance.</p>
+<p><strong>Tempo relationships between movements.</strong> No notated metric modulation between movements, but Bartók marks the slow movement substantially slower than the surrounding panels, magnifying the architectural symmetry of the slow center.</p>
+</section>
+
+    <section id="sec5">
+  <h2><span class="secn">6</span>Orchestration, Texture &amp; Timbre</h2>
+<p><strong>Forces.</strong> 2 flutes (2nd doubling piccolo), 2 oboes, 2 clarinets, 2 bassoons, 4 horns, 2 trumpets, 3 trombones, tuba, timpani, percussion (snare, bass drum, cymbals, triangle, tam-tam, xylophone), strings, solo piano.</p>
+<p>This is roughly the size of the <em>Concerto for Orchestra</em> ensemble — full Romantic orchestra — but used with conspicuous restraint. Long stretches feature only piano + strings, or piano + a single woodwind line. The percussion is sparse: there is no piano percussion-orchestra explosion as in Concerto No. 1, no battery of drums dictating tempo as in Concerto No. 2.</p>
+<p><strong>Textural types.</strong></p>
+<ul>
+<li><strong>Mvt. I.</strong> Predominantly homophonic — piano carrying melody over string accompaniment, with woodwind colorings. The development thickens to imitative counterpoint between piano and orchestra.</li>
+<li><strong>Mvt. II, A sections.</strong> Five-voice chorale homophony, alternated antiphonally between strings and piano. In A′ the texture becomes a complex two-layer fabric: chorale below, piano counterpoint above.</li>
+<li><strong>Mvt. II, B section.</strong> True heterophony / mosaic texture — the woodwinds and piano trade brief gestures over a sustained string carpet. This is some of the most coloristic writing in Bartók's late style.</li>
+<li><strong>Mvt. III.</strong> Alternating dance-homophony in refrains and rigorous fugal counterpoint in episodes.</li>
+</ul>
+<p><strong>Piano writing.</strong> Strikingly different from the Concertos 1 and 2. Bartók scales back almost entirely on:</p>
+<ul>
+<li>prepared-piano percussiveness</li>
+<li>two-fisted clusters</li>
+<li>glissando battery effects</li>
+<li>exposed extreme registers used as drumheads</li>
+</ul>
+<p>In their place: sustained singing lines in octaves, transparent contrapuntal voicing, ornamental figuration, and Bachian two-part textures. The writing is <strong>playable for a less athletic pianist</strong> than the earlier concertos demand — this matters: he was writing it for Ditta, who was not the brilliant prodigy he was, and he wanted her to be able to play it on tour.</p>
+<p><strong>Color highlights.</strong></p>
+<ul>
+<li>The opening — piano in bare octaves over string tremolando — is one of Bartók's most beautiful textural inventions.</li>
+<li>The night-music chirps in Mvt. II, with woodwind fragments scattered through silence.</li>
+<li>The quiet trombone chorale that supports the strings in the religioso opening.</li>
+<li>The xylophone touches in the finale, glinting through the dance refrains.</li>
+</ul>
+<p><strong>Dynamics.</strong> Wide but controlled — the work moves between <em>pp</em> whisper and full orchestral <em>ff</em> without ever sounding shrill. The dynamic architecture builds toward the climaxes in Mvt. I's recapitulation and Mvt. III's coda.</p>
+</section>
+
+    <section id="sec6">
+  <h2><span class="secn">7</span>Emotional Arc &amp; Dramaturgy</h2>
+<p>The Third Concerto is one of Bartók's only large works whose emotional trajectory is unambiguously <strong>affirmative</strong>. It moves from pastoral serenity through sacred gratitude to dancing, almost ecstatic joy.</p>
+<p>This is so unusual for Bartók that it changes how the work is heard. Most of his major orchestral pieces — Concerto for Orchestra excepted — are organized around violence, irony, or struggle. The Third Concerto refuses that posture. Knowing the biographical situation (Bartók writing while dying, writing for his wife's livelihood, writing in the months when fascism collapsed and the war ended) makes the affirmation feel earned rather than naive.</p>
+<ul>
+<li><strong>Mvt. I.</strong> Serene, occasionally bittersweet, with no real conflict in the dramatic sense. The development creates pressure but never danger; the recapitulation arrives like a homecoming.</li>
+<li><strong>Mvt. II.</strong> Religioso opens in stilled contemplation, opens out in the night music to a kind of childlike wonder at the natural world, then returns as elaborated thanksgiving. This is the <em>Heiliger Dankgesang</em> of a man preparing to die.</li>
+<li><strong>Mvt. III.</strong> Pure released energy. There is no "tragic" moment in this finale, no minor-key reversal, no ironic turn. The dance pours out and lifts off.</li>
+</ul>
+<p><strong>Climax placement.</strong> The principal emotional peak is the <em>return</em> of the chorale in Mvt. II (A′), not — as in most concertos — a coda in the finale. The finale ends in elation, but elation, not catharsis. The slow movement's final hush is the work's emotional center of gravity.</p>
+<p><strong>Programmatic content.</strong> Two specific extra-musical layers:</p>
+<ol>
+<li>The <em>Heiliger Dankgesang</em> model in Mvt. II — Beethoven, also gravely ill, giving thanks for recovery. Bartók knew he would not recover; the gratitude becomes anticipatory rather than retrospective.</li>
+<li>The bird transcriptions in the night music. Bartók had been notating bird songs at Saranac Lake; the figures in Mvt. II are heard as portraits of specific species (the rufous-sided towhee is the most often identified).</li>
+</ol>
+</section>
+
+    <section id="sec7">
+  <h2><span class="secn">8</span>Historical Significance &amp; Influence</h2>
+<p><strong>What was new or radical.</strong> Almost nothing — and that was the point. Bartók had spent twenty years pushing toward the most violent extremes of European modernism, and in his last work he turned around and wrote a luminous, lyrical, classically-formed concerto that any Romantic conservatory professor could love. The radical move was the renunciation of his own avant-garde reputation.</p>
+<p>There is a strain of mid-century modernist criticism (especially in the Darmstadt orbit) that read this as failure of nerve. The verdict has not aged well. The Third Concerto is now widely understood as an act of late-period synthesis comparable to Beethoven's last quartets or Strauss's <em>Four Last Songs</em>: a great modernist composer integrating the older traditions on his own terms.</p>
+<p><strong>Reception.</strong> The premiere was a public success, helped by the explicit "last work" narrative and by Sándor's playing. It entered the repertoire faster than the Second Concerto (which is harder to perform) and is now Bartók's most-played piano concerto.</p>
+<p><strong>Influence.</strong></p>
+<ul>
+<li>It validated, for a generation of composers, the idea that one could leave behind hard modernism without abandoning seriousness. György Ligeti, who knew Bartók's late work intimately, drew on this in his own late period.</li>
+<li>The night-music style — already established in <em>Out of Doors</em> and the Fourth Quartet — gets one of its most luminous statements here, and influenced later "atmospheric" piano writing across the postwar period.</li>
+<li>The Beethoven-homage gesture (a slow chorale movement marked <em>religioso</em> and modeled on Op. 132) was picked up by composers as different as Shostakovich and Schnittke as a way of marking late-style gravitas.</li>
+</ul>
+<p><strong>Place in the canon.</strong> Bartók's most-performed concerto, and arguably the late-Romantic / early-modern piano concerto repertoire's single most touching late work. It is regularly programmed alongside Beethoven 4 or Mozart 23, both of which it resembles in tonal warmth and proportional poise.</p>
+<p><strong>Relationship to contemporaneous works.</strong> Compare:</p>
+<ul>
+<li><em>Concerto for Orchestra</em> (1943) — same neoclassical lucidity, but more public, more dazzling, less interior.</li>
+<li><em>Sonata for Solo Violin</em> (1944) — same Bachian counterpoint impulse, much darker.</li>
+<li><em>Viola Concerto</em> (1945, fragmentary) — would have been the companion piece; Serly's reconstruction has a more melancholy late-autumn quality.</li>
+</ul>
+</section>
+
+    <section id="sec8">
+  <h2><span class="secn">9</span>Performance Practice &amp; Notable Recordings</h2>
+<p><strong>Interpretive questions.</strong></p>
+<ul>
+<li><strong>Tempo of Mvt. I.</strong> "Allegretto" is famously vague — slower readings make the movement pastoral and song-like; brisker readings make it more concertante. The score supports a moderate, singing pulse.</li>
+<li><strong>Religioso character of Mvt. II.</strong> Performers have to decide how openly devotional to play the chorale. Too much "religious" weight and it becomes lugubrious; too little and it loses the <em>Dankgesang</em> connection.</li>
+<li><strong>Night music dynamics.</strong> The chirps and trills of the middle section are written quietly. Some pianists project them more sharply for clarity in halls, but the score and the spirit favor a true <em>sotto voce</em>.</li>
+<li><strong>The last 17 bars.</strong> Performers and conductors should be aware that orchestration here is Serly's. There is no controversy worth correcting in performance, but it is part of the work's history.</li>
+<li><strong>No cadenza</strong> is written or implied. Bartók's piano writing here is integrated into the orchestral texture, classical-concerto style.</li>
+</ul>
+<p><strong>Landmark recordings.</strong></p>
+<ol>
+<li><strong>Géza Anda · Berlin Radio Symphony · Ferenc Fricsay (1959, DG).</strong> The reference. Anda was Hungarian, Fricsay was Bartók's former student, and the performance combines folk-idiomatic phrasing with patrician restraint. The slow movement is unforgettable.</li>
+<li><strong>Stephen Kovacevich · LSO · Colin Davis (1975, Philips).</strong> Lyrical, songful, emotionally direct. Possibly the warmest reading on disc; the slow movement breathes generously.</li>
+<li><strong>György Sándor · several recordings.</strong> The premiere soloist re-recorded the work multiple times. His readings carry the authority of having received the score directly from Bartók's circle, with idiomatic phrasing in the Hungarian rhythmic figures.</li>
+<li><strong>Krystian Zimerman · Chicago Symphony · Pierre Boulez (2004, DG).</strong> The great late-modernist conductor reading the late-modernist concerto: clean, structurally lit-from-within, unsentimental. The night music is exquisite.</li>
+<li><strong>Maurizio Pollini · Chicago Symphony · Claudio Abbado (1977, DG).</strong> Pristine architecture, gleaming pianism. A more "objective" reading; less folk-idiom, more line.</li>
+<li><strong>András Schiff · Budapest Festival Orchestra · Iván Fischer (1996, Teldec).</strong> Hungarian native readings of all three concertos as a set. Schiff's tone is luminous, Fischer's accompaniment idiomatic.</li>
+</ol>
+<p><strong>Performance tradition.</strong> Early performances (Sándor, Anda) emphasized the Hungarian folk-rhythmic backbone and the Bartókian piano touch — slightly drier, more articulated. Later readings (Pollini, Zimerman) treat the work more like late Beethoven, emphasizing line and architecture. Both traditions are legitimate; the work supports both.</p>
+</section>
+
+    <section id="sec9">
+  <h2><span class="secn">10</span>Listening Guide</h2>
+<p>Timings keyed to a roughly 24-minute reading (Anda/Fricsay).</p>
+<p><strong>Mvt. I — Allegretto</strong> (~7'30")</p>
+<ul>
+<li><strong>0:00</strong> Solo piano enters in bare octaves over rustling strings — <em>the</em> opening signature. Listen for the raised fourth (A♯) that gives the theme its modal lift.</li>
+<li><strong>1:30</strong> Bridge — chromatic intensification, modulation toward the dominant.</li>
+<li><strong>2:30</strong> Quieter, more lyrical second theme in the dominant.</li>
+<li><strong>3:30</strong> Development begins — head-motif fragments tossed between piano and orchestra.</li>
+<li><strong>5:30</strong> Recapitulation: first theme returns at pitch, in E.</li>
+<li><strong>6:50</strong> Luminous coda; the movement settles, doesn't conclude.</li>
+</ul>
+<p><strong>Mvt. II — Adagio religioso</strong> (~10'00") — <em>the heart of the concerto</em></p>
+<ul>
+<li><strong>0:00</strong> Strings present the five-voice chorale. Bartók marks it <em>religioso</em>.</li>
+<li><strong>1:00</strong> Piano answers with its own chorale paragraph.</li>
+<li><strong>3:00</strong> Antiphonal exchange: the music breathes back and forth between piano and strings.</li>
+<li><strong>~4:30</strong> The shift into night music: trills in the piano, scattered woodwind chirps. Listen for bird-call figures — short, decorated, isolated.</li>
+<li><strong>~7:00</strong> Return of the chorale (A′), now elaborated. The piano weaves a contrapuntal commentary above the strings.</li>
+<li><strong>~9:30</strong> Hushed plagal close. The work's emotional center of gravity.</li>
+</ul>
+<p><strong>Mvt. III — Allegro vivace</strong> (~6'30")</p>
+<ul>
+<li><strong>0:00</strong> Refrain: leaping dance theme, sharp accents, folk-dance rhythm.</li>
+<li><strong>~1:00</strong> First fugato: scampering subject builds through the orchestra.</li>
+<li><strong>~2:30</strong> Refrain returns.</li>
+<li><strong>~3:30</strong> Second fugato — inversions and stretto.</li>
+<li><strong>~5:00</strong> Coda begins: the piano cascades into scalar runs, the orchestra sweeps up to meet it.</li>
+<li><strong>~6:00</strong> Final E-major affirmation. (The last 17 bars are Serly's orchestration of Bartók's short score.)</li>
+</ul>
+<p><strong>First-listen focus.</strong> Stay with the slow movement. The whole concerto's argument is there. <strong>Re-listen focus.</strong> Track the flat-mediant arc (E → C → E) and notice how the slow movement's C-major center recolors the E-major outer movements.</p>
+</section>
+
+    <section id="sec10">
+  <h2><span class="secn">11</span>Must-Listen Track</h2>
+<div class="mustlisten"><p><strong>Mvt. II — Adagio religioso.</strong></p>
+<p>If you have ten minutes with this work, give them to the second movement. It is the structural keystone, the emotional center, and the movement that explains why this concerto matters in a way the others — beautiful as they are — do not. The chorale is a dying composer's reply to Beethoven's <em>Heiliger Dankgesang</em>; the night-music center is one of Bartók's most magical inventions, the natural world in chirps and trills; the elaborated return of the chorale is the moment the work earns its peace. No other movement in Bartók's piano output carries this emotional weight.</p>
+<p><strong>Recommended recording for this movement: Géza Anda with Ferenc Fricsay and the Berlin Radio Symphony (1959, DG).</strong> Anda phrases the chorale as Hungarian song, not as church music, which is exactly right; Fricsay's strings have a quiet glow in the <em>religioso</em> sections; the night music is played with genuine <em>sotto voce</em> hush. It has not been bettered in sixty years.</p></div>
+</section>
+    <footer>
+      
+      <p>Companion to the Markdown analysis in the Obsidian vault at <code>Musical Analysis/Bartok - Piano Concerto No. 3.md</code>.</p>
+      <p><a href="index.html">← back to music</a></p>
+    </footer>
+  </main>
+</div>
+</div>
+
+<script>
+  /* ---------- color palettes (Squarespace-style) ---------- */
+  const PALETTES = {
+    afternoon:{mode:'light',label:'Afternoon',v:{
+      '--bg':'#faf8f4','--panel':'#ffffff','--ink':'#1c1a17','--ink-soft':'#55504a','--ink-faint':'#8a8279',
+      '--line':'#e8e2d8','--line-strong':'#d8cfc0','--accent':'#9a5b2e','--accent-soft':'#f3e6d8','--accent-ink':'#7a4220',
+      '--gold':'#b8893b','--teal':'#2f6b6b','--code-bg':'#2b2722',
+      '--header-grad':'linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%)',
+      '--th-bg':'#f3ede3','--row-hover':'#fbf7f0','--epi-ink':'#5b3c20',
+      '--warm-bg':'#fbf3e2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f2f1','--cool-bd':'#bfdcda','--cool-ink':'#1f4f4f',
+      '--ml-grad':'linear-gradient(150deg,#fbf3e7,#f6e7d4)','--ml-bd':'#ebd7b8','--ml-ink':'#6b3f1c'}},
+    sage:{mode:'light',label:'Sage',v:{
+      '--bg':'#f5f7f2','--panel':'#ffffff','--ink':'#1c211a','--ink-soft':'#4e544a','--ink-faint':'#828a7c',
+      '--line':'#e3e8dc','--line-strong':'#d3dac8','--accent':'#5c7a52','--accent-soft':'#e6ede0','--accent-ink':'#3f592f',
+      '--gold':'#a98f3c','--teal':'#3a7a6b','--code-bg':'#1f2620',
+      '--header-grad':'linear-gradient(160deg,#1a231a 0%,#283a26 55%,#3a5232 100%)',
+      '--th-bg':'#edf1e7','--row-hover':'#f6f9f2','--epi-ink':'#3c4f30',
+      '--warm-bg':'#f4efdf','--warm-bd':'#e2dba9','--warm-ink':'#5f5520',
+      '--cool-bg':'#e6f1ec','--cool-bd':'#c0dccd','--cool-ink':'#1f4f3e',
+      '--ml-grad':'linear-gradient(150deg,#eef3e4,#e3ecd6)','--ml-bd':'#d2dcb8','--ml-ink':'#3f5224'}},
+    harbor:{mode:'light',label:'Harbor',v:{
+      '--bg':'#f4f6f9','--panel':'#ffffff','--ink':'#1a2026','--ink-soft':'#4b5560','--ink-faint':'#7d8794',
+      '--line':'#e1e7ec','--line-strong':'#cfd8e1','--accent':'#2f6690','--accent-soft':'#e0ebf2','--accent-ink':'#234e6b',
+      '--gold':'#b5862f','--teal':'#2f8682','--code-bg':'#192129',
+      '--header-grad':'linear-gradient(160deg,#121b24 0%,#1d2e3f 55%,#274a63 100%)',
+      '--th-bg':'#e9eef3','--row-hover':'#f4f8fb','--epi-ink':'#234e6b',
+      '--warm-bg':'#f6efe0','--warm-bd':'#e7d6b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e2eef2','--cool-bd':'#bcd6de','--cool-ink':'#1f4f55',
+      '--ml-grad':'linear-gradient(150deg,#e8f1f6,#dbe9f1)','--ml-bd':'#c2d6e4','--ml-ink':'#234e6b'}},
+    plum:{mode:'light',label:'Plum',v:{
+      '--bg':'#f8f5f8','--panel':'#ffffff','--ink':'#221c21','--ink-soft':'#564b54','--ink-faint':'#897e87',
+      '--line':'#e9e0e7','--line-strong':'#dccdd8','--accent':'#7d4a6b','--accent-soft':'#efe2ec','--accent-ink':'#5d3550',
+      '--gold':'#b07d3b','--teal':'#3a7a72','--code-bg':'#241c23',
+      '--header-grad':'linear-gradient(160deg,#201823 0%,#332338 55%,#4e2f53 100%)',
+      '--th-bg':'#f1e9f0','--row-hover':'#faf5f9','--epi-ink':'#5d3550',
+      '--warm-bg':'#f7efe2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f1f0','--cool-bd':'#c4d9d5','--cool-ink':'#1f4f48',
+      '--ml-grad':'linear-gradient(150deg,#f4e9f1,#ecdbe8)','--ml-bd':'#ddc4d6','--ml-ink':'#5d3550'}},
+    midnight:{mode:'dark',label:'Midnight',v:{
+      '--bg':'#0f1620','--panel':'#18212e','--ink':'#e8edf3','--ink-soft':'#a9b5c4','--ink-faint':'#6f7d8d',
+      '--line':'#25303f','--line-strong':'#34414f','--accent':'#5b9bd5','--accent-soft':'#1b2a3b','--accent-ink':'#9cc4e8',
+      '--gold':'#d2a85f','--teal':'#4db1a8','--code-bg':'#0b121b',
+      '--header-grad':'linear-gradient(160deg,#0b1220 0%,#13243a 55%,#1d3a5c 100%)',
+      '--th-bg':'#1f2a38','--row-hover':'#1d2735','--epi-ink':'#9cc4e8',
+      '--warm-bg':'#2a2418','--warm-bd':'#43381f','--warm-ink':'#e0b878',
+      '--cool-bg':'#11302d','--cool-bd':'#1f4a45','--cool-ink':'#7fd6cc',
+      '--ml-grad':'linear-gradient(150deg,#1c2a3b,#16222f)','--ml-bd':'#2c3f55','--ml-ink':'#9cc4e8'}},
+    charcoal:{mode:'dark',label:'Charcoal',v:{
+      '--bg':'#161514','--panel':'#201e1c','--ink':'#ece8e2','--ink-soft':'#b0a99f','--ink-faint':'#766f65',
+      '--line':'#2c2926','--line-strong':'#3a3631','--accent':'#c8895a','--accent-soft':'#2c2420','--accent-ink':'#e3a878',
+      '--gold':'#cda35e','--teal':'#5aada3','--code-bg':'#100f0e',
+      '--header-grad':'linear-gradient(160deg,#141210 0%,#241e18 55%,#3a2c20 100%)',
+      '--th-bg':'#25221f','--row-hover':'#211e1b','--epi-ink':'#e3a878',
+      '--warm-bg':'#2c2418','--warm-bd':'#443720','--warm-ink':'#e0b878',
+      '--cool-bg':'#1a2826','--cool-bd':'#2c4641','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#272019,#1d1814)','--ml-bd':'#3d3124','--ml-ink':'#e3a878'}},
+    forest:{mode:'dark',label:'Forest',v:{
+      '--bg':'#101713','--panel':'#18211b','--ink':'#e6ece6','--ink-soft':'#a6b3a6','--ink-faint':'#6e7c6e',
+      '--line':'#243029','--line-strong':'#324133','--accent':'#6fae7e','--accent-soft':'#1a2a20','--accent-ink':'#9fd3aa',
+      '--gold':'#cda35e','--teal':'#4fb0a0','--code-bg':'#0b110d',
+      '--header-grad':'linear-gradient(160deg,#0c1410 0%,#142a1d 55%,#1d4230 100%)',
+      '--th-bg':'#1d2922','--row-hover':'#1a241d','--epi-ink':'#9fd3aa',
+      '--warm-bg':'#28281a','--warm-bd':'#3f3f24','--warm-ink':'#d8b878',
+      '--cool-bg':'#16302a','--cool-bd':'#274a40','--cool-ink':'#7fd0bc',
+      '--ml-grad':'linear-gradient(150deg,#18271e,#132019)','--ml-bd':'#2a4231','--ml-ink':'#9fd3aa'}},
+    wine:{mode:'dark',label:'Wine',v:{
+      '--bg':'#1a1012','--panel':'#241619','--ink':'#f0e4e6','--ink-soft':'#c2a9af','--ink-faint':'#8c6f76',
+      '--line':'#321f24','--line-strong':'#43292f','--accent':'#c46b7e','--accent-soft':'#2e1a1f','--accent-ink':'#e49aa8',
+      '--gold':'#cda35e','--teal':'#5aa8a0','--code-bg':'#140c0e',
+      '--header-grad':'linear-gradient(160deg,#160c0e 0%,#2a141a 55%,#4a2230 100%)',
+      '--th-bg':'#2c1c20','--row-hover':'#271519','--epi-ink':'#e49aa8',
+      '--warm-bg':'#2e2418','--warm-bd':'#463720','--warm-ink':'#e0b878',
+      '--cool-bg':'#18302d','--cool-bd':'#2a4a45','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#2a181d,#201216)','--ml-bd':'#43272f','--ml-ink':'#e49aa8'}}
+  };
+
+  const root = document.documentElement;
+  function applyPalette(key){
+    const p = PALETTES[key]; if(!p) return;
+    for(const [k,val] of Object.entries(p.v)) root.style.setProperty(k,val);
+    root.setAttribute('data-mode', p.mode);
+    document.querySelectorAll('.pp-sw').forEach(b=>b.classList.toggle('active', b.dataset.pal===key));
+    try{ localStorage.setItem('faune-palette', key); }catch(e){}
+  }
+
+  // build swatches
+  const tick = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  for(const [key,p] of Object.entries(PALETTES)){
+    const btn = document.createElement('button');
+    btn.className = 'pp-sw'; btn.dataset.pal = key; btn.type = 'button';
+    btn.title = p.label;
+    btn.innerHTML =
+      '<div class="bars">'+
+        '<span style="background:'+p.v['--bg']+'"></span>'+
+        '<span style="background:'+p.v['--accent']+'"></span>'+
+        '<span style="background:'+p.v['--accent-ink']+'"></span>'+
+        '<span style="background:'+p.v['--gold']+'"></span>'+
+      '</div>'+
+      '<span class="nm">'+p.label+tick+'</span>';
+    btn.addEventListener('click', ()=>applyPalette(key));
+    document.getElementById(p.mode==='light'?'pp-light':'pp-dark').appendChild(btn);
+  }
+
+  // toggle panel
+  const picker = document.getElementById('picker');
+  const ppToggle = document.getElementById('ppToggle');
+  ppToggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = picker.classList.toggle('open');
+    ppToggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.addEventListener('click', (e)=>{
+    if(!picker.contains(e.target)) picker.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') picker.classList.remove('open'); });
+
+  // restore saved or honor OS dark preference
+  let saved=null; try{ saved = localStorage.getItem('faune-palette'); }catch(e){}
+  if(saved && PALETTES[saved]) applyPalette(saved);
+  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
+  else applyPalette('afternoon');
+
+  // active TOC highlighting
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const map = {};
+  links.forEach(a => { const id = a.getAttribute('href').slice(1); map[id] = a; });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = map[e.target.id];
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

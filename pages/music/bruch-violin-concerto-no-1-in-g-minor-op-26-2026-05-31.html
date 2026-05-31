@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Max Bruch — Violin Concerto No. 1 in G minor, Op. 26 · Musical Analysis</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --panel:#ffffff;
+    --ink:#1c1a17;
+    --ink-soft:#55504a;
+    --ink-faint:#8a8279;
+    --line:#e8e2d8;
+    --line-strong:#d8cfc0;
+    --accent:#9a5b2e;       /* warm terracotta — faun / afternoon heat */
+    --accent-soft:#f3e6d8;
+    --accent-ink:#7a4220;
+    --gold:#b8893b;
+    --teal:#2f6b6b;
+    --code-bg:#2b2722;
+    --green:#2f7d4f;
+    --amber:#b07d18;
+    --red:#a8392f;
+    /* themeable extras (overridden by JS palettes) */
+    --header-grad:linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%);
+    --th-bg:#f3ede3;
+    --row-hover:#fbf7f0;
+    --epi-ink:#5b3c20;
+    --warm-bg:#fbf3e2; --warm-bd:#ecd9b0; --warm-ink:#6b4e1e;
+    --cool-bg:#e8f2f1; --cool-bd:#bfdcda; --cool-ink:#1f4f4f;
+    --ml-grad:linear-gradient(150deg,#fbf3e7,#f6e7d4); --ml-bd:#ebd7b8; --ml-ink:#6b3f1c;
+    --radius:12px;
+    --shadow:0 1px 2px rgba(40,30,15,.04),0 6px 22px rgba(40,30,15,.06);
+  }
+  html{transition:none}
+  body,.card,table,.tldr,.callout,.mustlisten,nav.toc a,.svgcard,.pp-panel,.pp-toggle,.pp-sw{
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+    line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  /* ---- header ---- */
+  header.top{
+    background:var(--header-grad);
+    color:#f4ece1;position:relative;overflow:hidden;
+    border-bottom:3px solid var(--accent);
+  }
+  header.top .glow{position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(212,160,90,.35),transparent 65%);pointer-events:none;}
+  header.top .wrap{padding:46px 28px 40px;position:relative;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#d9b384;font-weight:600;margin:0 0 14px}
+  header.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;
+    font-size:40px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+  header.top h1 em{font-style:italic;color:#f0cfa0}
+  header.top .sub{font-size:17px;color:#d8cab8;margin:10px 0 0;max-width:760px}
+  .metarow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-size:13.5px;color:#cdbca6}
+  .metarow b{color:#f4ece1;font-weight:600}
+  .stamp{font-size:12px;color:#b39c80;margin-top:18px;font-family:"SF Mono",Menlo,monospace}
+
+  /* ---- layout ---- */
+  .layout{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0 80px;align-items:start}
+  nav.toc{position:sticky;top:24px;font-size:14px}
+  nav.toc .title{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 12px}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border-radius:7px;border-left:2px solid transparent;line-height:1.35}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+  nav.toc a .n{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;margin-right:7px}
+  nav.toc a.active{background:var(--accent-soft);color:var(--accent-ink);border-left-color:var(--accent)}
+
+  main{min-width:0}
+  section{margin:0 0 50px;scroll-margin-top:24px}
+  h2{font-family:Georgia,serif;font-size:25px;font-weight:600;letter-spacing:-.01em;
+    margin:0 0 4px;display:flex;align-items:baseline;gap:12px}
+  h2 .secn{font-size:14px;font-weight:700;color:#fff;background:var(--accent);
+    width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:-apple-system,system-ui;}
+  .lead{color:var(--ink-soft);margin:2px 0 22px 42px;font-size:15px}
+  h3{font-size:17px;font-weight:650;margin:26px 0 8px;color:var(--ink)}
+  p{margin:0 0 14px}
+  strong{font-weight:650}
+  a.inline{color:var(--accent-ink);text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+
+  /* ---- tl;dr box ---- */
+  .tldr{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow);margin-bottom:8px}
+  .tldr h2{font-size:18px;margin-bottom:10px}
+  .tldr p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+  .tldr p:last-child{margin-bottom:0}
+
+  blockquote.epi{margin:0 0 30px;padding:18px 24px;background:var(--accent-soft);
+    border-radius:var(--radius);font-family:Georgia,serif;font-style:italic;font-size:16px;color:var(--epi-ink)}
+  blockquote.epi .who{display:block;font-style:normal;font-family:-apple-system,system-ui;
+    font-size:13px;color:var(--accent-ink);margin-top:10px;font-weight:600}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 24px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin:6px 0}
+  .keyval{margin:0;padding:0;list-style:none}
+  .keyval li{display:grid;grid-template-columns:165px 1fr;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);margin:0}
+  .keyval li:last-child{border-bottom:none}
+  .keyval .k{color:var(--ink-faint);font-size:13.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+
+  /* ---- tables ---- */
+  table{width:100%;border-collapse:collapse;margin:6px 0 20px;font-size:14.5px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  th{background:var(--th-bg);text-align:left;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line-strong)}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--row-hover)}
+  td.sec{font-weight:650;color:var(--accent-ink);white-space:nowrap}
+  .time{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);white-space:nowrap}
+
+  /* ---- pull callout ---- */
+  .callout{border-radius:var(--radius);padding:16px 20px;margin:18px 0;font-size:15px;border:1px solid}
+  .callout.gold{background:var(--warm-bg);border-color:var(--warm-bd);color:var(--warm-ink)}
+  .callout.teal{background:var(--cool-bg);border-color:var(--cool-bd);color:var(--cool-ink)}
+  .callout .lbl{font-weight:700;text-transform:uppercase;font-size:11.5px;letter-spacing:.1em;display:block;margin-bottom:4px;opacity:.8}
+
+  /* ---- timeline ---- */
+  .tl{list-style:none;margin:8px 0 0;padding:0;position:relative}
+  .tl:before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+  .tl li{position:relative;padding:10px 0 10px 86px;margin:0}
+  .tl .t{position:absolute;left:0;top:11px;width:52px;text-align:right;font-family:"SF Mono",Menlo,monospace;
+    font-size:12.5px;color:var(--teal);font-weight:600}
+  .tl .dot{position:absolute;left:57px;top:15px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--accent)}
+  .tl li.peak .dot{background:var(--accent);width:14px;height:14px;left:56px;top:14px;box-shadow:0 0 0 4px var(--accent-soft)}
+  .tl b{color:var(--ink)}
+
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:2px 8px;border-radius:20px;vertical-align:middle}
+  .b-heart{background:#fbe3df;color:var(--red)}
+  .b-key{background:#e6efe9;color:var(--green)}
+
+  figure{margin:18px 0 24px}
+  figcaption{font-size:13px;color:var(--ink-faint);margin-top:10px;text-align:center;font-style:italic}
+  .svgcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  /* theme-aware SVG strokes/fills */
+  .svgcard svg .sv-axis{stroke:var(--line-strong)}
+  .svgcard svg .sv-grid{stroke:var(--line)}
+  .svgcard svg .sv-curve{stroke:var(--accent)}
+  .svgcard svg .sv-area{fill:var(--accent);opacity:.13}
+  .svgcard svg .sv-gold-line{stroke:var(--gold)}
+  .svgcard svg .sv-gold,.svgcard svg .sv-gold-dot{fill:var(--gold)}
+  .svgcard svg .sv-accent,.svgcard svg .sv-accent-dot{fill:var(--accent)}
+  .svgcard svg .sv-lbl{fill:var(--ink-soft)}
+  .svgcard svg .sv-faint{fill:var(--ink-faint)}
+
+  code{font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:5px}
+
+  /* ---- palette picker ---- */
+  .palette-picker{position:fixed;top:14px;right:14px;z-index:60;font-size:13px;
+    font-family:-apple-system,system-ui,sans-serif}
+  .pp-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    background:rgba(255,255,255,.92);color:#241c14;border:1px solid rgba(0,0,0,.12);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    padding:8px 13px;border-radius:30px;font-weight:600;font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,.16)}
+  .pp-toggle svg{display:block}
+  .pp-toggle .chev{transition:transform .2s ease}
+  .palette-picker.open .pp-toggle .chev{transform:rotate(180deg)}
+  .pp-panel{position:absolute;top:46px;right:0;width:248px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.22);padding:14px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);
+    transform-origin:top right;transition:opacity .16s ease,transform .16s ease,visibility .16s}
+  .palette-picker.open .pp-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+  .pp-group{margin-bottom:12px}
+  .pp-group:last-child{margin-bottom:0}
+  .pp-label{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 2px 8px}
+  .pp-label .ico{width:13px;height:13px;opacity:.7}
+  .pp-swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pp-sw{cursor:pointer;border:1.5px solid var(--line);background:var(--panel);
+    border-radius:10px;padding:7px;display:flex;flex-direction:column;gap:6px;text-align:left;
+    transition:border-color .15s,transform .1s}
+  .pp-sw:hover{transform:translateY(-1px)}
+  .pp-sw .bars{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .pp-sw .bars span{flex:1}
+  .pp-sw .nm{font-size:11.5px;font-weight:600;color:var(--ink-soft);display:flex;
+    align-items:center;justify-content:space-between;gap:4px}
+  .pp-sw.active{border-color:var(--accent)}
+  .pp-sw.active .nm{color:var(--ink)}
+  .pp-sw .tick{width:13px;height:13px;color:var(--accent);opacity:0}
+  .pp-sw.active .tick{opacity:1}
+
+  .rec{display:grid;grid-template-columns:1fr;gap:0}
+  .rec .who{font-weight:650;color:var(--accent-ink)}
+
+  .mustlisten{background:var(--ml-grad);border:1px solid var(--ml-bd);
+    border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow)}
+  .mustlisten h3{margin-top:0;font-family:Georgia,serif;font-size:20px;color:var(--ml-ink)}
+  .mustlisten .span{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--ink-faint);font-size:13.5px}
+  footer a{color:var(--accent-ink);text-decoration:none}
+
+  @media (max-width:720px){
+    .layout{grid-template-columns:1fr;gap:0;padding:24px 0 60px}
+    nav.toc{display:none}
+    .wrap{padding:0 18px}
+    header.top h1{font-size:30px}
+    header.top .wrap{padding:34px 18px 30px}
+    .keyval li{grid-template-columns:1fr;gap:2px}
+    .lead{margin-left:0}
+    h2{font-size:21px}
+    .palette-picker{top:10px;right:10px}
+    .pp-toggle .pp-txt{display:none}
+    .pp-toggle{padding:9px;border-radius:50%}
+    .pp-panel{width:230px}
+  }
+</style>
+</head>
+<body>
+
+<div class="palette-picker" id="picker">
+  <button class="pp-toggle" id="ppToggle" aria-expanded="false" aria-label="Change color theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    <span class="pp-txt">Theme</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pp-panel" role="menu" aria-label="Color palettes">
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>Light</span>
+      <div class="pp-swatches" id="pp-light"></div>
+    </div>
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark</span>
+      <div class="pp-swatches" id="pp-dark"></div>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <p class="eyebrow">Musical Analysis · Concerto</p>
+    <h1>Violin Concerto No. 1 in G minor, Op. 26</h1>
+    <p class="sub">Max Bruch · 1864</p>
+    <div class="metarow">
+      <span><b>Form</b> 24 April 1866, Koblenz, with *Otto von Königslow* as soloist and Bruch conduc…</span>
+      <span><b>Composed</b> 1864</span>
+      <span><b>Premiere</b> 7 January 1868, Bremen, with *Joseph Joachim* as soloist under Karl Martin Rh…</span>
+    </div>
+    <p class="stamp">Generated 2026-05-31 · musical-analysis</p>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <p class="title">Contents</p>
+    <a href="#tldr"><span class="n">·</span>In brief</a>
+    <a href="#sec0"><span class="n">1</span>Identity &amp; Context</a>
+    <a href="#sec1"><span class="n">2</span>Formal Structure</a>
+    <a href="#sec2"><span class="n">3</span>Melodic &amp; Thematic Content</a>
+    <a href="#sec3"><span class="n">4</span>Harmony &amp; Tonality</a>
+    <a href="#sec4"><span class="n">5</span>Rhythm, Meter &amp; Tempo</a>
+    <a href="#sec5"><span class="n">6</span>Orchestration, Texture &amp; Timbre</a>
+    <a href="#sec6"><span class="n">7</span>Emotional Arc &amp; Dramaturgy</a>
+    <a href="#sec7"><span class="n">8</span>Historical Significance &amp; Influence</a>
+    <a href="#sec8"><span class="n">9</span>Performance Practice &amp; Notable Recordings</a>
+    <a href="#sec9"><span class="n">10</span>Listening Guide</a>
+    <a href="#sec10"><span class="n">11</span>Must-Listen Tracks</a>
+  </nav>
+
+  <main>
+    <section id="tldr"><div class="tldr"><h2>In brief</h2><p>Three movements, performed <strong>without break</strong> (attacca throughout — a structural hallmark). Total duration: ~24–26 minutes.</p></div></section>
+    <section id="sec0">
+  <h2><span class="secn">1</span>Identity &amp; Context</h2>
+<ul class="keyval">
+<li><span class="k">Full title</span><span>Violin Concerto No. 1 in G minor, Op. 26</span></li>
+<li><span class="k">Composer</span><span>Max Bruch (1838–1920)</span></li>
+<li><span class="k">Composed</span><span>Begun 1864 in Mannheim; first complete version 1866; definitive revision with Joseph Joachim completed 1867</span></li>
+<li><span class="k">First performance (original version)</span><span>24 April 1866, Koblenz, with <strong>Otto von Königslow</strong> as soloist and Bruch conducting</span></li>
+<li><span class="k">Premiere of the revised version</span><span>7 January 1868, Bremen, with <strong>Joseph Joachim</strong> as soloist under Karl Martin Rheinthaler</span></li>
+<li><span class="k">Dedicated to</span><span><strong>Joseph Joachim</strong> — the most important violinist of the 19th century, also dedicatee of the Brahms concerto (1878). Joachim didn't just premiere the revision; he effectively co-shaped it, advising on bowings, virtuoso figuration, and formal proportions. It was Joachim who insisted that despite the unconventional first movement, the piece be called a <strong>"concerto"</strong> rather than the "fantasy" Bruch had originally imagined.</span></li>
+<li><span class="k">Place in the output</span><span>Bruch's first major orchestral success, written in his late twenties. He would compose prolifically for another fifty years — two more violin concertos, the <em>Scottish Fantasy</em>, the <em>Kol Nidrei</em> for cello, symphonies, operas, and oratorios — but nothing else would ever match its fame. He spent his later life <strong>openly resenting</strong> that audiences only wanted to hear this one piece: <em>"Forty years later, it's the G minor or nothing!"</em></span></li>
+<li><span class="k">The financial tragedy</span><span>Strapped for cash, Bruch sold the score outright to publisher N. Simrock for a pittance (<strong>around 250 thalers</strong>). He earned essentially nothing from its subsequent global ubiquity. After WWI, with Germany in economic collapse, he was destitute — dying in 1920 with his one worldwide hit still showering royalties he would never see.</span></li>
+<li><span class="k">Historical moment</span><span>1864–68 is a crossroads in German music. Wagner is writing <em>Die Meistersinger</em>; Brahms is about to begin the <em>Deutsches Requiem</em>; Liszt's New German School and the conservative Leipzig tradition are at war. Bruch sits firmly on the conservative side — a Mendelssohn-Schumann lineage, lyrical and formally rooted — and the G minor concerto is one of the movement's defining Romantic statements.</span></li>
+</ul>
+</section>
+
+    <section id="sec1">
+  <h2><span class="secn">2</span>Formal Structure</h2>
+<p>Three movements, performed <strong>without break</strong> (attacca throughout — a structural hallmark). Total duration: ~24–26 minutes.</p>
+<h3>I. Vorspiel: Allegro moderato (G minor, ~8 min)</h3>
+<ul>
+<li><strong>Form</strong>: A <strong>"Vorspiel" (Prelude)</strong> — not a conventional sonata-allegro. It has an exposition of two themes, a brief development, but <strong>no true recapitulation</strong>. Instead, the movement dissolves into a transition that leads directly into the Adagio. This is the core of Bruch's structural innovation, and it's why he originally wanted to call the piece a "fantasy." Joachim's great judgment was recognizing that despite the missing recap, the piece functioned — in its emotional scale and virtuoso demands — as a concerto.</li>
+<li><strong>Key</strong>: G minor home, with the lyrical second theme arriving in <strong>B♭ major</strong> (relative major, Classical convention). The transition to the Adagio moves through a long chromatic descent that settles into E♭ major.</li>
+<li><strong>Tempo/meter</strong>: 4/4, Allegro moderato, with a very free, recitative-like opening</li>
+<li><strong>Sectional breakdown</strong>:</li>
+<li><strong>mm. 1–5</strong>: Timpani roll + hushed woodwind chord — a curtain rising</li>
+<li><strong>mm. 6+</strong>: Violin cadenza-like recitative (<em>"Allegro moderato, quasi fantasia"</em> feel)</li>
+<li><strong>~1:30</strong>: First theme proper in G minor — passionate, declamatory, with double-stops over dark low-strings</li>
+<li><strong>~3:00</strong>: Second theme in B♭ major — a broad, soaring lyrical melody</li>
+<li><strong>~5:00</strong>: Brief development of both themes</li>
+<li><strong>~6:30</strong>: Instead of recapitulation, the music <strong>dissolves</strong> — violin climbs into its upper register over sustained harmony, orchestra fades, and we slip directly into E♭ major for the Adagio</li>
+</ul>
+<h3>II. Adagio (E♭ major, ~9 min — the emotional heart)</h3>
+<ul>
+<li><strong>Form</strong>: A rondo-like ternary with three principal lyric ideas — not a sonata, but a "song-form" (<em>Liedform</em>) on the grandest scale. Some analysts describe it as a free ABA with a second A that integrates material from B.</li>
+<li><strong>Key</strong>: E♭ major, with excursions through C minor and A♭ major</li>
+<li><strong>Tempo/meter</strong>: Adagio, 3/8 — a gently rocking, almost cradling pulse</li>
+<li><strong>Proportions</strong>: The <strong>longest movement</strong> and the unambiguous center of gravity</li>
+<li><strong>Sectional breakdown</strong>:</li>
+<li><strong>Theme 1</strong> (~0:00): Soaring violin line in the instrument's rich middle register over soft wind chords</li>
+<li><strong>Theme 2</strong> (~2:30): A second, more plaintive idea — still in E♭ major</li>
+<li><strong>Theme 3</strong> (~4:30): A third melody, more expansive, treated with increasing harmonic warmth</li>
+<li><strong>Climactic reprise</strong> (~6:30): First theme returns, violin now in a higher tessitura with fuller orchestral support — the emotional apex of the whole concerto</li>
+<li><strong>Coda</strong> (~8:00): A gentle dissolution into E♭ major stillness</li>
+</ul>
+<h3>III. Finale: Allegro energico (G major, ~7 min)</h3>
+<ul>
+<li><strong>Form</strong>: Sonata-allegro (proper this time — exposition, development, recapitulation, coda) — compensating for the absent recap of movement I and anchoring the concerto's formal balance</li>
+<li><strong>Key</strong>: G major — the <em>tierce de Picardie</em> resolution of the opening G minor, shifting the whole work from tragedy to triumph</li>
+<li><strong>Tempo/meter</strong>: 2/2 (alla breve), Allegro energico</li>
+<li><strong>Sectional breakdown</strong>:</li>
+<li><strong>mm. 1–24</strong>: Quiet orchestral buildup, rising motif — a gathering of energy</li>
+<li><strong>~0:40</strong>: Soloist launches the main theme in <strong>thirds and double-stops</strong> — a "gypsy dance" in triple-stop spirit, clearly indebted to Hungarian/Romani topos (a nod to Joachim's Hungarian heritage)</li>
+<li><strong>~2:00</strong>: Second theme — a broader, soaring lyrical subject in D major</li>
+<li><strong>~3:30</strong>: Development combines the two themes</li>
+<li><strong>~5:00</strong>: Recapitulation brings both themes back, with the second now in G major</li>
+<li><strong>~6:00</strong>: <strong>Presto coda</strong> — accelerando, rising tessitura, bravura double-stops and octaves to a blazing final G-major cadence with two emphatic orchestral chords</li>
+</ul>
+<h3>Macro-architecture</h3>
+<p>The three movements enact a classic <strong>Romantic tonal drama</strong>: G minor (struggle) → E♭ major (consolation, via third-relation) → G major (triumph). The <em>attacca</em> connections create a single continuous 25-minute arc rather than a triptych — a structural choice that links Bruch's concerto to Mendelssohn's E minor Violin Concerto (1844), whose through-linked movements were its obvious model. The Adagio is the golden-section keystone around which the faster outer movements are balanced.</p>
+</section>
+
+    <section id="sec2">
+  <h2><span class="secn">3</span>Melodic &amp; Thematic Content</h2>
+<ul class="keyval">
+<li><span class="k">Opening recitative (mvt I)</span><span>The violin's almost-improvised entries — rhapsodic, quasi-operatic, with a rising fourth / falling minor second profile — establish an <em>Innigkeit</em> (inwardness) that suffuses the whole work.</span></li>
+<li><span class="k">First-movement primary theme</span><span>Passionate, declamatory G-minor melody, first announced in <strong>double-stops</strong> by the soloist over dramatic low-string accompaniment. Its contour — a leap upward, stepwise descent, agitated triplet — makes it immediately vocal.</span></li>
+<li><span class="k">First-movement second theme</span><span>A long-breathed B♭-major melody whose initial rising sixth is almost unbearably yearning — classic mid-century German Romantic lyricism.</span></li>
+<li><span class="k">Adagio main theme</span><span>Perhaps <strong>the most famous slow-movement melody in the violin repertoire outside of Beethoven's Op. 61</strong>. Stepwise, vocal, unfolding over ten bars before its first cadence — a Schubertian breadth compressed into instrumental elegance.</span></li>
+<li><span class="k">Finale primary theme</span><span>A Hungarian/Romani-flavored dance in <strong>thirds and sixths</strong> — deliberately evoking Joachim's <em>style hongrois</em>. Its rhythmic bite (short-short-long) is instantly catchy.</span></li>
+<li><span class="k">Thematic economy</span><span>Bruch is not Brahms — he does not work by tight motivic derivation. His melodies are <strong>self-contained songs</strong>, each complete in itself. The concerto's strength lies in sequencing irresistible melodies, not in argumentative development.</span></li>
+</ul>
+</section>
+
+    <section id="sec3">
+  <h2><span class="secn">4</span>Harmony &amp; Tonality</h2>
+<ul class="keyval">
+<li><span class="k">Language</span><span>Mid-Romantic functional harmony in the Mendelssohn-Schumann lineage, with added chromatic richness. No harmonic radicalism — but expert use of conventional gestures.</span></li>
+<li><span class="k">Key scheme</span><span>G minor → E♭ major (flat submediant, a warm third relation that was Schubert's signature) → G major. The flat-submediant pivot from I to II is <em>the</em> characteristic Romantic modulatory gesture, and Bruch handles it with textbook grace.</span></li>
+<li><span class="k">Neapolitan inflections</span><span>The opening movement uses A♭ major coloring prominently — the Neapolitan of G — lending a darkened, almost operatic chromaticism to the violin's recitatives.</span></li>
+<li><span class="k">Cadential patterns</span><span>Generally clear and goal-directed. Bruch is a master of the <strong>deferred cadence</strong> — the Adagio repeatedly approaches closure and extends, sweetens, or redirects.</span></li>
+<li><span class="k">Chord vocabulary</span><span>Dominant sevenths, secondary dominants, diminished sevenths (especially in dramatic transitions), occasional borrowed chords. Essentially Schumann's vocabulary, deployed with full-orchestra weight.</span></li>
+</ul>
+</section>
+
+    <section id="sec4">
+  <h2><span class="secn">5</span>Rhythm, Meter &amp; Tempo</h2>
+<ul class="keyval">
+<li><span class="k">Rhythmic character</span><span>The outer movements are distinguished by their rhythmic drive (especially the Finale's alla breve pulse), while the Adagio is almost rubato-friendly, a gently breathing 3/8.</span></li>
+<li><span class="k">Tempo relationships</span><span>Allegro moderato → Adagio → Allegro energico — a traditional fast-slow-fast, with the <em>attacca</em> transitions creating strong tempo-contrast shocks.</span></li>
+<li><span class="k">Rhythmic motifs</span><span>The Finale's double-stopped main theme has a bouncing, dance-like rhythmic cell (short-short-long) that Bruch exploits throughout the movement. String players still debate optimal bow distribution and string-crossing for these rhythmic passages (see Strings Magazine's primer on the Finale's rhythmic challenges).</span></li>
+<li><span class="k">Rubato</span><span>The Adagio invites considerable interpretive rubato, and performance tradition varies widely — from Heifetz's straightforward flow to Milstein's aristocratic elasticity.</span></li>
+</ul>
+</section>
+
+    <section id="sec5">
+  <h2><span class="secn">6</span>Orchestration, Texture &amp; Timbre</h2>
+<ul>
+<li><strong>Forces</strong>: Solo violin + standard Romantic orchestra — 2 flutes, 2 oboes, 2 clarinets, 2 bassoons, 4 horns, 2 trumpets, timpani, strings. Conventional forces, expertly balanced.</li>
+<li><strong>Textural hallmark</strong>: Bruch writes accompaniments that <strong>never submerge the soloist</strong>. The Adagio's winds-and-lower-strings texture is a particular masterstroke — reserving upper strings allows the violin's middle register to shine unopposed.</li>
+<li><strong>Orchestration highlights</strong>:</li>
+<li><strong>Timpani entry</strong> in mvt I (the opening roll) — one of the most atmospheric curtain-raisers in the concerto literature</li>
+<li><strong>Horn choir</strong> in the Adagio's reprise, adding warmth to the emotional apex</li>
+<li><strong>Brass emphasis</strong> in the Finale's coda — underscoring the triumphant G-major arrival</li>
+<li><strong>Dynamic architecture</strong>: A clear large-scale shape — hushed opening, expansive lyric flight, blazing conclusion. Bruch reserves full-orchestra fortissimo for strategic moments (Finale coda, Adagio climax).</li>
+<li><strong>Idiomatic writing</strong>: The solo part is <strong>magnificently violinistic</strong> — double-stops, octaves, arpeggiated passagework, brilliant high register — but rarely gratuitously showy. Joachim's revision ensured that every difficulty has an expressive purpose. This is why it remains a staple of both student recitals and great-artist programs: it rewards technical mastery without fetishizing it.</li>
+</ul>
+</section>
+
+    <section id="sec6">
+  <h2><span class="secn">7</span>Emotional Arc &amp; Dramaturgy</h2>
+<p>The concerto plots a three-act Romantic drama:</p>
+<ul class="keyval">
+<li><span class="k">Act I — Vorspiel</span><span>A declamation of longing and struggle. The violin enters almost in mid-sentence, as if the player had been speaking to someone before we walked in. Passionate G-minor statements alternate with lyrical B♭-major consolation. The movement doesn't resolve — it <strong>yields</strong> to the Adagio, surrendering its thesis unfinished.</span></li>
+<li><span class="k">Act II — Adagio</span><span>The answer. Where the Vorspiel questioned, the Adagio contemplates. This is the emotional summit: a slow movement of such vocal, singing lyricism that generations of listeners have ranked it beside Beethoven's Op. 61 Adagio and Brahms's Op. 77 Adagio in the concerto canon.</span></li>
+<li><span class="k">Act III — Finale</span><span>Affirmation through dance. The G-major folk-inflected Allegro energico transforms the earlier struggle into celebration. The coda's accelerando is a familiar Romantic device (think Mendelssohn's E-minor Finale, Saint-Saëns's "Danse macabre") but Bruch's execution is exemplary.</span></li>
+</ul>
+<p>The <strong>climax</strong>: the reprise of the Adagio's main theme with full orchestra (~6:30 of mvt II). This is the emotional center of the concerto and perhaps of Bruch's entire output.</p>
+</section>
+
+    <section id="sec7">
+  <h2><span class="secn">8</span>Historical Significance &amp; Influence</h2>
+<p><strong>Structural innovation</strong>: The unconventional Vorspiel first movement — exposition and development without recap, dissolving directly into the slow movement — was bold. Joachim's insistence that it be called a <em>concerto</em> anyway set a template for the freer concerto architectures that followed (Liszt's E♭ concerto, Saint-Saëns, later Sibelius).</p>
+<p><strong>Reception history</strong>:</p>
+<ul class="keyval">
+<li><span class="k">1868</span><span>Immediate smash success. Joachim played it across Europe. It rapidly entered the core repertoire.</span></li>
+<li><span class="k">Late 19th / early 20th c.</span><span>Became <strong>one of the four most-performed Romantic violin concertos</strong> (alongside Beethoven, Mendelssohn, and Brahms).</span></li>
+<li><span class="k">Bruch's lament</span><span>By 1903, Bruch was complaining in letters that audiences demanded only this one work. He died in 1920 in near-poverty, his ~200 other works almost entirely forgotten.</span></li>
+<li><span class="k">Modern status</span><span>An undiminished favorite of audiences and soloists. A polling exercise by Classic FM (UK) has regularly placed it in the top three violin concertos ever written.</span></li>
+</ul>
+<p><strong>Influence</strong>: Bruch's concerto is a model for the genre — its Adagio influenced Elgar's Violin Concerto, its structural flow influenced Sibelius, its violinistic idiom influenced every German-school violinist through the 20th century.</p>
+<p><strong>Place in the canon</strong>: Universally beloved, occasionally sniffed at by academics for its lyrical generosity (the old charge: "too beautiful to be great"). But generations of the greatest violinists have chosen it for their first concerto recording — a silent but definitive argument about its importance.</p>
+</section>
+
+    <section id="sec8">
+  <h2><span class="secn">9</span>Performance Practice &amp; Notable Recordings</h2>
+<p><strong>Interpretive questions</strong>:</p>
+<ul class="keyval">
+<li><span class="k">Opening recitative</span><span>How much rubato? Heifetz is nearly in-tempo; Menuhin freely rhapsodic; younger soloists trend toward Heifetz.</span></li>
+<li><span class="k">Adagio tempo</span><span>Can sink into indulgent slowness or glide. The <em>molto espressivo</em> marking invites breadth, but over-broadening kills the 3/8's pulse.</span></li>
+<li><span class="k">Finale coda</span><span>How dramatic the accelerando? When do you pull back for the final chords?</span></li>
+<li><span class="k">Cadenza</span><span>There isn't a traditional cadenza in the sense of the Classical concerto — the opening recitative functions as a front-loaded quasi-cadenza, and the solo integration is so continuous that improvised cadenzas would be structurally disruptive. Joachim's original bowings and fingerings remain authoritative.</span></li>
+</ul>
+<p><strong>Landmark recordings</strong>:</p>
+<ul class="keyval">
+<li><span class="k">Jascha Heifetz / Sargent / New Symphony Orchestra of London (1962, RCA)</span><span>The classic anti-sentimental reading. Heifetz refuses to wallow; instead he <strong>"de-schmaltzifies"</strong> (his phrase) and reveals a steelier, more classical concerto underneath. Astonishing phrasing.</span></li>
+<li><span class="k">Nathan Milstein / Barzin / Leon (1953) or later Steinberg (Pittsburgh)</span><span>Aristocratic, silver-toned, with unmatched phrase shaping. The connoisseur's pick.</span></li>
+<li><span class="k">Itzhak Perlman / Haitink / Concertgebouw (1984, EMI)</span><span>Warm, golden-toned, full-throated Romantic reading. Often the top pick in Gramophone polls.</span></li>
+<li><span class="k">Kyung-Wha Chung / Kempe / RPO (1972, Decca)</span><span>Passionate, fiery, remarkably alive — a staple recommendation for decades.</span></li>
+<li><span class="k">Ida Haendel / Berglund / LPO</span><span>Grand, old-school eloquence from a violinist who played it as close to the Joachim tradition as anyone on record.</span></li>
+<li><span class="k">Yehudi Menuhin / Susskind / Philharmonia (1948)</span><span>The rhapsodic extreme — extraordinarily free and expressive.</span></li>
+</ul>
+<p><strong>Performance tradition</strong>: Every major violinist of the 20th century recorded it. The interpretive range is broad — from Heifetz's marble cleanliness to Menuhin's Romantic abandon — which itself speaks to the piece's generosity as a vehicle.</p>
+</section>
+
+    <section id="sec9">
+  <h2><span class="secn">10</span>Listening Guide</h2>
+<p>Approximate timestamps based on the Perlman / Haitink recording (~25 min total):</p>
+<table>
+<thead><tr>
+<th>Time</th>
+<th>What to listen for</th>
+</tr></thead>
+<tbody>
+<tr><td>0:00</td><td>Hushed timpani roll + winds — curtain rising</td></tr>
+<tr><td>0:15</td><td>Violin's first recitative entrance — almost speaking</td></tr>
+<tr><td>1:30</td><td><strong>First theme</strong> proper in G minor (double-stopped)</td></tr>
+<tr><td>3:00</td><td>Second theme in B♭ major — broad, yearning</td></tr>
+<tr><td>5:00</td><td>Brief development</td></tr>
+<tr><td>6:30</td><td><strong>Transition</strong> (no recapitulation) — violin climbs into the stratosphere</td></tr>
+<tr><td>~7:30</td><td>Attacca into Adagio — E♭ major warmth</td></tr>
+<tr><td>7:45</td><td><strong>Adagio main theme</strong> — the most beloved melody in the work</td></tr>
+<tr><td>10:00</td><td>Second Adagio theme</td></tr>
+<tr><td>12:00</td><td>Third Adagio theme</td></tr>
+<tr><td>13:30</td><td><strong>Climactic reprise</strong> of Adagio main theme — full orchestra, violin in upper register. <em>This is the emotional summit of the concerto.</em></td></tr>
+<tr><td>15:30</td><td>Adagio dissolves into E♭ stillness</td></tr>
+<tr><td>~16:30</td><td>Orchestral buildup begins mvt III</td></tr>
+<tr><td>17:15</td><td>Finale's <strong>"gypsy dance"</strong> theme launches in double-stops</td></tr>
+<tr><td>19:00</td><td>Second theme — broader, lyrical</td></tr>
+<tr><td>20:30</td><td>Development</td></tr>
+<tr><td>22:00</td><td>Recapitulation</td></tr>
+<tr><td>23:00</td><td><strong>Coda</strong> — accelerando, rising tessitura, bravura double-stops</td></tr>
+<tr><td>24:30</td><td>Two final G-major chords</td></tr>
+</tbody></table>
+<p><strong>First listen</strong>: Let the melodies wash over you. Focus on the Adagio. <strong>Second listen</strong>: Pay attention to <em>how</em> the movements connect — the Vorspiel's unresolved dissolution into E♭ is a structural masterstroke. <strong>Third listen</strong>: Track the recurring rising-sixth contour across all three movements; Bruch's lyric DNA.</p>
+</section>
+
+    <section id="sec10">
+  <h2><span class="secn">11</span>Must-Listen Tracks</h2>
+<div class="mustlisten"><h3>Movement II — Adagio</h3>
+<p>If you listen to nothing else from this concerto, listen to the <strong>Adagio</strong>. It is simply one of the most beautiful slow movements ever written for solo violin and orchestra — a nine-minute unspooling of lyric melody in E♭ major that reaches its emotional summit about two-thirds of the way through, when the main theme returns with full orchestral warmth and the soloist soars into an upper-register statement that feels like the sun breaking through after storm. This is the movement that made Bruch immortal and made him resent his immortality. Every great violinist has measured themselves against it.</p>
+<p><strong>Recommended recording</strong>: <strong>Perlman / Haitink / Concertgebouw (1984, EMI)</strong> for glowing Romantic warmth and phrasing of unmatched nobility. For a cooler, more aristocratic reading: <strong>Heifetz / Sargent (1962, RCA)</strong> — proving the Adagio can be devastating without sentimentality.</p>
+<p><strong>Sources</strong>:</p>
+<ul>
+<li><a class="inline" href="https://en.wikipedia.org/wiki/Violin_Concerto_No._1_(Bruch" target="_blank" rel="noopener">Violin Concerto No. 1 (Bruch) — Wikipedia</a>)</li>
+<li><a class="inline" href="https://www.britannica.com/topic/Violin-Concerto-No-1-in-G-Minor-Op-26" target="_blank" rel="noopener">Britannica — Violin Concerto No. 1 in G minor</a></li>
+<li><a class="inline" href="https://www.laphil.com/musicdb/pieces/4499/violin-concerto-no-1-in-g-minor-op-26" target="_blank" rel="noopener">LA Phil — Bruch Violin Concerto No. 1 program notes</a></li>
+<li><a class="inline" href="https://theviolinchannel.com/bruch-violin-concerto-1-g-minor-premiered-on-this-day-1868/" target="_blank" rel="noopener">The Violin Channel — Premiere anniversary</a></li>
+<li><a class="inline" href="https://www.gramophone.co.uk/features/article/bruch-s-violin-concerto-no-1-a-quick-guide-to-the-best-recordings" target="_blank" rel="noopener">Gramophone — Best recordings guide</a></li>
+<li><a class="inline" href="https://utahsymphony.org/explore/2019/04/bruch-concerto-no-1-in-g-minor-for-violin-and-orchestra/" target="_blank" rel="noopener">Utah Symphony — Bruch concerto program notes</a></li>
+<li><a class="inline" href="https://interlude.hk/max-bruch/" target="_blank" rel="noopener">Interlude HK — Why have we forgotten Max Bruch?</a></li>
+<li><a class="inline" href="https://stringsmagazine.com/mastering-the-irregular-rhythmic-passages-in-the-first-movement-of-the-bruch-violin-concerto-no-1-in-g-minor/" target="_blank" rel="noopener">Strings Magazine — Rhythmic challenges in the Finale</a></li>
+</ul></div>
+</section>
+    <footer>
+      
+      <p>Companion to the Markdown analysis in the Obsidian vault at <code>Musical Analysis/Bruch - Violin Concerto No. 1 in G minor, Op. 26.md</code>.</p>
+      <p><a href="index.html">← back to music</a></p>
+    </footer>
+  </main>
+</div>
+</div>
+
+<script>
+  /* ---------- color palettes (Squarespace-style) ---------- */
+  const PALETTES = {
+    afternoon:{mode:'light',label:'Afternoon',v:{
+      '--bg':'#faf8f4','--panel':'#ffffff','--ink':'#1c1a17','--ink-soft':'#55504a','--ink-faint':'#8a8279',
+      '--line':'#e8e2d8','--line-strong':'#d8cfc0','--accent':'#9a5b2e','--accent-soft':'#f3e6d8','--accent-ink':'#7a4220',
+      '--gold':'#b8893b','--teal':'#2f6b6b','--code-bg':'#2b2722',
+      '--header-grad':'linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%)',
+      '--th-bg':'#f3ede3','--row-hover':'#fbf7f0','--epi-ink':'#5b3c20',
+      '--warm-bg':'#fbf3e2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f2f1','--cool-bd':'#bfdcda','--cool-ink':'#1f4f4f',
+      '--ml-grad':'linear-gradient(150deg,#fbf3e7,#f6e7d4)','--ml-bd':'#ebd7b8','--ml-ink':'#6b3f1c'}},
+    sage:{mode:'light',label:'Sage',v:{
+      '--bg':'#f5f7f2','--panel':'#ffffff','--ink':'#1c211a','--ink-soft':'#4e544a','--ink-faint':'#828a7c',
+      '--line':'#e3e8dc','--line-strong':'#d3dac8','--accent':'#5c7a52','--accent-soft':'#e6ede0','--accent-ink':'#3f592f',
+      '--gold':'#a98f3c','--teal':'#3a7a6b','--code-bg':'#1f2620',
+      '--header-grad':'linear-gradient(160deg,#1a231a 0%,#283a26 55%,#3a5232 100%)',
+      '--th-bg':'#edf1e7','--row-hover':'#f6f9f2','--epi-ink':'#3c4f30',
+      '--warm-bg':'#f4efdf','--warm-bd':'#e2dba9','--warm-ink':'#5f5520',
+      '--cool-bg':'#e6f1ec','--cool-bd':'#c0dccd','--cool-ink':'#1f4f3e',
+      '--ml-grad':'linear-gradient(150deg,#eef3e4,#e3ecd6)','--ml-bd':'#d2dcb8','--ml-ink':'#3f5224'}},
+    harbor:{mode:'light',label:'Harbor',v:{
+      '--bg':'#f4f6f9','--panel':'#ffffff','--ink':'#1a2026','--ink-soft':'#4b5560','--ink-faint':'#7d8794',
+      '--line':'#e1e7ec','--line-strong':'#cfd8e1','--accent':'#2f6690','--accent-soft':'#e0ebf2','--accent-ink':'#234e6b',
+      '--gold':'#b5862f','--teal':'#2f8682','--code-bg':'#192129',
+      '--header-grad':'linear-gradient(160deg,#121b24 0%,#1d2e3f 55%,#274a63 100%)',
+      '--th-bg':'#e9eef3','--row-hover':'#f4f8fb','--epi-ink':'#234e6b',
+      '--warm-bg':'#f6efe0','--warm-bd':'#e7d6b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e2eef2','--cool-bd':'#bcd6de','--cool-ink':'#1f4f55',
+      '--ml-grad':'linear-gradient(150deg,#e8f1f6,#dbe9f1)','--ml-bd':'#c2d6e4','--ml-ink':'#234e6b'}},
+    plum:{mode:'light',label:'Plum',v:{
+      '--bg':'#f8f5f8','--panel':'#ffffff','--ink':'#221c21','--ink-soft':'#564b54','--ink-faint':'#897e87',
+      '--line':'#e9e0e7','--line-strong':'#dccdd8','--accent':'#7d4a6b','--accent-soft':'#efe2ec','--accent-ink':'#5d3550',
+      '--gold':'#b07d3b','--teal':'#3a7a72','--code-bg':'#241c23',
+      '--header-grad':'linear-gradient(160deg,#201823 0%,#332338 55%,#4e2f53 100%)',
+      '--th-bg':'#f1e9f0','--row-hover':'#faf5f9','--epi-ink':'#5d3550',
+      '--warm-bg':'#f7efe2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f1f0','--cool-bd':'#c4d9d5','--cool-ink':'#1f4f48',
+      '--ml-grad':'linear-gradient(150deg,#f4e9f1,#ecdbe8)','--ml-bd':'#ddc4d6','--ml-ink':'#5d3550'}},
+    midnight:{mode:'dark',label:'Midnight',v:{
+      '--bg':'#0f1620','--panel':'#18212e','--ink':'#e8edf3','--ink-soft':'#a9b5c4','--ink-faint':'#6f7d8d',
+      '--line':'#25303f','--line-strong':'#34414f','--accent':'#5b9bd5','--accent-soft':'#1b2a3b','--accent-ink':'#9cc4e8',
+      '--gold':'#d2a85f','--teal':'#4db1a8','--code-bg':'#0b121b',
+      '--header-grad':'linear-gradient(160deg,#0b1220 0%,#13243a 55%,#1d3a5c 100%)',
+      '--th-bg':'#1f2a38','--row-hover':'#1d2735','--epi-ink':'#9cc4e8',
+      '--warm-bg':'#2a2418','--warm-bd':'#43381f','--warm-ink':'#e0b878',
+      '--cool-bg':'#11302d','--cool-bd':'#1f4a45','--cool-ink':'#7fd6cc',
+      '--ml-grad':'linear-gradient(150deg,#1c2a3b,#16222f)','--ml-bd':'#2c3f55','--ml-ink':'#9cc4e8'}},
+    charcoal:{mode:'dark',label:'Charcoal',v:{
+      '--bg':'#161514','--panel':'#201e1c','--ink':'#ece8e2','--ink-soft':'#b0a99f','--ink-faint':'#766f65',
+      '--line':'#2c2926','--line-strong':'#3a3631','--accent':'#c8895a','--accent-soft':'#2c2420','--accent-ink':'#e3a878',
+      '--gold':'#cda35e','--teal':'#5aada3','--code-bg':'#100f0e',
+      '--header-grad':'linear-gradient(160deg,#141210 0%,#241e18 55%,#3a2c20 100%)',
+      '--th-bg':'#25221f','--row-hover':'#211e1b','--epi-ink':'#e3a878',
+      '--warm-bg':'#2c2418','--warm-bd':'#443720','--warm-ink':'#e0b878',
+      '--cool-bg':'#1a2826','--cool-bd':'#2c4641','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#272019,#1d1814)','--ml-bd':'#3d3124','--ml-ink':'#e3a878'}},
+    forest:{mode:'dark',label:'Forest',v:{
+      '--bg':'#101713','--panel':'#18211b','--ink':'#e6ece6','--ink-soft':'#a6b3a6','--ink-faint':'#6e7c6e',
+      '--line':'#243029','--line-strong':'#324133','--accent':'#6fae7e','--accent-soft':'#1a2a20','--accent-ink':'#9fd3aa',
+      '--gold':'#cda35e','--teal':'#4fb0a0','--code-bg':'#0b110d',
+      '--header-grad':'linear-gradient(160deg,#0c1410 0%,#142a1d 55%,#1d4230 100%)',
+      '--th-bg':'#1d2922','--row-hover':'#1a241d','--epi-ink':'#9fd3aa',
+      '--warm-bg':'#28281a','--warm-bd':'#3f3f24','--warm-ink':'#d8b878',
+      '--cool-bg':'#16302a','--cool-bd':'#274a40','--cool-ink':'#7fd0bc',
+      '--ml-grad':'linear-gradient(150deg,#18271e,#132019)','--ml-bd':'#2a4231','--ml-ink':'#9fd3aa'}},
+    wine:{mode:'dark',label:'Wine',v:{
+      '--bg':'#1a1012','--panel':'#241619','--ink':'#f0e4e6','--ink-soft':'#c2a9af','--ink-faint':'#8c6f76',
+      '--line':'#321f24','--line-strong':'#43292f','--accent':'#c46b7e','--accent-soft':'#2e1a1f','--accent-ink':'#e49aa8',
+      '--gold':'#cda35e','--teal':'#5aa8a0','--code-bg':'#140c0e',
+      '--header-grad':'linear-gradient(160deg,#160c0e 0%,#2a141a 55%,#4a2230 100%)',
+      '--th-bg':'#2c1c20','--row-hover':'#271519','--epi-ink':'#e49aa8',
+      '--warm-bg':'#2e2418','--warm-bd':'#463720','--warm-ink':'#e0b878',
+      '--cool-bg':'#18302d','--cool-bd':'#2a4a45','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#2a181d,#201216)','--ml-bd':'#43272f','--ml-ink':'#e49aa8'}}
+  };
+
+  const root = document.documentElement;
+  function applyPalette(key){
+    const p = PALETTES[key]; if(!p) return;
+    for(const [k,val] of Object.entries(p.v)) root.style.setProperty(k,val);
+    root.setAttribute('data-mode', p.mode);
+    document.querySelectorAll('.pp-sw').forEach(b=>b.classList.toggle('active', b.dataset.pal===key));
+    try{ localStorage.setItem('faune-palette', key); }catch(e){}
+  }
+
+  // build swatches
+  const tick = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  for(const [key,p] of Object.entries(PALETTES)){
+    const btn = document.createElement('button');
+    btn.className = 'pp-sw'; btn.dataset.pal = key; btn.type = 'button';
+    btn.title = p.label;
+    btn.innerHTML =
+      '<div class="bars">'+
+        '<span style="background:'+p.v['--bg']+'"></span>'+
+        '<span style="background:'+p.v['--accent']+'"></span>'+
+        '<span style="background:'+p.v['--accent-ink']+'"></span>'+
+        '<span style="background:'+p.v['--gold']+'"></span>'+
+      '</div>'+
+      '<span class="nm">'+p.label+tick+'</span>';
+    btn.addEventListener('click', ()=>applyPalette(key));
+    document.getElementById(p.mode==='light'?'pp-light':'pp-dark').appendChild(btn);
+  }
+
+  // toggle panel
+  const picker = document.getElementById('picker');
+  const ppToggle = document.getElementById('ppToggle');
+  ppToggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = picker.classList.toggle('open');
+    ppToggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.addEventListener('click', (e)=>{
+    if(!picker.contains(e.target)) picker.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') picker.classList.remove('open'); });
+
+  // restore saved or honor OS dark preference
+  let saved=null; try{ saved = localStorage.getItem('faune-palette'); }catch(e){}
+  if(saved && PALETTES[saved]) applyPalette(saved);
+  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
+  else applyPalette('afternoon');
+
+  // active TOC highlighting
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const map = {};
+  links.forEach(a => { const id = a.getAttribute('href').slice(1); map[id] = a; });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = map[e.target.id];
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

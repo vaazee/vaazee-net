@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beethoven — Piano Concerto No. 3 in C minor, Op. 37 · Musical Analysis</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --panel:#ffffff;
+    --ink:#1c1a17;
+    --ink-soft:#55504a;
+    --ink-faint:#8a8279;
+    --line:#e8e2d8;
+    --line-strong:#d8cfc0;
+    --accent:#9a5b2e;       /* warm terracotta — faun / afternoon heat */
+    --accent-soft:#f3e6d8;
+    --accent-ink:#7a4220;
+    --gold:#b8893b;
+    --teal:#2f6b6b;
+    --code-bg:#2b2722;
+    --green:#2f7d4f;
+    --amber:#b07d18;
+    --red:#a8392f;
+    /* themeable extras (overridden by JS palettes) */
+    --header-grad:linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%);
+    --th-bg:#f3ede3;
+    --row-hover:#fbf7f0;
+    --epi-ink:#5b3c20;
+    --warm-bg:#fbf3e2; --warm-bd:#ecd9b0; --warm-ink:#6b4e1e;
+    --cool-bg:#e8f2f1; --cool-bd:#bfdcda; --cool-ink:#1f4f4f;
+    --ml-grad:linear-gradient(150deg,#fbf3e7,#f6e7d4); --ml-bd:#ebd7b8; --ml-ink:#6b3f1c;
+    --radius:12px;
+    --shadow:0 1px 2px rgba(40,30,15,.04),0 6px 22px rgba(40,30,15,.06);
+  }
+  html{transition:none}
+  body,.card,table,.tldr,.callout,.mustlisten,nav.toc a,.svgcard,.pp-panel,.pp-toggle,.pp-sw{
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+    line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  /* ---- header ---- */
+  header.top{
+    background:var(--header-grad);
+    color:#f4ece1;position:relative;overflow:hidden;
+    border-bottom:3px solid var(--accent);
+  }
+  header.top .glow{position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(212,160,90,.35),transparent 65%);pointer-events:none;}
+  header.top .wrap{padding:46px 28px 40px;position:relative;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#d9b384;font-weight:600;margin:0 0 14px}
+  header.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;
+    font-size:40px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+  header.top h1 em{font-style:italic;color:#f0cfa0}
+  header.top .sub{font-size:17px;color:#d8cab8;margin:10px 0 0;max-width:760px}
+  .metarow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-size:13.5px;color:#cdbca6}
+  .metarow b{color:#f4ece1;font-weight:600}
+  .stamp{font-size:12px;color:#b39c80;margin-top:18px;font-family:"SF Mono",Menlo,monospace}
+
+  /* ---- layout ---- */
+  .layout{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0 80px;align-items:start}
+  nav.toc{position:sticky;top:24px;font-size:14px}
+  nav.toc .title{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 12px}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border-radius:7px;border-left:2px solid transparent;line-height:1.35}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+  nav.toc a .n{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;margin-right:7px}
+  nav.toc a.active{background:var(--accent-soft);color:var(--accent-ink);border-left-color:var(--accent)}
+
+  main{min-width:0}
+  section{margin:0 0 50px;scroll-margin-top:24px}
+  h2{font-family:Georgia,serif;font-size:25px;font-weight:600;letter-spacing:-.01em;
+    margin:0 0 4px;display:flex;align-items:baseline;gap:12px}
+  h2 .secn{font-size:14px;font-weight:700;color:#fff;background:var(--accent);
+    width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:-apple-system,system-ui;}
+  .lead{color:var(--ink-soft);margin:2px 0 22px 42px;font-size:15px}
+  h3{font-size:17px;font-weight:650;margin:26px 0 8px;color:var(--ink)}
+  p{margin:0 0 14px}
+  strong{font-weight:650}
+  a.inline{color:var(--accent-ink);text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+
+  /* ---- tl;dr box ---- */
+  .tldr{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow);margin-bottom:8px}
+  .tldr h2{font-size:18px;margin-bottom:10px}
+  .tldr p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+  .tldr p:last-child{margin-bottom:0}
+
+  blockquote.epi{margin:0 0 30px;padding:18px 24px;background:var(--accent-soft);
+    border-radius:var(--radius);font-family:Georgia,serif;font-style:italic;font-size:16px;color:var(--epi-ink)}
+  blockquote.epi .who{display:block;font-style:normal;font-family:-apple-system,system-ui;
+    font-size:13px;color:var(--accent-ink);margin-top:10px;font-weight:600}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 24px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin:6px 0}
+  .keyval{margin:0;padding:0;list-style:none}
+  .keyval li{display:grid;grid-template-columns:165px 1fr;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);margin:0}
+  .keyval li:last-child{border-bottom:none}
+  .keyval .k{color:var(--ink-faint);font-size:13.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+
+  /* ---- tables ---- */
+  table{width:100%;border-collapse:collapse;margin:6px 0 20px;font-size:14.5px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  th{background:var(--th-bg);text-align:left;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line-strong)}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--row-hover)}
+  td.sec{font-weight:650;color:var(--accent-ink);white-space:nowrap}
+  .time{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);white-space:nowrap}
+
+  /* ---- pull callout ---- */
+  .callout{border-radius:var(--radius);padding:16px 20px;margin:18px 0;font-size:15px;border:1px solid}
+  .callout.gold{background:var(--warm-bg);border-color:var(--warm-bd);color:var(--warm-ink)}
+  .callout.teal{background:var(--cool-bg);border-color:var(--cool-bd);color:var(--cool-ink)}
+  .callout .lbl{font-weight:700;text-transform:uppercase;font-size:11.5px;letter-spacing:.1em;display:block;margin-bottom:4px;opacity:.8}
+
+  /* ---- timeline ---- */
+  .tl{list-style:none;margin:8px 0 0;padding:0;position:relative}
+  .tl:before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+  .tl li{position:relative;padding:10px 0 10px 86px;margin:0}
+  .tl .t{position:absolute;left:0;top:11px;width:52px;text-align:right;font-family:"SF Mono",Menlo,monospace;
+    font-size:12.5px;color:var(--teal);font-weight:600}
+  .tl .dot{position:absolute;left:57px;top:15px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--accent)}
+  .tl li.peak .dot{background:var(--accent);width:14px;height:14px;left:56px;top:14px;box-shadow:0 0 0 4px var(--accent-soft)}
+  .tl b{color:var(--ink)}
+
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:2px 8px;border-radius:20px;vertical-align:middle}
+  .b-heart{background:#fbe3df;color:var(--red)}
+  .b-key{background:#e6efe9;color:var(--green)}
+
+  figure{margin:18px 0 24px}
+  figcaption{font-size:13px;color:var(--ink-faint);margin-top:10px;text-align:center;font-style:italic}
+  .svgcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  /* theme-aware SVG strokes/fills */
+  .svgcard svg .sv-axis{stroke:var(--line-strong)}
+  .svgcard svg .sv-grid{stroke:var(--line)}
+  .svgcard svg .sv-curve{stroke:var(--accent)}
+  .svgcard svg .sv-area{fill:var(--accent);opacity:.13}
+  .svgcard svg .sv-gold-line{stroke:var(--gold)}
+  .svgcard svg .sv-gold,.svgcard svg .sv-gold-dot{fill:var(--gold)}
+  .svgcard svg .sv-accent,.svgcard svg .sv-accent-dot{fill:var(--accent)}
+  .svgcard svg .sv-lbl{fill:var(--ink-soft)}
+  .svgcard svg .sv-faint{fill:var(--ink-faint)}
+
+  code{font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:5px}
+
+  /* ---- palette picker ---- */
+  .palette-picker{position:fixed;top:14px;right:14px;z-index:60;font-size:13px;
+    font-family:-apple-system,system-ui,sans-serif}
+  .pp-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    background:rgba(255,255,255,.92);color:#241c14;border:1px solid rgba(0,0,0,.12);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    padding:8px 13px;border-radius:30px;font-weight:600;font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,.16)}
+  .pp-toggle svg{display:block}
+  .pp-toggle .chev{transition:transform .2s ease}
+  .palette-picker.open .pp-toggle .chev{transform:rotate(180deg)}
+  .pp-panel{position:absolute;top:46px;right:0;width:248px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.22);padding:14px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);
+    transform-origin:top right;transition:opacity .16s ease,transform .16s ease,visibility .16s}
+  .palette-picker.open .pp-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+  .pp-group{margin-bottom:12px}
+  .pp-group:last-child{margin-bottom:0}
+  .pp-label{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 2px 8px}
+  .pp-label .ico{width:13px;height:13px;opacity:.7}
+  .pp-swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pp-sw{cursor:pointer;border:1.5px solid var(--line);background:var(--panel);
+    border-radius:10px;padding:7px;display:flex;flex-direction:column;gap:6px;text-align:left;
+    transition:border-color .15s,transform .1s}
+  .pp-sw:hover{transform:translateY(-1px)}
+  .pp-sw .bars{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .pp-sw .bars span{flex:1}
+  .pp-sw .nm{font-size:11.5px;font-weight:600;color:var(--ink-soft);display:flex;
+    align-items:center;justify-content:space-between;gap:4px}
+  .pp-sw.active{border-color:var(--accent)}
+  .pp-sw.active .nm{color:var(--ink)}
+  .pp-sw .tick{width:13px;height:13px;color:var(--accent);opacity:0}
+  .pp-sw.active .tick{opacity:1}
+
+  .rec{display:grid;grid-template-columns:1fr;gap:0}
+  .rec .who{font-weight:650;color:var(--accent-ink)}
+
+  .mustlisten{background:var(--ml-grad);border:1px solid var(--ml-bd);
+    border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow)}
+  .mustlisten h3{margin-top:0;font-family:Georgia,serif;font-size:20px;color:var(--ml-ink)}
+  .mustlisten .span{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--ink-faint);font-size:13.5px}
+  footer a{color:var(--accent-ink);text-decoration:none}
+
+  @media (max-width:720px){
+    .layout{grid-template-columns:1fr;gap:0;padding:24px 0 60px}
+    nav.toc{display:none}
+    .wrap{padding:0 18px}
+    header.top h1{font-size:30px}
+    header.top .wrap{padding:34px 18px 30px}
+    .keyval li{grid-template-columns:1fr;gap:2px}
+    .lead{margin-left:0}
+    h2{font-size:21px}
+    .palette-picker{top:10px;right:10px}
+    .pp-toggle .pp-txt{display:none}
+    .pp-toggle{padding:9px;border-radius:50%}
+    .pp-panel{width:230px}
+  }
+</style>
+</head>
+<body>
+
+<div class="palette-picker" id="picker">
+  <button class="pp-toggle" id="ppToggle" aria-expanded="false" aria-label="Change color theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    <span class="pp-txt">Theme</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pp-panel" role="menu" aria-label="Color palettes">
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>Light</span>
+      <div class="pp-swatches" id="pp-light"></div>
+    </div>
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark</span>
+      <div class="pp-swatches" id="pp-dark"></div>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <p class="eyebrow">Musical Analysis · Concerto</p>
+    <h1>Piano Concerto No. 3 in C minor, Op. 37</h1>
+    <p class="sub">Beethoven · 1800–1803</p>
+    <div class="metarow">
+      <span><b>Composed</b> 1800–1803</span>
+      <span><b>Premiere</b> 5 April 1803, Theater an der Wien, Vienna. Beethoven was soloist and conductor</span>
+    </div>
+    <p class="stamp">Generated 2026-05-31 · musical-analysis</p>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <p class="title">Contents</p>
+    <a href="#tldr"><span class="n">·</span>In brief</a>
+    <a href="#sec0"><span class="n">1</span>Identity &amp; Context</a>
+    <a href="#sec1"><span class="n">2</span>Formal Structure</a>
+    <a href="#sec2"><span class="n">3</span>Melodic &amp; Thematic Content</a>
+    <a href="#sec3"><span class="n">4</span>Harmony &amp; Tonality</a>
+    <a href="#sec4"><span class="n">5</span>Rhythm, Meter &amp; Tempo</a>
+    <a href="#sec5"><span class="n">6</span>Orchestration, Texture &amp; Timbre</a>
+    <a href="#sec6"><span class="n">7</span>Emotional Arc &amp; Dramaturgy</a>
+    <a href="#sec7"><span class="n">8</span>Historical Significance &amp; Influence</a>
+    <a href="#sec8"><span class="n">9</span>Performance Practice &amp; Notable Recordings</a>
+    <a href="#sec9"><span class="n">10</span>Listening Guide</a>
+    <a href="#sec10"><span class="n">11</span>Must-Listen Tracks</a>
+  </nav>
+
+  <main>
+    <section id="tldr"><div class="tldr"><h2>In brief</h2><p><strong>Full title:</strong> Piano Concerto No. 3 in C minor, Op. 37 <strong>Composer:</strong> Ludwig van Beethoven (1770–1827) <strong>Composed:</strong> Principally 1800–1803, with sketches as early as 1796. The solo part was not fully written down at the premiere — Beethoven played much of it from memory or improvised from shorthand. <strong>Premiere:</strong> 5 April 1803, Theater an der Wien, Vienna. Beethoven was soloist and conductor; the concert also premiered the Second Symphony and the oratorio <em>Christ on the Mount of Olives</em>. Ignaz von Seyfried famously recounted turning pages for Beethoven and finding the piano part "almost wholly empty pages; here and there a few Egyptian hieroglyphs, wholly unintelligible to me, were scribbled down to serve as clues for him." <strong>Dedicatee:</strong> Prince Louis Ferdinand of Prussia — himself a gifted pianist-composer who died in battle in 1806.</p></div></section>
+    <section id="sec0">
+  <h2><span class="secn">1</span>Identity &amp; Context</h2>
+<p><strong>Where it sits in Beethoven's output:</strong> Op. 37 straddles the line between the so-called early and middle ("heroic") periods. It was composed in the very years of the Heiligenstadt Testament (October 1802) — Beethoven's devastating letter confronting his deafness and his near-suicide — and immediately precedes the <em>Eroica</em> Symphony (1803–04). The Third Concerto is the first of Beethoven's concerti to break definitively with the Mozartian model, and the first in which his distinctive tragic-heroic voice speaks with full authority.</p>
+<p><strong>Historical moment:</strong> Napoleon had been Consul for three years; Europe was between wars; Vienna was the musical capital of the world. Haydn was alive and active (<em>The Seasons</em> had premiered in 1801); Mozart's C minor Concerto K. 491 — the unmistakable ancestor of this work — had been published a decade earlier. Beethoven was already famous as a virtuoso; this concerto, and the <em>Eroica</em>, would soon transform his reputation from brilliant pianist-composer into epochal artist.</p>
+</section>
+
+    <section id="sec1">
+  <h2><span class="secn">2</span>Formal Structure</h2>
+<p>Three movements, ~33–37 minutes total.</p>
+<h3>I. Allegro con brio (C minor, 4/4, ~16–18 min)</h3>
+<p>Double-exposition sonata form on a symphonic scale. This is the first of Beethoven's concerti where the first movement feels structurally equal to a symphony's opening movement.</p>
+<ul class="keyval">
+<li><span class="k">Orchestral exposition (mm. 1–110)</span><span>Opens with a hushed unison first theme in strings — a rising C minor arpeggio (C–Eb–G–C) followed by a stepwise descent. The theme's quiet menace is immediately undercut by a sudden <em>forte</em> outburst. The second theme appears in Eb major (the classical relative-major choice) in the clarinet and first violins.</span></li>
+<li><span class="k">Piano exposition (mm. 111–226)</span><span>The soloist enters with three rising C-minor scales capped by the first theme. The piano exposition largely follows the orchestral one but with virtuosic elaboration.</span></li>
+<li><span class="k">Development (mm. 227–302)</span><span>Compact and concentrated, wrestling with the first theme's arpeggio and scale figures. Key excursions to D major, F minor.</span></li>
+<li><span class="k">Recapitulation (mm. 303–416)</span><span>First theme returns in C minor; the second theme, unusually, appears in C major (not the parallel C minor) — a glimpse of eventual consolation.</span></li>
+<li><span class="k">Cadenza</span><span>Beethoven wrote out a cadenza (the one virtually all modern pianists play); it is a taut, motivically rigorous essay on the movement's material rather than a Mozartian display piece.</span></li>
+<li><span class="k">Coda</span><span>After the cadenza, the timpani enters alone on a C pedal while the piano plays fragmented arpeggios — one of the first concerto passages where the soloist and timpani converse intimately. This moment is revolutionary.</span></li>
+</ul>
+<h3>II. Largo (E major, 3/8, ~9–11 min)</h3>
+<p>Ternary (A–B–A′) with hymnic, almost sacred character. The key — <strong>E major, a tritone-adjacent distance from C minor</strong> — is the work's most famous stroke of harmonic daring.</p>
+<ul class="keyval">
+<li><span class="k">A (mm. 1–45)</span><span>Piano begins alone with a sublime, softly pedaled chorale in E major. Strings then take up the theme; piano responds with elaborate filigree.</span></li>
+<li><span class="k">B (mm. 46–71)</span><span>A central episode featuring a duet between flute and bassoon (over piano arpeggios) — one of the most exquisite chamber-music passages in the concerto literature.</span></li>
+<li><span class="k">A′ (mm. 72–end)</span><span>Returns the opening with further ornamentation; closes with a brief cadenza-like passage and a hushed perfect cadence.</span></li>
+</ul>
+<h3>III. Rondo: Allegro – Presto (C minor → C major, 2/4, ~9–10 min)</h3>
+<p>Sonata-rondo (A–B–A–C–A–B′–A–coda) with the classical rondo's spiritedness but Beethoven's weight of argument.</p>
+<ul class="keyval">
+<li><span class="k">Rondo theme (A)</span><span>A pungent, syncopated C-minor tune whose leap of a minor sixth is clearly a reshaping of the first movement's opening arpeggio.</span></li>
+<li><span class="k">B (Eb major)</span><span>Lyrical contrast.</span></li>
+<li><span class="k">C (central episode in Ab major)</span><span>A surprising turn to the flat submediant; a fugato-tinged development.</span></li>
+<li><span class="k">Coda</span><span>The meter shifts to 6/8 <em>Presto</em> and the key pivots to C major; a scintillating chase to a triumphant close.</span></li>
+</ul>
+<h3>Macro-architecture</h3>
+<p>The classical <strong>C minor → E major → C minor/major</strong> key scheme. The tritone relationship between movements I and II (C ↔ E as implied roots, though E major is reached through enharmonic common-tone G#/Ab logic) is audacious. The narrative: tragic striving (I) → transcendent stillness (II) → defiant joy (III). The arc prefigures the Fifth Symphony's C minor → C major journey.</p>
+</section>
+
+    <section id="sec2">
+  <h2><span class="secn">3</span>Melodic &amp; Thematic Content</h2>
+<ul class="keyval">
+<li><span class="k">First-movement main theme</span><span>The rising C minor triad (C–Eb–G–C) followed by a stepwise descent. Its DNA — a triadic ascent plus scalar descent — is directly borrowed from Mozart's C minor Concerto K. 491, but Beethoven hardens it into a near-motto. The same arpeggio shapes also govern the rondo theme.</span></li>
+<li><span class="k">First-movement second theme</span><span>More lyrical, with a characteristic drooping appoggiatura — classical in gesture, Beethovenian in intensity.</span></li>
+<li><span class="k">Largo theme</span><span>A slow chorale in parallel motion, deeply vocal, almost Bachian in its sacred restraint.</span></li>
+<li><span class="k">Rondo theme</span><span>Syncopated, sardonic, with a characteristic "hiccup" rhythm on the upbeat.</span></li>
+</ul>
+<p><strong>Motivic economy:</strong> Beethoven is already writing with Beethovenian tightness — the first movement's opening arpeggio echoes in the piano's first entry, in the cadenza, in the recap's second theme, and (transformed) in the rondo. Not as monothematic as the Fifth Symphony, but clearly the same compositional temperament emerging.</p>
+</section>
+
+    <section id="sec3">
+  <h2><span class="secn">4</span>Harmony &amp; Tonality</h2>
+<ul>
+<li><strong>C minor</strong> was for Beethoven what the <em>Tristan</em> chord would be for Wagner: a signature. His C minor works (the Pathétique Sonata, the Fifth Symphony, Op. 18 No. 4, Op. 111) share a common air — taut, tragic, heroic, ultimately redemptive. Op. 37 is the concerto entry in that lineage.</li>
+<li><strong>Slow-movement key:</strong> E major. A stunning choice. From C minor, the common-tone link is Eb/Eb enharmonic re-spelling, but more importantly the tritone distance (C ↔ F# = E's dominant neighborhood) creates a feeling of having stepped into a wholly different world. This distant-key slow movement anticipates Beethoven's later "remote mediant" practice (Op. 53's E major, Op. 106's F# minor).</li>
+<li><strong>Chord vocabulary:</strong> Diatonic-with-teeth. Diminished sevenths are used structurally (especially at the first-movement's recap boundary); Neapolitan sixths appear at dramatic corners; augmented sixths steer modulations.</li>
+<li><strong>Cadential practice:</strong> Beethoven both honors and evades cadence. The first-movement coda delays final cadence through a long timpani pedal; the Largo dissolves into its hush rather than arriving with emphasis.</li>
+</ul>
+</section>
+
+    <section id="sec4">
+  <h2><span class="secn">5</span>Rhythm, Meter &amp; Tempo</h2>
+<ul>
+<li><strong>First movement</strong> is driven by a characteristic dotted-rhythm insistence — the <em>con brio</em> marking is as much rhythmic as tempo.</li>
+<li><strong>Largo</strong> uses 3/8 to allow very slow harmonic rhythm with internal subdivisions that the piano's ornamental figuration can navigate.</li>
+<li><strong>Rondo</strong> uses 2/4 with strong offbeat accents — the theme's character depends on syncopation. The <em>Presto</em> coda's shift to 6/8 is a metric modulation that releases the movement into joyous forward motion.</li>
+</ul>
+<p>Rubato is relatively restrained; Beethoven's tempo markings are prescriptive enough that the performer's freedom is primarily agogic (stretching specific beats) rather than large-scale.</p>
+</section>
+
+    <section id="sec5">
+  <h2><span class="secn">6</span>Orchestration, Texture &amp; Timbre</h2>
+<ul>
+<li><strong>Forces:</strong> 2 flutes, 2 oboes, 2 clarinets, 2 bassoons, 2 horns, 2 trumpets, timpani, strings, solo piano. No trombones. Classical in size but Beethovenian in weight.</li>
+<li><strong>Piano writing:</strong> Fuller-textured than Mozart, exploiting the extended range of Beethoven's Viennese fortepianos. Double-octave passages, thick chordal writing, extended pedaling (specified in the Largo).</li>
+<li><strong>Key orchestration innovations:</strong></li>
+<li>The first-movement coda's piano-timpani duet — an unprecedented moment of intimate dialogue between soloist and percussion.</li>
+<li>The Largo's flute-bassoon duet in the central section, floated above piano arpeggios, is a textural miracle that Brahms would study.</li>
+<li>The rondo's wind writing is wiry, witty, almost chamber-musical.</li>
+<li><strong>Dynamic architecture:</strong> Very large contrasts, subito effects (sudden fortes following pianissimos), and long crescendi. The first movement's opening pianissimo arpeggio interrupted by a forte outburst is a Beethovenian signature.</li>
+</ul>
+</section>
+
+    <section id="sec6">
+  <h2><span class="secn">7</span>Emotional Arc &amp; Dramaturgy</h2>
+<p>The C minor Concerto is already the mature Beethovenian drama in miniature: struggle, transcendence, hard-won joy. The first movement stages a tragic-heroic conflict; the Largo offers a glimpse of the eternal (its E major as a kind of distant heaven seen through clouds); the rondo returns to the earthly, with C minor's combative spirit finally yielding to C major's affirmation.</p>
+<p><strong>Climax placement:</strong> The first movement climaxes in the coda's piano-timpani passage. The Largo climaxes internally at the return of the opening theme (the hushed transfiguration is more powerful than any outburst). The rondo's climax is the <em>Presto</em> C-major coda.</p>
+<p><strong>Character:</strong> The first movement is stoic, combative. The Largo is hymnic, reverential — Beethoven rarely wrote more openly spiritual music. The rondo is defiant, mischievous, finally jubilant.</p>
+</section>
+
+    <section id="sec7">
+  <h2><span class="secn">8</span>Historical Significance &amp; Influence</h2>
+<p>The Third Concerto is a <strong>hinge work</strong>. It is the first Beethoven concerto to:</p>
+<ul>
+<li>Treat the orchestra as a full symphonic partner rather than a polite accompanist.</li>
+<li>Sustain tragic-heroic rhetoric across an entire work (Op. 37 is Beethoven's first C minor large-scale orchestral statement — the Fifth Symphony's direct ancestor).</li>
+<li>Place a slow movement in a remote, non-classical key.</li>
+<li>Use the cadenza as motivic argument rather than virtuoso display.</li>
+</ul>
+<p>Mozart's K. 491 is the obvious model — same key, similar rising arpeggiated theme, similar gravity — but Beethoven extends and hardens Mozart's tragic vision. After Op. 37, the pathway to Chopin's F minor concerto, Brahms's D minor, and every serious nineteenth-century minor-key concerto runs through this work.</p>
+<p><strong>Reception:</strong> Well-received at the premiere; the work entered the repertoire quickly and has never left it. Its status as one of the five or six essential Classical/early-Romantic concertos was established within a generation.</p>
+</section>
+
+    <section id="sec8">
+  <h2><span class="secn">9</span>Performance Practice &amp; Notable Recordings</h2>
+<p><strong>Interpretive questions:</strong></p>
+<ul class="keyval">
+<li><span class="k">Cadenza choice</span><span>Beethoven's own cadenza is nearly universal, but a few pianists (Schnabel occasionally, Glenn Gould) have composed or improvised alternatives. Clara Schumann's cadenza is also occasionally heard.</span></li>
+<li><span class="k">Fortepiano vs. modern piano</span><span>The concerto sounds radically different on a period instrument (thinner texture, more transparent piano-orchestra balance, faster tempos feasible). Andreas Staier and Ronald Brautigam have made persuasive period readings.</span></li>
+<li><span class="k">First-movement tempo</span><span>Beethoven's <em>Allegro con brio</em> is often taken too slowly; the <em>brio</em> implies dance-like urgency, not tragic plod.</span></li>
+<li><span class="k">Largo pedaling</span><span>Beethoven's notation specifies unusually long pedal effects — how literal to be remains a live question.</span></li>
+</ul>
+<p><strong>Landmark recordings:</strong></p>
+<ol>
+<li><strong>Arthur Rubinstein / Symphony of the Air / Josef Krips (1956, RCA)</strong> — Patrician, spacious, warm. Rubinstein's Beethoven is civilized and deeply sung.</li>
+<li><strong>Sviatoslav Richter / Vienna Symphony / Kurt Sanderling (1962, DG)</strong> — Iron grip, enormous weight, astonishing control of dynamic extremes. The Largo is one of the most otherworldly performances on record.</li>
+<li><strong>Maurizio Pollini / Vienna Philharmonic / Karl Böhm (1978, DG)</strong> — Clean-edged, architectural, classical in scale. A model modern reading.</li>
+<li><strong>Murray Perahia / Concertgebouw / Bernard Haitink (1986, Sony)</strong> — Lyrical, supple, with unusually alive orchestral detail; the Largo floats.</li>
+<li><strong>Leif Ove Andsnes / Mahler Chamber Orchestra (2012, Sony, play/conduct)</strong> — Modern, lean, chamber-textured; the orchestra is alive and the piano integrated rather than dominant.</li>
+</ol>
+<p><strong>Performance tradition</strong> has moved from grand, symphonic readings (Schnabel, Backhaus, early Serkin) toward leaner, more historically-informed interpretations. The best modern performances balance classical proportion with romantic weight.</p>
+</section>
+
+    <section id="sec9">
+  <h2><span class="secn">10</span>Listening Guide</h2>
+<p>Timings approximate, based on a ~35-minute performance.</p>
+<p><strong>I. Allegro con brio (~17 min)</strong></p>
+<ul>
+<li><strong>0:00</strong> — Hushed unison first theme (rising C minor arpeggio, stepwise descent). Listen for the menace under the pianissimo.</li>
+<li><strong>0:45</strong> — Forte outburst — first theme as confrontation.</li>
+<li><strong>2:30</strong> — Second theme in Eb major (clarinet, first violins) — lyrical relief.</li>
+<li><strong>3:30</strong> — Piano enters with three rising C minor scales and takes up the first theme.</li>
+<li><strong>8:00</strong> — Development: fragmentation and tonal excursion.</li>
+<li><strong>10:30</strong> — Recapitulation; note the second theme now in C major (foreshadowing eventual resolution).</li>
+<li><strong>13:30</strong> — Cadenza (Beethoven's own): motivically concentrated rather than flashy.</li>
+<li><strong>15:30</strong> — <strong>The magical coda</strong>: piano and timpani converse over a C pedal — revolutionary writing.</li>
+</ul>
+<p><strong>II. Largo (~10 min)</strong></p>
+<ul>
+<li><strong>0:00</strong> — Piano opens alone with the E major chorale — sacred, hushed.</li>
+<li><strong>1:30</strong> — Strings take up the theme; piano responds with filigree.</li>
+<li><strong>4:30</strong> — Central section: <strong>flute and bassoon duet</strong> over piano arpeggios — listen here with total attention.</li>
+<li><strong>7:00</strong> — Return of the opening, more ornamented.</li>
+<li><strong>9:00</strong> — Brief cadenza; the movement dissolves.</li>
+</ul>
+<p><strong>III. Rondo: Allegro – Presto (~9 min)</strong></p>
+<ul>
+<li><strong>0:00</strong> — Rondo theme: syncopated C minor tune.</li>
+<li><strong>1:30</strong> — B episode in Eb major.</li>
+<li><strong>3:00</strong> — Rondo returns.</li>
+<li><strong>4:00</strong> — C section: Ab major, contrapuntal.</li>
+<li><strong>6:30</strong> — Final rondo returns.</li>
+<li><strong>8:00</strong> — <strong>Pivot to C major, <em>Presto</em> 6/8</strong> — the work's exultant release.</li>
+</ul>
+<p><strong>First-listen focus:</strong> The C minor → C major journey across the whole work; the Largo's hushed transfiguration. <strong>Deeper re-listen focus:</strong> Track the first-movement's opening arpeggio across all three movements. Listen to the piano-timpani coda in the first movement as a moment of structural revolution.</p>
+</section>
+
+    <section id="sec10">
+  <h2><span class="secn">11</span>Must-Listen Tracks</h2>
+<div class="mustlisten"><p><strong>I. Allegro con brio — the coda (piano + timpani).</strong> The last three minutes of the first movement, beginning with Beethoven's own cadenza and running into the timpani pedal over which the piano plays fragmented arpeggios, are where Beethoven decisively leaves Mozart behind. Nothing like this soloist-percussion duet existed before; every concerto coda written since is in some sense a response. Hear the whole movement if you can, but if you sample just one passage, start at the cadenza. <strong>Recommended:</strong> Pollini / Vienna Philharmonic / Böhm (1978, DG) — the cleanest architectural reading, where the revolutionary coda registers with full structural weight.</p>
+<p><strong>II. Largo.</strong> The entire slow movement is a must-listen — the E major chorale opening (piano alone, hushed, almost sacred), and especially the central flute-bassoon duet over piano arpeggios, which is one of the most exquisite chamber passages in the concerto literature. The tritone-distant key relationship to C minor gives the movement the feeling of having stepped into a different world. <strong>Recommended:</strong> Sviatoslav Richter / Vienna Symphony / Sanderling (1962, DG) — otherworldly control of dynamic extremes.</p>
+<p><em>A work standing exactly at the threshold between Mozart's world and Beethoven's own. You can hear Beethoven, in real time, deciding to become Beethoven.</em></p></div>
+</section>
+    <footer>
+      
+      <p>Companion to the Markdown analysis in the Obsidian vault at <code>Musical Analysis/Beethoven - Piano Concerto No. 3.md</code>.</p>
+      <p><a href="index.html">← back to music</a></p>
+    </footer>
+  </main>
+</div>
+</div>
+
+<script>
+  /* ---------- color palettes (Squarespace-style) ---------- */
+  const PALETTES = {
+    afternoon:{mode:'light',label:'Afternoon',v:{
+      '--bg':'#faf8f4','--panel':'#ffffff','--ink':'#1c1a17','--ink-soft':'#55504a','--ink-faint':'#8a8279',
+      '--line':'#e8e2d8','--line-strong':'#d8cfc0','--accent':'#9a5b2e','--accent-soft':'#f3e6d8','--accent-ink':'#7a4220',
+      '--gold':'#b8893b','--teal':'#2f6b6b','--code-bg':'#2b2722',
+      '--header-grad':'linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%)',
+      '--th-bg':'#f3ede3','--row-hover':'#fbf7f0','--epi-ink':'#5b3c20',
+      '--warm-bg':'#fbf3e2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f2f1','--cool-bd':'#bfdcda','--cool-ink':'#1f4f4f',
+      '--ml-grad':'linear-gradient(150deg,#fbf3e7,#f6e7d4)','--ml-bd':'#ebd7b8','--ml-ink':'#6b3f1c'}},
+    sage:{mode:'light',label:'Sage',v:{
+      '--bg':'#f5f7f2','--panel':'#ffffff','--ink':'#1c211a','--ink-soft':'#4e544a','--ink-faint':'#828a7c',
+      '--line':'#e3e8dc','--line-strong':'#d3dac8','--accent':'#5c7a52','--accent-soft':'#e6ede0','--accent-ink':'#3f592f',
+      '--gold':'#a98f3c','--teal':'#3a7a6b','--code-bg':'#1f2620',
+      '--header-grad':'linear-gradient(160deg,#1a231a 0%,#283a26 55%,#3a5232 100%)',
+      '--th-bg':'#edf1e7','--row-hover':'#f6f9f2','--epi-ink':'#3c4f30',
+      '--warm-bg':'#f4efdf','--warm-bd':'#e2dba9','--warm-ink':'#5f5520',
+      '--cool-bg':'#e6f1ec','--cool-bd':'#c0dccd','--cool-ink':'#1f4f3e',
+      '--ml-grad':'linear-gradient(150deg,#eef3e4,#e3ecd6)','--ml-bd':'#d2dcb8','--ml-ink':'#3f5224'}},
+    harbor:{mode:'light',label:'Harbor',v:{
+      '--bg':'#f4f6f9','--panel':'#ffffff','--ink':'#1a2026','--ink-soft':'#4b5560','--ink-faint':'#7d8794',
+      '--line':'#e1e7ec','--line-strong':'#cfd8e1','--accent':'#2f6690','--accent-soft':'#e0ebf2','--accent-ink':'#234e6b',
+      '--gold':'#b5862f','--teal':'#2f8682','--code-bg':'#192129',
+      '--header-grad':'linear-gradient(160deg,#121b24 0%,#1d2e3f 55%,#274a63 100%)',
+      '--th-bg':'#e9eef3','--row-hover':'#f4f8fb','--epi-ink':'#234e6b',
+      '--warm-bg':'#f6efe0','--warm-bd':'#e7d6b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e2eef2','--cool-bd':'#bcd6de','--cool-ink':'#1f4f55',
+      '--ml-grad':'linear-gradient(150deg,#e8f1f6,#dbe9f1)','--ml-bd':'#c2d6e4','--ml-ink':'#234e6b'}},
+    plum:{mode:'light',label:'Plum',v:{
+      '--bg':'#f8f5f8','--panel':'#ffffff','--ink':'#221c21','--ink-soft':'#564b54','--ink-faint':'#897e87',
+      '--line':'#e9e0e7','--line-strong':'#dccdd8','--accent':'#7d4a6b','--accent-soft':'#efe2ec','--accent-ink':'#5d3550',
+      '--gold':'#b07d3b','--teal':'#3a7a72','--code-bg':'#241c23',
+      '--header-grad':'linear-gradient(160deg,#201823 0%,#332338 55%,#4e2f53 100%)',
+      '--th-bg':'#f1e9f0','--row-hover':'#faf5f9','--epi-ink':'#5d3550',
+      '--warm-bg':'#f7efe2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f1f0','--cool-bd':'#c4d9d5','--cool-ink':'#1f4f48',
+      '--ml-grad':'linear-gradient(150deg,#f4e9f1,#ecdbe8)','--ml-bd':'#ddc4d6','--ml-ink':'#5d3550'}},
+    midnight:{mode:'dark',label:'Midnight',v:{
+      '--bg':'#0f1620','--panel':'#18212e','--ink':'#e8edf3','--ink-soft':'#a9b5c4','--ink-faint':'#6f7d8d',
+      '--line':'#25303f','--line-strong':'#34414f','--accent':'#5b9bd5','--accent-soft':'#1b2a3b','--accent-ink':'#9cc4e8',
+      '--gold':'#d2a85f','--teal':'#4db1a8','--code-bg':'#0b121b',
+      '--header-grad':'linear-gradient(160deg,#0b1220 0%,#13243a 55%,#1d3a5c 100%)',
+      '--th-bg':'#1f2a38','--row-hover':'#1d2735','--epi-ink':'#9cc4e8',
+      '--warm-bg':'#2a2418','--warm-bd':'#43381f','--warm-ink':'#e0b878',
+      '--cool-bg':'#11302d','--cool-bd':'#1f4a45','--cool-ink':'#7fd6cc',
+      '--ml-grad':'linear-gradient(150deg,#1c2a3b,#16222f)','--ml-bd':'#2c3f55','--ml-ink':'#9cc4e8'}},
+    charcoal:{mode:'dark',label:'Charcoal',v:{
+      '--bg':'#161514','--panel':'#201e1c','--ink':'#ece8e2','--ink-soft':'#b0a99f','--ink-faint':'#766f65',
+      '--line':'#2c2926','--line-strong':'#3a3631','--accent':'#c8895a','--accent-soft':'#2c2420','--accent-ink':'#e3a878',
+      '--gold':'#cda35e','--teal':'#5aada3','--code-bg':'#100f0e',
+      '--header-grad':'linear-gradient(160deg,#141210 0%,#241e18 55%,#3a2c20 100%)',
+      '--th-bg':'#25221f','--row-hover':'#211e1b','--epi-ink':'#e3a878',
+      '--warm-bg':'#2c2418','--warm-bd':'#443720','--warm-ink':'#e0b878',
+      '--cool-bg':'#1a2826','--cool-bd':'#2c4641','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#272019,#1d1814)','--ml-bd':'#3d3124','--ml-ink':'#e3a878'}},
+    forest:{mode:'dark',label:'Forest',v:{
+      '--bg':'#101713','--panel':'#18211b','--ink':'#e6ece6','--ink-soft':'#a6b3a6','--ink-faint':'#6e7c6e',
+      '--line':'#243029','--line-strong':'#324133','--accent':'#6fae7e','--accent-soft':'#1a2a20','--accent-ink':'#9fd3aa',
+      '--gold':'#cda35e','--teal':'#4fb0a0','--code-bg':'#0b110d',
+      '--header-grad':'linear-gradient(160deg,#0c1410 0%,#142a1d 55%,#1d4230 100%)',
+      '--th-bg':'#1d2922','--row-hover':'#1a241d','--epi-ink':'#9fd3aa',
+      '--warm-bg':'#28281a','--warm-bd':'#3f3f24','--warm-ink':'#d8b878',
+      '--cool-bg':'#16302a','--cool-bd':'#274a40','--cool-ink':'#7fd0bc',
+      '--ml-grad':'linear-gradient(150deg,#18271e,#132019)','--ml-bd':'#2a4231','--ml-ink':'#9fd3aa'}},
+    wine:{mode:'dark',label:'Wine',v:{
+      '--bg':'#1a1012','--panel':'#241619','--ink':'#f0e4e6','--ink-soft':'#c2a9af','--ink-faint':'#8c6f76',
+      '--line':'#321f24','--line-strong':'#43292f','--accent':'#c46b7e','--accent-soft':'#2e1a1f','--accent-ink':'#e49aa8',
+      '--gold':'#cda35e','--teal':'#5aa8a0','--code-bg':'#140c0e',
+      '--header-grad':'linear-gradient(160deg,#160c0e 0%,#2a141a 55%,#4a2230 100%)',
+      '--th-bg':'#2c1c20','--row-hover':'#271519','--epi-ink':'#e49aa8',
+      '--warm-bg':'#2e2418','--warm-bd':'#463720','--warm-ink':'#e0b878',
+      '--cool-bg':'#18302d','--cool-bd':'#2a4a45','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#2a181d,#201216)','--ml-bd':'#43272f','--ml-ink':'#e49aa8'}}
+  };
+
+  const root = document.documentElement;
+  function applyPalette(key){
+    const p = PALETTES[key]; if(!p) return;
+    for(const [k,val] of Object.entries(p.v)) root.style.setProperty(k,val);
+    root.setAttribute('data-mode', p.mode);
+    document.querySelectorAll('.pp-sw').forEach(b=>b.classList.toggle('active', b.dataset.pal===key));
+    try{ localStorage.setItem('faune-palette', key); }catch(e){}
+  }
+
+  // build swatches
+  const tick = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  for(const [key,p] of Object.entries(PALETTES)){
+    const btn = document.createElement('button');
+    btn.className = 'pp-sw'; btn.dataset.pal = key; btn.type = 'button';
+    btn.title = p.label;
+    btn.innerHTML =
+      '<div class="bars">'+
+        '<span style="background:'+p.v['--bg']+'"></span>'+
+        '<span style="background:'+p.v['--accent']+'"></span>'+
+        '<span style="background:'+p.v['--accent-ink']+'"></span>'+
+        '<span style="background:'+p.v['--gold']+'"></span>'+
+      '</div>'+
+      '<span class="nm">'+p.label+tick+'</span>';
+    btn.addEventListener('click', ()=>applyPalette(key));
+    document.getElementById(p.mode==='light'?'pp-light':'pp-dark').appendChild(btn);
+  }
+
+  // toggle panel
+  const picker = document.getElementById('picker');
+  const ppToggle = document.getElementById('ppToggle');
+  ppToggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = picker.classList.toggle('open');
+    ppToggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.addEventListener('click', (e)=>{
+    if(!picker.contains(e.target)) picker.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') picker.classList.remove('open'); });
+
+  // restore saved or honor OS dark preference
+  let saved=null; try{ saved = localStorage.getItem('faune-palette'); }catch(e){}
+  if(saved && PALETTES[saved]) applyPalette(saved);
+  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
+  else applyPalette('afternoon');
+
+  // active TOC highlighting
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const map = {};
+  links.forEach(a => { const id = a.getAttribute('href').slice(1); map[id] = a; });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = map[e.target.id];
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

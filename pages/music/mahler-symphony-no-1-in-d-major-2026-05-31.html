@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mahler — Symphony No. 1 in D major ("Titan") · Musical Analysis</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --panel:#ffffff;
+    --ink:#1c1a17;
+    --ink-soft:#55504a;
+    --ink-faint:#8a8279;
+    --line:#e8e2d8;
+    --line-strong:#d8cfc0;
+    --accent:#9a5b2e;       /* warm terracotta — faun / afternoon heat */
+    --accent-soft:#f3e6d8;
+    --accent-ink:#7a4220;
+    --gold:#b8893b;
+    --teal:#2f6b6b;
+    --code-bg:#2b2722;
+    --green:#2f7d4f;
+    --amber:#b07d18;
+    --red:#a8392f;
+    /* themeable extras (overridden by JS palettes) */
+    --header-grad:linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%);
+    --th-bg:#f3ede3;
+    --row-hover:#fbf7f0;
+    --epi-ink:#5b3c20;
+    --warm-bg:#fbf3e2; --warm-bd:#ecd9b0; --warm-ink:#6b4e1e;
+    --cool-bg:#e8f2f1; --cool-bd:#bfdcda; --cool-ink:#1f4f4f;
+    --ml-grad:linear-gradient(150deg,#fbf3e7,#f6e7d4); --ml-bd:#ebd7b8; --ml-ink:#6b3f1c;
+    --radius:12px;
+    --shadow:0 1px 2px rgba(40,30,15,.04),0 6px 22px rgba(40,30,15,.06);
+  }
+  html{transition:none}
+  body,.card,table,.tldr,.callout,.mustlisten,nav.toc a,.svgcard,.pp-panel,.pp-toggle,.pp-sw{
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+    line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  /* ---- header ---- */
+  header.top{
+    background:var(--header-grad);
+    color:#f4ece1;position:relative;overflow:hidden;
+    border-bottom:3px solid var(--accent);
+  }
+  header.top .glow{position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(212,160,90,.35),transparent 65%);pointer-events:none;}
+  header.top .wrap{padding:46px 28px 40px;position:relative;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#d9b384;font-weight:600;margin:0 0 14px}
+  header.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;
+    font-size:40px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+  header.top h1 em{font-style:italic;color:#f0cfa0}
+  header.top .sub{font-size:17px;color:#d8cab8;margin:10px 0 0;max-width:760px}
+  .metarow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-size:13.5px;color:#cdbca6}
+  .metarow b{color:#f4ece1;font-weight:600}
+  .stamp{font-size:12px;color:#b39c80;margin-top:18px;font-family:"SF Mono",Menlo,monospace}
+
+  /* ---- layout ---- */
+  .layout{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0 80px;align-items:start}
+  nav.toc{position:sticky;top:24px;font-size:14px}
+  nav.toc .title{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 12px}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border-radius:7px;border-left:2px solid transparent;line-height:1.35}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+  nav.toc a .n{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;margin-right:7px}
+  nav.toc a.active{background:var(--accent-soft);color:var(--accent-ink);border-left-color:var(--accent)}
+
+  main{min-width:0}
+  section{margin:0 0 50px;scroll-margin-top:24px}
+  h2{font-family:Georgia,serif;font-size:25px;font-weight:600;letter-spacing:-.01em;
+    margin:0 0 4px;display:flex;align-items:baseline;gap:12px}
+  h2 .secn{font-size:14px;font-weight:700;color:#fff;background:var(--accent);
+    width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:-apple-system,system-ui;}
+  .lead{color:var(--ink-soft);margin:2px 0 22px 42px;font-size:15px}
+  h3{font-size:17px;font-weight:650;margin:26px 0 8px;color:var(--ink)}
+  p{margin:0 0 14px}
+  strong{font-weight:650}
+  a.inline{color:var(--accent-ink);text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+
+  /* ---- tl;dr box ---- */
+  .tldr{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow);margin-bottom:8px}
+  .tldr h2{font-size:18px;margin-bottom:10px}
+  .tldr p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+  .tldr p:last-child{margin-bottom:0}
+
+  blockquote.epi{margin:0 0 30px;padding:18px 24px;background:var(--accent-soft);
+    border-radius:var(--radius);font-family:Georgia,serif;font-style:italic;font-size:16px;color:var(--epi-ink)}
+  blockquote.epi .who{display:block;font-style:normal;font-family:-apple-system,system-ui;
+    font-size:13px;color:var(--accent-ink);margin-top:10px;font-weight:600}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 24px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin:6px 0}
+  .keyval{margin:0;padding:0;list-style:none}
+  .keyval li{display:grid;grid-template-columns:165px 1fr;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);margin:0}
+  .keyval li:last-child{border-bottom:none}
+  .keyval .k{color:var(--ink-faint);font-size:13.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+
+  /* ---- tables ---- */
+  table{width:100%;border-collapse:collapse;margin:6px 0 20px;font-size:14.5px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  th{background:var(--th-bg);text-align:left;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line-strong)}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--row-hover)}
+  td.sec{font-weight:650;color:var(--accent-ink);white-space:nowrap}
+  .time{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);white-space:nowrap}
+
+  /* ---- pull callout ---- */
+  .callout{border-radius:var(--radius);padding:16px 20px;margin:18px 0;font-size:15px;border:1px solid}
+  .callout.gold{background:var(--warm-bg);border-color:var(--warm-bd);color:var(--warm-ink)}
+  .callout.teal{background:var(--cool-bg);border-color:var(--cool-bd);color:var(--cool-ink)}
+  .callout .lbl{font-weight:700;text-transform:uppercase;font-size:11.5px;letter-spacing:.1em;display:block;margin-bottom:4px;opacity:.8}
+
+  /* ---- timeline ---- */
+  .tl{list-style:none;margin:8px 0 0;padding:0;position:relative}
+  .tl:before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+  .tl li{position:relative;padding:10px 0 10px 86px;margin:0}
+  .tl .t{position:absolute;left:0;top:11px;width:52px;text-align:right;font-family:"SF Mono",Menlo,monospace;
+    font-size:12.5px;color:var(--teal);font-weight:600}
+  .tl .dot{position:absolute;left:57px;top:15px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--accent)}
+  .tl li.peak .dot{background:var(--accent);width:14px;height:14px;left:56px;top:14px;box-shadow:0 0 0 4px var(--accent-soft)}
+  .tl b{color:var(--ink)}
+
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:2px 8px;border-radius:20px;vertical-align:middle}
+  .b-heart{background:#fbe3df;color:var(--red)}
+  .b-key{background:#e6efe9;color:var(--green)}
+
+  figure{margin:18px 0 24px}
+  figcaption{font-size:13px;color:var(--ink-faint);margin-top:10px;text-align:center;font-style:italic}
+  .svgcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  /* theme-aware SVG strokes/fills */
+  .svgcard svg .sv-axis{stroke:var(--line-strong)}
+  .svgcard svg .sv-grid{stroke:var(--line)}
+  .svgcard svg .sv-curve{stroke:var(--accent)}
+  .svgcard svg .sv-area{fill:var(--accent);opacity:.13}
+  .svgcard svg .sv-gold-line{stroke:var(--gold)}
+  .svgcard svg .sv-gold,.svgcard svg .sv-gold-dot{fill:var(--gold)}
+  .svgcard svg .sv-accent,.svgcard svg .sv-accent-dot{fill:var(--accent)}
+  .svgcard svg .sv-lbl{fill:var(--ink-soft)}
+  .svgcard svg .sv-faint{fill:var(--ink-faint)}
+
+  code{font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:5px}
+
+  /* ---- palette picker ---- */
+  .palette-picker{position:fixed;top:14px;right:14px;z-index:60;font-size:13px;
+    font-family:-apple-system,system-ui,sans-serif}
+  .pp-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    background:rgba(255,255,255,.92);color:#241c14;border:1px solid rgba(0,0,0,.12);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    padding:8px 13px;border-radius:30px;font-weight:600;font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,.16)}
+  .pp-toggle svg{display:block}
+  .pp-toggle .chev{transition:transform .2s ease}
+  .palette-picker.open .pp-toggle .chev{transform:rotate(180deg)}
+  .pp-panel{position:absolute;top:46px;right:0;width:248px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.22);padding:14px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);
+    transform-origin:top right;transition:opacity .16s ease,transform .16s ease,visibility .16s}
+  .palette-picker.open .pp-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+  .pp-group{margin-bottom:12px}
+  .pp-group:last-child{margin-bottom:0}
+  .pp-label{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 2px 8px}
+  .pp-label .ico{width:13px;height:13px;opacity:.7}
+  .pp-swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pp-sw{cursor:pointer;border:1.5px solid var(--line);background:var(--panel);
+    border-radius:10px;padding:7px;display:flex;flex-direction:column;gap:6px;text-align:left;
+    transition:border-color .15s,transform .1s}
+  .pp-sw:hover{transform:translateY(-1px)}
+  .pp-sw .bars{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .pp-sw .bars span{flex:1}
+  .pp-sw .nm{font-size:11.5px;font-weight:600;color:var(--ink-soft);display:flex;
+    align-items:center;justify-content:space-between;gap:4px}
+  .pp-sw.active{border-color:var(--accent)}
+  .pp-sw.active .nm{color:var(--ink)}
+  .pp-sw .tick{width:13px;height:13px;color:var(--accent);opacity:0}
+  .pp-sw.active .tick{opacity:1}
+
+  .rec{display:grid;grid-template-columns:1fr;gap:0}
+  .rec .who{font-weight:650;color:var(--accent-ink)}
+
+  .mustlisten{background:var(--ml-grad);border:1px solid var(--ml-bd);
+    border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow)}
+  .mustlisten h3{margin-top:0;font-family:Georgia,serif;font-size:20px;color:var(--ml-ink)}
+  .mustlisten .span{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--ink-faint);font-size:13.5px}
+  footer a{color:var(--accent-ink);text-decoration:none}
+
+  @media (max-width:720px){
+    .layout{grid-template-columns:1fr;gap:0;padding:24px 0 60px}
+    nav.toc{display:none}
+    .wrap{padding:0 18px}
+    header.top h1{font-size:30px}
+    header.top .wrap{padding:34px 18px 30px}
+    .keyval li{grid-template-columns:1fr;gap:2px}
+    .lead{margin-left:0}
+    h2{font-size:21px}
+    .palette-picker{top:10px;right:10px}
+    .pp-toggle .pp-txt{display:none}
+    .pp-toggle{padding:9px;border-radius:50%}
+    .pp-panel{width:230px}
+  }
+</style>
+</head>
+<body>
+
+<div class="palette-picker" id="picker">
+  <button class="pp-toggle" id="ppToggle" aria-expanded="false" aria-label="Change color theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    <span class="pp-txt">Theme</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pp-panel" role="menu" aria-label="Color palettes">
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>Light</span>
+      <div class="pp-swatches" id="pp-light"></div>
+    </div>
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark</span>
+      <div class="pp-swatches" id="pp-dark"></div>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <p class="eyebrow">Musical Analysis · Symphony</p>
+    <h1>Symphony No. 1 in D major ("Titan")</h1>
+    <p class="sub">Mahler · 1887–1888</p>
+    <div class="metarow">
+      <span><b>Composed</b> 1887–1888</span>
+      <span><b>Premiere</b> 20 November 1889, Budapest, conducted by the composer — as a five-movement "S…</span>
+    </div>
+    <p class="stamp">Generated 2026-05-31 · musical-analysis</p>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <p class="title">Contents</p>
+    <a href="#tldr"><span class="n">·</span>In brief</a>
+    <a href="#sec0"><span class="n">1</span>Identity &amp; Context</a>
+    <a href="#sec1"><span class="n">2</span>Formal Structure</a>
+    <a href="#sec2"><span class="n">3</span>Melodic &amp; Thematic Content</a>
+    <a href="#sec3"><span class="n">4</span>Harmony &amp; Tonality</a>
+    <a href="#sec4"><span class="n">5</span>Rhythm, Meter &amp; Tempo</a>
+    <a href="#sec5"><span class="n">6</span>Orchestration, Texture &amp; Timbre</a>
+    <a href="#sec6"><span class="n">7</span>Emotional Arc &amp; Dramaturgy</a>
+    <a href="#sec7"><span class="n">8</span>Historical Significance &amp; Influence</a>
+    <a href="#sec8"><span class="n">9</span>Performance Practice &amp; Notable Recordings</a>
+    <a href="#sec9"><span class="n">10</span>Listening Guide</a>
+    <a href="#sec10"><span class="n">11</span>Must-Listen Tracks</a>
+  </nav>
+
+  <main>
+    <section id="tldr"><div class="tldr"><h2>In brief</h2><p>This is Mahler's first essay in the genre that would consume him. He had been Kapellmeister in Kassel, Prague, Leipzig, and was about to take Budapest. The symphony emerged in white heat — six weeks of composition, by his own (probably embellished) account — drawing heavily on his own <em>Lieder eines fahrenden Gesellen</em> (1884–85), themselves rooted in the bruising end of his affair with Johanna Richter.</p></div></section>
+    <section id="sec0">
+  <h2><span class="secn">1</span>Identity &amp; Context</h2>
+<ul class="keyval">
+<li><span class="k">Full title</span><span>Symphony No. 1 in D major (originally subtitled, then withdrawn: <em>"Titan, eine Tondichtung in Symphonieform"</em> — "Titan, a tone poem in symphonic form")</span></li>
+<li><span class="k">Composer</span><span>Gustav Mahler (1860–1911)</span></li>
+<li><span class="k">Composition</span><span>1887–1888 (Leipzig and Prague), with substantial revisions through 1896 and beyond</span></li>
+<li><span class="k">Premiere</span><span>20 November 1889, Budapest, conducted by the composer — as a five-movement "Symphonic Poem in Two Parts." The work was a near-fiasco; the audience was bewildered, the critics hostile.</span></li>
+<li><span class="k">Standard four-movement version</span><span>Definitive form arrived in 1896 (Berlin), after Mahler excised the original second movement, <em>Blumine</em> — a tender Andante later rediscovered in 1966 and occasionally performed.</span></li>
+</ul>
+<p>The work sits at the gateway of late Romanticism. Bruckner had just completed his Eighth; Brahms was still alive and writing his clarinet works; Strauss was about to launch the modern tone poem with <em>Don Juan</em> (1888). Wagner had been dead five years but still ruled the imagination of every German composer under forty. Mahler's First absorbs all of this — Wagnerian harmony, Brucknerian breadth, Schubertian song, the rustic Austrian landscape — and detonates it into something unmistakably new: the symphony as autobiographical confession, as world-novel, as cosmic theater.</p>
+<p>The "Titan" subtitle refers to Jean Paul's 1803 novel of the same name, beloved by Mahler in youth — but Mahler insisted the connection was only atmospheric, not programmatic, and eventually withdrew all programs. Wisely. The music tells its own story.</p>
+</section>
+
+    <section id="sec1">
+  <h2><span class="secn">2</span>Formal Structure</h2>
+<p>The four movements span roughly 55 minutes. The macro-architecture traces an arc from pastoral awakening through rustic dance and ironic funeral to apocalyptic struggle and triumph — D major bookending D minor at the symphony's emotional nadir.</p>
+<h3>I. Langsam, schleppend — Immer sehr gemächlich ("Slowly, dragging — Always very leisurely") — D major</h3>
+<ul>
+<li><strong>Form</strong>: Sonata-allegro with an extraordinary slow introduction</li>
+<li><strong>Duration</strong>: ~15 minutes</li>
+<li><strong>Structure</strong>:</li>
+<li><strong>Introduction (mm. 1–62)</strong>: A seven-octave A pedal across the entire orchestra — "wie ein Naturlaut" ("like a sound of nature"). Distant fanfares, cuckoo calls (a falling fourth, not the natural minor third), horn calls.</li>
+<li><strong>Exposition (mm. 63–207)</strong>: Main theme — borrowed wholesale from <em>Lieder eines fahrenden Gesellen</em> No. 2, "Ging heut' Morgen übers Feld" — a sunny D-major walking song. No true second subject; the development of the wanderer-theme is the substance.</li>
+<li><strong>Development (mm. 208–351)</strong>: Returns to the introduction's pedal-drone world; gathers darker material; a long crescendo.</li>
+<li><strong>Recapitulation/coda (mm. 352–end)</strong>: Triumphant horn calls, brilliant D-major peroration.</li>
+</ul>
+<h3>II. Kräftig bewegt, doch nicht zu schnell ("Strongly moving, but not too fast") — A major</h3>
+<ul>
+<li><strong>Form</strong>: Scherzo with Trio (ländler-based)</li>
+<li><strong>Duration</strong>: ~7 minutes</li>
+<li><strong>Scherzo</strong>: A stomping Austrian peasant dance in 3/4, robust and rough-shod. Bass strings dig in like boots in mud.</li>
+<li><strong>Trio</strong>: A tenderer, more graceful Viennese waltz in F major — sentimental, with portamento strings and gemütlich horn writing.</li>
+<li><strong>Da capo Scherzo</strong>, with coda.</li>
+</ul>
+<h3>III. Feierlich und gemessen, ohne zu schleppen ("Solemn and measured, without dragging") — D minor</h3>
+<ul class="keyval">
+<li><span class="k">Form</span><span>A loose ternary/rondo built on a <em>minor-mode</em> canon of "Frère Jacques" ("Bruder Jakob")</span></li>
+<li><span class="k">Duration</span><span>~11 minutes</span></li>
+<li><span class="k">A</span><span>Solo double bass intones the canon at the top of its register over muted timpani. Other instruments enter in canon: bassoon, cello, tuba, clarinets. A grotesque funeral procession.</span></li>
+<li><span class="k">B</span><span>A klezmer-tinged interruption — oboes, E-flat clarinet, trumpets — vulgar, parodistic, a Bohemian village band.</span></li>
+<li><span class="k">A'</span><span>Return of the canon, more sustained.</span></li>
+<li><span class="k">C (central episode)</span><span>A heartbreakingly tender G-major passage, again drawn from <em>Gesellen</em> No. 4 ("Die zwei blauen Augen") — the wanderer lying down under the linden tree.</span></li>
+<li><span class="k">A''</span><span>Canon returns, fades into ambiguous oblivion.</span></li>
+</ul>
+<h3>IV. Stürmisch bewegt ("Stormily agitated") — F minor → D major</h3>
+<ul class="keyval">
+<li><span class="k">Form</span><span>Vastly expanded sonata form with multiple expositions of contrasting material — what Mahler called "the cry of a wounded heart"</span></li>
+<li><span class="k">Duration</span><span>~20 minutes</span></li>
+<li><span class="k">Opening</span><span>Cymbal crash and orchestral shriek launches a turbulent F-minor first subject — frantic, demonic.</span></li>
+<li><span class="k">Second subject</span><span>A long-breathed, yearning D-flat major theme — one of the great Mahlerian <em>Gesangsperioden</em>.</span></li>
+<li><span class="k">Development</span><span>Cyclic returns of material from Movement I, including the introduction's nature-sounds and main theme — the first major instance of Mahler's life-long technique of cross-movement quotation.</span></li>
+<li><span class="k">Triumph</span><span>A premature D-major chorale on horns, then collapse, then a final hard-won breakthrough — the famous instruction <em>Alle Hörner auf! Schalltrichter hoch!</em> ("All horns up, bells in the air!") — eight horns standing for the apotheosis. Coda hurls toward D major.</span></li>
+</ul>
+<h3>Macro-architecture</h3>
+<p>The tonal plan — D major / A major / D minor / F minor → D major — is striking. The third movement's D minor functions as the symphony's "shadow," and the finale's F minor is far from D, requiring the full twenty-minute span to claw its way back. The symphony enacts a <em>progressive tonality</em> in miniature: not just home → away → home, but home → contracted home → shadow → distant darkness → reconquered home. This becomes the structural fingerprint of mature Mahler.</p>
+</section>
+
+    <section id="sec2">
+  <h2><span class="secn">3</span>Melodic &amp; Thematic Content</h2>
+<p>The symphony is a network of recycled and transformed song.</p>
+<ul>
+<li><strong>Wanderer theme (Mvt I, main subject)</strong>: Quoted from <em>Gesellen</em> No. 2. Stepwise diatonic, walking-tempo, cuckoo-fourths embedded — radiates morning sunshine. Throughout the movement it is fragmented, layered, contrapuntally combined with itself.</li>
+<li><strong>Nature-sound</strong> ("Naturlaut"): Not a theme so much as an <em>aural symbol</em> — the seven-octave A, distant fanfares, cuckoo calls. It returns in the finale's development as memory.</li>
+<li><strong>Ländler theme</strong> (Mvt II): A muscular, descending-fifth-saturated dance — first cousin to Schubert and Bruckner's ländlers, but rougher.</li>
+<li><strong>Frère Jacques canon</strong> (Mvt III): An act of theatrical perversity — a child's round in minor mode, dragged by double bass at funereal tempo. The shock isn't the canon itself but the <em>flatness</em> of affect.</li>
+<li><strong>Linden-tree melody</strong> (Mvt III, central episode): From <em>Gesellen</em> No. 4. Pure, tender, G major; a moment of utter sincerity in the middle of the parody.</li>
+<li><strong>Finale's first subject</strong>: Jagged minor-mode wail, derived through inversion and rhythmic reshaping from material in Mvt I.</li>
+<li><strong>Finale's second subject</strong>: A long Wagner-like Sehnsucht melody in D-flat — the symphony's emotional heart on its sleeve.</li>
+<li><strong>Chorale of triumph</strong> (Finale coda): A new, hymn-like theme in D major — but listen carefully and you hear it is a major-mode transformation of the despair theme.</li>
+</ul>
+<p>This last point is crucial: Mahler's victory is not a <em>new</em> melody, but the <em>same</em> melody saved. The dialectic of transformation — minor-to-major, twisted-to-noble — is the bone of the work.</p>
+</section>
+
+    <section id="sec3">
+  <h2><span class="secn">4</span>Harmony &amp; Tonality</h2>
+<p>The harmonic language is Wagnerian-late-Romantic, but with idiosyncratic features that mark Mahler off from his peers:</p>
+<ul class="keyval">
+<li><span class="k">Pedal points as world-building</span><span>The opening seven-octave A pedal lasts for nearly sixty measures. Mahler will use this device throughout his career to suggest a primordial, non-temporal soundscape.</span></li>
+<li><span class="k">Plagal and modal coloring</span><span>Frequent use of modal mixture, IV-of-IV motion, and Lydian/Mixolydian inflections rooted in Austrian and Bohemian folk music.</span></li>
+<li><span class="k">Long-range tonal architecture as drama</span><span>F minor for the finale is a daring choice — <em>not</em> the parallel minor of D, not the relative minor, but a key whose distance is itself the dramatic problem. The finale's twenty-minute return to D major is therefore a tonal struggle, not a foregone conclusion.</span></li>
+<li><span class="k">Mediant relationships</span><span>D ↔ B-flat, D ↔ F, are favored over dominant relations. This loosens functional tonality without abandoning it — characteristic of late-19th-century post-Wagnerian harmony.</span></li>
+<li><span class="k">Cadential evasion</span><span>Mahler delays full closure for paragraph after paragraph, using deceptive resolutions and sustained dominants.</span></li>
+<li><span class="k">The "Mahler chord"</span><span>Already present in nascent form — superimposed triads, added-sixth and added-ninth sonorities that color rather than functionally drive harmony.</span></li>
+</ul>
+</section>
+
+    <section id="sec4">
+  <h2><span class="secn">5</span>Rhythm, Meter &amp; Tempo</h2>
+<ul>
+<li><strong>Rhythmic character ranges from glacial to demonic</strong>: The first movement's introduction is essentially metric-free natural sound; the finale's opening is a maelstrom of triplets against duplets.</li>
+<li><strong>Ländler rhythm</strong> (Mvt II): The dance's heavy first beat with off-beat accents on 2 and 3 — peasant kinetics.</li>
+<li><strong>Funeral march tread</strong> (Mvt III): The double bass canon over a steady ostinato — a dragging quarter-note pulse that resists resolution.</li>
+<li><strong>Mahlerian elasticity</strong>: The score is densely marked — <em>zurückhaltend, drängend, nicht eilen, allmählich ruhiger, immer dasselbe Tempo</em>. Mahler treats tempo as a dramatic variable, not a constant. Performances that ignore his rubato indications flatten the work catastrophically.</li>
+<li><strong>Metric modulation in the finale</strong>: Tempo relationships across the finale's sections are explicitly notated — proportional tempi connect the storm, the lyrical second subject, and the developmental returns to Mvt I material.</li>
+</ul>
+</section>
+
+    <section id="sec5">
+  <h2><span class="secn">6</span>Orchestration, Texture &amp; Timbre</h2>
+<p>The orchestration is enormous for 1888, and revolutionary in its handling.</p>
+<ul>
+<li><strong>Forces</strong>: 4 flutes (3rd &amp; 4th doubling piccolo), 4 oboes (3rd doubling English horn), 4 clarinets (3rd doubling bass clarinet, 4th doubling E-flat clarinet), 3 bassoons (3rd doubling contrabassoon), <strong>7 horns</strong> (Mahler asks for an additional horn doubling the trumpets, and in the finale all seven plus a doubling player stand and raise their bells), 4 trumpets, 3 trombones, tuba, timpani (2 players), bass drum, cymbals, triangle, tam-tam, harp, strings.</li>
+<li><strong>Texture</strong>: Mahler treats the orchestra as chamber-sized when he wants — solo double bass, solo oboe over muted strings, a single horn against silence — and only later unleashes the full mass. This calibration of <em>registral and dynamic space</em> is his great innovation.</li>
+<li><strong>Color devices</strong>:</li>
+<li><strong>Harmonics in violins</strong> to thin the texture in the introduction</li>
+<li><strong>Stopped horns</strong> ("+") for sneering and grotesque effects</li>
+<li><strong>Bells-up brass</strong> ("Schalltrichter hoch") for raw, projecting power</li>
+<li><strong>Klezmer band</strong> in Mvt III — E-flat clarinet, oboe with reedy attack, snare-drum-like effects in cellos</li>
+<li><strong>Solo double bass</strong> in his upper register opening Mvt III — almost unheard before this</li>
+<li><strong>Dynamic range</strong>: From <em>ppppp</em> to <em>ffff</em>, with extreme calibration. The opening is barely audible; the closing pages annihilate.</li>
+</ul>
+</section>
+
+    <section id="sec6">
+  <h2><span class="secn">7</span>Emotional Arc &amp; Dramaturgy</h2>
+<p>The symphony enacts what Mahler later called the journey "from sunny morning, through love and loss and parody, to the final hard-won affirmation."</p>
+<ul class="keyval">
+<li><span class="k">Movement I</span><span>Awakening, innocence, nature consciousness. A young man walks across a sunlit field; the world is fresh.</span></li>
+<li><span class="k">Movement II</span><span>Earthly pleasure, peasant vigor, then sentimental waltz — the world of the body and the village square.</span></li>
+<li><span class="k">Movement III</span><span>Disillusionment, irony, parody, but <em>also</em> tenderness at the center. The young man's death — or rather, the death of his innocence. The klezmer interruption is critical: it is not just grotesque, it is <em>vulgar</em> — Mahler called it "the unspeakable irony and bitterness of a real Bohemian band trying to play sincerely while being utterly out of place." The central episode quoting "Die zwei blauen Augen" is the moment of pure grief.</span></li>
+<li><span class="k">Movement IV</span><span>Cosmic struggle. The wounded heart cries out; memories of Movement I return as wreckage; the chorale rises, fails, rises again, and finally — through twenty minutes of effort — wins. The <em>meaning</em> of the D-major triumph is inseparable from how hard it was to reach.</span></li>
+</ul>
+<p>This is the architecture Mahler would refine across nine more symphonies: not "from darkness to light" (that's Beethoven Five) but "from innocence to wisdom," and the wisdom is dearly bought.</p>
+</section>
+
+    <section id="sec7">
+  <h2><span class="secn">8</span>Historical Significance &amp; Influence</h2>
+<p>What was new and radical in 1888:</p>
+<ul class="keyval">
+<li><span class="k">The opening Naturlaut</span><span>No symphony had ever begun like that. Pure ambient sound, a held A across the orchestra, distant offstage fanfares — ambient music sixty years before Eno conceived the term.</span></li>
+<li><span class="k">The minor-mode "Frère Jacques"</span><span>An audacious, almost Dadaist gesture — taking a child's nursery round and making it the basis of a funeral march. Critics in Budapest hated it. Now it is the most quoted passage of the symphony.</span></li>
+<li><span class="k">Klezmer and folk music in the symphony orchestra</span><span>Mahler smuggles in not just folk material (Beethoven, Schubert, Brahms had done that) but <em>the sound of folk performance</em> — the wrong-notes, the nasal reeds, the vulgar swagger. This opens the door to Bartók, Janáček, Stravinsky.</span></li>
+<li><span class="k">Cyclic recall as memory, not just unification</span><span>When Movement I's nature-sounds return in the finale, they are explicitly <em>recollected</em> — the past intruding on the present. This narrative use of cyclic form points toward Berg, Shostakovich.</span></li>
+<li><span class="k">Symphony as world-novel</span><span>Mahler's famous later remark — "A symphony must be like the world: it must contain everything" — is already operative here.</span></li>
+</ul>
+<p>Reception history: hostile at premiere (Budapest 1889), tepid through the 1890s, gradually accepted in the 1900s, ignored again after WWII alongside most of Mahler's output, then triumphantly resurrected by Bruno Walter, Leonard Bernstein, and Bernard Haitink in the 1960s. Now standard repertoire, performed everywhere, recorded constantly.</p>
+<p>Influence: traceable in Sibelius (the Naturlaut → Sibelius Five), Shostakovich (irony, parody, cross-movement quotation), Britten, Berio, Schnittke. Without Mahler I there is no Berg <em>Three Pieces for Orchestra</em>, perhaps no Shostakovich at all.</p>
+</section>
+
+    <section id="sec8">
+  <h2><span class="secn">9</span>Performance Practice &amp; Notable Recordings</h2>
+<p>Interpretive cruxes:</p>
+<ul>
+<li><strong>Tempo flexibility</strong>: Mahler's score is annotated to the millimeter. Conductors who play it "straight" — at a single tempo per section — produce a pale shadow of the work. The tempo <em>must</em> breathe.</li>
+<li><strong>The funeral march tempo (III)</strong>: Too slow and it drags; too fast and the parody loses its bite. The double bass solo's intonation is famously treacherous.</li>
+<li><strong>Eight horns standing in the finale</strong>: Some conductors observe Mahler's instruction (it transforms the sonic balance), some do not. The visual is theatrical, almost Mahlerian camp — but the projection is genuine.</li>
+<li><strong>Inclusion of <em>Blumine</strong></em>: Some conductors restore the original second movement (a tender Andante in C major). The five-movement version is a curiosity worth hearing once; the four-movement version is the work as Mahler ultimately conceived it.</li>
+</ul>
+<p>Landmark recordings:</p>
+<ol>
+<li><strong>Bruno Walter / Columbia Symphony Orchestra (1961)</strong> — Walter knew Mahler personally and assisted at the early performances. His recording is patriarchal, lyrical, profoundly humane, and slightly understated in the finale. The Mahler-Walter sound: warmth, line, breath.</li>
+<li><strong>Leonard Bernstein / New York Philharmonic (1966), and again with Concertgebouw (1987)</strong>: The 1966 is fierce, propulsive, theatrical; the 1987 broader, weightier, more stricken. Bernstein understood that Mahler is <em>acted</em> as much as played. Both essential.</li>
+<li><strong>Bernard Haitink / Concertgebouw (1972, also 1987)</strong>: The opposite pole — clean, balanced, classical, allowing the structure to speak. The Concertgebouw's horn section is the gold standard.</li>
+<li><strong>Pierre Boulez / Chicago Symphony (1998)</strong>: Cool, lucid, surgically transparent. Reveals the modernity of the orchestration. Some find it under-charged; others find it revelatory.</li>
+<li><strong>Claudio Abbado / Berlin Philharmonic (live, 1989) or Lucerne Festival Orchestra (live, 2009)</strong>: Late Abbado is luminous, weightless, valedictory — particularly the Lucerne, recorded after his cancer treatment, which has the quality of a man hearing the music from a great distance and treasuring every note.</li>
+</ol>
+</section>
+
+    <section id="sec9">
+  <h2><span class="secn">10</span>Listening Guide</h2>
+<p>(Timings approximate, based on a ~55-minute recording.)</p>
+<p><strong>Movement I (15')</strong></p>
+<ul>
+<li>0:00 — The seven-octave A. <em>Listen for</em>: distant trumpets, the cuckoo calls (falling fourths, not minor thirds — Mahler's cuckoo is unnatural).</li>
+<li>3:00 — The wanderer's theme enters in the cellos: a sunny D-major walk.</li>
+<li>9:00 — Development darkens; the pedal returns; tension builds.</li>
+<li>13:00 — Triumphant horn calls; brilliant peroration to end.</li>
+</ul>
+<p><strong>Movement II (7')</strong></p>
+<ul>
+<li>0:00 — Stomping ländler in A major. Heavy bass-string accents; rough Austrian dance.</li>
+<li>3:30 — Trio in F major: tender Viennese waltz, sweet horn solo, portamento strings.</li>
+<li>5:30 — Da capo of the ländler, with vigorous coda.</li>
+</ul>
+<p><strong>Movement III (11')</strong></p>
+<ul>
+<li>0:00 — Timpani strokes; solo double bass intones "Frère Jacques" in D minor.</li>
+<li>1:30 — Other instruments join in canon (bassoon, cellos, tuba).</li>
+<li>3:30 — <em>Klezmer band interrupts</em>: oboes and E-flat clarinet — vulgar, parodistic.</li>
+<li>6:00 — <em>Tender G-major episode</em>: the linden-tree melody from <em>Gesellen</em> No. 4. The symphony's most heartbreaking passage. Listen for the harp and the muted strings.</li>
+<li>9:00 — Funeral canon returns and dissolves.</li>
+</ul>
+<p><strong>Movement IV (20')</strong></p>
+<ul>
+<li>0:00 — <em>Cymbal crash and orchestral shriek</em>. F-minor storm.</li>
+<li>3:30 — Long-breathed D-flat major second subject. Yearning, Wagnerian.</li>
+<li>7:00 — Memories of Movement I return — the cuckoo, the nature-sounds. <em>Listen for</em> the way they are now haunted, no longer innocent.</li>
+<li>11:00 — Premature D-major chorale on horns; collapses.</li>
+<li>16:00 — Renewed struggle.</li>
+<li>18:00 — Final breakthrough. Eight horns rise. <em>Schalltrichter hoch!</em></li>
+<li>19:00 — D major peroration. Annihilating final cadence.</li>
+</ul>
+</section>
+
+    <section id="sec10">
+  <h2><span class="secn">11</span>Must-Listen Tracks</h2>
+<div class="mustlisten"><p><strong>Movement IV — <em>Stürmisch bewegt</em> (the finale).</strong></p>
+<p>If you only have twenty minutes with this symphony, spend them here. The finale contains everything — the storm, the long-breathed lyrical theme, the cyclic recall of the first movement, the false triumph and the real one. It is the proving ground for Mahler's central artistic claim: that the symphony can stage a soul's struggle and victory in real time, with no external program, using only the resources of the orchestra.</p>
+<p>Listen especially for the moment around 18 minutes in when the eight horns rise and the brass blaze the D-major chorale: Mahler's instruction <em>"Alle Hörner auf, Schalltrichter hoch!"</em> is one of the great moments of theatrical conducting in the repertoire, and it makes audible what Mahler meant when he said the symphony must contain everything.</p>
+<p><strong>Recommended recording for this movement</strong>: Leonard Bernstein / Concertgebouw Orchestra, 1987 (DG). Bernstein at his late-period weightiest — broader than his 1966 New York account, stricken with the awareness of mortality that haunts all his late Mahler. The horns at the peroration are unforgettable. If you want a colder, more architectural reading, Haitink/Concertgebouw 1972 is the classic alternative.</p></div>
+</section>
+    <footer>
+      
+      <p>Companion to the Markdown analysis in the Obsidian vault at <code>Musical Analysis/Mahler - Symphony No. 1 in D major.md</code>.</p>
+      <p><a href="index.html">← back to music</a></p>
+    </footer>
+  </main>
+</div>
+</div>
+
+<script>
+  /* ---------- color palettes (Squarespace-style) ---------- */
+  const PALETTES = {
+    afternoon:{mode:'light',label:'Afternoon',v:{
+      '--bg':'#faf8f4','--panel':'#ffffff','--ink':'#1c1a17','--ink-soft':'#55504a','--ink-faint':'#8a8279',
+      '--line':'#e8e2d8','--line-strong':'#d8cfc0','--accent':'#9a5b2e','--accent-soft':'#f3e6d8','--accent-ink':'#7a4220',
+      '--gold':'#b8893b','--teal':'#2f6b6b','--code-bg':'#2b2722',
+      '--header-grad':'linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%)',
+      '--th-bg':'#f3ede3','--row-hover':'#fbf7f0','--epi-ink':'#5b3c20',
+      '--warm-bg':'#fbf3e2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f2f1','--cool-bd':'#bfdcda','--cool-ink':'#1f4f4f',
+      '--ml-grad':'linear-gradient(150deg,#fbf3e7,#f6e7d4)','--ml-bd':'#ebd7b8','--ml-ink':'#6b3f1c'}},
+    sage:{mode:'light',label:'Sage',v:{
+      '--bg':'#f5f7f2','--panel':'#ffffff','--ink':'#1c211a','--ink-soft':'#4e544a','--ink-faint':'#828a7c',
+      '--line':'#e3e8dc','--line-strong':'#d3dac8','--accent':'#5c7a52','--accent-soft':'#e6ede0','--accent-ink':'#3f592f',
+      '--gold':'#a98f3c','--teal':'#3a7a6b','--code-bg':'#1f2620',
+      '--header-grad':'linear-gradient(160deg,#1a231a 0%,#283a26 55%,#3a5232 100%)',
+      '--th-bg':'#edf1e7','--row-hover':'#f6f9f2','--epi-ink':'#3c4f30',
+      '--warm-bg':'#f4efdf','--warm-bd':'#e2dba9','--warm-ink':'#5f5520',
+      '--cool-bg':'#e6f1ec','--cool-bd':'#c0dccd','--cool-ink':'#1f4f3e',
+      '--ml-grad':'linear-gradient(150deg,#eef3e4,#e3ecd6)','--ml-bd':'#d2dcb8','--ml-ink':'#3f5224'}},
+    harbor:{mode:'light',label:'Harbor',v:{
+      '--bg':'#f4f6f9','--panel':'#ffffff','--ink':'#1a2026','--ink-soft':'#4b5560','--ink-faint':'#7d8794',
+      '--line':'#e1e7ec','--line-strong':'#cfd8e1','--accent':'#2f6690','--accent-soft':'#e0ebf2','--accent-ink':'#234e6b',
+      '--gold':'#b5862f','--teal':'#2f8682','--code-bg':'#192129',
+      '--header-grad':'linear-gradient(160deg,#121b24 0%,#1d2e3f 55%,#274a63 100%)',
+      '--th-bg':'#e9eef3','--row-hover':'#f4f8fb','--epi-ink':'#234e6b',
+      '--warm-bg':'#f6efe0','--warm-bd':'#e7d6b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e2eef2','--cool-bd':'#bcd6de','--cool-ink':'#1f4f55',
+      '--ml-grad':'linear-gradient(150deg,#e8f1f6,#dbe9f1)','--ml-bd':'#c2d6e4','--ml-ink':'#234e6b'}},
+    plum:{mode:'light',label:'Plum',v:{
+      '--bg':'#f8f5f8','--panel':'#ffffff','--ink':'#221c21','--ink-soft':'#564b54','--ink-faint':'#897e87',
+      '--line':'#e9e0e7','--line-strong':'#dccdd8','--accent':'#7d4a6b','--accent-soft':'#efe2ec','--accent-ink':'#5d3550',
+      '--gold':'#b07d3b','--teal':'#3a7a72','--code-bg':'#241c23',
+      '--header-grad':'linear-gradient(160deg,#201823 0%,#332338 55%,#4e2f53 100%)',
+      '--th-bg':'#f1e9f0','--row-hover':'#faf5f9','--epi-ink':'#5d3550',
+      '--warm-bg':'#f7efe2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f1f0','--cool-bd':'#c4d9d5','--cool-ink':'#1f4f48',
+      '--ml-grad':'linear-gradient(150deg,#f4e9f1,#ecdbe8)','--ml-bd':'#ddc4d6','--ml-ink':'#5d3550'}},
+    midnight:{mode:'dark',label:'Midnight',v:{
+      '--bg':'#0f1620','--panel':'#18212e','--ink':'#e8edf3','--ink-soft':'#a9b5c4','--ink-faint':'#6f7d8d',
+      '--line':'#25303f','--line-strong':'#34414f','--accent':'#5b9bd5','--accent-soft':'#1b2a3b','--accent-ink':'#9cc4e8',
+      '--gold':'#d2a85f','--teal':'#4db1a8','--code-bg':'#0b121b',
+      '--header-grad':'linear-gradient(160deg,#0b1220 0%,#13243a 55%,#1d3a5c 100%)',
+      '--th-bg':'#1f2a38','--row-hover':'#1d2735','--epi-ink':'#9cc4e8',
+      '--warm-bg':'#2a2418','--warm-bd':'#43381f','--warm-ink':'#e0b878',
+      '--cool-bg':'#11302d','--cool-bd':'#1f4a45','--cool-ink':'#7fd6cc',
+      '--ml-grad':'linear-gradient(150deg,#1c2a3b,#16222f)','--ml-bd':'#2c3f55','--ml-ink':'#9cc4e8'}},
+    charcoal:{mode:'dark',label:'Charcoal',v:{
+      '--bg':'#161514','--panel':'#201e1c','--ink':'#ece8e2','--ink-soft':'#b0a99f','--ink-faint':'#766f65',
+      '--line':'#2c2926','--line-strong':'#3a3631','--accent':'#c8895a','--accent-soft':'#2c2420','--accent-ink':'#e3a878',
+      '--gold':'#cda35e','--teal':'#5aada3','--code-bg':'#100f0e',
+      '--header-grad':'linear-gradient(160deg,#141210 0%,#241e18 55%,#3a2c20 100%)',
+      '--th-bg':'#25221f','--row-hover':'#211e1b','--epi-ink':'#e3a878',
+      '--warm-bg':'#2c2418','--warm-bd':'#443720','--warm-ink':'#e0b878',
+      '--cool-bg':'#1a2826','--cool-bd':'#2c4641','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#272019,#1d1814)','--ml-bd':'#3d3124','--ml-ink':'#e3a878'}},
+    forest:{mode:'dark',label:'Forest',v:{
+      '--bg':'#101713','--panel':'#18211b','--ink':'#e6ece6','--ink-soft':'#a6b3a6','--ink-faint':'#6e7c6e',
+      '--line':'#243029','--line-strong':'#324133','--accent':'#6fae7e','--accent-soft':'#1a2a20','--accent-ink':'#9fd3aa',
+      '--gold':'#cda35e','--teal':'#4fb0a0','--code-bg':'#0b110d',
+      '--header-grad':'linear-gradient(160deg,#0c1410 0%,#142a1d 55%,#1d4230 100%)',
+      '--th-bg':'#1d2922','--row-hover':'#1a241d','--epi-ink':'#9fd3aa',
+      '--warm-bg':'#28281a','--warm-bd':'#3f3f24','--warm-ink':'#d8b878',
+      '--cool-bg':'#16302a','--cool-bd':'#274a40','--cool-ink':'#7fd0bc',
+      '--ml-grad':'linear-gradient(150deg,#18271e,#132019)','--ml-bd':'#2a4231','--ml-ink':'#9fd3aa'}},
+    wine:{mode:'dark',label:'Wine',v:{
+      '--bg':'#1a1012','--panel':'#241619','--ink':'#f0e4e6','--ink-soft':'#c2a9af','--ink-faint':'#8c6f76',
+      '--line':'#321f24','--line-strong':'#43292f','--accent':'#c46b7e','--accent-soft':'#2e1a1f','--accent-ink':'#e49aa8',
+      '--gold':'#cda35e','--teal':'#5aa8a0','--code-bg':'#140c0e',
+      '--header-grad':'linear-gradient(160deg,#160c0e 0%,#2a141a 55%,#4a2230 100%)',
+      '--th-bg':'#2c1c20','--row-hover':'#271519','--epi-ink':'#e49aa8',
+      '--warm-bg':'#2e2418','--warm-bd':'#463720','--warm-ink':'#e0b878',
+      '--cool-bg':'#18302d','--cool-bd':'#2a4a45','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#2a181d,#201216)','--ml-bd':'#43272f','--ml-ink':'#e49aa8'}}
+  };
+
+  const root = document.documentElement;
+  function applyPalette(key){
+    const p = PALETTES[key]; if(!p) return;
+    for(const [k,val] of Object.entries(p.v)) root.style.setProperty(k,val);
+    root.setAttribute('data-mode', p.mode);
+    document.querySelectorAll('.pp-sw').forEach(b=>b.classList.toggle('active', b.dataset.pal===key));
+    try{ localStorage.setItem('faune-palette', key); }catch(e){}
+  }
+
+  // build swatches
+  const tick = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  for(const [key,p] of Object.entries(PALETTES)){
+    const btn = document.createElement('button');
+    btn.className = 'pp-sw'; btn.dataset.pal = key; btn.type = 'button';
+    btn.title = p.label;
+    btn.innerHTML =
+      '<div class="bars">'+
+        '<span style="background:'+p.v['--bg']+'"></span>'+
+        '<span style="background:'+p.v['--accent']+'"></span>'+
+        '<span style="background:'+p.v['--accent-ink']+'"></span>'+
+        '<span style="background:'+p.v['--gold']+'"></span>'+
+      '</div>'+
+      '<span class="nm">'+p.label+tick+'</span>';
+    btn.addEventListener('click', ()=>applyPalette(key));
+    document.getElementById(p.mode==='light'?'pp-light':'pp-dark').appendChild(btn);
+  }
+
+  // toggle panel
+  const picker = document.getElementById('picker');
+  const ppToggle = document.getElementById('ppToggle');
+  ppToggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = picker.classList.toggle('open');
+    ppToggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.addEventListener('click', (e)=>{
+    if(!picker.contains(e.target)) picker.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') picker.classList.remove('open'); });
+
+  // restore saved or honor OS dark preference
+  let saved=null; try{ saved = localStorage.getItem('faune-palette'); }catch(e){}
+  if(saved && PALETTES[saved]) applyPalette(saved);
+  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
+  else applyPalette('afternoon');
+
+  // active TOC highlighting
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const map = {};
+  links.forEach(a => { const id = a.getAttribute('href').slice(1); map[id] = a; });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = map[e.target.id];
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

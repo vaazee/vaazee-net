@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mendelssohn — String Octet in E‑flat major, Op. 20 · Musical Analysis</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --panel:#ffffff;
+    --ink:#1c1a17;
+    --ink-soft:#55504a;
+    --ink-faint:#8a8279;
+    --line:#e8e2d8;
+    --line-strong:#d8cfc0;
+    --accent:#9a5b2e;       /* warm terracotta — faun / afternoon heat */
+    --accent-soft:#f3e6d8;
+    --accent-ink:#7a4220;
+    --gold:#b8893b;
+    --teal:#2f6b6b;
+    --code-bg:#2b2722;
+    --green:#2f7d4f;
+    --amber:#b07d18;
+    --red:#a8392f;
+    /* themeable extras (overridden by JS palettes) */
+    --header-grad:linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%);
+    --th-bg:#f3ede3;
+    --row-hover:#fbf7f0;
+    --epi-ink:#5b3c20;
+    --warm-bg:#fbf3e2; --warm-bd:#ecd9b0; --warm-ink:#6b4e1e;
+    --cool-bg:#e8f2f1; --cool-bd:#bfdcda; --cool-ink:#1f4f4f;
+    --ml-grad:linear-gradient(150deg,#fbf3e7,#f6e7d4); --ml-bd:#ebd7b8; --ml-ink:#6b3f1c;
+    --radius:12px;
+    --shadow:0 1px 2px rgba(40,30,15,.04),0 6px 22px rgba(40,30,15,.06);
+  }
+  html{transition:none}
+  body,.card,table,.tldr,.callout,.mustlisten,nav.toc a,.svgcard,.pp-panel,.pp-toggle,.pp-sw{
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+    line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  /* ---- header ---- */
+  header.top{
+    background:var(--header-grad);
+    color:#f4ece1;position:relative;overflow:hidden;
+    border-bottom:3px solid var(--accent);
+  }
+  header.top .glow{position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(212,160,90,.35),transparent 65%);pointer-events:none;}
+  header.top .wrap{padding:46px 28px 40px;position:relative;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#d9b384;font-weight:600;margin:0 0 14px}
+  header.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;
+    font-size:40px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+  header.top h1 em{font-style:italic;color:#f0cfa0}
+  header.top .sub{font-size:17px;color:#d8cab8;margin:10px 0 0;max-width:760px}
+  .metarow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-size:13.5px;color:#cdbca6}
+  .metarow b{color:#f4ece1;font-weight:600}
+  .stamp{font-size:12px;color:#b39c80;margin-top:18px;font-family:"SF Mono",Menlo,monospace}
+
+  /* ---- layout ---- */
+  .layout{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0 80px;align-items:start}
+  nav.toc{position:sticky;top:24px;font-size:14px}
+  nav.toc .title{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 12px}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border-radius:7px;border-left:2px solid transparent;line-height:1.35}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+  nav.toc a .n{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;margin-right:7px}
+  nav.toc a.active{background:var(--accent-soft);color:var(--accent-ink);border-left-color:var(--accent)}
+
+  main{min-width:0}
+  section{margin:0 0 50px;scroll-margin-top:24px}
+  h2{font-family:Georgia,serif;font-size:25px;font-weight:600;letter-spacing:-.01em;
+    margin:0 0 4px;display:flex;align-items:baseline;gap:12px}
+  h2 .secn{font-size:14px;font-weight:700;color:#fff;background:var(--accent);
+    width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:-apple-system,system-ui;}
+  .lead{color:var(--ink-soft);margin:2px 0 22px 42px;font-size:15px}
+  h3{font-size:17px;font-weight:650;margin:26px 0 8px;color:var(--ink)}
+  p{margin:0 0 14px}
+  strong{font-weight:650}
+  a.inline{color:var(--accent-ink);text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+
+  /* ---- tl;dr box ---- */
+  .tldr{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow);margin-bottom:8px}
+  .tldr h2{font-size:18px;margin-bottom:10px}
+  .tldr p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+  .tldr p:last-child{margin-bottom:0}
+
+  blockquote.epi{margin:0 0 30px;padding:18px 24px;background:var(--accent-soft);
+    border-radius:var(--radius);font-family:Georgia,serif;font-style:italic;font-size:16px;color:var(--epi-ink)}
+  blockquote.epi .who{display:block;font-style:normal;font-family:-apple-system,system-ui;
+    font-size:13px;color:var(--accent-ink);margin-top:10px;font-weight:600}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 24px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin:6px 0}
+  .keyval{margin:0;padding:0;list-style:none}
+  .keyval li{display:grid;grid-template-columns:165px 1fr;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);margin:0}
+  .keyval li:last-child{border-bottom:none}
+  .keyval .k{color:var(--ink-faint);font-size:13.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+
+  /* ---- tables ---- */
+  table{width:100%;border-collapse:collapse;margin:6px 0 20px;font-size:14.5px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  th{background:var(--th-bg);text-align:left;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line-strong)}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--row-hover)}
+  td.sec{font-weight:650;color:var(--accent-ink);white-space:nowrap}
+  .time{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);white-space:nowrap}
+
+  /* ---- pull callout ---- */
+  .callout{border-radius:var(--radius);padding:16px 20px;margin:18px 0;font-size:15px;border:1px solid}
+  .callout.gold{background:var(--warm-bg);border-color:var(--warm-bd);color:var(--warm-ink)}
+  .callout.teal{background:var(--cool-bg);border-color:var(--cool-bd);color:var(--cool-ink)}
+  .callout .lbl{font-weight:700;text-transform:uppercase;font-size:11.5px;letter-spacing:.1em;display:block;margin-bottom:4px;opacity:.8}
+
+  /* ---- timeline ---- */
+  .tl{list-style:none;margin:8px 0 0;padding:0;position:relative}
+  .tl:before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+  .tl li{position:relative;padding:10px 0 10px 86px;margin:0}
+  .tl .t{position:absolute;left:0;top:11px;width:52px;text-align:right;font-family:"SF Mono",Menlo,monospace;
+    font-size:12.5px;color:var(--teal);font-weight:600}
+  .tl .dot{position:absolute;left:57px;top:15px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--accent)}
+  .tl li.peak .dot{background:var(--accent);width:14px;height:14px;left:56px;top:14px;box-shadow:0 0 0 4px var(--accent-soft)}
+  .tl b{color:var(--ink)}
+
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:2px 8px;border-radius:20px;vertical-align:middle}
+  .b-heart{background:#fbe3df;color:var(--red)}
+  .b-key{background:#e6efe9;color:var(--green)}
+
+  figure{margin:18px 0 24px}
+  figcaption{font-size:13px;color:var(--ink-faint);margin-top:10px;text-align:center;font-style:italic}
+  .svgcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  /* theme-aware SVG strokes/fills */
+  .svgcard svg .sv-axis{stroke:var(--line-strong)}
+  .svgcard svg .sv-grid{stroke:var(--line)}
+  .svgcard svg .sv-curve{stroke:var(--accent)}
+  .svgcard svg .sv-area{fill:var(--accent);opacity:.13}
+  .svgcard svg .sv-gold-line{stroke:var(--gold)}
+  .svgcard svg .sv-gold,.svgcard svg .sv-gold-dot{fill:var(--gold)}
+  .svgcard svg .sv-accent,.svgcard svg .sv-accent-dot{fill:var(--accent)}
+  .svgcard svg .sv-lbl{fill:var(--ink-soft)}
+  .svgcard svg .sv-faint{fill:var(--ink-faint)}
+
+  code{font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:5px}
+
+  /* ---- palette picker ---- */
+  .palette-picker{position:fixed;top:14px;right:14px;z-index:60;font-size:13px;
+    font-family:-apple-system,system-ui,sans-serif}
+  .pp-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    background:rgba(255,255,255,.92);color:#241c14;border:1px solid rgba(0,0,0,.12);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    padding:8px 13px;border-radius:30px;font-weight:600;font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,.16)}
+  .pp-toggle svg{display:block}
+  .pp-toggle .chev{transition:transform .2s ease}
+  .palette-picker.open .pp-toggle .chev{transform:rotate(180deg)}
+  .pp-panel{position:absolute;top:46px;right:0;width:248px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.22);padding:14px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);
+    transform-origin:top right;transition:opacity .16s ease,transform .16s ease,visibility .16s}
+  .palette-picker.open .pp-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+  .pp-group{margin-bottom:12px}
+  .pp-group:last-child{margin-bottom:0}
+  .pp-label{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 2px 8px}
+  .pp-label .ico{width:13px;height:13px;opacity:.7}
+  .pp-swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pp-sw{cursor:pointer;border:1.5px solid var(--line);background:var(--panel);
+    border-radius:10px;padding:7px;display:flex;flex-direction:column;gap:6px;text-align:left;
+    transition:border-color .15s,transform .1s}
+  .pp-sw:hover{transform:translateY(-1px)}
+  .pp-sw .bars{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .pp-sw .bars span{flex:1}
+  .pp-sw .nm{font-size:11.5px;font-weight:600;color:var(--ink-soft);display:flex;
+    align-items:center;justify-content:space-between;gap:4px}
+  .pp-sw.active{border-color:var(--accent)}
+  .pp-sw.active .nm{color:var(--ink)}
+  .pp-sw .tick{width:13px;height:13px;color:var(--accent);opacity:0}
+  .pp-sw.active .tick{opacity:1}
+
+  .rec{display:grid;grid-template-columns:1fr;gap:0}
+  .rec .who{font-weight:650;color:var(--accent-ink)}
+
+  .mustlisten{background:var(--ml-grad);border:1px solid var(--ml-bd);
+    border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow)}
+  .mustlisten h3{margin-top:0;font-family:Georgia,serif;font-size:20px;color:var(--ml-ink)}
+  .mustlisten .span{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--ink-faint);font-size:13.5px}
+  footer a{color:var(--accent-ink);text-decoration:none}
+
+  @media (max-width:720px){
+    .layout{grid-template-columns:1fr;gap:0;padding:24px 0 60px}
+    nav.toc{display:none}
+    .wrap{padding:0 18px}
+    header.top h1{font-size:30px}
+    header.top .wrap{padding:34px 18px 30px}
+    .keyval li{grid-template-columns:1fr;gap:2px}
+    .lead{margin-left:0}
+    h2{font-size:21px}
+    .palette-picker{top:10px;right:10px}
+    .pp-toggle .pp-txt{display:none}
+    .pp-toggle{padding:9px;border-radius:50%}
+    .pp-panel{width:230px}
+  }
+</style>
+</head>
+<body>
+
+<div class="palette-picker" id="picker">
+  <button class="pp-toggle" id="ppToggle" aria-expanded="false" aria-label="Change color theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    <span class="pp-txt">Theme</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pp-panel" role="menu" aria-label="Color palettes">
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>Light</span>
+      <div class="pp-swatches" id="pp-light"></div>
+    </div>
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark</span>
+      <div class="pp-swatches" id="pp-dark"></div>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <p class="eyebrow">Musical Analysis · Octet</p>
+    <h1>String Octet in E‑flat major, Op. 20</h1>
+    <p class="sub">Mendelssohn · 1825</p>
+    <div class="metarow">
+      <span><b>Composed</b> 1825</span>
+      <span><b>Premiere</b> privately at the Mendelssohn family home on the Leipziger Straße, likely at o…</span>
+    </div>
+    <p class="stamp">Generated 2026-05-31 · musical-analysis</p>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <p class="title">Contents</p>
+    <a href="#tldr"><span class="n">·</span>In brief</a>
+    <a href="#sec0"><span class="n">1</span>Identity &amp; Context</a>
+    <a href="#sec1"><span class="n">2</span>Formal Structure</a>
+    <a href="#sec2"><span class="n">3</span>Melodic &amp; Thematic Content</a>
+    <a href="#sec3"><span class="n">4</span>Harmony &amp; Tonality</a>
+    <a href="#sec4"><span class="n">5</span>Rhythm, Meter &amp; Tempo</a>
+    <a href="#sec5"><span class="n">6</span>Orchestration, Texture &amp; Timbre</a>
+    <a href="#sec6"><span class="n">7</span>Emotional Arc &amp; Dramaturgy</a>
+    <a href="#sec7"><span class="n">8</span>Historical Significance &amp; Influence</a>
+    <a href="#sec8"><span class="n">9</span>Performance Practice &amp; Notable Recordings</a>
+    <a href="#sec9"><span class="n">10</span>Listening Guide</a>
+    <a href="#sec10"><span class="n">11</span>Must‑Listen Tracks</a>
+  </nav>
+
+  <main>
+    <section id="tldr"><div class="tldr"><h2>In brief</h2><p>The octet is a four‑movement work lasting about <strong>30–33 minutes</strong>.</p></div></section>
+    <section id="sec0">
+  <h2><span class="secn">1</span>Identity &amp; Context</h2>
+<ul class="keyval">
+<li><span class="k">Full title</span><span>Octet for Strings in E‑flat major, Op. 20 (MWV R 20)</span></li>
+<li><span class="k">Composer</span><span>Felix Mendelssohn (1809–1847)</span></li>
+<li><span class="k">Forces</span><span>4 violins, 2 violas, 2 cellos</span></li>
+<li><span class="k">Composed</span><span>completed October 15, 1825 in Berlin. Revised c. 1832–33; the revised version is what is almost always played today.</span></li>
+<li><span class="k">Premiere</span><span>privately at the Mendelssohn family home on the Leipziger Straße, likely at one of the famous Sunday musicales. First public performance in Leipzig, January 30, 1836.</span></li>
+<li><span class="k">Published</span><span>1832 (Breitkopf &amp; Härtel), dedicated to the violinist <strong>Eduard Rietz</strong>, Felix's close friend and teacher, who led the first readings. Rietz died young in 1832; Mendelssohn also commemorated him in the slow movement of the String Quartet Op. 13.</span></li>
+<li><span class="k">Age of composer</span><span>16. The octet is the most astonishing teenage masterpiece in the Western canon — not a clever juvenilia but a fully formed, technically fearless work that no adult Mendelssohn would surpass for chamber color.</span></li>
+<li><span class="k">Place in output</span><span>the arrival piece. Before it, Mendelssohn had written twelve string sinfonias, some concertos, and promising salon work. After it — and the <em>Midsummer Night's Dream</em> Overture a year later (1826) — he was a composer of international rank. The octet inaugurates the "Mendelssohnian scherzo" idiom he would mine for the next two decades.</span></li>
+<li><span class="k">Historical moment</span><span>1825 is the year Beethoven wrote the Op. 132 A minor Quartet and the Grosse Fuge; Schubert produced the "Great" C major Symphony the next year; Weber's <em>Der Freischütz</em> had premiered four years earlier. Romanticism is fully arrived, but the Classical formal instinct is still load-bearing. Mendelssohn, raised on Bach, Handel, Mozart, and Beethoven through the Berlin Singakademie, synthesizes all of it.</span></li>
+<li><span class="k">Instruction on the score</span><span>Mendelssohn's preface is famous — "This Octet must be played by all the instruments in symphonic orchestral style. Pianos and fortes must be strictly observed and more strongly emphasized than is usual in pieces of this character." He is telling the players: do not treat this as a double quartet. Treat it as an orchestra of eight.</span></li>
+</ul>
+</section>
+
+    <section id="sec1">
+  <h2><span class="secn">2</span>Formal Structure</h2>
+<p>The octet is a four‑movement work lasting about <strong>30–33 minutes</strong>.</p>
+<h3>I. Allegro moderato, ma con fuoco — E‑flat major, 4/4</h3>
+<ul>
+<li><strong>Form</strong>: full‑scale sonata‑allegro with a very long exposition and a development that earns every bar.</li>
+<li><strong>Proportions</strong>: c. 13–15 minutes. The biggest movement.</li>
+<li><strong>Key scheme</strong>: I (E‑flat) → V (B‑flat, second theme), development ranging through C minor, A‑flat, F minor, G minor; recap in E‑flat with second theme now in the tonic; coda that rebuilds the opening surge.</li>
+<li><strong>Sectional map</strong>:</li>
+<li><strong>Exposition</strong>: soaring Violin I theme over tremolando inner voices, rising an octave and a sixth in the first two bars — the signature gesture. Transition through virtuosic passagework. Second theme (bar ~70) in B‑flat, lyrical, in dialogue between violins and violas. Closing group tightens rhythm and drives to a hammered cadence.</li>
+<li><strong>Development</strong>: starts quietly, fragments the main theme's leaping head, passes it through inversion and stretto between the eight voices. Builds an immense polyphonic climax.</li>
+<li><strong>Recapitulation</strong>: returns with the tremolando apparatus now redistributed (a Mendelssohn fingerprint — he never simply repeats).</li>
+<li><strong>Coda</strong>: compressed, ecstatic; the opening leap becomes a fanfare.</li>
+</ul>
+<h3>II. Andante — C minor, 6/8</h3>
+<ul class="keyval">
+<li><span class="k">Form</span><span>through‑composed ternary with variation elements. Roughly A — B — A′ with a melancholy, wandering middle.</span></li>
+<li><span class="k">Key scheme</span><span>C minor opening, moves to E‑flat major and A‑flat major for the B section, returns to C minor with a coda that settles onto a Picardy‑inflected resolution.</span></li>
+<li><span class="k">Proportions</span><span>c. 6–7 minutes.</span></li>
+<li><span class="k">Character</span><span>Mendelssohn at his most Schubertian — rocking 6/8, sighing suspensions, a sense of overheard private mourning. The cellos open with a walking, shadowed line; violins enter in thirds high above. Unusual among Mendelssohn slow movements for its chromatic restlessness rather than serene hymnody.</span></li>
+</ul>
+<h3>III. Scherzo: Allegro leggierissimo — G minor, 2/4, <em>sempre pianissimo e staccato</em></h3>
+<ul class="keyval">
+<li><span class="k">Form</span><span>a single perpetual‑motion arch — not a conventional scherzo‑trio‑scherzo. More like a through‑composed moto perpetuo with contrasting episodes and a <strong>disappearing coda</strong>.</span></li>
+<li><span class="k">Key scheme</span><span>G minor → tonicizes B‑flat → a long chromatic middle zone through D minor and E‑flat — → returns to G minor → evaporates.</span></li>
+<li><span class="k">Proportions</span><span>c. 4 minutes. Feels like 90 seconds.</span></li>
+<li><span class="k">Famous literary program</span><span>Felix's sister Fanny Mendelssohn recorded that Felix told her the scherzo was inspired by the <strong>Walpurgis Night Dream</strong> passage from Goethe's <em>Faust, Part I</em>: &gt; <em>"The flight of clouds and veil of mist / Are lighted from above. / A breeze in the leaves, a wind in the reeds, / And all has vanished."</em></span></li>
+</ul>
+<p>That single programmatic hint is the key to the whole movement — it <em>ends</em> by vanishing on a pianissimo unison G, the "puff" of wind after which "all has vanished."</p>
+<h3>IV. Presto — E‑flat major, 2/2 (alla breve)</h3>
+<ul class="keyval">
+<li><span class="k">Form</span><span>sonata‑rondo with fugal episodes. Combines a rondo's returning refrain, a sonata's development, and a fugue's imitative rigor — technically astonishing writing for a sixteen‑year‑old.</span></li>
+<li><span class="k">Proportions</span><span>c. 6–7 minutes.</span></li>
+<li><span class="k">Key scheme</span><span>E‑flat throughout its refrains; the fugal subject is stated successively in cello II, cello I, viola II, viola I, violin IV, III, II, I — a rising ladder of entries climbing from the bottom of the ensemble to the top, eight voices, one after another. Modulations reach C minor and A‑flat before the triumphant return.</span></li>
+<li><span class="k">Quotations inside</span><span>Mendelssohn embeds a theme from <strong>Handel's <em>Messiah</strong></em> — specifically "And He shall reign forever and ever" from the <em>Hallelujah</em> chorus — which appears in counterpoint against his own subject. He also references the scherzo's main motif in the middle of the finale, a <strong>cyclic gesture</strong> unprecedented in chamber music of this scale before Beethoven's Ninth.</span></li>
+</ul>
+<h3>Macro‑architecture</h3>
+<ul class="keyval">
+<li><span class="k">Key plan</span><span>E‑flat → C minor → G minor → E‑flat — a descending chain of thirds before the return home. E‑flat is the "heroic/imperial" key (Beethoven's <em>Eroica</em>, Mozart's last symphony, Beethoven's Emperor Concerto), and Mendelssohn places his first major public statement there.</span></li>
+<li><span class="k">Thematic links</span><span>scherzo returns literally inside the finale. The finale's scalar rush echoes the first movement's opening ascent.</span></li>
+<li><span class="k">Narrative arc</span><span>radiant exuberance → private lament → supernatural flicker → communal triumph. It is, in miniature, the shape of a Beethoven symphony.</span></li>
+</ul>
+</section>
+
+    <section id="sec2">
+  <h2><span class="secn">3</span>Melodic &amp; Thematic Content</h2>
+<ul class="keyval">
+<li><span class="k">First movement theme</span><span>a rising arpeggio from E‑flat, leaping up an octave in bar 1, then pushing through B‑flat to higher G — an <strong>eleventh of upward span</strong> in under three bars. The gesture is what conductors call a "lift": the bow attack, the tremolando floor beneath, and the sheer altitude of the first violin line together create the sense of a curtain flying up.</span></li>
+<li><span class="k">Second subject</span><span>lyric, in thirds, stepwise, answering the first theme's bravado with sweetness. The move from outward‑ness to inward‑ness inside the exposition is handled with unusual grace for a teenager.</span></li>
+<li><span class="k">Scherzo motif</span><span>a three‑note pickup (short‑short‑long) that never stops. Every phrase in the scherzo is built from micro‑cells of this shape passed between voices like a relay.</span></li>
+<li><span class="k">Finale fugue subject</span><span>a long‑short‑short‑long‑long pattern with a rising fourth at its head — an ideal imitative subject because its profile stays clear even when stacked eight voices deep.</span></li>
+<li><span class="k">Thematic transformation</span><span>watch how the Goethe‑inspired scherzo motif is quoted inside the finale at mm. ~70 onward. The flicker of the elves returns in the middle of a triumphant fugue — briefly, almost as a secret — and then the finale resumes.</span></li>
+<li><span class="k">Motivic economy</span><span>less than Beethoven (this is not a work built from a single four‑note kernel) but more than standard early‑Romantic chamber music. Each movement has its own idiom, but motivic fragments cross movements.</span></li>
+</ul>
+</section>
+
+    <section id="sec3">
+  <h2><span class="secn">4</span>Harmony &amp; Tonality</h2>
+<ul>
+<li><strong>Harmonic language</strong>: essentially Classical voice‑leading animated by Romantic color. Mendelssohn is not a chromatic radical — he is a chromaticist of the Mozart‑plus‑Bach lineage. Every chromatic chord has a voice‑led reason.</li>
+<li><strong>Notable progressions</strong>:</li>
+<li>The C minor slow movement's B section reaches A‑flat major through a mediant side‑slip that is pure early Schubert.</li>
+<li>The scherzo's vanishing ending — a unison G stripped of third and fifth — is harmonically extraordinary: it doesn't cadence, it <em>dematerializes</em>.</li>
+<li>The finale's fugue entries cycle through fifths in a way that echoes Bach's <em>Art of Fugue</em>; Mendelssohn had been studying Bach at home with Zelter for years.</li>
+<li><strong>Cadential patterns</strong>: Mendelssohn generally avoids the heavy perfect authentic cadence at structural seams (except at final closure). He prefers elided cadences that keep the line moving — this is why the octet feels breathless.</li>
+<li><strong>Dissonance treatment</strong>: conservative by 1825 standards. No emancipation of dissonance; every suspension resolves. The Romanticism comes from register, dynamics, and harmonic <em>color</em>, not dissonance density.</li>
+</ul>
+</section>
+
+    <section id="sec4">
+  <h2><span class="secn">5</span>Rhythm, Meter &amp; Tempo</h2>
+<ul class="keyval">
+<li><span class="k">First movement</span><span>surging 4/4 with tremolando inner voices that function like an orchestra's string tremolo. The rhythmic character is <strong>orchestral</strong> — Mendelssohn's preface is not hyperbole.</span></li>
+<li><span class="k">Slow movement</span><span>6/8 with a characteristic lilt; the walking bass line in the cellos gives the movement its mournful gait.</span></li>
+<li><span class="k">Scherzo</span><span>2/4 at a tempo that must be <em>flying</em> but never hurried — the crucial marking is <strong>leggierissimo</strong> (as light as possible). Not <em>prestissimo</em>. Light, not fast. The distinction is the whole interpretive question of this movement.</span></li>
+<li><span class="k">Finale</span><span>alla breve at a presto tempo, with relentless eighth‑ and sixteenth‑note motion. The challenge is articulation clarity through eight instruments at this speed.</span></li>
+<li><span class="k">Tempo relationships</span><span>each movement is faster in character than the last — Allegro moderato → Andante → Allegro leggierissimo → Presto. The slow movement is the emotional fulcrum around which the three faster movements pivot.</span></li>
+</ul>
+</section>
+
+    <section id="sec5">
+  <h2><span class="secn">6</span>Orchestration, Texture &amp; Timbre</h2>
+<p>This is where the octet is genuinely revolutionary.</p>
+<ul>
+<li><strong>Instrumentation</strong>: the double string quartet (4 violins, 2 violas, 2 cellos) was not Mendelssohn's invention — Louis Spohr wrote double quartets — but Mendelssohn refused to treat the ensemble as two quartets in dialogue. He blended the eight instruments <strong>as a single orchestra</strong>.</li>
+<li><strong>Textural strategies</strong>:</li>
+<li><strong>Orchestral tremolando</strong>: lower seven instruments sustain tremolando while violin I carries the theme — exactly the texture of an orchestral first movement.</li>
+<li><strong>Antiphonal blocks</strong>: violins I–IV against violas and cellos, or odd‑numbered against even‑numbered instruments, producing stereo‑field effects.</li>
+<li><strong>Solo emergence</strong>: any of the eight can step forward. In the scherzo, the theme is tossed between voices with such speed that no single player "owns" it.</li>
+<li><strong>Fugal stacking</strong>: the finale's rising fugue entries produce an eight‑voice texture that almost no other chamber work of the 1820s dared.</li>
+<li><strong>Dynamic architecture</strong>: Mendelssohn's preface insists on orchestral dynamic contrasts. The first movement's exposition has true <em>fortissimo</em> climaxes; the scherzo must stay <em>pianissimo</em> almost throughout, which in eight players is physically harder than playing loud.</li>
+<li><strong>Timbral innovation</strong>: the scherzo's color — <em>leggierissimo staccato</em> in all eight instruments, piano throughout — invented a new sound. It is the direct ancestor of the <em>Midsummer Night's Dream</em> scherzo (1826, one year later), the scherzo of the <em>Scottish</em> Symphony, and ultimately the gossamer scherzo tradition that runs through Berlioz, Saint‑Saëns, and Ravel.</li>
+</ul>
+</section>
+
+    <section id="sec6">
+  <h2><span class="secn">7</span>Emotional Arc &amp; Dramaturgy</h2>
+<ul class="keyval">
+<li><span class="k">Movement I</span><span>public, extroverted, radiant. A young man announcing himself. The climaxes feel won, not asserted.</span></li>
+<li><span class="k">Movement II</span><span>inward, grieving, almost Schubertian in its acceptance of sadness. The most personal music in the work.</span></li>
+<li><span class="k">Movement III</span><span>otherworldly. This is music about <em>seeing</em> something (the Walpurgis vision) and then having it disappear. It is a piece of enchantment — Mendelssohn's first great fairy scherzo — and its emotional effect is the thrill of glimpsing something you can't quite catch.</span></li>
+<li><span class="k">Movement IV</span><span>communal jubilation, learned counterpoint, the quotation of Handel's "And He shall reign forever" — an affirmation not just of the key of E‑flat but of the composer's place in a tradition.</span></li>
+</ul>
+<p>The overall arc is <strong>triumphant</strong> in the classical sense. Brightness → private sorrow → fantasy → collective joy.</p>
+</section>
+
+    <section id="sec7">
+  <h2><span class="secn">8</span>Historical Significance &amp; Influence</h2>
+<ul class="keyval">
+<li><span class="k">What was new</span><span>nobody had written chamber music of this orchestral scope, thematic integration, and contrapuntal density before — certainly not at sixteen. Spohr's double quartets are elegant but stay in the salon; Mendelssohn's Octet is a symphony's ambition in chamber dress.</span></li>
+<li><span class="k">The "fairy scherzo" lineage</span><span>the Op. 20 scherzo invents a genre. Every Mendelssohn scherzo afterward — the <em>Midsummer</em>, the Scottish Symphony's second movement, the Piano Trios — descends from it. So do Berlioz's <em>Queen Mab</em> scherzo, Bruckner's scherzo writing (indirectly), and much of Ravel.</span></li>
+<li><span class="k">Reception</span><span>the octet was slow to be heard in public (the first public performance was eleven years after composition), but within the Mendelssohn circle it was immediately recognized as extraordinary. Its reputation grew steadily through the 19th century, was dimmed by the anti‑Mendelssohn turn of the late Romantic and early modernist period (Wagner's infamous 1850 essay, Shaw's dismissals), and was fully re‑established after WWII.</span></li>
+<li><span class="k">Place in canon</span><span>now regarded as one of the greatest chamber works of the 19th century, and the single greatest work by a teenage composer in the Western tradition.</span></li>
+<li><span class="k">Relationship to contemporaneous works</span><span>in 1825 Beethoven was writing the late quartets a few hundred miles away. The octet is <em>not</em> late‑Beethoven in spirit — it is closer to the Mozartian–Bachian synthesis Mendelssohn had absorbed through Zelter. But the ambition, the four‑movement integrity, the cyclic finale quotation — these are Beethovenian gestures.</span></li>
+</ul>
+</section>
+
+    <section id="sec8">
+  <h2><span class="secn">9</span>Performance Practice &amp; Notable Recordings</h2>
+<ul>
+<li><strong>Double‑quartet vs. orchestral</strong>: ensembles still debate whether to play one‑on‑a‑part (chamber style, eight individual voices) or with a small string orchestra (fully realizing Mendelssohn's orchestral preface). The chamber reading is now standard, but the preface is unambiguous about the <em>character</em> Mendelssohn wants: symphonic.</li>
+<li><strong>Scherzo tempo</strong>: the single hardest interpretive call. Too fast and the staccato articulations blur; too slow and the magic evaporates. The tradition ranges from ~2:40 (fastest) to ~4:30 (slowest).</li>
+<li><strong>Repeats</strong>: the first‑movement exposition repeat is usually observed in modern recordings. Pre‑1970 recordings often omitted it.</li>
+<li><strong>Landmark recordings</strong>:</li>
+<li><strong>Academy of St Martin in the Fields Chamber Ensemble (Philips, 1979)</strong> — eight players, symphonic reading, gloriously sprung. Iona Brown leading.</li>
+<li><strong>Vienna Octet (Decca, 1966)</strong> — warm, burnished, very Viennese; a benchmark of old‑world tone.</li>
+<li><strong>Mullova / Dumay / Caussé / Wang / etc. — "ad hoc" international octets</strong> (multiple, DG / Philips) — featured players (e.g. the Ozawa‑led New Japan Philharmonic Mendelssohn project, or the Marlboro Festival recordings) bring individuality to every line.</li>
+<li><strong>Nash Ensemble (Hyperion, 2004)</strong> — a deeply considered chamber reading, textures scrupulously balanced.</li>
+<li><strong>Academy of St Martin / Hausmusik London (Virgin/Erato, period strings, 1990s)</strong> — period‑instrument reading that restores the articulation and the transparency; the scherzo becomes almost terrifyingly clear.</li>
+<li><strong>Isaac Stern + members of Guarneri Quartet &amp; others (Sony, 1982)</strong> — legendary live‑ish recording with Stern leading a dream team; extravert and thrilling.</li>
+</ul>
+</section>
+
+    <section id="sec9">
+  <h2><span class="secn">10</span>Listening Guide</h2>
+<p>Timings reference a standard ~32‑minute recording. Your version may vary by ±2 minutes.</p>
+<ul>
+<li><strong>0:00</strong> — Curtain up. The violin I leap; tremolando blanket underneath. Listen for how <em>high</em> the first violin goes and how the other seven instruments function as an orchestral pad.</li>
+<li><strong>2:30–3:30</strong> — Second theme enters, lyrical, in dialogue. Notice the sudden softening of texture.</li>
+<li><strong>6:30–9:00</strong> — Development. The main theme fragments; listen for imitative entries passed through the ensemble. The polyphonic climax around minute 8 is the first movement's peak.</li>
+<li><strong>~11:00</strong> — Recapitulation: the opening leap returns but with the accompaniment redistributed. Same surface, new interior.</li>
+<li><strong>~13:30</strong> — Movement ends; a breath.</li>
+<li><strong>13:30–20:30 — Andante</strong>. The cellos' shadowed opening line. At ~16:00, the major‑mode middle section floats in. Around 18:30, the C minor opening returns, darker. Listen for suspensions and sighing figures.</li>
+<li><strong>~20:30 — Scherzo</strong>. Pianissimo throughout. Listen for: (a) how the motif is <em>relayed</em> across all eight instruments so quickly you can barely track it; (b) the central sustained passage where the flicker becomes more harmonic and mysterious (~22:00); (c) <strong>the ending</strong> — a pianissimo unison G that evaporates. This is the Walpurgis vanishing. Don't miss it — conductors sometimes let it slip away in under a second.</li>
+<li><strong>~24:30 — Finale</strong>. Count the fugal entries: cello II enters alone, then cello I, then the violas, then the violins in sequence. All eight voices eventually stack.</li>
+<li><strong>~27:30</strong> — The scherzo motif returns <strong>inside</strong> the finale. A secret flicker in the middle of the triumph. Catch it — it's the cyclic gesture that ties the whole work together.</li>
+<li><strong>~28:30</strong> — Handel's "And He shall reign" surfaces in counterpoint (if you know the <em>Messiah</em>, you'll feel the shiver).</li>
+<li><strong>~31:00</strong> — Coda. The ensemble converges on E‑flat; the final cadence is earned, not merely arrived at.</li>
+</ul>
+<p><strong>First‑listen focus</strong>: movements I and III. The extroversion and the magic. <strong>Deeper re‑listen focus</strong>: the Andante (for emotional depth) and the finale's counterpoint (for architectural marvel).</p>
+</section>
+
+    <section id="sec10">
+  <h2><span class="secn">11</span>Must‑Listen Tracks</h2>
+<p><strong>1. Scherzo (III. Allegro leggierissimo).</strong> If you listen to nothing else, listen to this. It is one of the greatest four minutes in the 19th‑century string literature, the moment where Mendelssohn invents an entire expressive genre in real time. A sixteen‑year‑old writes the Walpurgis scene of <em>Faust</em> as music and then, with the final pianissimo unison G, makes it vanish — and the technique, the scoring, the vanishing ending, all of it, is the template for a century of fairy music. It is also the most immediately gripping movement: light, uncanny, over before you know it, demanding a re‑listen.</p>
+<p><strong>Recommended recording for this movement</strong>: <strong>Academy of St Martin in the Fields Chamber Ensemble / Iona Brown (Philips, 1979)</strong> — the staccato is impossibly clean, the dynamic is truly pianissimo, and the disappearing ending is perfectly calibrated. Runner‑up: <strong>Hausmusik London</strong> on period instruments, for uncanny transparency.</p>
+<p><strong>2. First movement (I. Allegro moderato, ma con fuoco).</strong> If you have a second 13 minutes. This is the movement that announces Mendelssohn as a world composer. The opening theme's upward leap, the tremolando orchestral texture underneath, and the long polyphonic development earning the recapitulation: it is the clearest case in the repertoire of a teenager writing fully mature music.</p>
+</section>
+    <footer>
+      
+      <p>Companion to the Markdown analysis in the Obsidian vault at <code>Musical Analysis/Mendelssohn - String Octet in E-flat major, Op. 20.md</code>.</p>
+      <p><a href="index.html">← back to music</a></p>
+    </footer>
+  </main>
+</div>
+</div>
+
+<script>
+  /* ---------- color palettes (Squarespace-style) ---------- */
+  const PALETTES = {
+    afternoon:{mode:'light',label:'Afternoon',v:{
+      '--bg':'#faf8f4','--panel':'#ffffff','--ink':'#1c1a17','--ink-soft':'#55504a','--ink-faint':'#8a8279',
+      '--line':'#e8e2d8','--line-strong':'#d8cfc0','--accent':'#9a5b2e','--accent-soft':'#f3e6d8','--accent-ink':'#7a4220',
+      '--gold':'#b8893b','--teal':'#2f6b6b','--code-bg':'#2b2722',
+      '--header-grad':'linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%)',
+      '--th-bg':'#f3ede3','--row-hover':'#fbf7f0','--epi-ink':'#5b3c20',
+      '--warm-bg':'#fbf3e2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f2f1','--cool-bd':'#bfdcda','--cool-ink':'#1f4f4f',
+      '--ml-grad':'linear-gradient(150deg,#fbf3e7,#f6e7d4)','--ml-bd':'#ebd7b8','--ml-ink':'#6b3f1c'}},
+    sage:{mode:'light',label:'Sage',v:{
+      '--bg':'#f5f7f2','--panel':'#ffffff','--ink':'#1c211a','--ink-soft':'#4e544a','--ink-faint':'#828a7c',
+      '--line':'#e3e8dc','--line-strong':'#d3dac8','--accent':'#5c7a52','--accent-soft':'#e6ede0','--accent-ink':'#3f592f',
+      '--gold':'#a98f3c','--teal':'#3a7a6b','--code-bg':'#1f2620',
+      '--header-grad':'linear-gradient(160deg,#1a231a 0%,#283a26 55%,#3a5232 100%)',
+      '--th-bg':'#edf1e7','--row-hover':'#f6f9f2','--epi-ink':'#3c4f30',
+      '--warm-bg':'#f4efdf','--warm-bd':'#e2dba9','--warm-ink':'#5f5520',
+      '--cool-bg':'#e6f1ec','--cool-bd':'#c0dccd','--cool-ink':'#1f4f3e',
+      '--ml-grad':'linear-gradient(150deg,#eef3e4,#e3ecd6)','--ml-bd':'#d2dcb8','--ml-ink':'#3f5224'}},
+    harbor:{mode:'light',label:'Harbor',v:{
+      '--bg':'#f4f6f9','--panel':'#ffffff','--ink':'#1a2026','--ink-soft':'#4b5560','--ink-faint':'#7d8794',
+      '--line':'#e1e7ec','--line-strong':'#cfd8e1','--accent':'#2f6690','--accent-soft':'#e0ebf2','--accent-ink':'#234e6b',
+      '--gold':'#b5862f','--teal':'#2f8682','--code-bg':'#192129',
+      '--header-grad':'linear-gradient(160deg,#121b24 0%,#1d2e3f 55%,#274a63 100%)',
+      '--th-bg':'#e9eef3','--row-hover':'#f4f8fb','--epi-ink':'#234e6b',
+      '--warm-bg':'#f6efe0','--warm-bd':'#e7d6b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e2eef2','--cool-bd':'#bcd6de','--cool-ink':'#1f4f55',
+      '--ml-grad':'linear-gradient(150deg,#e8f1f6,#dbe9f1)','--ml-bd':'#c2d6e4','--ml-ink':'#234e6b'}},
+    plum:{mode:'light',label:'Plum',v:{
+      '--bg':'#f8f5f8','--panel':'#ffffff','--ink':'#221c21','--ink-soft':'#564b54','--ink-faint':'#897e87',
+      '--line':'#e9e0e7','--line-strong':'#dccdd8','--accent':'#7d4a6b','--accent-soft':'#efe2ec','--accent-ink':'#5d3550',
+      '--gold':'#b07d3b','--teal':'#3a7a72','--code-bg':'#241c23',
+      '--header-grad':'linear-gradient(160deg,#201823 0%,#332338 55%,#4e2f53 100%)',
+      '--th-bg':'#f1e9f0','--row-hover':'#faf5f9','--epi-ink':'#5d3550',
+      '--warm-bg':'#f7efe2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f1f0','--cool-bd':'#c4d9d5','--cool-ink':'#1f4f48',
+      '--ml-grad':'linear-gradient(150deg,#f4e9f1,#ecdbe8)','--ml-bd':'#ddc4d6','--ml-ink':'#5d3550'}},
+    midnight:{mode:'dark',label:'Midnight',v:{
+      '--bg':'#0f1620','--panel':'#18212e','--ink':'#e8edf3','--ink-soft':'#a9b5c4','--ink-faint':'#6f7d8d',
+      '--line':'#25303f','--line-strong':'#34414f','--accent':'#5b9bd5','--accent-soft':'#1b2a3b','--accent-ink':'#9cc4e8',
+      '--gold':'#d2a85f','--teal':'#4db1a8','--code-bg':'#0b121b',
+      '--header-grad':'linear-gradient(160deg,#0b1220 0%,#13243a 55%,#1d3a5c 100%)',
+      '--th-bg':'#1f2a38','--row-hover':'#1d2735','--epi-ink':'#9cc4e8',
+      '--warm-bg':'#2a2418','--warm-bd':'#43381f','--warm-ink':'#e0b878',
+      '--cool-bg':'#11302d','--cool-bd':'#1f4a45','--cool-ink':'#7fd6cc',
+      '--ml-grad':'linear-gradient(150deg,#1c2a3b,#16222f)','--ml-bd':'#2c3f55','--ml-ink':'#9cc4e8'}},
+    charcoal:{mode:'dark',label:'Charcoal',v:{
+      '--bg':'#161514','--panel':'#201e1c','--ink':'#ece8e2','--ink-soft':'#b0a99f','--ink-faint':'#766f65',
+      '--line':'#2c2926','--line-strong':'#3a3631','--accent':'#c8895a','--accent-soft':'#2c2420','--accent-ink':'#e3a878',
+      '--gold':'#cda35e','--teal':'#5aada3','--code-bg':'#100f0e',
+      '--header-grad':'linear-gradient(160deg,#141210 0%,#241e18 55%,#3a2c20 100%)',
+      '--th-bg':'#25221f','--row-hover':'#211e1b','--epi-ink':'#e3a878',
+      '--warm-bg':'#2c2418','--warm-bd':'#443720','--warm-ink':'#e0b878',
+      '--cool-bg':'#1a2826','--cool-bd':'#2c4641','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#272019,#1d1814)','--ml-bd':'#3d3124','--ml-ink':'#e3a878'}},
+    forest:{mode:'dark',label:'Forest',v:{
+      '--bg':'#101713','--panel':'#18211b','--ink':'#e6ece6','--ink-soft':'#a6b3a6','--ink-faint':'#6e7c6e',
+      '--line':'#243029','--line-strong':'#324133','--accent':'#6fae7e','--accent-soft':'#1a2a20','--accent-ink':'#9fd3aa',
+      '--gold':'#cda35e','--teal':'#4fb0a0','--code-bg':'#0b110d',
+      '--header-grad':'linear-gradient(160deg,#0c1410 0%,#142a1d 55%,#1d4230 100%)',
+      '--th-bg':'#1d2922','--row-hover':'#1a241d','--epi-ink':'#9fd3aa',
+      '--warm-bg':'#28281a','--warm-bd':'#3f3f24','--warm-ink':'#d8b878',
+      '--cool-bg':'#16302a','--cool-bd':'#274a40','--cool-ink':'#7fd0bc',
+      '--ml-grad':'linear-gradient(150deg,#18271e,#132019)','--ml-bd':'#2a4231','--ml-ink':'#9fd3aa'}},
+    wine:{mode:'dark',label:'Wine',v:{
+      '--bg':'#1a1012','--panel':'#241619','--ink':'#f0e4e6','--ink-soft':'#c2a9af','--ink-faint':'#8c6f76',
+      '--line':'#321f24','--line-strong':'#43292f','--accent':'#c46b7e','--accent-soft':'#2e1a1f','--accent-ink':'#e49aa8',
+      '--gold':'#cda35e','--teal':'#5aa8a0','--code-bg':'#140c0e',
+      '--header-grad':'linear-gradient(160deg,#160c0e 0%,#2a141a 55%,#4a2230 100%)',
+      '--th-bg':'#2c1c20','--row-hover':'#271519','--epi-ink':'#e49aa8',
+      '--warm-bg':'#2e2418','--warm-bd':'#463720','--warm-ink':'#e0b878',
+      '--cool-bg':'#18302d','--cool-bd':'#2a4a45','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#2a181d,#201216)','--ml-bd':'#43272f','--ml-ink':'#e49aa8'}}
+  };
+
+  const root = document.documentElement;
+  function applyPalette(key){
+    const p = PALETTES[key]; if(!p) return;
+    for(const [k,val] of Object.entries(p.v)) root.style.setProperty(k,val);
+    root.setAttribute('data-mode', p.mode);
+    document.querySelectorAll('.pp-sw').forEach(b=>b.classList.toggle('active', b.dataset.pal===key));
+    try{ localStorage.setItem('faune-palette', key); }catch(e){}
+  }
+
+  // build swatches
+  const tick = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  for(const [key,p] of Object.entries(PALETTES)){
+    const btn = document.createElement('button');
+    btn.className = 'pp-sw'; btn.dataset.pal = key; btn.type = 'button';
+    btn.title = p.label;
+    btn.innerHTML =
+      '<div class="bars">'+
+        '<span style="background:'+p.v['--bg']+'"></span>'+
+        '<span style="background:'+p.v['--accent']+'"></span>'+
+        '<span style="background:'+p.v['--accent-ink']+'"></span>'+
+        '<span style="background:'+p.v['--gold']+'"></span>'+
+      '</div>'+
+      '<span class="nm">'+p.label+tick+'</span>';
+    btn.addEventListener('click', ()=>applyPalette(key));
+    document.getElementById(p.mode==='light'?'pp-light':'pp-dark').appendChild(btn);
+  }
+
+  // toggle panel
+  const picker = document.getElementById('picker');
+  const ppToggle = document.getElementById('ppToggle');
+  ppToggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = picker.classList.toggle('open');
+    ppToggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.addEventListener('click', (e)=>{
+    if(!picker.contains(e.target)) picker.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') picker.classList.remove('open'); });
+
+  // restore saved or honor OS dark preference
+  let saved=null; try{ saved = localStorage.getItem('faune-palette'); }catch(e){}
+  if(saved && PALETTES[saved]) applyPalette(saved);
+  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
+  else applyPalette('afternoon');
+
+  // active TOC highlighting
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const map = {};
+  links.forEach(a => { const id = a.getAttribute('href').slice(1); map[id] = a; });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = map[e.target.id];
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carl Orff — Carmina Burana · Musical Analysis</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --panel:#ffffff;
+    --ink:#1c1a17;
+    --ink-soft:#55504a;
+    --ink-faint:#8a8279;
+    --line:#e8e2d8;
+    --line-strong:#d8cfc0;
+    --accent:#9a5b2e;       /* warm terracotta — faun / afternoon heat */
+    --accent-soft:#f3e6d8;
+    --accent-ink:#7a4220;
+    --gold:#b8893b;
+    --teal:#2f6b6b;
+    --code-bg:#2b2722;
+    --green:#2f7d4f;
+    --amber:#b07d18;
+    --red:#a8392f;
+    /* themeable extras (overridden by JS palettes) */
+    --header-grad:linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%);
+    --th-bg:#f3ede3;
+    --row-hover:#fbf7f0;
+    --epi-ink:#5b3c20;
+    --warm-bg:#fbf3e2; --warm-bd:#ecd9b0; --warm-ink:#6b4e1e;
+    --cool-bg:#e8f2f1; --cool-bd:#bfdcda; --cool-ink:#1f4f4f;
+    --ml-grad:linear-gradient(150deg,#fbf3e7,#f6e7d4); --ml-bd:#ebd7b8; --ml-ink:#6b3f1c;
+    --radius:12px;
+    --shadow:0 1px 2px rgba(40,30,15,.04),0 6px 22px rgba(40,30,15,.06);
+  }
+  html{transition:none}
+  body,.card,table,.tldr,.callout,.mustlisten,nav.toc a,.svgcard,.pp-panel,.pp-toggle,.pp-sw{
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+    line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  /* ---- header ---- */
+  header.top{
+    background:var(--header-grad);
+    color:#f4ece1;position:relative;overflow:hidden;
+    border-bottom:3px solid var(--accent);
+  }
+  header.top .glow{position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(212,160,90,.35),transparent 65%);pointer-events:none;}
+  header.top .wrap{padding:46px 28px 40px;position:relative;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#d9b384;font-weight:600;margin:0 0 14px}
+  header.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;
+    font-size:40px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+  header.top h1 em{font-style:italic;color:#f0cfa0}
+  header.top .sub{font-size:17px;color:#d8cab8;margin:10px 0 0;max-width:760px}
+  .metarow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-size:13.5px;color:#cdbca6}
+  .metarow b{color:#f4ece1;font-weight:600}
+  .stamp{font-size:12px;color:#b39c80;margin-top:18px;font-family:"SF Mono",Menlo,monospace}
+
+  /* ---- layout ---- */
+  .layout{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0 80px;align-items:start}
+  nav.toc{position:sticky;top:24px;font-size:14px}
+  nav.toc .title{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 12px}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border-radius:7px;border-left:2px solid transparent;line-height:1.35}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+  nav.toc a .n{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;margin-right:7px}
+  nav.toc a.active{background:var(--accent-soft);color:var(--accent-ink);border-left-color:var(--accent)}
+
+  main{min-width:0}
+  section{margin:0 0 50px;scroll-margin-top:24px}
+  h2{font-family:Georgia,serif;font-size:25px;font-weight:600;letter-spacing:-.01em;
+    margin:0 0 4px;display:flex;align-items:baseline;gap:12px}
+  h2 .secn{font-size:14px;font-weight:700;color:#fff;background:var(--accent);
+    width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:-apple-system,system-ui;}
+  .lead{color:var(--ink-soft);margin:2px 0 22px 42px;font-size:15px}
+  h3{font-size:17px;font-weight:650;margin:26px 0 8px;color:var(--ink)}
+  p{margin:0 0 14px}
+  strong{font-weight:650}
+  a.inline{color:var(--accent-ink);text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+
+  /* ---- tl;dr box ---- */
+  .tldr{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow);margin-bottom:8px}
+  .tldr h2{font-size:18px;margin-bottom:10px}
+  .tldr p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+  .tldr p:last-child{margin-bottom:0}
+
+  blockquote.epi{margin:0 0 30px;padding:18px 24px;background:var(--accent-soft);
+    border-radius:var(--radius);font-family:Georgia,serif;font-style:italic;font-size:16px;color:var(--epi-ink)}
+  blockquote.epi .who{display:block;font-style:normal;font-family:-apple-system,system-ui;
+    font-size:13px;color:var(--accent-ink);margin-top:10px;font-weight:600}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 24px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin:6px 0}
+  .keyval{margin:0;padding:0;list-style:none}
+  .keyval li{display:grid;grid-template-columns:165px 1fr;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);margin:0}
+  .keyval li:last-child{border-bottom:none}
+  .keyval .k{color:var(--ink-faint);font-size:13.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+
+  /* ---- tables ---- */
+  table{width:100%;border-collapse:collapse;margin:6px 0 20px;font-size:14.5px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  th{background:var(--th-bg);text-align:left;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line-strong)}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--row-hover)}
+  td.sec{font-weight:650;color:var(--accent-ink);white-space:nowrap}
+  .time{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);white-space:nowrap}
+
+  /* ---- pull callout ---- */
+  .callout{border-radius:var(--radius);padding:16px 20px;margin:18px 0;font-size:15px;border:1px solid}
+  .callout.gold{background:var(--warm-bg);border-color:var(--warm-bd);color:var(--warm-ink)}
+  .callout.teal{background:var(--cool-bg);border-color:var(--cool-bd);color:var(--cool-ink)}
+  .callout .lbl{font-weight:700;text-transform:uppercase;font-size:11.5px;letter-spacing:.1em;display:block;margin-bottom:4px;opacity:.8}
+
+  /* ---- timeline ---- */
+  .tl{list-style:none;margin:8px 0 0;padding:0;position:relative}
+  .tl:before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+  .tl li{position:relative;padding:10px 0 10px 86px;margin:0}
+  .tl .t{position:absolute;left:0;top:11px;width:52px;text-align:right;font-family:"SF Mono",Menlo,monospace;
+    font-size:12.5px;color:var(--teal);font-weight:600}
+  .tl .dot{position:absolute;left:57px;top:15px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--accent)}
+  .tl li.peak .dot{background:var(--accent);width:14px;height:14px;left:56px;top:14px;box-shadow:0 0 0 4px var(--accent-soft)}
+  .tl b{color:var(--ink)}
+
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:2px 8px;border-radius:20px;vertical-align:middle}
+  .b-heart{background:#fbe3df;color:var(--red)}
+  .b-key{background:#e6efe9;color:var(--green)}
+
+  figure{margin:18px 0 24px}
+  figcaption{font-size:13px;color:var(--ink-faint);margin-top:10px;text-align:center;font-style:italic}
+  .svgcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  /* theme-aware SVG strokes/fills */
+  .svgcard svg .sv-axis{stroke:var(--line-strong)}
+  .svgcard svg .sv-grid{stroke:var(--line)}
+  .svgcard svg .sv-curve{stroke:var(--accent)}
+  .svgcard svg .sv-area{fill:var(--accent);opacity:.13}
+  .svgcard svg .sv-gold-line{stroke:var(--gold)}
+  .svgcard svg .sv-gold,.svgcard svg .sv-gold-dot{fill:var(--gold)}
+  .svgcard svg .sv-accent,.svgcard svg .sv-accent-dot{fill:var(--accent)}
+  .svgcard svg .sv-lbl{fill:var(--ink-soft)}
+  .svgcard svg .sv-faint{fill:var(--ink-faint)}
+
+  code{font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:5px}
+
+  /* ---- palette picker ---- */
+  .palette-picker{position:fixed;top:14px;right:14px;z-index:60;font-size:13px;
+    font-family:-apple-system,system-ui,sans-serif}
+  .pp-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    background:rgba(255,255,255,.92);color:#241c14;border:1px solid rgba(0,0,0,.12);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    padding:8px 13px;border-radius:30px;font-weight:600;font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,.16)}
+  .pp-toggle svg{display:block}
+  .pp-toggle .chev{transition:transform .2s ease}
+  .palette-picker.open .pp-toggle .chev{transform:rotate(180deg)}
+  .pp-panel{position:absolute;top:46px;right:0;width:248px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.22);padding:14px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);
+    transform-origin:top right;transition:opacity .16s ease,transform .16s ease,visibility .16s}
+  .palette-picker.open .pp-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+  .pp-group{margin-bottom:12px}
+  .pp-group:last-child{margin-bottom:0}
+  .pp-label{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 2px 8px}
+  .pp-label .ico{width:13px;height:13px;opacity:.7}
+  .pp-swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pp-sw{cursor:pointer;border:1.5px solid var(--line);background:var(--panel);
+    border-radius:10px;padding:7px;display:flex;flex-direction:column;gap:6px;text-align:left;
+    transition:border-color .15s,transform .1s}
+  .pp-sw:hover{transform:translateY(-1px)}
+  .pp-sw .bars{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .pp-sw .bars span{flex:1}
+  .pp-sw .nm{font-size:11.5px;font-weight:600;color:var(--ink-soft);display:flex;
+    align-items:center;justify-content:space-between;gap:4px}
+  .pp-sw.active{border-color:var(--accent)}
+  .pp-sw.active .nm{color:var(--ink)}
+  .pp-sw .tick{width:13px;height:13px;color:var(--accent);opacity:0}
+  .pp-sw.active .tick{opacity:1}
+
+  .rec{display:grid;grid-template-columns:1fr;gap:0}
+  .rec .who{font-weight:650;color:var(--accent-ink)}
+
+  .mustlisten{background:var(--ml-grad);border:1px solid var(--ml-bd);
+    border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow)}
+  .mustlisten h3{margin-top:0;font-family:Georgia,serif;font-size:20px;color:var(--ml-ink)}
+  .mustlisten .span{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--ink-faint);font-size:13.5px}
+  footer a{color:var(--accent-ink);text-decoration:none}
+
+  @media (max-width:720px){
+    .layout{grid-template-columns:1fr;gap:0;padding:24px 0 60px}
+    nav.toc{display:none}
+    .wrap{padding:0 18px}
+    header.top h1{font-size:30px}
+    header.top .wrap{padding:34px 18px 30px}
+    .keyval li{grid-template-columns:1fr;gap:2px}
+    .lead{margin-left:0}
+    h2{font-size:21px}
+    .palette-picker{top:10px;right:10px}
+    .pp-toggle .pp-txt{display:none}
+    .pp-toggle{padding:9px;border-radius:50%}
+    .pp-panel{width:230px}
+  }
+</style>
+</head>
+<body>
+
+<div class="palette-picker" id="picker">
+  <button class="pp-toggle" id="ppToggle" aria-expanded="false" aria-label="Change color theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    <span class="pp-txt">Theme</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pp-panel" role="menu" aria-label="Color palettes">
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>Light</span>
+      <div class="pp-swatches" id="pp-light"></div>
+    </div>
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark</span>
+      <div class="pp-swatches" id="pp-dark"></div>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <p class="eyebrow">Musical Analysis · Cantata</p>
+    <h1>Carmina Burana</h1>
+    <p class="sub">Carl Orff · 1935–1936</p>
+    <div class="metarow">
+      <span><b>Composed</b> 1935–1936</span>
+    </div>
+    <p class="stamp">Generated 2026-05-31 · musical-analysis</p>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <p class="title">Contents</p>
+    <a href="#tldr"><span class="n">·</span>In brief</a>
+    <a href="#sec0"><span class="n">1</span>Identity &amp; Context</a>
+    <a href="#sec1"><span class="n">2</span>Formal Structure</a>
+    <a href="#sec2"><span class="n">3</span>Melodic &amp; Thematic Content</a>
+    <a href="#sec3"><span class="n">4</span>Harmony &amp; Tonality</a>
+    <a href="#sec4"><span class="n">5</span>Rhythm, Meter &amp; Tempo</a>
+    <a href="#sec5"><span class="n">6</span>Orchestration, Texture &amp; Timbre</a>
+    <a href="#sec6"><span class="n">7</span>Emotional Arc &amp; Dramaturgy</a>
+    <a href="#sec7"><span class="n">8</span>Historical Significance &amp; Influence</a>
+    <a href="#sec8"><span class="n">9</span>Performance Practice &amp; Notable Recordings</a>
+    <a href="#sec9"><span class="n">10</span>Listening Guide</a>
+    <a href="#sec10"><span class="n">11</span>Must-Listen Tracks</a>
+  </nav>
+
+  <main>
+    <section id="tldr"><div class="tldr"><h2>In brief</h2><p>The work comprises <strong>25 movements</strong> in three large divisions, framed by the celebrated <em>Fortuna</em> prologue/epilogue. The architecture is <strong>arch-shaped (ABA')</strong>: the <em>O Fortuna</em> music returns identically at the end, sealing the wheel.</p></div></section>
+    <section id="sec0">
+  <h2><span class="secn">1</span>Identity &amp; Context</h2>
+<ul class="keyval">
+<li><span class="k">Title</span><span><em>Carmina Burana</em> — "Songs of Beuern," named for the Bavarian monastery of Benediktbeuern where the source manuscript was discovered in 1803.</span></li>
+<li><span class="k">Composer</span><span>Carl Orff (1895–1982), German composer and music educator.</span></li>
+<li><span class="k">Year</span><span>Composed 1935–1936; premiered <strong>8 June 1937</strong> at the Frankfurt Opera under Bertil Wetzelsberger, staged by Oskar Wälterlin with sets by Ludwig Sievert.</span></li>
+<li><span class="k">Forces</span><span>Soprano, tenor, and baritone soloists; large mixed chorus; small boys' chorus; large orchestra (with two pianos and an enormous percussion battery — five timpanists plus 3–5 additional percussionists).</span></li>
+<li><span class="k">Source text</span><span>24 of the roughly 254 poems from the <strong>Codex Buranus</strong> (Bavarian State Library, Clm 4660), a 13th-century manuscript of mostly secular Latin verse — with sprinklings of Middle High German and Old French — written by goliards, defrocked clerics, and wandering scholars. The poems range from sacred satire and moral complaint to drinking songs, gambling lyrics, spring pastorals, and frank erotic verse.</span></li>
+<li><span class="k">Position in Orff's output</span><span><em>Carmina Burana</em> is the breakthrough work that defined his mature voice. Orff was so satisfied with it that he famously wrote to his publisher Schott: "Everything I have written to date, and which you have, unfortunately, printed, can be destroyed. With <em>Carmina Burana</em>, my collected works begin." It became the first panel of the <em>Trionfi</em> triptych, completed by <em>Catulli Carmina</em> (1943) and <em>Trionfo di Afrodite</em> (1953).</span></li>
+<li><span class="k">Historical moment</span><span>Composed in Nazi Germany. The premiere occurred under the Third Reich; the work's primitivism, monumentalism, and pseudo-medieval Latin appealed to certain ideological currents, but its erotic frankness and Latin-Romance text made some Nazi critics suspicious. Orff's relationship to the regime remains historically contested: he accepted official commissions (a replacement <em>A Midsummer Night's Dream</em> score to displace Mendelssohn's), claimed postwar resistance ties he could not document, and benefited from the regime's promotion of his work.</span></li>
+<li><span class="k">Aesthetic context</span><span>A pointed rebuke to the German symphonic tradition (Wagner, Brahms, Mahler, Schoenberg). Orff replaces developmental complexity with ostinato, motivic transformation with literal repetition, chromatic harmony with modal/triadic blocks. Cousins in spirit: Stravinsky's <em>Les Noces</em> (1923), the rhythmic engine of <em>The Rite of Spring</em>, and the mass-spectacle aesthetics of contemporary Soviet and German art.</span></li>
+</ul>
+</section>
+
+    <section id="sec1">
+  <h2><span class="secn">2</span>Formal Structure</h2>
+<p>The work comprises <strong>25 movements</strong> in three large divisions, framed by the celebrated <em>Fortuna</em> prologue/epilogue. The architecture is <strong>arch-shaped (ABA')</strong>: the <em>O Fortuna</em> music returns identically at the end, sealing the wheel.</p>
+<h3>Macro-architecture</h3>
+<p>``<code> Fortuna Imperatrix Mundi (1–2)         — frame: the Wheel of Fortune I.   Primo vere / Uf dem Anger      (3–10)   — Spring II.  In taberna                     (11–14)  — The Tavern III. Cour d'amours / Blanziflor     (15–24)  — The Court of Love / Beauty Fortuna Imperatrix Mundi (25)          — frame returns </code>``</p>
+<p>The three inner sections form a <strong>medieval estates allegory of pleasure</strong>: <em>Primo vere</em> belongs to nature and the peasantry; <em>In taberna</em> to the lower clergy and goliards; <em>Cour d'amours</em> to the courtly nobility. Fortuna's wheel encloses them all — every human pleasure is provisional.</p>
+<h3>Movement-by-movement map</h3>
+<h4>Fortuna Imperatrix Mundi</h4>
+<ol>
+<li><strong>O Fortuna</strong> — D minor, 3/4, <em>molto pesante → vivace</em>. Strophic with three explosive iterations. Begins triple-<em>forte</em>, recedes to <em>pianissimo</em> repeated-note ostinato, builds again to a battering climax. The defining sound: pounding choral homophony over relentless 8th-note timpani-and-bass ostinato.</li>
+<li><strong>Fortune plango vulnera</strong> — D minor, 2/2. Three-strophe lament; chorus alternates with hammered orchestral interjections.</li>
+</ol>
+<h4>I. Primo vere ("In Springtime") — pastoral, modal</h4>
+<ol>
+<li><strong>Veris leta facies</strong> — D minor/modal, slow. Small chorus <em>a cappella</em>-feeling, austere parallel triads suggesting plainchant.</li>
+<li><strong>Omnia sol temperat</strong> — A♭, baritone solo. Lyrical, sun-drenched.</li>
+<li><strong>Ecce gratum</strong> — F major, fast and rollicking. Strophic, three verses each ending in a vaulting choral exclamation on "iam liquescit."</li>
+</ol>
+<h4>Uf dem Anger ("On the Lawn") — vernacular dance</h4>
+<ol>
+<li><strong>Tanz</strong> — orchestra alone. Stamping 6/8 dance.</li>
+<li><strong>Floret silva</strong> — D minor → D major. Chorus + women's chorus; a forest pastoral.</li>
+<li><strong>Chramer, gip die varwe mir</strong> — Middle High German. Slow, modal, austere — three women's strophes asking the merchant for rouge to attract young men.</li>
+<li><strong>Reie / Swaz hie gat umbe / Chume, chum, geselle min / Swaz hie gat umbe (reprise)</strong> — a tripartite dance: orchestral round dance, women's choral round, tenor-and-women duet, then the dance returns.</li>
+<li><strong>Were diu werlt alle min</strong> — D major, ferocious, 14 bars. The shortest movement; entire chorus shouts "Were the world all mine, from the sea to the Rhine, I would gladly give it all up to have the Queen of England in my arms."</li>
+</ol>
+<h4>II. In taberna ("In the Tavern") — male voices, satirical, brutal</h4>
+<ol>
+<li><strong>Estuans interius</strong> — D minor, baritone solo. The <strong>Confession of the Archpoet</strong> ("Burning inside with violent anger") — the goliard's manifesto. Aggressive, declamatory, unaccompanied stretches.</li>
+<li><strong>Olim lacus colueram</strong> — solo tenor in extreme high tessitura. The <strong>Song of the Roasted Swan</strong> — sung by the swan itself, on the spit. Macabre, agonized; tenor confined to head voice, accompanied by squealing bassoons and high winds.</li>
+<li><strong>Ego sum abbas</strong> — baritone + male chorus, half-spoken. The "Abbot of Cucany" presides over a dice game. The chorus shouts "Wafna!" (an old German cry of distress).</li>
+<li><strong>In taberna quando sumus</strong> — D minor, baritone-led chorus, <em>prestissimo</em>. The drinking-song catalog: "When we are in the tavern... first the dice players drink, then the prisoners, then the penitent, then the living, then the dead, then the Pope, then the King..." — a great cumulative tour de force ending in ecstatic chaos.</li>
+</ol>
+<h4>III. Cour d'amours ("The Court of Love") — refined, lyrical, increasingly sensual</h4>
+<ol>
+<li><strong>Amor volat undique</strong> — soprano + boys' chorus. "Cupid flies everywhere." Delicate, modal.</li>
+<li><strong>Dies, nox et omnia</strong> — baritone solo, alternating French/Latin. A courtly lover's complaint with falsetto outbursts.</li>
+<li><strong>Stetit puella</strong> — soprano, A major. A girl in a red dress.</li>
+<li><strong>Circa mea pectora</strong> — baritone + chorus. Strophic; grows more ardent.</li>
+<li><strong>Si puer cum puellula</strong> — six male voices <em>a cappella</em>. A whispered seduction — surprisingly explicit lyrics in a hushed homorhythmic chant.</li>
+<li><strong>Veni, veni, venias</strong> — double chorus, antiphonal. "Come, come, come to me" — clipped, rhythmic, anticipatory.</li>
+<li><strong>In trutina</strong> — soprano solo, slow, A♭ major. "On the wavering scale of my mind, chastity and lust contend." One of the most beautiful moments — a single sustained lyrical breath.</li>
+<li><strong>Tempus est iocundum</strong> — baritone + soprano + chorus + boys, building strophic dance, accelerating to ecstatic climax on "Oh, oh, oh, totus floreo!"</li>
+<li><strong>Dulcissime</strong> — soprano alone, unaccompanied, vaulting to high D♭. Six bars of pure ecstasy. The consummation. ("Sweetest one, I give myself to you wholly.")</li>
+</ol>
+<h4>Blanziflor et Helena</h4>
+<ol>
+<li><strong>Ave formosissima</strong> — full chorus, blazing D major. A hymn to the beloved as the most beautiful, compared to Blanchefleur, Helen, and Venus.</li>
+</ol>
+<h4>Fortuna Imperatrix Mundi (reprise)</h4>
+<ol>
+<li><strong>O Fortuna (reprise)</strong> — exact return of movement 1. The wheel completes its turn. The carnal apex of "Dulcissime" and "Ave formosissima" is annihilated by Fortuna's return.</li>
+</ol>
+<h3>Structural observations</h3>
+<ul>
+<li>The work is <strong>strophic almost everywhere</strong> — Orff repeats stanzas with minimal variation, trusting accumulation rather than development.</li>
+<li>Every section ends with a long, accelerating crescendo — a <strong>rhythmic mass-event</strong>.</li>
+<li>The <strong>frame device</strong> is the deepest stroke: by returning <em>O Fortuna</em> unaltered, Orff makes the entire human pageant — spring, drink, love — a single revolution of a wheel that does not care.</li>
+</ul>
+</section>
+
+    <section id="sec2">
+  <h2><span class="secn">3</span>Melodic &amp; Thematic Content</h2>
+<p>Orff's melodic style is deliberately <strong>archaic and elemental</strong>:</p>
+<ul>
+<li><strong>Modal, often pentatonic</strong> — phrases sit within a fifth or sixth, hover around a reciting tone, descend to a final.</li>
+<li><strong>Diatonic stepwise motion</strong> dominates; leaps when they appear (the falling fourths of <em>O Fortuna</em>, the soaring ninth at "Dulcissime") are events.</li>
+<li><strong>Plainchant and folk-song models</strong> — many tunes resemble Gregorian psalmody (the <em>a cappella</em> opening of <em>Veris leta facies</em>) or Bavarian peasant song.</li>
+<li><strong>Phrase symmetry</strong> — almost everything falls in 2-, 4-, or 8-bar units; irregular phrases (the 5-bar "Were diu werlt alle min") are conspicuous.</li>
+<li><strong>No leitmotif system in the Wagnerian sense</strong> — but the <em>O Fortuna</em> gesture (the falling D-minor triad over pounding bass) functions as the work's controlling <strong>idée fixe</strong>, returning literally to close the cycle.</li>
+<li><strong>Soprano line</strong> in <em>Dulcissime</em> abandons stepwise modesty and leaps a tenth — its singularity within the work is the point.</li>
+</ul>
+<p>Thematic transformation barely exists. Orff is a composer of <strong>juxtaposition</strong>, not development: themes are stated, repeated, transposed, and abandoned. The work's coherence comes from rhythmic and textural recurrence, not motivic argument.</p>
+</section>
+
+    <section id="sec3">
+  <h2><span class="secn">4</span>Harmony &amp; Tonality</h2>
+<ul>
+<li><strong>Tonal language</strong>: triadic, modal, frequently bare. Major and minor triads are placed in <strong>planing parallel motion</strong> with little voice-leading concern. Whole sections function as <strong>drones</strong> with melodic lines moving above a static harmonic floor.</li>
+<li><strong>Modal palette</strong>: Aeolian and Dorian dominate; Mixolydian colors several pastoral movements; Lydian flickers in <em>In trutina</em>.</li>
+<li><strong>Tritone relations</strong> appear at structural seams (e.g., G–C♯ poles in some sections), echoing medieval <em>diabolus in musica</em> associations.</li>
+<li><strong>No chromatic voice-leading; no functional dominant cycles</strong> in any sustained way. Cadences are typically <strong>plagal or modal</strong> (IV–I, ♭VII–I), not authentic. When V–I appears, it usually arrives as a sudden block, not a prepared resolution.</li>
+<li><strong>Pedal points and ostinatos</strong> carry harmonic identity for long stretches. <em>O Fortuna</em> sits on a relentless D pedal; <em>In taberna</em> hammers a D drone for minutes.</li>
+<li><strong>Harmonic surprise</strong> comes from <strong>abrupt key shifts</strong> — the lurch from D minor up a half-step to E♭, or the bright F-major break of <em>Ecce gratum</em> after the gloom of <em>Fortune plango</em>.</li>
+<li><strong>Final resolution</strong>: the work begins and ends in D minor with no synthesis. The blazing D-major <em>Ave formosissima</em> is <strong>swept aside</strong> rather than reconciled.</li>
+</ul>
+<p>The harmonic stripping-away is a deliberate aesthetic project. Orff wrote that he wanted to recover music's "elemental" force, undoing what he saw as the over-refinement of post-Wagnerian harmony. Whether this counts as visionary primitivism or willful regression is the central critical question about him.</p>
+</section>
+
+    <section id="sec4">
+  <h2><span class="secn">5</span>Rhythm, Meter &amp; Tempo</h2>
+<p>Rhythm is <strong>the engine of <em>Carmina Burana</strong></em> — the dimension where Orff is most original and most powerful.</p>
+<ul class="keyval">
+<li><span class="k">Ostinato as architecture</span><span>entire movements ride on a single repeated rhythmic cell. <em>O Fortuna</em>'s pulverizing 8th-note bass; <em>In taberna</em>'s relentless drinking-song pulse.</span></li>
+<li><span class="k">Metric variety</span><span>2/2, 3/4, 6/8, 4/4, alternating 5/8 and 7/8 in <em>Tempus est iocundum</em>. Mixed meters appear when the text demands accentual irregularity, never as abstract complexity.</span></li>
+<li><span class="k">Speech rhythm</span><span>many vocal lines are essentially <strong>chanted text</strong>, with rhythmic values dictated by Latin scansion. Orff treats the chorus as a vast rhythmic instrument.</span></li>
+<li><span class="k">Tempo as drama</span><span>every climactic movement is structured as a <strong>gradual accelerando</strong> culminating in the fastest, loudest tutti possible. <em>Tempus est iocundum</em> and the tavern-song catalog <em>In taberna quando sumus</em> both work this way.</span></li>
+<li><span class="k">Percussion as structural protagonist</span><span>timpani, glockenspiel, xylophone, castanets, tambourine, triangle, cymbals, gong, sleigh bells. The percussion battery doesn't decorate — it <em>drives</em>. Orff often hands the rhythmic argument to percussion alone for measures at a time.</span></li>
+<li><span class="k">Schulwerk influence</span><span>Orff developed the Orff Schulwerk pedagogy in the same years (1930s Günther-Schule, Munich), centered on body rhythm, ostinato, and pitched-percussion ensemble. <em>Carmina Burana</em> is essentially the Schulwerk philosophy scaled to the opera house.</span></li>
+</ul>
+</section>
+
+    <section id="sec5">
+  <h2><span class="secn">6</span>Orchestration, Texture &amp; Timbre</h2>
+<h3>Forces</h3>
+<ul>
+<li>3 flutes (incl. piccolos), 3 oboes (incl. English horn), 3 clarinets (incl. E♭ clarinet, bass clarinet), 2 bassoons + contrabassoon</li>
+<li>4 horns, 3 trumpets, 3 trombones, tuba</li>
+<li><strong>5 timpani</strong> (one player) plus a percussion section requiring 3–5 additional players: glockenspiel, xylophone, castanets, ratchet, sleigh bells, triangle, antique cymbals, small bells, tambourine, snare drum, bass drum, cymbals, tam-tam</li>
+<li><strong>2 pianos</strong> (used as percussion, not lyrical instruments)</li>
+<li>Celesta</li>
+<li>Strings</li>
+<li>Soprano, tenor (high tessitura, often falsetto), baritone soloists</li>
+<li>Large mixed chorus, small chorus, boys' chorus</li>
+</ul>
+<h3>Textural strategy</h3>
+<ul>
+<li><strong>Block scoring</strong>: instrumental groups are deployed as massive monolithic units rather than blended.</li>
+<li><strong>Doubling at multiple octaves</strong> — Orff regularly doubles a melody across 4–5 octaves to give it elemental weight (chorus + horns + strings + piano in unison or octaves).</li>
+<li><strong>Extreme registral contrasts</strong>: bass-drum-and-piano thuds against piccolo-and-glockenspiel filigree, with little middle-register filler.</li>
+<li><strong>Two pianos used percussively</strong> — pounding chords, glissandi, register-jumping figuration. They are essentially mallet instruments.</li>
+<li><strong>Color highlights</strong>:</li>
+<li>The <strong>roasted swan</strong>: high tenor + bassoons in their squealing top register + muted brass — a deliberately ugly timbre for grotesque effect.</li>
+<li><strong>In trutina</strong>: solo soprano with strings and harp, almost chamber-scale — the work's most translucent moment.</li>
+<li><strong>Stetit puella</strong>: solo violin and pizzicato, child-like delicacy.</li>
+<li><strong>Si puer cum puellula</strong>: six male voices unaccompanied — a sudden recession into a cappella intimacy.</li>
+<li><strong>Dynamics</strong>: <strong>terraced, not graded</strong>. Subito <em>fortissimo</em> and subito <em>pianissimo</em> are the rule. Crescendos when they happen are structural events stretching across whole movements.</li>
+</ul>
+</section>
+
+    <section id="sec6">
+  <h2><span class="secn">7</span>Emotional Arc &amp; Dramaturgy</h2>
+<p>The dramaturgy is <strong>allegorical, not narrative</strong>. There is no protagonist; humanity in the abstract is the subject. The arc:</p>
+<ol>
+<li><strong>Fortuna's verdict</strong> — humans subject to blind fate (1–2).</li>
+<li><strong>Innocence and renewal</strong> — spring, dance, peasant fertility (3–10). Affect: bright, communal, slightly archaic.</li>
+<li><strong>Carnal descent</strong> — the tavern, the dice, the roasting swan, the mass appetite (11–14). Affect: sardonic, violent, drunken.</li>
+<li><strong>Ascent through Eros</strong> — the courtly garden, the flirtation, the ardor, the ecstatic surrender (15–23). Affect: sensuous, accelerating from delicate to incandescent.</li>
+<li><strong>Apotheosis</strong> — <em>Ave formosissima</em>, the beloved as goddess (24). Affect: blazing affirmation.</li>
+<li><strong>Catastrophe</strong> — Fortuna returns. The wheel turns. All annihilated (25).</li>
+</ol>
+<p>The <strong>two structural climaxes</strong> are <em>Dulcissime</em> (the soprano's high D♭, the moment of erotic fulfillment) and <em>Ave formosissima</em> (the chorus's apotheosis). Both are answered, not consoled, by the return of <em>O Fortuna</em>. The dramaturgical point is <strong>inexorability</strong>: pleasure is real, intense, and worthless against the wheel.</p>
+<p>This is what gives the work its unsettling charge — it is neither moralistic (no judgment is passed on tavern or bed) nor consolatory (no transcendence rescues anyone). It is a pagan, anti-redemptive cosmology.</p>
+</section>
+
+    <section id="sec7">
+  <h2><span class="secn">8</span>Historical Significance &amp; Influence</h2>
+<ul class="keyval">
+<li><span class="k">Immediate reception</span><span>enormous popular success at the 1937 premiere; embraced (cautiously) by some Nazi cultural functionaries despite the erotic content. Orff withdrew nearly all his prior works after the success.</span></li>
+<li><span class="k">Postwar afterlife</span><span><em>Carmina Burana</em> survived denazification largely intact and became one of the most-performed choral works of the 20th century. <em>O Fortuna</em> is arguably the single most ubiquitous "classical" cue in film, advertising, and sports broadcasting — used (among countless others) in <em>Excalibur</em> (1981), <em>The Doors</em>, <em>Glory</em>, NFL promos, and an eternity of trailers.</span></li>
+<li><span class="k">What was new</span><span>a deliberate <strong>rejection of developmental complexity</strong> in favor of mass-rhythm, modal-triadic harmony, and primal sonority. A bridge from Stravinsky's <em>Les Noces</em> to Steve Reich and Arvo Pärt; an ancestor to <strong>minimalism's repetition aesthetics</strong> and to <strong>post-minimalist film scoring</strong> (Hans Zimmer's choral pounders descend directly from this idiom).</span></li>
+<li><span class="k">What was reactionary</span><span>the rejection of harmonic and contrapuntal sophistication as decadent, the cult of the elemental, and the cultural politics surrounding its premiere place the work in uncomfortable ideological company. Many serious listeners admire and distrust it in roughly equal measure.</span></li>
+<li><span class="k">In the canon</span><span>simultaneously the most popular 20th-century cantata and one of the most critically embattled. Its presence in the standard repertoire is unshakable; its critical estimation oscillates.</span></li>
+<li><span class="k">Direct influence</span><span>Hans Zimmer's <em>Gladiator</em> and <em>The Lion King</em> choral textures; Howard Shore's <em>Lord of the Rings</em> battle music; the entire late-20th-century vocabulary of "epic" cinematic chorus owes Orff royalties.</span></li>
+</ul>
+</section>
+
+    <section id="sec8">
+  <h2><span class="secn">9</span>Performance Practice &amp; Notable Recordings</h2>
+<h3>Interpretive questions</h3>
+<ul class="keyval">
+<li><span class="k">Tempos</span><span><em>O Fortuna</em> is often taken slower and more bombastic than Orff's marking suggests; faster, lighter readings recover its dance-like underlay.</span></li>
+<li><span class="k">Diction</span><span>medieval Latin pronunciation is contested — some conductors use Germanic Latin (closer to what Orff knew), others Italianate church Latin, others reconstructed medieval. Choices change the work's color significantly.</span></li>
+<li><span class="k">Tenor "Olim lacus"</span><span>the swan's lament sits in extreme falsetto; some tenors (e.g., countertenors) are now occasionally used.</span></li>
+<li><span class="k">Soloists' role</span><span>the soprano is the work's lyrical conscience; her <em>In trutina</em> and <em>Dulcissime</em> must transcend the percussive frame.</span></li>
+<li><span class="k">Children's chorus</span><span>balance with the adult chorus is a perennial problem; some performances substitute boys' voices with light women's voices for projection.</span></li>
+</ul>
+<h3>Landmark recordings</h3>
+<ul>
+<li><strong>Eugen Jochum / Deutsche Oper Berlin / DG (1967)</strong> — Gundula Janowitz, Gerhard Stolze, Dietrich Fischer-Dieskau. <strong>Approved by Orff himself</strong>; widely regarded as the reference. Brisk, lean, dance-like, with extraordinary diction. Fischer-Dieskau's baritone makes the tavern songs into character study.</li>
+<li><strong>Herbert Blomstedt / San Francisco Symphony / Decca (1991)</strong> — Sylvia McNair, John Aler, Håkan Hagegård. Beautifully recorded, transparent, controlled — emphasizes the work's lyrical center.</li>
+<li><strong>André Previn / LSO / EMI (1974)</strong> — Sheila Armstrong, Gerald English, Thomas Allen. Theatrical, vivid, with terrific English chorus weight. A favorite of many listeners.</li>
+<li><strong>Riccardo Muti / Philharmonia Orchestra / EMI (1979)</strong> — Arleen Augér, John van Kesteren, Jonathan Summers. Italianate fire and tension; perhaps the most viscerally exciting reading on disc.</li>
+<li><strong>Simon Rattle / Berlin Philharmonic / EMI (2004)</strong> — Sally Matthews, Lawrence Brownlee, Christian Gerhaher. Modern, polished, sumptuously played; less raw than the older accounts but extraordinarily detailed.</li>
+</ul>
+<h3>Performance tradition</h3>
+<p>Early performances leaned heavy and ritualistic; the trend since the 1980s is <strong>lighter, faster, more dance-oriented</strong>, recovering the work's roots in Schulwerk movement-music and goliard cabaret. The Jochum approach — direct, idiomatic, unsentimental — has aged best.</p>
+<h3>Live vs. studio</h3>
+<p>The work is <strong>a live event by nature</strong>. The terraced dynamics, the percussion attacks, the sheer mass of bodies producing sound — none of it survives compression intact. If you have access to a live performance with a real chorus of 80+, take it.</p>
+</section>
+
+    <section id="sec9">
+  <h2><span class="secn">10</span>Listening Guide</h2>
+<p>(Timings approximate, based on Jochum's ~60-minute reading.)</p>
+<table>
+<thead><tr>
+<th>Time</th>
+<th>Movement</th>
+<th>Listen for</th>
+</tr></thead>
+<tbody>
+<tr><td>0:00</td><td><em>O Fortuna</em></td><td>The opening triple-<em>forte</em> hammer; the recession to whispered ostinato; the rebuild to the closing wheel-stroke.</td></tr>
+<tr><td>2:35</td><td><em>Fortune plango</em></td><td>Three nearly identical strophes — accumulating, not developing.</td></tr>
+<tr><td>5:10</td><td><em>Veris leta facies</em></td><td>Bare modal chant, almost monastic — Orff's archaic palette in pure form.</td></tr>
+<tr><td>8:00</td><td><em>Ecce gratum</em></td><td>The first big bright chorus; listen for the vault on "iam liquescit."</td></tr>
+<tr><td>10:50</td><td><em>Tanz / Floret silva</em></td><td>Stamping orchestral dance into forest pastoral.</td></tr>
+<tr><td>16:30</td><td><em>Were diu werlt alle min</em></td><td>14 bars, all teeth — the Queen of England outburst.</td></tr>
+<tr><td>17:30</td><td><em>Estuans interius</em></td><td>Baritone declamation — the Archpoet's confession, the work's only sustained character solo.</td></tr>
+<tr><td>20:30</td><td><em>Olim lacus colueram</em></td><td>The swan on the spit — bassoons squeal, tenor sings in agony.</td></tr>
+<tr><td>23:30</td><td><em>Ego sum abbas</em></td><td>Half-spoken dice game; chorus shouts of "Wafna!"</td></tr>
+<tr><td>25:00</td><td><em>In taberna quando sumus</em></td><td>The drinking catalog — accelerando through the social order to ecstatic chaos.</td></tr>
+<tr><td>28:30</td><td><em>Amor volat undique</em></td><td>Pivot into the love-section: soprano + boys' chorus, suddenly delicate.</td></tr>
+<tr><td>33:00</td><td><em>Stetit puella</em></td><td>The girl in the red dress — listen for the simple oboe line.</td></tr>
+<tr><td>36:00</td><td><em>Si puer cum puellula</em></td><td>Six male voices alone, hushed — the work's most surprising texture.</td></tr>
+<tr><td>38:30</td><td><em>Veni, veni, venias</em></td><td>Antiphonal double chorus, breathlessly anticipatory.</td></tr>
+<tr><td>40:30</td><td><strong><em>In trutina</strong></em></td><td>The soprano's still center. Almost no rhythm — pure line.</td></tr>
+<tr><td>42:30</td><td><em>Tempus est iocundum</em></td><td>Strophic accelerando — listen for the boys' chorus and the cumulative climaxes.</td></tr>
+<tr><td>46:00</td><td><strong><em>Dulcissime</strong></em></td><td>Six bars of unaccompanied soprano vaulting to a high D♭. The orgasm of the work.</td></tr>
+<tr><td>47:00</td><td><em>Ave formosissima</em></td><td>Blazing D-major hymn — apotheosis.</td></tr>
+<tr><td>49:00</td><td><em>O Fortuna</em> (reprise)</td><td>Identical return. The wheel turns. Everything you just heard — gone.</td></tr>
+</tbody></table>
+<p><strong>First listen</strong>: just feel the arc, especially the <em>In trutina → Dulcissime → Ave formosissima → O Fortuna</em> sequence. The whole work is structured to deliver that final twist.</p>
+<p><strong>Re-listen</strong>: pay attention to what's <em>not</em> there. No development. No counterpoint. No functional harmony. Hear how Orff makes drama from rhythm, repetition, and timbral block-scoring alone — and ask yourself whether that ascesis is liberation or impoverishment. The honest answer is probably both.</p>
+</section>
+
+    <section id="sec10">
+  <h2><span class="secn">11</span>Must-Listen Tracks</h2>
+<div class="mustlisten"><h3><strong>1. <em>O Fortuna</em> (Movement 1, also returning as 25)</strong></h3>
+<p><strong>Why this one</strong>: It is the work's signature, its frame, and its argument. In four minutes you have Orff's entire vocabulary — pounding ostinato, modal triads, terraced dynamics, mass-chorus declamation, the rhythmic accelerando to apotheosis. If <em>Carmina Burana</em> survives one more century in the popular imagination, it will survive on this movement alone. And it earns the ubiquity: the opening still works, even after a thousand film trailers have tried to wear it out.</p>
+<p><strong>Recommended recording</strong>: <strong>Eugen Jochum / Deutsche Oper Berlin / DG (1967)</strong> — Orff-approved, unmatched in rhythmic incision and choral diction.</p>
+<h3><strong>2. <em>In trutina</em> → <em>Dulcissime</em> (Movements 21 → 23, listened to as a pair)</strong></h3>
+<p><strong>Why this one</strong>: This is <em>Carmina Burana</em>'s lyrical heart and the proof that Orff is more than a percussionist. <em>In trutina</em> is the chastity-and-lust soliloquy: a single sustained vocal line over the most translucent orchestration in the work, harmonically suspended. <em>Dulcissime</em> is its consummation — six bars of unaccompanied soprano, ending on a leaping high D♭ that breaks the rhythmic frame entirely. The pairing reveals the work's hidden subject: the moment when Eros transcends Fortuna, just before Fortuna swallows it back. Skip these and you only know the bombast; hear them and you know why the piece matters.</p>
+<p><strong>Recommended recording</strong>: <strong>Gundula Janowitz with Jochum (1967)</strong> for <em>In trutina</em> — ravishing, unforced, definitive. Sylvia McNair with Blomstedt is a fine modern alternative.</p>
+<h3><strong>3. <em>In taberna quando sumus</em> (Movement 14)</strong></h3>
+<p><strong>Why this one</strong>: Orff's rhythmic engine at its most outrageous and most exhilarating. The baritone leads the chorus through the great drinking-song catalog — <em>bibit hera, bibit herus, bibit miles, bibit clerus, bibit ille, bibit illa</em> ("the lady drinks, the lord drinks, the soldier drinks, the cleric drinks, he drinks, she drinks…") — cataloging the entire medieval social order one toast at a time. The whole movement is a single accelerando: a steady drone in the bass, a hammered choral ostinato, and a tempo that just keeps tightening until the final stretto detonates into pure delirium. If <em>O Fortuna</em> shows you the wheel, this shows you the carnival underneath it. It is also the single best demonstration of why Orff's two pianos and percussion battery exist — the engine room is fully visible here.</p>
+<p><strong>Recommended recording</strong>: <strong>Riccardo Muti / Philharmonia (1979)</strong> with Jonathan Summers — visceral, headlong, nearly out of control by the end. Jochum's reading is more disciplined; Muti's is more drunk, which is the point.</p>
+<h3><strong>4. <em>Olim lacus colueram</em> (Movement 12)</strong></h3>
+<p><strong>Why this one</strong>: The strangest, blackest, most unforgettable five minutes in the score — the lament of the <strong>roasted swan</strong>, sung <em>by the swan itself</em>, on the spit. Orff confines the tenor to a punishing falsetto-and-head-voice tessitura and accompanies him with squealing high bassoons and muted brass, producing a deliberately ugly, scorched timbre unlike anything else in the work. It is grotesque medieval comedy and genuine pathos at the same time — the swan remembers swimming on lakes, sees its own blackened body turning over the fire, and hears the cooks cursing it. Nothing else in the popular cantata literature sounds like this. If the <em>In trutina</em> / <em>Dulcissime</em> pair shows Orff's lyric capacity, this shows his capacity for genuine strangeness — the side of him that risks the absurd and earns it.</p>
+<p><strong>Recommended recording</strong>: <strong>Gerhard Stolze with Jochum (1967)</strong> is the historical benchmark — a character tenor who fully commits to the grotesque without losing line. Modern listeners may also want to hear a countertenor reading (the Rattle / Berlin recording flirts with this aesthetic) for a comparison.</p></div>
+</section>
+    <footer>
+      
+      <p>Companion to the Markdown analysis in the Obsidian vault at <code>Musical Analysis/Orff - Carmina Burana.md</code>.</p>
+      <p><a href="index.html">← back to music</a></p>
+    </footer>
+  </main>
+</div>
+</div>
+
+<script>
+  /* ---------- color palettes (Squarespace-style) ---------- */
+  const PALETTES = {
+    afternoon:{mode:'light',label:'Afternoon',v:{
+      '--bg':'#faf8f4','--panel':'#ffffff','--ink':'#1c1a17','--ink-soft':'#55504a','--ink-faint':'#8a8279',
+      '--line':'#e8e2d8','--line-strong':'#d8cfc0','--accent':'#9a5b2e','--accent-soft':'#f3e6d8','--accent-ink':'#7a4220',
+      '--gold':'#b8893b','--teal':'#2f6b6b','--code-bg':'#2b2722',
+      '--header-grad':'linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%)',
+      '--th-bg':'#f3ede3','--row-hover':'#fbf7f0','--epi-ink':'#5b3c20',
+      '--warm-bg':'#fbf3e2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f2f1','--cool-bd':'#bfdcda','--cool-ink':'#1f4f4f',
+      '--ml-grad':'linear-gradient(150deg,#fbf3e7,#f6e7d4)','--ml-bd':'#ebd7b8','--ml-ink':'#6b3f1c'}},
+    sage:{mode:'light',label:'Sage',v:{
+      '--bg':'#f5f7f2','--panel':'#ffffff','--ink':'#1c211a','--ink-soft':'#4e544a','--ink-faint':'#828a7c',
+      '--line':'#e3e8dc','--line-strong':'#d3dac8','--accent':'#5c7a52','--accent-soft':'#e6ede0','--accent-ink':'#3f592f',
+      '--gold':'#a98f3c','--teal':'#3a7a6b','--code-bg':'#1f2620',
+      '--header-grad':'linear-gradient(160deg,#1a231a 0%,#283a26 55%,#3a5232 100%)',
+      '--th-bg':'#edf1e7','--row-hover':'#f6f9f2','--epi-ink':'#3c4f30',
+      '--warm-bg':'#f4efdf','--warm-bd':'#e2dba9','--warm-ink':'#5f5520',
+      '--cool-bg':'#e6f1ec','--cool-bd':'#c0dccd','--cool-ink':'#1f4f3e',
+      '--ml-grad':'linear-gradient(150deg,#eef3e4,#e3ecd6)','--ml-bd':'#d2dcb8','--ml-ink':'#3f5224'}},
+    harbor:{mode:'light',label:'Harbor',v:{
+      '--bg':'#f4f6f9','--panel':'#ffffff','--ink':'#1a2026','--ink-soft':'#4b5560','--ink-faint':'#7d8794',
+      '--line':'#e1e7ec','--line-strong':'#cfd8e1','--accent':'#2f6690','--accent-soft':'#e0ebf2','--accent-ink':'#234e6b',
+      '--gold':'#b5862f','--teal':'#2f8682','--code-bg':'#192129',
+      '--header-grad':'linear-gradient(160deg,#121b24 0%,#1d2e3f 55%,#274a63 100%)',
+      '--th-bg':'#e9eef3','--row-hover':'#f4f8fb','--epi-ink':'#234e6b',
+      '--warm-bg':'#f6efe0','--warm-bd':'#e7d6b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e2eef2','--cool-bd':'#bcd6de','--cool-ink':'#1f4f55',
+      '--ml-grad':'linear-gradient(150deg,#e8f1f6,#dbe9f1)','--ml-bd':'#c2d6e4','--ml-ink':'#234e6b'}},
+    plum:{mode:'light',label:'Plum',v:{
+      '--bg':'#f8f5f8','--panel':'#ffffff','--ink':'#221c21','--ink-soft':'#564b54','--ink-faint':'#897e87',
+      '--line':'#e9e0e7','--line-strong':'#dccdd8','--accent':'#7d4a6b','--accent-soft':'#efe2ec','--accent-ink':'#5d3550',
+      '--gold':'#b07d3b','--teal':'#3a7a72','--code-bg':'#241c23',
+      '--header-grad':'linear-gradient(160deg,#201823 0%,#332338 55%,#4e2f53 100%)',
+      '--th-bg':'#f1e9f0','--row-hover':'#faf5f9','--epi-ink':'#5d3550',
+      '--warm-bg':'#f7efe2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f1f0','--cool-bd':'#c4d9d5','--cool-ink':'#1f4f48',
+      '--ml-grad':'linear-gradient(150deg,#f4e9f1,#ecdbe8)','--ml-bd':'#ddc4d6','--ml-ink':'#5d3550'}},
+    midnight:{mode:'dark',label:'Midnight',v:{
+      '--bg':'#0f1620','--panel':'#18212e','--ink':'#e8edf3','--ink-soft':'#a9b5c4','--ink-faint':'#6f7d8d',
+      '--line':'#25303f','--line-strong':'#34414f','--accent':'#5b9bd5','--accent-soft':'#1b2a3b','--accent-ink':'#9cc4e8',
+      '--gold':'#d2a85f','--teal':'#4db1a8','--code-bg':'#0b121b',
+      '--header-grad':'linear-gradient(160deg,#0b1220 0%,#13243a 55%,#1d3a5c 100%)',
+      '--th-bg':'#1f2a38','--row-hover':'#1d2735','--epi-ink':'#9cc4e8',
+      '--warm-bg':'#2a2418','--warm-bd':'#43381f','--warm-ink':'#e0b878',
+      '--cool-bg':'#11302d','--cool-bd':'#1f4a45','--cool-ink':'#7fd6cc',
+      '--ml-grad':'linear-gradient(150deg,#1c2a3b,#16222f)','--ml-bd':'#2c3f55','--ml-ink':'#9cc4e8'}},
+    charcoal:{mode:'dark',label:'Charcoal',v:{
+      '--bg':'#161514','--panel':'#201e1c','--ink':'#ece8e2','--ink-soft':'#b0a99f','--ink-faint':'#766f65',
+      '--line':'#2c2926','--line-strong':'#3a3631','--accent':'#c8895a','--accent-soft':'#2c2420','--accent-ink':'#e3a878',
+      '--gold':'#cda35e','--teal':'#5aada3','--code-bg':'#100f0e',
+      '--header-grad':'linear-gradient(160deg,#141210 0%,#241e18 55%,#3a2c20 100%)',
+      '--th-bg':'#25221f','--row-hover':'#211e1b','--epi-ink':'#e3a878',
+      '--warm-bg':'#2c2418','--warm-bd':'#443720','--warm-ink':'#e0b878',
+      '--cool-bg':'#1a2826','--cool-bd':'#2c4641','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#272019,#1d1814)','--ml-bd':'#3d3124','--ml-ink':'#e3a878'}},
+    forest:{mode:'dark',label:'Forest',v:{
+      '--bg':'#101713','--panel':'#18211b','--ink':'#e6ece6','--ink-soft':'#a6b3a6','--ink-faint':'#6e7c6e',
+      '--line':'#243029','--line-strong':'#324133','--accent':'#6fae7e','--accent-soft':'#1a2a20','--accent-ink':'#9fd3aa',
+      '--gold':'#cda35e','--teal':'#4fb0a0','--code-bg':'#0b110d',
+      '--header-grad':'linear-gradient(160deg,#0c1410 0%,#142a1d 55%,#1d4230 100%)',
+      '--th-bg':'#1d2922','--row-hover':'#1a241d','--epi-ink':'#9fd3aa',
+      '--warm-bg':'#28281a','--warm-bd':'#3f3f24','--warm-ink':'#d8b878',
+      '--cool-bg':'#16302a','--cool-bd':'#274a40','--cool-ink':'#7fd0bc',
+      '--ml-grad':'linear-gradient(150deg,#18271e,#132019)','--ml-bd':'#2a4231','--ml-ink':'#9fd3aa'}},
+    wine:{mode:'dark',label:'Wine',v:{
+      '--bg':'#1a1012','--panel':'#241619','--ink':'#f0e4e6','--ink-soft':'#c2a9af','--ink-faint':'#8c6f76',
+      '--line':'#321f24','--line-strong':'#43292f','--accent':'#c46b7e','--accent-soft':'#2e1a1f','--accent-ink':'#e49aa8',
+      '--gold':'#cda35e','--teal':'#5aa8a0','--code-bg':'#140c0e',
+      '--header-grad':'linear-gradient(160deg,#160c0e 0%,#2a141a 55%,#4a2230 100%)',
+      '--th-bg':'#2c1c20','--row-hover':'#271519','--epi-ink':'#e49aa8',
+      '--warm-bg':'#2e2418','--warm-bd':'#463720','--warm-ink':'#e0b878',
+      '--cool-bg':'#18302d','--cool-bd':'#2a4a45','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#2a181d,#201216)','--ml-bd':'#43272f','--ml-ink':'#e49aa8'}}
+  };
+
+  const root = document.documentElement;
+  function applyPalette(key){
+    const p = PALETTES[key]; if(!p) return;
+    for(const [k,val] of Object.entries(p.v)) root.style.setProperty(k,val);
+    root.setAttribute('data-mode', p.mode);
+    document.querySelectorAll('.pp-sw').forEach(b=>b.classList.toggle('active', b.dataset.pal===key));
+    try{ localStorage.setItem('faune-palette', key); }catch(e){}
+  }
+
+  // build swatches
+  const tick = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  for(const [key,p] of Object.entries(PALETTES)){
+    const btn = document.createElement('button');
+    btn.className = 'pp-sw'; btn.dataset.pal = key; btn.type = 'button';
+    btn.title = p.label;
+    btn.innerHTML =
+      '<div class="bars">'+
+        '<span style="background:'+p.v['--bg']+'"></span>'+
+        '<span style="background:'+p.v['--accent']+'"></span>'+
+        '<span style="background:'+p.v['--accent-ink']+'"></span>'+
+        '<span style="background:'+p.v['--gold']+'"></span>'+
+      '</div>'+
+      '<span class="nm">'+p.label+tick+'</span>';
+    btn.addEventListener('click', ()=>applyPalette(key));
+    document.getElementById(p.mode==='light'?'pp-light':'pp-dark').appendChild(btn);
+  }
+
+  // toggle panel
+  const picker = document.getElementById('picker');
+  const ppToggle = document.getElementById('ppToggle');
+  ppToggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = picker.classList.toggle('open');
+    ppToggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.addEventListener('click', (e)=>{
+    if(!picker.contains(e.target)) picker.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') picker.classList.remove('open'); });
+
+  // restore saved or honor OS dark preference
+  let saved=null; try{ saved = localStorage.getItem('faune-palette'); }catch(e){}
+  if(saved && PALETTES[saved]) applyPalette(saved);
+  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
+  else applyPalette('afternoon');
+
+  // active TOC highlighting
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const map = {};
+  links.forEach(a => { const id = a.getAttribute('href').slice(1); map[id] = a; });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = map[e.target.id];
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

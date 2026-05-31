@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bach — Goldberg Variations, BWV 988 · Musical Analysis</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --panel:#ffffff;
+    --ink:#1c1a17;
+    --ink-soft:#55504a;
+    --ink-faint:#8a8279;
+    --line:#e8e2d8;
+    --line-strong:#d8cfc0;
+    --accent:#9a5b2e;       /* warm terracotta — faun / afternoon heat */
+    --accent-soft:#f3e6d8;
+    --accent-ink:#7a4220;
+    --gold:#b8893b;
+    --teal:#2f6b6b;
+    --code-bg:#2b2722;
+    --green:#2f7d4f;
+    --amber:#b07d18;
+    --red:#a8392f;
+    /* themeable extras (overridden by JS palettes) */
+    --header-grad:linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%);
+    --th-bg:#f3ede3;
+    --row-hover:#fbf7f0;
+    --epi-ink:#5b3c20;
+    --warm-bg:#fbf3e2; --warm-bd:#ecd9b0; --warm-ink:#6b4e1e;
+    --cool-bg:#e8f2f1; --cool-bd:#bfdcda; --cool-ink:#1f4f4f;
+    --ml-grad:linear-gradient(150deg,#fbf3e7,#f6e7d4); --ml-bd:#ebd7b8; --ml-ink:#6b3f1c;
+    --radius:12px;
+    --shadow:0 1px 2px rgba(40,30,15,.04),0 6px 22px rgba(40,30,15,.06);
+  }
+  html{transition:none}
+  body,.card,table,.tldr,.callout,.mustlisten,nav.toc a,.svgcard,.pp-panel,.pp-toggle,.pp-sw{
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+    line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  /* ---- header ---- */
+  header.top{
+    background:var(--header-grad);
+    color:#f4ece1;position:relative;overflow:hidden;
+    border-bottom:3px solid var(--accent);
+  }
+  header.top .glow{position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(212,160,90,.35),transparent 65%);pointer-events:none;}
+  header.top .wrap{padding:46px 28px 40px;position:relative;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#d9b384;font-weight:600;margin:0 0 14px}
+  header.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;
+    font-size:40px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+  header.top h1 em{font-style:italic;color:#f0cfa0}
+  header.top .sub{font-size:17px;color:#d8cab8;margin:10px 0 0;max-width:760px}
+  .metarow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-size:13.5px;color:#cdbca6}
+  .metarow b{color:#f4ece1;font-weight:600}
+  .stamp{font-size:12px;color:#b39c80;margin-top:18px;font-family:"SF Mono",Menlo,monospace}
+
+  /* ---- layout ---- */
+  .layout{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0 80px;align-items:start}
+  nav.toc{position:sticky;top:24px;font-size:14px}
+  nav.toc .title{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 12px}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border-radius:7px;border-left:2px solid transparent;line-height:1.35}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+  nav.toc a .n{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;margin-right:7px}
+  nav.toc a.active{background:var(--accent-soft);color:var(--accent-ink);border-left-color:var(--accent)}
+
+  main{min-width:0}
+  section{margin:0 0 50px;scroll-margin-top:24px}
+  h2{font-family:Georgia,serif;font-size:25px;font-weight:600;letter-spacing:-.01em;
+    margin:0 0 4px;display:flex;align-items:baseline;gap:12px}
+  h2 .secn{font-size:14px;font-weight:700;color:#fff;background:var(--accent);
+    width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:-apple-system,system-ui;}
+  .lead{color:var(--ink-soft);margin:2px 0 22px 42px;font-size:15px}
+  h3{font-size:17px;font-weight:650;margin:26px 0 8px;color:var(--ink)}
+  p{margin:0 0 14px}
+  strong{font-weight:650}
+  a.inline{color:var(--accent-ink);text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+
+  /* ---- tl;dr box ---- */
+  .tldr{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow);margin-bottom:8px}
+  .tldr h2{font-size:18px;margin-bottom:10px}
+  .tldr p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+  .tldr p:last-child{margin-bottom:0}
+
+  blockquote.epi{margin:0 0 30px;padding:18px 24px;background:var(--accent-soft);
+    border-radius:var(--radius);font-family:Georgia,serif;font-style:italic;font-size:16px;color:var(--epi-ink)}
+  blockquote.epi .who{display:block;font-style:normal;font-family:-apple-system,system-ui;
+    font-size:13px;color:var(--accent-ink);margin-top:10px;font-weight:600}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 24px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin:6px 0}
+  .keyval{margin:0;padding:0;list-style:none}
+  .keyval li{display:grid;grid-template-columns:165px 1fr;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);margin:0}
+  .keyval li:last-child{border-bottom:none}
+  .keyval .k{color:var(--ink-faint);font-size:13.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+
+  /* ---- tables ---- */
+  table{width:100%;border-collapse:collapse;margin:6px 0 20px;font-size:14.5px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  th{background:var(--th-bg);text-align:left;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line-strong)}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--row-hover)}
+  td.sec{font-weight:650;color:var(--accent-ink);white-space:nowrap}
+  .time{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);white-space:nowrap}
+
+  /* ---- pull callout ---- */
+  .callout{border-radius:var(--radius);padding:16px 20px;margin:18px 0;font-size:15px;border:1px solid}
+  .callout.gold{background:var(--warm-bg);border-color:var(--warm-bd);color:var(--warm-ink)}
+  .callout.teal{background:var(--cool-bg);border-color:var(--cool-bd);color:var(--cool-ink)}
+  .callout .lbl{font-weight:700;text-transform:uppercase;font-size:11.5px;letter-spacing:.1em;display:block;margin-bottom:4px;opacity:.8}
+
+  /* ---- timeline ---- */
+  .tl{list-style:none;margin:8px 0 0;padding:0;position:relative}
+  .tl:before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+  .tl li{position:relative;padding:10px 0 10px 86px;margin:0}
+  .tl .t{position:absolute;left:0;top:11px;width:52px;text-align:right;font-family:"SF Mono",Menlo,monospace;
+    font-size:12.5px;color:var(--teal);font-weight:600}
+  .tl .dot{position:absolute;left:57px;top:15px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--accent)}
+  .tl li.peak .dot{background:var(--accent);width:14px;height:14px;left:56px;top:14px;box-shadow:0 0 0 4px var(--accent-soft)}
+  .tl b{color:var(--ink)}
+
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:2px 8px;border-radius:20px;vertical-align:middle}
+  .b-heart{background:#fbe3df;color:var(--red)}
+  .b-key{background:#e6efe9;color:var(--green)}
+
+  figure{margin:18px 0 24px}
+  figcaption{font-size:13px;color:var(--ink-faint);margin-top:10px;text-align:center;font-style:italic}
+  .svgcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  /* theme-aware SVG strokes/fills */
+  .svgcard svg .sv-axis{stroke:var(--line-strong)}
+  .svgcard svg .sv-grid{stroke:var(--line)}
+  .svgcard svg .sv-curve{stroke:var(--accent)}
+  .svgcard svg .sv-area{fill:var(--accent);opacity:.13}
+  .svgcard svg .sv-gold-line{stroke:var(--gold)}
+  .svgcard svg .sv-gold,.svgcard svg .sv-gold-dot{fill:var(--gold)}
+  .svgcard svg .sv-accent,.svgcard svg .sv-accent-dot{fill:var(--accent)}
+  .svgcard svg .sv-lbl{fill:var(--ink-soft)}
+  .svgcard svg .sv-faint{fill:var(--ink-faint)}
+
+  code{font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:5px}
+
+  /* ---- palette picker ---- */
+  .palette-picker{position:fixed;top:14px;right:14px;z-index:60;font-size:13px;
+    font-family:-apple-system,system-ui,sans-serif}
+  .pp-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    background:rgba(255,255,255,.92);color:#241c14;border:1px solid rgba(0,0,0,.12);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    padding:8px 13px;border-radius:30px;font-weight:600;font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,.16)}
+  .pp-toggle svg{display:block}
+  .pp-toggle .chev{transition:transform .2s ease}
+  .palette-picker.open .pp-toggle .chev{transform:rotate(180deg)}
+  .pp-panel{position:absolute;top:46px;right:0;width:248px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.22);padding:14px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);
+    transform-origin:top right;transition:opacity .16s ease,transform .16s ease,visibility .16s}
+  .palette-picker.open .pp-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+  .pp-group{margin-bottom:12px}
+  .pp-group:last-child{margin-bottom:0}
+  .pp-label{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 2px 8px}
+  .pp-label .ico{width:13px;height:13px;opacity:.7}
+  .pp-swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pp-sw{cursor:pointer;border:1.5px solid var(--line);background:var(--panel);
+    border-radius:10px;padding:7px;display:flex;flex-direction:column;gap:6px;text-align:left;
+    transition:border-color .15s,transform .1s}
+  .pp-sw:hover{transform:translateY(-1px)}
+  .pp-sw .bars{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .pp-sw .bars span{flex:1}
+  .pp-sw .nm{font-size:11.5px;font-weight:600;color:var(--ink-soft);display:flex;
+    align-items:center;justify-content:space-between;gap:4px}
+  .pp-sw.active{border-color:var(--accent)}
+  .pp-sw.active .nm{color:var(--ink)}
+  .pp-sw .tick{width:13px;height:13px;color:var(--accent);opacity:0}
+  .pp-sw.active .tick{opacity:1}
+
+  .rec{display:grid;grid-template-columns:1fr;gap:0}
+  .rec .who{font-weight:650;color:var(--accent-ink)}
+
+  .mustlisten{background:var(--ml-grad);border:1px solid var(--ml-bd);
+    border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow)}
+  .mustlisten h3{margin-top:0;font-family:Georgia,serif;font-size:20px;color:var(--ml-ink)}
+  .mustlisten .span{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--ink-faint);font-size:13.5px}
+  footer a{color:var(--accent-ink);text-decoration:none}
+
+  @media (max-width:720px){
+    .layout{grid-template-columns:1fr;gap:0;padding:24px 0 60px}
+    nav.toc{display:none}
+    .wrap{padding:0 18px}
+    header.top h1{font-size:30px}
+    header.top .wrap{padding:34px 18px 30px}
+    .keyval li{grid-template-columns:1fr;gap:2px}
+    .lead{margin-left:0}
+    h2{font-size:21px}
+    .palette-picker{top:10px;right:10px}
+    .pp-toggle .pp-txt{display:none}
+    .pp-toggle{padding:9px;border-radius:50%}
+    .pp-panel{width:230px}
+  }
+</style>
+</head>
+<body>
+
+<div class="palette-picker" id="picker">
+  <button class="pp-toggle" id="ppToggle" aria-expanded="false" aria-label="Change color theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    <span class="pp-txt">Theme</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pp-panel" role="menu" aria-label="Color palettes">
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>Light</span>
+      <div class="pp-swatches" id="pp-light"></div>
+    </div>
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark</span>
+      <div class="pp-swatches" id="pp-dark"></div>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <p class="eyebrow">Musical Analysis · Variations</p>
+    <h1>Goldberg Variations, BWV 988</h1>
+    <p class="sub">Bach · 1741</p>
+    <div class="metarow">
+      <span><b>Composed</b> 1741</span>
+    </div>
+    <p class="stamp">Generated 2026-05-31 · musical-analysis</p>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <p class="title">Contents</p>
+    <a href="#tldr"><span class="n">·</span>In brief</a>
+    <a href="#sec0"><span class="n">1</span>Identity &amp; Context</a>
+    <a href="#sec1"><span class="n">2</span>Formal Structure</a>
+    <a href="#sec2"><span class="n">3</span>Melodic &amp; Thematic Content</a>
+    <a href="#sec3"><span class="n">4</span>Harmony &amp; Tonality</a>
+    <a href="#sec4"><span class="n">5</span>Rhythm, Meter &amp; Tempo</a>
+    <a href="#sec5"><span class="n">6</span>Texture &amp; Timbre</a>
+    <a href="#sec6"><span class="n">7</span>Emotional Arc &amp; Dramaturgy</a>
+    <a href="#sec7"><span class="n">8</span>Historical Significance &amp; Influence</a>
+    <a href="#sec8"><span class="n">9</span>Performance Practice &amp; Notable Recordings</a>
+    <a href="#sec9"><span class="n">10</span>Listening Guide</a>
+    <a href="#sec10"><span class="n">11</span>Must-Listen Tracks</a>
+    <a href="#sec11"><span class="n">·</span>Coda</a>
+  </nav>
+
+  <main>
+    <section id="tldr"><div class="tldr"><h2>In brief</h2><p><strong>Full title:</strong> <em>Clavier Ubung bestehend in einer ARIA mit verschiedenen Veraenderungen vors Clavicimbal mit 2 Manualen</em> ("Keyboard Practice consisting of an Aria with Diverse Variations for harpsichord with two manuals").</p></div></section>
+    <section id="sec0">
+  <h2><span class="secn">1</span>Identity &amp; Context</h2>
+<p><strong>Composer:</strong> Johann Sebastian Bach (1685–1750).</p>
+<p><strong>Date of publication:</strong> 1741, by Balthasar Schmid of Nuremberg. Composition likely begun in the late 1730s. Bach was 56 — fully in his late period.</p>
+<p><strong>Position in the output:</strong> The work is the fourth and final installment of Bach's <em>Clavier-Übung</em> ("Keyboard Practice") series, following partitas (Part I, 1731), the Italian Concerto and French Overture (Part II, 1735), and the great organ collection with the <em>Prelude and Fugue in E-flat</em> and the four duets (Part III, 1739). The Goldbergs are Part IV — the capstone, and one of only a handful of works Bach published in his lifetime. They sit alongside the contemporaneous <em>Art of Fugue</em>, <em>Musical Offering</em>, and the <em>Mass in B Minor</em> as the great encyclopedic monuments of Bach's final decade.</p>
+<p><strong>The Goldberg legend.</strong> The traditional story comes from Bach's first biographer Johann Nikolaus Forkel (1802): Count Hermann Karl von Keyserlingk, the Russian ambassador to the Saxon court, suffered from insomnia and kept a teenaged harpsichordist — Johann Gottlieb Goldberg, a Bach pupil — to play for him during sleepless nights. The count is said to have commissioned the variations and rewarded Bach with a gold goblet containing 100 louis d'or. Modern scholarship is skeptical: there is no dedication to Keyserlingk on the title page (highly unusual if it were a commission), and Goldberg would have been only 14 in 1741. The work was almost certainly conceived independently as the climax of the <em>Clavier-Übung</em>, with the Keyserlingk anecdote a posthumous embellishment — though it is plausible the count later acquired a copy and asked Goldberg to play it.</p>
+<p><strong>Bach's personal copy ("Handexemplar").</strong> A printed copy with Bach's autograph corrections and an appended series of <strong>fourteen canons on the first eight bass notes of the Aria</strong> (BWV 1087) was discovered in 1974 in Strasbourg. This source has reshaped editions and confirmed how seriously Bach took the bass line as a generative engine.</p>
+<p><strong>Historical moment.</strong> 1741 sits at the cusp of the late Baroque's collapse into the <em>galant</em> and early Classical styles. Bach's sons (Carl Philipp Emanuel chief among them) and contemporaries like Pergolesi and the Mannheim composers were moving toward lighter textures, periodic phrasing, and an "expressive" idiom that explicitly rejected the dense counterpoint Bach embodied. The Goldbergs are, in this light, a magnificently anachronistic monument — but one that absorbs <em>galant</em> idioms (variations 19, 24, 25 are saturated with them) into its contrapuntal universe.</p>
+</section>
+
+    <section id="sec1">
+  <h2><span class="secn">2</span>Formal Structure</h2>
+<h3>The macro-architecture</h3>
+<p>The work consists of <strong>32 movements</strong>: an opening Aria, 30 variations, and a closing Aria da Capo. The 32 = 2 × 16 = 4 × 8 structure is itself a numerological echo of the Aria's 32 bars. Crucially, <strong>the variations are not variations on the Aria's melody but on its bass line and harmonic plan</strong> — a 32-bar ground in binary form (||: 16 :||: 16 :||) that descends from G in characteristic Baroque bass patterns. This makes the Goldbergs technically a <em>passacaglia/chaconne hybrid</em> with variation form, closer to Handel's chaconnes or Purcell's grounds than to the Mozartian "theme and variations" model that came later.</p>
+<h3>The canonic backbone</h3>
+<p>Bach organizes the 30 variations into <strong>ten groups of three</strong>, and the pattern is rigorous:</p>
+<table>
+<thead><tr>
+<th>Group</th>
+<th>Var.</th>
+<th>Type</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>1</td><td>Genre piece / character variation</td></tr>
+<tr><td>1</td><td>2</td><td>Trio / arabesque</td></tr>
+<tr><td>1</td><td>3</td><td><strong>Canon at the unison</strong></td></tr>
+<tr><td>2</td><td>4</td><td>Genre piece</td></tr>
+<tr><td>2</td><td>5</td><td>Two-manual virtuoso</td></tr>
+<tr><td>2</td><td>6</td><td><strong>Canon at the second</strong></td></tr>
+<tr><td>3</td><td>7</td><td>Genre (gigue/forlana)</td></tr>
+<tr><td>3</td><td>8</td><td>Two-manual virtuoso</td></tr>
+<tr><td>3</td><td>9</td><td><strong>Canon at the third</strong></td></tr>
+<tr><td>...</td><td>...</td><td>...</td></tr>
+<tr><td>10</td><td>28</td><td>Two-manual virtuoso (trills)</td></tr>
+<tr><td>10</td><td>29</td><td>Toccata / hand-crossing</td></tr>
+<tr><td>10</td><td>30</td><td><strong>Quodlibet</strong> (in place of canon at the tenth)</td></tr>
+</tbody></table>
+<p>Every third variation is a <strong>canon, ascending in interval</strong> from the unison (Var. 3) through the ninth (Var. 27). Where the canon at the tenth would fall (Var. 30), Bach substitutes a <strong>quodlibet</strong> combining two folk songs over the ground bass — the wittiest and most personal possible substitution. (Bach family gatherings were famous for improvised quodlibets.)</p>
+<p>The non-canon variations alternate between <strong>genre/character pieces</strong> and <strong>two-manual virtuoso variations</strong> (toccatas, arabesques, hand-crossings) that exploit the two-keyboard harpsichord's ability to overlap the hands.</p>
+<h3>The 16/16 hinge: Variation 16 as French Overture</h3>
+<p>The work's exact midpoint is <strong>Variation 16</strong>, a <strong>French Overture</strong> — dotted-rhythm grave plus fugal allegro. Bach is announcing the "second act," opening the second half with maximum ceremony. This is the structural keystone that locks the entire architecture together.</p>
+<h3>Key scheme</h3>
+<p>Almost all 32 movements are in <strong>G major</strong>. The three exceptions, all in <strong>G minor</strong>, are deliberately placed:</p>
+<ul>
+<li><strong>Variation 15</strong> — Canon at the fifth, <em>Andante</em>. Ends the first half on a quiet, ascending open fifth — extraordinary.</li>
+<li><strong>Variation 21</strong> — Canon at the seventh. Chromatic, lamenting.</li>
+<li><strong>Variation 25</strong> — the "Black Pearl" (Wanda Landowska's name). Chromatic adagio in 3/4, the emotional abyss of the work.</li>
+</ul>
+<p>The three minor-mode variations are spaced like rest points in a Fibonacci-adjacent proportion (15, 21, 25). The most harrowing (25) sits roughly at the golden section of the second half.</p>
+<h3>The Aria's bass: the actual theme</h3>
+<p>The bass line — not the surface melody — is the variation theme. Its first half descends largely by step from G to D (with characteristic Baroque suspensions and inflections); the second half completes the journey back to G. This bass is also a <strong>sarabande</strong> in 3/4, with the characteristic weight on beat 2. The harmonic skeleton:</p>
+<p>``<code> ||: G  D  Em7 Bm  C  G/B  Am7  D7  :||  (first half — toward D) ||: G7 C  F   Dm  G  C/E  D     G  :||  (second half — back to G via modulations) </code>``</p>
+<p>This 32-bar ground is <em>exactly preserved</em> under every variation, though Bach takes interpretive liberties with surface chord choices.</p>
+<h3>Proportions and timing</h3>
+<p>A typical performance with all repeats runs <strong>75–90 minutes</strong> (Tureck, Hewitt); without repeats, <strong>45–55 minutes</strong> (Gould 1955 famously clocks in at 38). Each variation is 32 bars, but tempos vary so dramatically — from the rapid Var. 1 to the glacial Var. 25 — that individual movements range from under a minute to nearly nine.</p>
+</section>
+
+    <section id="sec2">
+  <h2><span class="secn">3</span>Melodic &amp; Thematic Content</h2>
+<h3>The Aria</h3>
+<p>The Aria is <strong>not</strong> Bach's invention as a tune. The bass and harmonic plan derive from a standard Baroque ground (related to "La Folia" and other passacaglia patterns), and a similar melodic ornamentation appears in Anna Magdalena Bach's 1725 <em>Notenbüchlein</em> — though scholars believe Bach composed (or perfected) this exact version specifically for the variations.</p>
+<p>The melody itself is a <em>galant</em> sarabande, drenched in ornaments — written-out trills, mordents, <em>appoggiature</em>, slides. It is <strong>deliberately surface-decorative</strong>: lacy, almost rococo. Bach is hiding the structural skeleton (the bass) under elaborate filigree, like a calligrapher disguising the architecture of the letters.</p>
+<h3>Motivic transformation</h3>
+<p>Because the variations are on the bass, the <strong>surface melodic material is freshly invented for each variation</strong>. There is no "theme" being constantly recognized in the soprano line — instead, each variation is a self-contained character piece sitting on a shared harmonic skeleton. This is closer to the Renaissance/Baroque <em>passacaglia</em> aesthetic than to Classical variation form.</p>
+<p>Yet motivic threads do run through groups:</p>
+<ul>
+<li>The canons share characteristic intervallic exchanges with their answers.</li>
+<li>The two-manual virtuoso variations share toccata-figuration DNA (broken chords, hand-crossings, arabesques).</li>
+<li>The genre variations each commit fully to a dance archetype.</li>
+</ul>
+<h3>Melodic style across the variations</h3>
+<ul class="keyval">
+<li><span class="k">Variation 1</span><span>bright, polonaise-ish two-voice invention; energetic upward leaps.</span></li>
+<li><span class="k">Variation 7</span><span>gigue with dotted forlana lilt — Bach himself labeled it <em>al tempo di Giga</em> in the Handexemplar.</span></li>
+<li><span class="k">Variation 13</span><span>a lyrical sarabande-aria in its own right — perhaps the most beautiful purely melodic movement.</span></li>
+<li><span class="k">Variation 25</span><span>chromatic descending lament-bass figures, sigh motifs, a vocabulary that points forward to Mozart's <em>Adagio and Fugue in C minor</em> and Beethoven's late-period chromaticism.</span></li>
+<li><span class="k">Variation 30 (Quodlibet)</span><span>stitches together two known German folk songs — <em>"Ich bin so lang nicht bei dir g'west"</em> ("I've been so long away from you") and <em>"Kraut und Rüben haben mich vertrieben"</em> ("Cabbage and turnips have driven me away") — over the bass. Comic, affectionate, completely characteristic of Bach's domestic music-making.</span></li>
+</ul>
+</section>
+
+    <section id="sec3">
+  <h2><span class="secn">4</span>Harmony &amp; Tonality</h2>
+<h3>Harmonic language</h3>
+<p>The work is fundamentally <strong>diatonic and functional</strong>, anchored in G major. But within that frame, Bach explores nearly every harmonic device available in 1741:</p>
+<ul>
+<li><strong>Chromatic descents</strong> (the lament bass): Variations 15, 21, 25.</li>
+<li><strong>Modal inflections</strong>: phrygian colorings in Var. 25, mixolydian touches.</li>
+<li><strong>Secondary dominants and tonicizations</strong> that briefly visit relative and parallel keys.</li>
+<li><strong>Suspensions and appoggiature</strong>: especially dense in the slow variations.</li>
+<li><strong>Augmented sixths and Neapolitan harmonies</strong>: rare in Bach but present in Var. 25.</li>
+</ul>
+<h3>The ground as harmonic constraint</h3>
+<p>The fixed 32-bar harmonic plan creates an extraordinary compositional discipline: Bach must invent 30 different surfaces over the <em>same harmonic ground</em>. The wonder is how completely each variation hides this constraint. A naive listener might not notice that Variations 1 and 25 share a harmonic frame — they sound like utterly different works.</p>
+<p>The <strong>canonic constraint</strong> at every third variation compounds this: Bach must produce a strict imitative canon (often with a third free voice) that <em>also</em> fits the harmonic ground <em>and</em> the rising interval requirement <em>and</em> makes idiomatic keyboard music. The puzzle is dizzying. That he makes it sound effortless — even tossed-off — is the Bachian miracle.</p>
+<h3>Key inflections in the minor variations</h3>
+<ul>
+<li><strong>Var. 15</strong> (canon at the fifth, G minor, <em>Andante</em>): the canon is <strong>inverted</strong> (the answering voice moves in mirror to the leader). The variation ends with an unprecedented open ascending fifth in the soprano — a question mark hanging over the half-way point.</li>
+<li><strong>Var. 21</strong> (canon at the seventh): chromatic, full of crossings and lament figures.</li>
+<li><strong>Var. 25</strong> (free variation in G minor): the most harmonically advanced movement — extended chromatic descent, dissonant suspensions, sighs piling on sighs. Donald Tovey called it <em>"the supreme expression of harmonic agony in 18th-century music."</em> It anticipates Mozart's chromaticism, Wagner's <em>Tristan</em> idiom, and arguably the entire Romantic vocabulary of suffering.</li>
+</ul>
+<h3>Cadential strategy</h3>
+<p>Bach systematically varies cadential weight. Some variations close with full perfect authentic cadences and ornate flourishes; others (15, 25) end with deliberately understated, suspended gestures. The Aria da Capo at the end retroactively recasts the entire work as a <em>frame</em>: the Aria opens the door, walks us through 30 rooms, and closes the door — and what once sounded merely decorative now sounds, after the journey, like an elegy.</p>
+</section>
+
+    <section id="sec4">
+  <h2><span class="secn">5</span>Rhythm, Meter &amp; Tempo</h2>
+<h3>Meter diversity</h3>
+<p>Across 32 movements Bach deploys an extraordinary range of meters:</p>
+<ul>
+<li><strong>3/4</strong> (Aria, Vars. 13, 14, 25, 26 in part)</li>
+<li><strong>2/4, 4/4</strong> (multiple)</li>
+<li><strong>3/8, 6/8, 9/8, 12/8</strong> (gigues, sicilianas)</li>
+<li><strong>18/16</strong> within Var. 26 — superimposed against a 3/4 sarabande in the other hand. Two meters simultaneously.</li>
+</ul>
+<h3>The famous polymetric variation: Var. 26</h3>
+<p>Variation 26 is <strong>polymetric</strong>: one hand plays a fast 18/16 perpetual-motion figure, the other a slow 3/4 sarabande. The notation requires both meters to be written into the same system. The mathematical relationship is exact (one bar of 3/4 = one bar of 18/16, since 18 sixteenths = 3 dotted-eighths = 3 beats), but the <em>perceptual</em> result is two musics existing at once.</p>
+<h3>Rhythmic character variety</h3>
+<p>The variations function almost as a <strong>catalog of Baroque genres</strong>:</p>
+<ul>
+<li><strong>Polonaise</strong> (Var. 1)</li>
+<li><strong>Two-part invention</strong> (Var. 2)</li>
+<li><strong>Pastorale / siciliana</strong> (Var. 19)</li>
+<li><strong>Giga / forlana</strong> (Var. 7)</li>
+<li><strong>French overture</strong> (Var. 16)</li>
+<li><strong>Sarabande</strong> (Aria, Vars. 13, 25)</li>
+<li><strong>Toccata / fantasy</strong> (Vars. 5, 14, 20, 23, 28, 29)</li>
+<li><strong>Aria-duet</strong> (Var. 13)</li>
+<li><strong>Fughetta</strong> (Var. 10)</li>
+</ul>
+<h3>Tempo relationships</h3>
+<p>Bach gives almost no tempo markings in the original print (only Var. 7 <em>al tempo di Giga</em> in the Handexemplar, Var. 15 <em>Andante</em>, Var. 25 <em>Adagio</em>, Var. 16 the implicit French overture pacing). Performers therefore must derive tempos from the implied genre and figuration. This has produced wildly different "tempo plans" across recordings — Gould's 1981 take is almost twice as slow in many places as his 1955.</p>
+<h3>Hemiola and metric play</h3>
+<p>Hemiolas appear throughout (notably Var. 1's cross-rhythm passages), and metric ambiguity is exploited in many of the canons where the imitative entries cut against the bar lines.</p>
+</section>
+
+    <section id="sec5">
+  <h2><span class="secn">6</span>Texture &amp; Timbre</h2>
+<h3>Instrumentation</h3>
+<p>Written for <strong>two-manual harpsichord</strong>, and crucially, <strong>the two-manual requirement is structural</strong>, not decorative. Variations 5, 8, 11, 14, 17, 20, 23, 26, 28 are explicitly marked <em>"a 2 Clav."</em> — they require the two keyboards because the hands cross continuously and would collide on a single manual.</p>
+<p>On a <strong>modern piano</strong>, these hand-crossings become physical puzzles. Pianists negotiate them by various means (lifting the inside hand quickly, registering soft/loud across hands, etc.) — but the inherent compromise is real, and a major argument for hearing the work on harpsichord at least once.</p>
+<h3>Textural variety</h3>
+<p>The work is a <strong>textbook of Baroque texture</strong>:</p>
+<ul>
+<li><strong>Two-voice invention texture</strong> (Vars. 1, 2, 4)</li>
+<li><strong>Three-voice canon plus free bass</strong> (the canon variations 3, 6, 9, 12, 18, 24, 27 — the canon is in the upper two voices over a free bass continuation of the ground)</li>
+<li><strong>Free three-voice canon</strong> (Var. 15 — inverted canon)</li>
+<li><strong>Four-voice fughetta</strong> (Var. 10)</li>
+<li><strong>French overture with fugal allegro</strong> (Var. 16)</li>
+<li><strong>Brilliant two-voice toccata</strong> with hand-crossing (Vars. 5, 14, 20, 23, 28, 29)</li>
+<li><strong>Aria texture</strong> (Var. 13 — singing right hand, accompanimental left)</li>
+<li><strong>Quodlibet polyphony</strong> (Var. 30 — folk tunes weaving through bass)</li>
+</ul>
+<h3>Timbral world on harpsichord</h3>
+<p>On a two-manual harpsichord with 8' and 4' stops, Bach can register variations for <strong>contrast</strong>: bright (both manuals coupled, with the 4' adding a brilliant octave) for virtuoso variations; softer (single 8') for canons and meditative variations. The Aria is typically played with subdued registration; the climactic Var. 16 (French overture) calls for full registration. The harpsichord cannot do <em>crescendo</em>, but the two manuals allow <strong>terraced dynamics</strong> — sudden block changes of volume — and Bach exploits this for the structural contrasts.</p>
+</section>
+
+    <section id="sec6">
+  <h2><span class="secn">7</span>Emotional Arc &amp; Dramaturgy</h2>
+<h3>The shape</h3>
+<p>Despite being a "set of variations," the work has an unmistakable <strong>dramatic trajectory</strong>, not a flat sequence. The architecture suggests:</p>
+<ul class="keyval">
+<li><span class="k">Aria — opening</span><span>a contemplative, almost private invitation. A door opens.</span></li>
+<li><span class="k">Vars. 1–15</span><span>a gathering journey through dance, virtuosity, and intimacy. Energy and brilliance accumulate. Var. 13 is the first deeply lyrical moment. Var. 15 (G minor canon) ends the first half on a quiet, hanging fifth — the door closes on the first act.</span></li>
+<li><span class="k">Var. 16 — French Overture</span><span>the second act begins with pomp, almost theatrical ceremony.</span></li>
+<li><span class="k">Vars. 17–24</span><span>a denser, more contrapuntally adventurous phase. Var. 21 (G minor canon) is darker. Var. 22 is a serene alla breve.</span></li>
+<li><span class="k">Var. 25 — the Black Pearl</span><span>the emotional nadir. Time slows; chromatic suffering intensifies. The largest single variation in performance time (often 8–10 minutes).</span></li>
+<li><span class="k">Vars. 26–29</span><span>rebirth — a sudden return to G major with brilliant, almost ecstatic figuration; toccatas, hand-crossings, fireworks.</span></li>
+<li><span class="k">Var. 30 — Quodlibet</span><span>a return to earth. Folk songs over the bass. Humanity, family, laughter.</span></li>
+<li><span class="k">Aria da Capo</span><span>the same notes as the opening Aria, but utterly transformed by what we have lived through. This is one of the great gestures in Western music — the return of identical material with completely altered meaning.</span></li>
+</ul>
+<h3>Climax architecture</h3>
+<p>There are arguably <strong>two</strong> climactic moments, not one:</p>
+<ol>
+<li><strong>Var. 25</strong> — the emotional/expressive climax (suffering, depth).</li>
+<li><strong>Var. 29</strong> — the kinetic/technical climax (chordal toccata, maximum physical energy).</li>
+</ol>
+<p>They function as paired peaks before the wry de-escalation of Var. 30 and the contemplative homecoming of the Aria da Capo.</p>
+<h3>The da capo as transfiguration</h3>
+<p>Hearing the same Aria again at the end is the work's masterstroke. Nothing has technically changed — same notes, same ornaments, same harmony. Yet after 75 minutes inside the bass line's universe, the Aria sounds different: heavier, more aware, more aware <em>of itself</em>. It is the same person looking at the same garden after a long life. The variation form has been turned inside out — instead of the theme being varied, the listener has been varied.</p>
+</section>
+
+    <section id="sec7">
+  <h2><span class="secn">8</span>Historical Significance &amp; Influence</h2>
+<h3>Reception</h3>
+<p>In 1741 the Goldbergs were a commercial curiosity — engraved, expensive, immensely difficult, and out of step with the <em>galant</em> fashion. They were respected by connoisseurs and largely ignored by the broader public. Bach's reputation went into eclipse after his death in 1750; the variations remained a specialist's monument through the 18th century. Mozart and Beethoven knew them (Beethoven owned a copy and consulted them while writing the <em>Diabelli Variations</em>, which are explicitly modeled on the Goldbergs' ambition).</p>
+<h3>The 19th century</h3>
+<p>Czerny edited the work; pianists like Hans von Bülow performed it. But it was considered "academic," a museum piece — admired more than loved.</p>
+<h3>Wanda Landowska (1933)</h3>
+<p>Landowska's pioneering 1933 harpsichord recording brought the work into the modern performing repertoire and established it as a possible concert piece. She called Var. 25 the "Black Pearl."</p>
+<h3>Glenn Gould (1955, 1981)</h3>
+<p>The decisive event in the work's modern life. Gould's 1955 debut LP — a 38-minute, swift, articulate, joyously contrapuntal reading — became one of the best-selling classical records of all time and made the Goldbergs synonymous with intellectual depth and pianistic clarity. His 1981 re-recording, slower and more meditative, completed his life-arc with the work: it was the first major piece he recorded and the last. He died nine days after the 1981 release.</p>
+<h3>Influence</h3>
+<ul>
+<li>Beethoven's <em>Diabelli Variations</em> (1819–1823) are a direct response: 33 variations on a banal waltz, attempting to outdo Bach's encyclopedia of variation technique.</li>
+<li>Brahms's <em>Variations on a Theme by Handel</em> (1861) and <em>Paganini Variations</em> (1863) carry forward the architectural variation tradition.</li>
+<li>20th- and 21st-century composers — Webern, Reger, Busoni, Rzewski, and countless arrangers (Sitkovetsky's string trio, Andrew Manze's chamber version) — have engaged with the work as compositional touchstone.</li>
+<li>The Goldbergs have become <strong>culture</strong>: they appear in films (<em>The Silence of the Lambs</em>, <em>Hannibal</em>, <em>English Patient</em>), novels (Thomas Bernhard's <em>The Loser</em>), and the broader iconography of musical seriousness.</li>
+</ul>
+<h3>Place in the canon</h3>
+<p>Together with <em>The Art of Fugue</em>, <em>Mass in B Minor</em>, and the <em>Well-Tempered Clavier</em>, the Goldbergs are one of the four high monuments of Bach's output and arguably the supreme keyboard variation set in Western music — surpassed in scope only by Beethoven's <em>Diabelli</em> and perhaps Rzewski's <em>The People United</em>, both of which acknowledge it as ancestor.</p>
+</section>
+
+    <section id="sec8">
+  <h2><span class="secn">9</span>Performance Practice &amp; Notable Recordings</h2>
+<h3>Interpretive questions</h3>
+<ul>
+<li><strong>Instrument</strong>: harpsichord (Bach's specified instrument) vs. modern piano (universally accepted since Gould). Each has compelling arguments — harpsichord clarifies the two-manual hand-crossings and gives the canons their proper "etched" sound; piano allows dynamic shading and <em>cantabile</em> in slow variations.</li>
+<li><strong>Repeats</strong>: the work is in binary form with both sections repeated. With all repeats: ~75–90 min. Without: ~45–55. Gould 1955 takes no repeats; Hewitt and most modern players take them all. Many take selective repeats.</li>
+<li><strong>Tempi</strong>: nearly free, since Bach left almost no markings. Each performer constructs their own "tempo plan."</li>
+<li><strong>Ornamentation</strong>: Bach wrote many ornaments out; performers add tasteful additions, especially in repeats.</li>
+<li><strong>Tuning</strong> (on harpsichord): well-tempered systems like Vallotti, Werckmeister III, or Lehman-Bach give the G major brilliance and the G minor variations characteristic darkness.</li>
+</ul>
+<h3>Landmark recordings</h3>
+<ul>
+<li><strong>Wanda Landowska (1933, RCA)</strong> — the modern revival begins here. Pleyel harpsichord with its plummy, almost orchestral sound. Romantic, idiosyncratic, and historically pivotal.</li>
+<li><strong>Glenn Gould (1955, Columbia)</strong> — the recording that defines modern Goldberg consciousness. Lightning tempos, supreme articulation, vocal humming included. Polyphonic clarity that has never been surpassed. The Aria is fast and almost casual; Var. 25 is searing but unsentimental.</li>
+<li><strong>Glenn Gould (1981, CBS)</strong> — slower (Aria nearly twice as slow), more interior, every variation linked by tempo proportion. A different aesthetic universe. Gould's final statement.</li>
+<li><strong>Rosalyn Tureck</strong> (multiple recordings, 1957 onward) — the patient saint of Bach playing. Tempos slower than Gould, articulation incandescent, every voice unfailingly audible. The opposite pole.</li>
+<li><strong>Trevor Pinnock (1980, DG Archiv)</strong> — landmark historically-informed harpsichord performance: brisk, dancing, clear.</li>
+<li><strong>Pierre Hantaï (1992, Astrée; revisited 2003 Mirare)</strong> — possibly the finest modern harpsichord Goldbergs. Brilliant, rhetorical, with thrilling rhythmic vitality and a Var. 25 of devastating slowness.</li>
+<li><strong>András Schiff (1982 Decca, 2001 ECM live)</strong> — pianistic in the best sense: singing line, structural intelligence, full repeats with subtly varied ornamentation on repeats.</li>
+<li><strong>Murray Perahia (2000, Sony)</strong> — luminous, deeply musical, perhaps the most "humane" piano Goldbergs on record.</li>
+<li><strong>Angela Hewitt (1999, 2015, both Hyperion)</strong> — clarity, taste, comprehensive musicianship. Excellent for first-time pianistic immersion.</li>
+<li><strong>Lang Lang (2020, DG)</strong> — controversial but worth hearing for the extreme range of tempos and pianistic colorings.</li>
+<li><strong>Beatrice Rana (2017, Warner)</strong> — youthful, structurally sharp, with an electrifying Var. 26.</li>
+<li><strong>Víkingur Ólafsson (2023, DG)</strong> — the most-discussed Goldbergs of the 2020s: pianistically transparent, meditative, with an unusually probing Var. 25.</li>
+</ul>
+<h3>Recommendations by purpose</h3>
+<ul class="keyval">
+<li><span class="k">First listen, harpsichord</span><span>Hantaï (1992 or 2003).</span></li>
+<li><span class="k">First listen, piano</span><span>Perahia or Hewitt 1999.</span></li>
+<li><span class="k">For revelation</span><span>Gould 1981.</span></li>
+<li><span class="k">For pyrotechnics</span><span>Gould 1955 or Hantaï.</span></li>
+<li><span class="k">For meditative depth</span><span>Tureck, Gould 1981, or Ólafsson.</span></li>
+</ul>
+</section>
+
+    <section id="sec9">
+  <h2><span class="secn">10</span>Listening Guide</h2>
+<p>Timings approximate, based on a ~75-minute performance with most repeats (Hewitt, Hantaï tempo range). For Gould 1955 (no repeats, 38 min), halve them roughly.</p>
+<table>
+<thead><tr>
+<th>Time</th>
+<th>Movement</th>
+<th>What to listen for</th>
+</tr></thead>
+<tbody>
+<tr><td>0:00</td><td><strong>Aria</strong></td><td>The bass line is the theme — feel it under the ornaments. Note the sarabande pulse (weight on beat 2).</td></tr>
+<tr><td>~4:00</td><td><strong>Var. 1</strong></td><td>Energetic two-voice invention; first surge of variation energy.</td></tr>
+<tr><td>~6:00</td><td><strong>Var. 2</strong></td><td>Three-voice trio; the bass becomes melodically active.</td></tr>
+<tr><td>~8:00</td><td><strong>Var. 3 — Canon at the unison</strong></td><td>The first canon. Two upper voices imitate at the unison after one bar.</td></tr>
+<tr><td>~10:00</td><td><strong>Var. 5</strong></td><td>First two-manual virtuoso variation — hand-crossings, brilliant figuration.</td></tr>
+<tr><td>~12:00</td><td><strong>Var. 6 — Canon at the second</strong></td><td>Second voice enters a step higher.</td></tr>
+<tr><td>~16:00</td><td><strong>Var. 9 — Canon at the third</strong></td><td>Listen for the contrapuntal logic — every note of the upper voice will appear in the second voice a third higher.</td></tr>
+<tr><td>~20:00</td><td><strong>Var. 10 — Fughetta</strong></td><td>A miniature four-voice fugue. Pivot point of the first half.</td></tr>
+<tr><td>~25:00</td><td><strong>Var. 13</strong></td><td>First deeply lyrical moment — an aria-like singing line over arpeggiated accompaniment. The emotional heart of the first half.</td></tr>
+<tr><td>~30:00</td><td><strong>Var. 15 — Canon at the fifth (G minor, <em>inverted</em>)</strong></td><td><strong>Major structural moment.</strong> First minor-mode variation. The canon is in mirror motion. Ends on a quiet ascending open fifth — the first half "closes" with a question hanging in the air.</td></tr>
+<tr><td>~33:00</td><td><strong>Var. 16 — French Overture</strong></td><td><strong>The exact midpoint.</strong> Pomp, dotted rhythms, then a fugal allegro. The second act begins.</td></tr>
+<tr><td>~38:00</td><td><strong>Var. 18 — Canon at the sixth</strong></td><td>Tight, contrapuntally locked.</td></tr>
+<tr><td>~43:00</td><td><strong>Var. 21 — Canon at the seventh (G minor)</strong></td><td>Chromatic, mournful — the second minor variation.</td></tr>
+<tr><td>~46:00</td><td><strong>Var. 22 — Alla breve</strong></td><td>Serene chorale-like writing in 2/2. A moment of stillness.</td></tr>
+<tr><td>~50:00</td><td><strong>Var. 24 — Canon at the octave</strong></td><td>Voices in unison-octave imitation; pastoral.</td></tr>
+<tr><td>~54:00</td><td><strong>Var. 25 — "Black Pearl" (G minor, <em>Adagio</em>)</strong></td><td><strong>The emotional nadir.</strong> Listen for: chromatic descents, sigh figures, suspended dissonances. The longest variation in performance. This is the world's grief made keyboard music.</td></tr>
+<tr><td>~63:00</td><td><strong>Var. 26</strong></td><td><strong>Sudden rebirth.</strong> Polymetric: one hand in fast 18/16, the other in slow 3/4 sarabande. Listen for two musics happening at once.</td></tr>
+<tr><td>~66:00</td><td><strong>Var. 28</strong></td><td>Continuous trills cascade through the texture.</td></tr>
+<tr><td>~69:00</td><td><strong>Var. 29</strong></td><td>Chordal toccata — the work's kinetic peak. Heavy, almost orchestral.</td></tr>
+<tr><td>~72:00</td><td><strong>Var. 30 — Quodlibet</strong></td><td>Two folk tunes ("I've been so long away from you" and "Cabbage and turnips") weave through the bass. A family gathering. Humanity returns.</td></tr>
+<tr><td>~75:00</td><td><strong>Aria da Capo</strong></td><td>The same Aria as the opening, but you are not the same listener.</td></tr>
+</tbody></table>
+<h3>First-listen focus</h3>
+<p>Don't try to track every variation. Listen for:</p>
+<ol>
+<li>The opening Aria's character.</li>
+<li>Variation 15's ascending open fifth at its close (the first half ends with a question).</li>
+<li>Variation 25's chromatic anguish.</li>
+<li>Variation 30's folk tunes (the quodlibet — see if you can hear two melodies braid).</li>
+<li>The Aria da Capo — and ask yourself why it now feels different.</li>
+</ol>
+<h3>Deeper re-listen focus</h3>
+<ul>
+<li>Track the bass line under each variation. Sing or play it alongside. Hear how 30 different surfaces sit on the same skeleton.</li>
+<li>Listen to each canon (Vars. 3, 6, 9, 12, 15, 18, 21, 24, 27) and try to follow the imitative voice entries — the interval of imitation widens by one step each time.</li>
+<li>Compare Variations 13 and 25 as the two "great slow movements" — they share a sarabande inheritance but inhabit different emotional worlds.</li>
+<li>Compare the two Arias as bookends.</li>
+</ul>
+</section>
+
+    <section id="sec10">
+  <h2><span class="secn">11</span>Must-Listen Tracks</h2>
+<div class="mustlisten"><p>If you have only 15 minutes, listen to these two movements:</p>
+<h3><strong>Aria (opening) — Pierre Hantaï, 2003 (Mirare) or Murray Perahia, 2000 (Sony)</strong></h3>
+<p>The door of the entire work. Before knowing anything else, sit with the Aria's sarabande pulse and ornamental filigree. The whole 80-minute journey is encoded here — the bass line you are about to hear 30 different versions of, the harmonic plan, the emotional restraint. It's also one of the most beautiful single pieces of keyboard music ever written, full stop.</p>
+<h3><strong>Variation 25 ("Black Pearl") — Glenn Gould, 1981 (CBS) or Víkingur Ólafsson, 2023 (DG)</strong></h3>
+<p>If the Aria is the door, Var. 25 is the heart. Bach's deepest moment of harmonic anguish in any keyboard work — chromatic, suspended, weeping. It's the proof that the late Baroque was capable of expressive depths the Romantics liked to claim as their own invention. Gould's 1981 reading is glacial, interior, almost unbearable in its concentration; Ólafsson's 2023 reading is more architecturally lit but no less devastating. Either will tell you why this work matters.</p>
+<p>If you have a third movement to spare, add <strong>Variation 26</strong> (Pinnock or Hantaï) — the polymetric rebirth into G major immediately after the Var. 25 catastrophe. The contrast is one of the most thrilling juxtapositions in the entire repertoire.</p></div>
+</section>
+
+    <section id="sec11">
+  <h2><span class="secn">·</span>Coda</h2>
+<p>The Goldberg Variations are, in the end, a meditation disguised as a catalog. Bach takes a 32-bar harmonic ground — a stretch of musical real estate no larger than a small garden — and walks around it thirty times, in different lights, different weathers, different moods, with different companions. The work's hidden subject is not variation technique but <strong>the inexhaustibility of the familiar</strong>: that the same notes, the same plot of land, the same life, contain infinite worlds if you walk around them with sufficient attention. The Aria da Capo at the end is Bach's quiet insistence that you have not heard the same music twice. You have heard one music, and then you have lived a life, and now you are hearing it again.</p>
+</section>
+    <footer>
+      
+      <p>Companion to the Markdown analysis in the Obsidian vault at <code>Musical Analysis/Bach - Goldberg Variations BWV 988.md</code>.</p>
+      <p><a href="index.html">← back to music</a></p>
+    </footer>
+  </main>
+</div>
+</div>
+
+<script>
+  /* ---------- color palettes (Squarespace-style) ---------- */
+  const PALETTES = {
+    afternoon:{mode:'light',label:'Afternoon',v:{
+      '--bg':'#faf8f4','--panel':'#ffffff','--ink':'#1c1a17','--ink-soft':'#55504a','--ink-faint':'#8a8279',
+      '--line':'#e8e2d8','--line-strong':'#d8cfc0','--accent':'#9a5b2e','--accent-soft':'#f3e6d8','--accent-ink':'#7a4220',
+      '--gold':'#b8893b','--teal':'#2f6b6b','--code-bg':'#2b2722',
+      '--header-grad':'linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%)',
+      '--th-bg':'#f3ede3','--row-hover':'#fbf7f0','--epi-ink':'#5b3c20',
+      '--warm-bg':'#fbf3e2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f2f1','--cool-bd':'#bfdcda','--cool-ink':'#1f4f4f',
+      '--ml-grad':'linear-gradient(150deg,#fbf3e7,#f6e7d4)','--ml-bd':'#ebd7b8','--ml-ink':'#6b3f1c'}},
+    sage:{mode:'light',label:'Sage',v:{
+      '--bg':'#f5f7f2','--panel':'#ffffff','--ink':'#1c211a','--ink-soft':'#4e544a','--ink-faint':'#828a7c',
+      '--line':'#e3e8dc','--line-strong':'#d3dac8','--accent':'#5c7a52','--accent-soft':'#e6ede0','--accent-ink':'#3f592f',
+      '--gold':'#a98f3c','--teal':'#3a7a6b','--code-bg':'#1f2620',
+      '--header-grad':'linear-gradient(160deg,#1a231a 0%,#283a26 55%,#3a5232 100%)',
+      '--th-bg':'#edf1e7','--row-hover':'#f6f9f2','--epi-ink':'#3c4f30',
+      '--warm-bg':'#f4efdf','--warm-bd':'#e2dba9','--warm-ink':'#5f5520',
+      '--cool-bg':'#e6f1ec','--cool-bd':'#c0dccd','--cool-ink':'#1f4f3e',
+      '--ml-grad':'linear-gradient(150deg,#eef3e4,#e3ecd6)','--ml-bd':'#d2dcb8','--ml-ink':'#3f5224'}},
+    harbor:{mode:'light',label:'Harbor',v:{
+      '--bg':'#f4f6f9','--panel':'#ffffff','--ink':'#1a2026','--ink-soft':'#4b5560','--ink-faint':'#7d8794',
+      '--line':'#e1e7ec','--line-strong':'#cfd8e1','--accent':'#2f6690','--accent-soft':'#e0ebf2','--accent-ink':'#234e6b',
+      '--gold':'#b5862f','--teal':'#2f8682','--code-bg':'#192129',
+      '--header-grad':'linear-gradient(160deg,#121b24 0%,#1d2e3f 55%,#274a63 100%)',
+      '--th-bg':'#e9eef3','--row-hover':'#f4f8fb','--epi-ink':'#234e6b',
+      '--warm-bg':'#f6efe0','--warm-bd':'#e7d6b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e2eef2','--cool-bd':'#bcd6de','--cool-ink':'#1f4f55',
+      '--ml-grad':'linear-gradient(150deg,#e8f1f6,#dbe9f1)','--ml-bd':'#c2d6e4','--ml-ink':'#234e6b'}},
+    plum:{mode:'light',label:'Plum',v:{
+      '--bg':'#f8f5f8','--panel':'#ffffff','--ink':'#221c21','--ink-soft':'#564b54','--ink-faint':'#897e87',
+      '--line':'#e9e0e7','--line-strong':'#dccdd8','--accent':'#7d4a6b','--accent-soft':'#efe2ec','--accent-ink':'#5d3550',
+      '--gold':'#b07d3b','--teal':'#3a7a72','--code-bg':'#241c23',
+      '--header-grad':'linear-gradient(160deg,#201823 0%,#332338 55%,#4e2f53 100%)',
+      '--th-bg':'#f1e9f0','--row-hover':'#faf5f9','--epi-ink':'#5d3550',
+      '--warm-bg':'#f7efe2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f1f0','--cool-bd':'#c4d9d5','--cool-ink':'#1f4f48',
+      '--ml-grad':'linear-gradient(150deg,#f4e9f1,#ecdbe8)','--ml-bd':'#ddc4d6','--ml-ink':'#5d3550'}},
+    midnight:{mode:'dark',label:'Midnight',v:{
+      '--bg':'#0f1620','--panel':'#18212e','--ink':'#e8edf3','--ink-soft':'#a9b5c4','--ink-faint':'#6f7d8d',
+      '--line':'#25303f','--line-strong':'#34414f','--accent':'#5b9bd5','--accent-soft':'#1b2a3b','--accent-ink':'#9cc4e8',
+      '--gold':'#d2a85f','--teal':'#4db1a8','--code-bg':'#0b121b',
+      '--header-grad':'linear-gradient(160deg,#0b1220 0%,#13243a 55%,#1d3a5c 100%)',
+      '--th-bg':'#1f2a38','--row-hover':'#1d2735','--epi-ink':'#9cc4e8',
+      '--warm-bg':'#2a2418','--warm-bd':'#43381f','--warm-ink':'#e0b878',
+      '--cool-bg':'#11302d','--cool-bd':'#1f4a45','--cool-ink':'#7fd6cc',
+      '--ml-grad':'linear-gradient(150deg,#1c2a3b,#16222f)','--ml-bd':'#2c3f55','--ml-ink':'#9cc4e8'}},
+    charcoal:{mode:'dark',label:'Charcoal',v:{
+      '--bg':'#161514','--panel':'#201e1c','--ink':'#ece8e2','--ink-soft':'#b0a99f','--ink-faint':'#766f65',
+      '--line':'#2c2926','--line-strong':'#3a3631','--accent':'#c8895a','--accent-soft':'#2c2420','--accent-ink':'#e3a878',
+      '--gold':'#cda35e','--teal':'#5aada3','--code-bg':'#100f0e',
+      '--header-grad':'linear-gradient(160deg,#141210 0%,#241e18 55%,#3a2c20 100%)',
+      '--th-bg':'#25221f','--row-hover':'#211e1b','--epi-ink':'#e3a878',
+      '--warm-bg':'#2c2418','--warm-bd':'#443720','--warm-ink':'#e0b878',
+      '--cool-bg':'#1a2826','--cool-bd':'#2c4641','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#272019,#1d1814)','--ml-bd':'#3d3124','--ml-ink':'#e3a878'}},
+    forest:{mode:'dark',label:'Forest',v:{
+      '--bg':'#101713','--panel':'#18211b','--ink':'#e6ece6','--ink-soft':'#a6b3a6','--ink-faint':'#6e7c6e',
+      '--line':'#243029','--line-strong':'#324133','--accent':'#6fae7e','--accent-soft':'#1a2a20','--accent-ink':'#9fd3aa',
+      '--gold':'#cda35e','--teal':'#4fb0a0','--code-bg':'#0b110d',
+      '--header-grad':'linear-gradient(160deg,#0c1410 0%,#142a1d 55%,#1d4230 100%)',
+      '--th-bg':'#1d2922','--row-hover':'#1a241d','--epi-ink':'#9fd3aa',
+      '--warm-bg':'#28281a','--warm-bd':'#3f3f24','--warm-ink':'#d8b878',
+      '--cool-bg':'#16302a','--cool-bd':'#274a40','--cool-ink':'#7fd0bc',
+      '--ml-grad':'linear-gradient(150deg,#18271e,#132019)','--ml-bd':'#2a4231','--ml-ink':'#9fd3aa'}},
+    wine:{mode:'dark',label:'Wine',v:{
+      '--bg':'#1a1012','--panel':'#241619','--ink':'#f0e4e6','--ink-soft':'#c2a9af','--ink-faint':'#8c6f76',
+      '--line':'#321f24','--line-strong':'#43292f','--accent':'#c46b7e','--accent-soft':'#2e1a1f','--accent-ink':'#e49aa8',
+      '--gold':'#cda35e','--teal':'#5aa8a0','--code-bg':'#140c0e',
+      '--header-grad':'linear-gradient(160deg,#160c0e 0%,#2a141a 55%,#4a2230 100%)',
+      '--th-bg':'#2c1c20','--row-hover':'#271519','--epi-ink':'#e49aa8',
+      '--warm-bg':'#2e2418','--warm-bd':'#463720','--warm-ink':'#e0b878',
+      '--cool-bg':'#18302d','--cool-bd':'#2a4a45','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#2a181d,#201216)','--ml-bd':'#43272f','--ml-ink':'#e49aa8'}}
+  };
+
+  const root = document.documentElement;
+  function applyPalette(key){
+    const p = PALETTES[key]; if(!p) return;
+    for(const [k,val] of Object.entries(p.v)) root.style.setProperty(k,val);
+    root.setAttribute('data-mode', p.mode);
+    document.querySelectorAll('.pp-sw').forEach(b=>b.classList.toggle('active', b.dataset.pal===key));
+    try{ localStorage.setItem('faune-palette', key); }catch(e){}
+  }
+
+  // build swatches
+  const tick = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  for(const [key,p] of Object.entries(PALETTES)){
+    const btn = document.createElement('button');
+    btn.className = 'pp-sw'; btn.dataset.pal = key; btn.type = 'button';
+    btn.title = p.label;
+    btn.innerHTML =
+      '<div class="bars">'+
+        '<span style="background:'+p.v['--bg']+'"></span>'+
+        '<span style="background:'+p.v['--accent']+'"></span>'+
+        '<span style="background:'+p.v['--accent-ink']+'"></span>'+
+        '<span style="background:'+p.v['--gold']+'"></span>'+
+      '</div>'+
+      '<span class="nm">'+p.label+tick+'</span>';
+    btn.addEventListener('click', ()=>applyPalette(key));
+    document.getElementById(p.mode==='light'?'pp-light':'pp-dark').appendChild(btn);
+  }
+
+  // toggle panel
+  const picker = document.getElementById('picker');
+  const ppToggle = document.getElementById('ppToggle');
+  ppToggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = picker.classList.toggle('open');
+    ppToggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.addEventListener('click', (e)=>{
+    if(!picker.contains(e.target)) picker.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') picker.classList.remove('open'); });
+
+  // restore saved or honor OS dark preference
+  let saved=null; try{ saved = localStorage.getItem('faune-palette'); }catch(e){}
+  if(saved && PALETTES[saved]) applyPalette(saved);
+  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
+  else applyPalette('afternoon');
+
+  // active TOC highlighting
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const map = {};
+  links.forEach(a => { const id = a.getAttribute('href').slice(1); map[id] = a; });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = map[e.target.id];
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

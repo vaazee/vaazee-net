@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mendelssohn — Piano Trio No. 1 in D minor, Op. 49 · Musical Analysis</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --panel:#ffffff;
+    --ink:#1c1a17;
+    --ink-soft:#55504a;
+    --ink-faint:#8a8279;
+    --line:#e8e2d8;
+    --line-strong:#d8cfc0;
+    --accent:#9a5b2e;       /* warm terracotta — faun / afternoon heat */
+    --accent-soft:#f3e6d8;
+    --accent-ink:#7a4220;
+    --gold:#b8893b;
+    --teal:#2f6b6b;
+    --code-bg:#2b2722;
+    --green:#2f7d4f;
+    --amber:#b07d18;
+    --red:#a8392f;
+    /* themeable extras (overridden by JS palettes) */
+    --header-grad:linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%);
+    --th-bg:#f3ede3;
+    --row-hover:#fbf7f0;
+    --epi-ink:#5b3c20;
+    --warm-bg:#fbf3e2; --warm-bd:#ecd9b0; --warm-ink:#6b4e1e;
+    --cool-bg:#e8f2f1; --cool-bd:#bfdcda; --cool-ink:#1f4f4f;
+    --ml-grad:linear-gradient(150deg,#fbf3e7,#f6e7d4); --ml-bd:#ebd7b8; --ml-ink:#6b3f1c;
+    --radius:12px;
+    --shadow:0 1px 2px rgba(40,30,15,.04),0 6px 22px rgba(40,30,15,.06);
+  }
+  html{transition:none}
+  body,.card,table,.tldr,.callout,.mustlisten,nav.toc a,.svgcard,.pp-panel,.pp-toggle,.pp-sw{
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+    line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  /* ---- header ---- */
+  header.top{
+    background:var(--header-grad);
+    color:#f4ece1;position:relative;overflow:hidden;
+    border-bottom:3px solid var(--accent);
+  }
+  header.top .glow{position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(212,160,90,.35),transparent 65%);pointer-events:none;}
+  header.top .wrap{padding:46px 28px 40px;position:relative;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#d9b384;font-weight:600;margin:0 0 14px}
+  header.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;
+    font-size:40px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+  header.top h1 em{font-style:italic;color:#f0cfa0}
+  header.top .sub{font-size:17px;color:#d8cab8;margin:10px 0 0;max-width:760px}
+  .metarow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-size:13.5px;color:#cdbca6}
+  .metarow b{color:#f4ece1;font-weight:600}
+  .stamp{font-size:12px;color:#b39c80;margin-top:18px;font-family:"SF Mono",Menlo,monospace}
+
+  /* ---- layout ---- */
+  .layout{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0 80px;align-items:start}
+  nav.toc{position:sticky;top:24px;font-size:14px}
+  nav.toc .title{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 12px}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border-radius:7px;border-left:2px solid transparent;line-height:1.35}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+  nav.toc a .n{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;margin-right:7px}
+  nav.toc a.active{background:var(--accent-soft);color:var(--accent-ink);border-left-color:var(--accent)}
+
+  main{min-width:0}
+  section{margin:0 0 50px;scroll-margin-top:24px}
+  h2{font-family:Georgia,serif;font-size:25px;font-weight:600;letter-spacing:-.01em;
+    margin:0 0 4px;display:flex;align-items:baseline;gap:12px}
+  h2 .secn{font-size:14px;font-weight:700;color:#fff;background:var(--accent);
+    width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:-apple-system,system-ui;}
+  .lead{color:var(--ink-soft);margin:2px 0 22px 42px;font-size:15px}
+  h3{font-size:17px;font-weight:650;margin:26px 0 8px;color:var(--ink)}
+  p{margin:0 0 14px}
+  strong{font-weight:650}
+  a.inline{color:var(--accent-ink);text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+
+  /* ---- tl;dr box ---- */
+  .tldr{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow);margin-bottom:8px}
+  .tldr h2{font-size:18px;margin-bottom:10px}
+  .tldr p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+  .tldr p:last-child{margin-bottom:0}
+
+  blockquote.epi{margin:0 0 30px;padding:18px 24px;background:var(--accent-soft);
+    border-radius:var(--radius);font-family:Georgia,serif;font-style:italic;font-size:16px;color:var(--epi-ink)}
+  blockquote.epi .who{display:block;font-style:normal;font-family:-apple-system,system-ui;
+    font-size:13px;color:var(--accent-ink);margin-top:10px;font-weight:600}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 24px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin:6px 0}
+  .keyval{margin:0;padding:0;list-style:none}
+  .keyval li{display:grid;grid-template-columns:165px 1fr;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);margin:0}
+  .keyval li:last-child{border-bottom:none}
+  .keyval .k{color:var(--ink-faint);font-size:13.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+
+  /* ---- tables ---- */
+  table{width:100%;border-collapse:collapse;margin:6px 0 20px;font-size:14.5px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  th{background:var(--th-bg);text-align:left;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line-strong)}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--row-hover)}
+  td.sec{font-weight:650;color:var(--accent-ink);white-space:nowrap}
+  .time{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);white-space:nowrap}
+
+  /* ---- pull callout ---- */
+  .callout{border-radius:var(--radius);padding:16px 20px;margin:18px 0;font-size:15px;border:1px solid}
+  .callout.gold{background:var(--warm-bg);border-color:var(--warm-bd);color:var(--warm-ink)}
+  .callout.teal{background:var(--cool-bg);border-color:var(--cool-bd);color:var(--cool-ink)}
+  .callout .lbl{font-weight:700;text-transform:uppercase;font-size:11.5px;letter-spacing:.1em;display:block;margin-bottom:4px;opacity:.8}
+
+  /* ---- timeline ---- */
+  .tl{list-style:none;margin:8px 0 0;padding:0;position:relative}
+  .tl:before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+  .tl li{position:relative;padding:10px 0 10px 86px;margin:0}
+  .tl .t{position:absolute;left:0;top:11px;width:52px;text-align:right;font-family:"SF Mono",Menlo,monospace;
+    font-size:12.5px;color:var(--teal);font-weight:600}
+  .tl .dot{position:absolute;left:57px;top:15px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--accent)}
+  .tl li.peak .dot{background:var(--accent);width:14px;height:14px;left:56px;top:14px;box-shadow:0 0 0 4px var(--accent-soft)}
+  .tl b{color:var(--ink)}
+
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:2px 8px;border-radius:20px;vertical-align:middle}
+  .b-heart{background:#fbe3df;color:var(--red)}
+  .b-key{background:#e6efe9;color:var(--green)}
+
+  figure{margin:18px 0 24px}
+  figcaption{font-size:13px;color:var(--ink-faint);margin-top:10px;text-align:center;font-style:italic}
+  .svgcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  /* theme-aware SVG strokes/fills */
+  .svgcard svg .sv-axis{stroke:var(--line-strong)}
+  .svgcard svg .sv-grid{stroke:var(--line)}
+  .svgcard svg .sv-curve{stroke:var(--accent)}
+  .svgcard svg .sv-area{fill:var(--accent);opacity:.13}
+  .svgcard svg .sv-gold-line{stroke:var(--gold)}
+  .svgcard svg .sv-gold,.svgcard svg .sv-gold-dot{fill:var(--gold)}
+  .svgcard svg .sv-accent,.svgcard svg .sv-accent-dot{fill:var(--accent)}
+  .svgcard svg .sv-lbl{fill:var(--ink-soft)}
+  .svgcard svg .sv-faint{fill:var(--ink-faint)}
+
+  code{font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:5px}
+
+  /* ---- palette picker ---- */
+  .palette-picker{position:fixed;top:14px;right:14px;z-index:60;font-size:13px;
+    font-family:-apple-system,system-ui,sans-serif}
+  .pp-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    background:rgba(255,255,255,.92);color:#241c14;border:1px solid rgba(0,0,0,.12);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    padding:8px 13px;border-radius:30px;font-weight:600;font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,.16)}
+  .pp-toggle svg{display:block}
+  .pp-toggle .chev{transition:transform .2s ease}
+  .palette-picker.open .pp-toggle .chev{transform:rotate(180deg)}
+  .pp-panel{position:absolute;top:46px;right:0;width:248px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.22);padding:14px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);
+    transform-origin:top right;transition:opacity .16s ease,transform .16s ease,visibility .16s}
+  .palette-picker.open .pp-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+  .pp-group{margin-bottom:12px}
+  .pp-group:last-child{margin-bottom:0}
+  .pp-label{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 2px 8px}
+  .pp-label .ico{width:13px;height:13px;opacity:.7}
+  .pp-swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pp-sw{cursor:pointer;border:1.5px solid var(--line);background:var(--panel);
+    border-radius:10px;padding:7px;display:flex;flex-direction:column;gap:6px;text-align:left;
+    transition:border-color .15s,transform .1s}
+  .pp-sw:hover{transform:translateY(-1px)}
+  .pp-sw .bars{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .pp-sw .bars span{flex:1}
+  .pp-sw .nm{font-size:11.5px;font-weight:600;color:var(--ink-soft);display:flex;
+    align-items:center;justify-content:space-between;gap:4px}
+  .pp-sw.active{border-color:var(--accent)}
+  .pp-sw.active .nm{color:var(--ink)}
+  .pp-sw .tick{width:13px;height:13px;color:var(--accent);opacity:0}
+  .pp-sw.active .tick{opacity:1}
+
+  .rec{display:grid;grid-template-columns:1fr;gap:0}
+  .rec .who{font-weight:650;color:var(--accent-ink)}
+
+  .mustlisten{background:var(--ml-grad);border:1px solid var(--ml-bd);
+    border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow)}
+  .mustlisten h3{margin-top:0;font-family:Georgia,serif;font-size:20px;color:var(--ml-ink)}
+  .mustlisten .span{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--ink-faint);font-size:13.5px}
+  footer a{color:var(--accent-ink);text-decoration:none}
+
+  @media (max-width:720px){
+    .layout{grid-template-columns:1fr;gap:0;padding:24px 0 60px}
+    nav.toc{display:none}
+    .wrap{padding:0 18px}
+    header.top h1{font-size:30px}
+    header.top .wrap{padding:34px 18px 30px}
+    .keyval li{grid-template-columns:1fr;gap:2px}
+    .lead{margin-left:0}
+    h2{font-size:21px}
+    .palette-picker{top:10px;right:10px}
+    .pp-toggle .pp-txt{display:none}
+    .pp-toggle{padding:9px;border-radius:50%}
+    .pp-panel{width:230px}
+  }
+</style>
+</head>
+<body>
+
+<div class="palette-picker" id="picker">
+  <button class="pp-toggle" id="ppToggle" aria-expanded="false" aria-label="Change color theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    <span class="pp-txt">Theme</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pp-panel" role="menu" aria-label="Color palettes">
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>Light</span>
+      <div class="pp-swatches" id="pp-light"></div>
+    </div>
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark</span>
+      <div class="pp-swatches" id="pp-dark"></div>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <p class="eyebrow">Musical Analysis · Trio</p>
+    <h1>Piano Trio No. 1 in D minor, Op. 49</h1>
+    <p class="sub">Mendelssohn · 1839</p>
+    <div class="metarow">
+      <span><b>Composed</b> 1839</span>
+      <span><b>Premiere</b> February 1, 1840, at the Leipzig Gewandhaus, with Mendelssohn at the piano, F…</span>
+    </div>
+    <p class="stamp">Generated 2026-05-31 · musical-analysis</p>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <p class="title">Contents</p>
+    <a href="#tldr"><span class="n">·</span>In brief</a>
+    <a href="#sec0"><span class="n">1</span>Identity &amp; Context</a>
+    <a href="#sec1"><span class="n">2</span>Formal Structure</a>
+    <a href="#sec2"><span class="n">3</span>Melodic &amp; Thematic Content</a>
+    <a href="#sec3"><span class="n">4</span>Harmony &amp; Tonality</a>
+    <a href="#sec4"><span class="n">5</span>Rhythm, Meter &amp; Tempo</a>
+    <a href="#sec5"><span class="n">6</span>Orchestration, Texture &amp; Timbre</a>
+    <a href="#sec6"><span class="n">7</span>Emotional Arc &amp; Dramaturgy</a>
+    <a href="#sec7"><span class="n">8</span>Historical Significance &amp; Influence</a>
+    <a href="#sec8"><span class="n">9</span>Performance Practice &amp; Notable Recordings</a>
+    <a href="#sec9"><span class="n">10</span>Listening Guide</a>
+    <a href="#sec10"><span class="n">11</span>Must-Listen Tracks</a>
+  </nav>
+
+  <main>
+    <section id="tldr"><div class="tldr"><h2>In brief</h2><p>The trio sits at the peak of Mendelssohn's middle maturity, written between the <em>St. Paul</em> oratorio (1836) and the great years that would yield the Violin Concerto (1844), Octet revisions, and <em>Elijah</em> (1846). He was 30, music director of the Leipzig Gewandhaus, the most powerful conductor in Germany, and at the height of his powers as a pianist.</p></div></section>
+    <section id="sec0">
+  <h2><span class="secn">1</span>Identity &amp; Context</h2>
+<ul class="keyval">
+<li><span class="k">Full title</span><span>Piano Trio No. 1 in D minor, Op. 49, for piano, violin, and cello</span></li>
+<li><span class="k">Composer</span><span>Felix Mendelssohn (1809–1847)</span></li>
+<li><span class="k">Year of composition</span><span>1839 (completed September 23, 1839 in Frankfurt; revised early 1840 in Leipzig)</span></li>
+<li><span class="k">Premiere</span><span>February 1, 1840, at the Leipzig Gewandhaus, with Mendelssohn at the piano, Ferdinand David on violin, and Carl Wittmann on cello</span></li>
+<li><span class="k">Publication</span><span>1840, by Breitkopf &amp; Härtel</span></li>
+<li><span class="k">Dedicatee</span><span>Louis Spohr, the elder violinist-composer Mendelssohn revered</span></li>
+</ul>
+<p>The crucial backstory: Mendelssohn had drafted the trio over the summer of 1839, then showed it to his friend and fellow pianist-composer <strong>Ferdinand Hiller</strong>. Hiller, freshly returned from Paris, urged him to rewrite the piano part along more Lisztian/Chopinesque lines — more arpeggios, more brilliant figuration, more pianistic ambition. Mendelssohn, reluctantly at first ("I am content with the notes, and if I have a few ideas to add, why should I begin again?"), in fact did just that, recomposing the piano writing wholesale. The result is the most virtuosic piano-trio writing of the era, and the work Schumann promptly anointed in <em>Neue Zeitschrift für Musik</em> as "the master-trio of our time, as Beethoven's in B♭ and D, and Schubert's in E♭ were of their day. It is an exceedingly fine composition that will rejoice our grandchildren and great-grandchildren even in years to come… Mendelssohn is the <strong>Mozart of the nineteenth century</strong>, the most luminous musician, who has most clearly grasped the contradictions of our age and has been the first to reconcile them."</p>
+<p>That review essentially canonized the work on arrival — and Schumann was right. It is the central German piano trio of the romantic era.</p>
+</section>
+
+    <section id="sec1">
+  <h2><span class="secn">2</span>Formal Structure</h2>
+<p>A four-movement Classical layout, played in roughly <strong>28–32 minutes</strong>.</p>
+<h3>I. Molto allegro ed agitato — D minor — 4/4</h3>
+<p>Full sonata form, no slow introduction. The "agitato" is literal: the entire movement is in restless triplet- and sextuplet-driven motion.</p>
+<ul>
+<li><strong>mm. 1–35</strong> — First theme: cello sings a long-breathed, surging D-minor melody (the great singing-cello opening Brahms would never forget); piano accompanies with quiet rippling triplets; violin enters in canon at m. 13.</li>
+<li><strong>mm. 36–110</strong> — Transition: piano takes the lead with increasingly turbulent figuration, modulating toward A major.</li>
+<li><strong>mm. 111–179</strong> — Second theme group in A major / F major: a more lyrical, tender idea, again given to the cello first.</li>
+<li><strong>mm. 180–227</strong> — Closing material, codetta, exposition repeat (usually observed).</li>
+<li><strong>Development</strong> (~mm. 228–360) — fragmentary, contrapuntal, ranges through B♭, C minor, G minor; a famous passage of cello sustained notes against piano filigree.</li>
+<li><strong>Recapitulation</strong> (~mm. 361–500) — both themes return in D minor / D major regions.</li>
+<li><strong>Coda</strong> (~mm. 500–end) — a long peroration that intensifies the agitato, ending decisively in D minor.</li>
+</ul>
+<p>Tempo, meter, key are unbroken: the movement's drama comes entirely from harmonic and textural pressure.</p>
+<h3>II. Andante con moto tranquillo — B♭ major — 9/8 → 4/4 → 9/8</h3>
+<p>Ternary ABA' with coda, in the manner of one of Mendelssohn's own <em>Lieder ohne Worte</em> (Songs Without Words) — and indeed it is sometimes called the "Song Without Words" of the trio.</p>
+<ul>
+<li><strong>A (mm. 1–26)</strong> — Piano alone presents a quiet, hymn-like 9/8 melody. Strings enter at m. 13 and take it over.</li>
+<li><strong>B (mm. 27–55)</strong> — Shift to B♭ minor and a more agitated, chromatic middle section; meter clouded by cross-rhythms.</li>
+<li><strong>A' (mm. 56–end)</strong> — Return of the opening, now with strings doubling and ornamenting the piano line; serene coda.</li>
+</ul>
+<h3>III. Scherzo: Leggiero e vivace — D major — 6/8</h3>
+<p>This is the elf-scherzo Mendelssohn made his own, descended directly from the <em>Midsummer Night's Dream</em> scherzo and the Octet finale. Sonata-rondo with no contrasting Trio section.</p>
+<ul>
+<li><strong>A</strong> (D major) — feather-light staccato eighth-notes, perpetuum-mobile texture, virtually pianissimo throughout</li>
+<li><strong>B</strong> (A major / F♯ minor) — a second, slightly more lyrical idea, still gossamer</li>
+<li><strong>Development of A</strong></li>
+<li><strong>A returns</strong></li>
+<li><strong>Coda</strong> — vanishes into a whisper</li>
+</ul>
+<p>The brilliance is technical <em>and</em> atmospheric: the pianist plays nearly the entire movement in airy detached figuration that must sound effortless. Roughly 3:30 long — the shortest movement.</p>
+<h3>IV. Finale: Allegro assai appassionato — D minor → D major — 4/4</h3>
+<p>Sonata-rondo (or modified sonata form with a recurring refrain), the most expansive movement.</p>
+<ul>
+<li><strong>Refrain / first theme</strong> in D minor: a passionate, leaping idea launched by the piano, then taken up by the strings</li>
+<li><strong>Episode / second theme</strong> in F major: a broad chorale-like melody, almost Mendelssohn's Lutheran inheritance audibly speaking</li>
+<li><strong>Refrain returns</strong></li>
+<li><strong>Development</strong></li>
+<li><strong>Return of refrain</strong> in D minor</li>
+<li><strong>Second theme transformed</strong>, now in D major</li>
+<li><strong>Coda — Più presto</strong> in D major: a blazing apotheosis of the chorale theme, the trio's tragic minor finally yielding to triumphant major</li>
+</ul>
+<h3>Macro-architecture</h3>
+<p>D minor → B♭ major (submediant) → D major → D minor/major. The two outer movements are stormy and dramatic; the inner pair are intimate and elfin. The overall arc is the classic <em>per aspera ad astra</em> (through darkness to light) trajectory — D minor's grief finally redeemed by D major in the finale's final pages. The chorale-theme victory is structurally and emotionally the work's destination.</p>
+</section>
+
+    <section id="sec2">
+  <h2><span class="secn">3</span>Melodic &amp; Thematic Content</h2>
+<p>Mendelssohn's principal themes here are long-breathed, vocal, and almost always launched by the cello — an instrument he treats as the trio's lyric soul. The first-movement opening theme is among the most singable in chamber music: a stepwise descent and reascent shaped like a respiration, organized in two-bar units that grow into eight-bar paragraphs. The agitation comes not from the theme itself but from its accompanimental triplets, which never let it rest.</p>
+<p>Across movements there is little overt thematic recall, but there is a <strong>consistent melodic signature</strong>: stepwise contours, leaps of a sixth, frequent appoggiaturas leaning into resolution. The Andante's hymn melody and the Finale's chorale theme are clearly cousins — both are slow-moving, harmonized in close position, and feel like sacred music transposed into the chamber.</p>
+<p>The Scherzo theme is the exception: it isn't a melody so much as a <em>texture</em> — a stream of staccato eighths that resolves into harmonic shimmer. This is Mendelssohn's invented genre, and the theme exists to disappear.</p>
+</section>
+
+    <section id="sec3">
+  <h2><span class="secn">4</span>Harmony &amp; Tonality</h2>
+<p>Diatonic with rich chromatic shading; firmly tonal, but with the romantic mediant excursions Mendelssohn loved. The first movement's exposition moves D minor → F major (relative major) rather than the usual minor-mode dominant — a Schubertian touch. The Andante is in B♭ (♭VI of D minor), giving the slow movement a flat-side warmth that contrasts beautifully with the outer movements' sharp-side restlessness.</p>
+<p>The finale's tonal drama is the clearest: it sets up a battle between D minor and D major (parallel keys) and resolves it definitively only in the last 40 bars. The chorale theme first appears in F major, then returns transformed in D major — that thematic transformation is the structural and emotional climax of the entire trio.</p>
+<p>Cadentially, Mendelssohn is a master of the <em>evaded</em> cadence: passages drive toward an expected resolution, then slip sideways through a deceptive chord or a sudden modulation. The first-movement development is full of this — the harmony is constantly <em>almost</em> arriving.</p>
+<p>Chord vocabulary: diatonic with Neapolitans, augmented sixths, secondary dominants, and the occasional flat-mediant chord. Nothing as adventurous as Schumann or Chopin contemporaneously — Mendelssohn's idiom stays closer to Beethoven and Schubert — but the voice-leading is impeccable and the harmonic rhythm beautifully judged.</p>
+</section>
+
+    <section id="sec4">
+  <h2><span class="secn">5</span>Rhythm, Meter &amp; Tempo</h2>
+<p>The first movement's defining feature is <strong>rhythmic stratification</strong>: the singing themes float in long values over relentless piano triplets. This is the agitato. It creates a sense of two simultaneous musical times — the patient lyric line and the anxious accompaniment beneath it.</p>
+<p>The Andante's 9/8 is unusual for a slow movement — it gives the hymn a gently rocking, almost barcarolle quality, and Mendelssohn exploits the compound meter's flexibility to blur bar lines in the B section.</p>
+<p>The Scherzo's 6/8 is the elf-meter: light, dancing, dactylic, played at a tempo that requires the piano part to feel weightless. The Finale's 4/4 returns to driving common time, with the coda's <em>Più presto</em> ratcheting tempo for the final ascent.</p>
+<p>There are no metric modulations or asymmetric meters — Mendelssohn was not that kind of innovator — but his control of <em>rhythmic texture</em> is everywhere virtuosic.</p>
+</section>
+
+    <section id="sec5">
+  <h2><span class="secn">6</span>Orchestration, Texture &amp; Timbre</h2>
+<p>The instrumentation is the classical piano trio (violin, cello, piano), but Mendelssohn's writing for it is more pianistically demanding than any predecessor's. The 1839 revision pushed the piano part into Lisztian territory: extended arpeggio sweeps, rapid octaves, intricate filigree above and below the strings. The pianist is, frankly, doing about 60% of the work.</p>
+<p>But the <em>balance</em> is genius. Mendelssohn understands that piano figuration can support a string melody without smothering it if it stays in a different register and uses pedal sparingly. The result: textures that sound full and brilliant on the piano while leaving the cello and violin completely audible — the Beethoven <em>Archduke</em> problem solved.</p>
+<p>The cello is privileged throughout — almost every major theme is given to it first. The violin often serves as the cello's harmonic shadow or contrapuntal foil before getting its own turn. This is a trio in which the cellist is a co-protagonist, not a bass support.</p>
+<p>Timbral signatures: piano triplet shimmer in the first movement, hymn-textures in the Andante, gossamer staccato in the Scherzo, chorale octaves in the Finale's apotheosis. Each movement has a sound-world you would recognize in three seconds.</p>
+</section>
+
+    <section id="sec6">
+  <h2><span class="secn">7</span>Emotional Arc &amp; Dramaturgy</h2>
+<p>The trio's arc is a romantic drama in four acts:</p>
+<ol>
+<li><strong>Storm and longing</strong> — the first movement's agitato is unresolved struggle; the singing themes try to find peace, the triplets won't allow it.</li>
+<li><strong>Consolation</strong> — the Andante is an intimate prayer, the trio's emotional refuge.</li>
+<li><strong>Enchantment</strong> — the Scherzo is a brief escape into Mendelssohn's fairy world, weightless and unbothered.</li>
+<li><strong>Triumph</strong> — the Finale starts in renewed darkness but finds its way, through the chorale theme, to a hard-won D-major victory.</li>
+</ol>
+<p>The climax of the entire work is the final transformation of the chorale theme into D major in the Finale's coda. Every earlier movement has been preparing this — the unresolved D minor of the opening, the consoling hymn in B♭, the playful D-major Scherzo (which now reads as a foretaste of the finale's eventual key), all converge on this moment. When the chorale rings out in D major over the <em>Più presto</em> tempo, it is one of the most genuinely earned major-key conclusions in romantic chamber music.</p>
+</section>
+
+    <section id="sec7">
+  <h2><span class="secn">8</span>Historical Significance &amp; Influence</h2>
+<p>Schumann's review wasn't hype — this trio reset the genre. After 1840 every serious piano-trio composer (Schumann himself in 1847, Brahms in his B-major Trio of 1854, Saint-Saëns, Tchaikovsky, Dvořák, Fauré) wrote in its long shadow. The combination Mendelssohn established — virtuosic piano part, equal partnership for the strings, four-movement large-scale architecture, romantic harmonic palette inside Classical formal control — became the template.</p>
+<p><strong>Specific influences</strong>:</p>
+<ul>
+<li><strong>Brahms's</strong> B-major Trio Op. 8 (1854) opens with a cello-led singing melody over piano arpeggios — a direct homage to Op. 49's opening.</li>
+<li><strong>Tchaikovsky's</strong> Piano Trio in A minor (1882) inherits the virtuoso-piano model.</li>
+<li><strong>Dvořák's</strong> "Dumky" Trio and F-minor Trio sit inside the Mendelssohn-Brahms lineage.</li>
+<li>Schumann's three piano trios are explicit responses to Op. 49.</li>
+</ul>
+<p>Within Mendelssohn's own output, the trio is widely held to be his finest chamber work alongside the Octet (1825) and the late String Quartet in F minor Op. 80 (1847). It outshines the (still excellent) Piano Trio No. 2 in C minor Op. 66 of 1845 in popular reception and concert frequency.</p>
+<p>The 20th-century rediscovery of Mendelssohn (after Wagner's poisonous antisemitic dismissal of him had distorted his reception for decades) leaned heavily on this trio, the Octet, and the Violin Concerto as evidence that here was a major composer, not the salon miniaturist his detractors had tried to make him.</p>
+</section>
+
+    <section id="sec8">
+  <h2><span class="secn">9</span>Performance Practice &amp; Notable Recordings</h2>
+<p><strong>Interpretive questions</strong>:</p>
+<ul class="keyval">
+<li><span class="k">Exposition repeat in I</span><span>most modern performances observe it; some shorter recordings cut it.</span></li>
+<li><span class="k">Tempo of the Scherzo</span><span>Mendelssohn's <em>leggiero e vivace</em> invites real velocity, but the piano part must remain articulate — too fast and the filigree turns to mush. Around dotted quarter = 96–104 is typical.</span></li>
+<li><span class="k">Pedal in the piano</span><span>minimal in the Scherzo (clarity is everything), generous in the Andante, judicious in the outer movements where the triplet figuration needs to glitter rather than blur.</span></li>
+<li><span class="k">Cello sound in the opening</span><span>warm and full, but not overweight — the triplets need to be audible underneath.</span></li>
+</ul>
+<p><strong>Landmark recordings</strong>:</p>
+<ul>
+<li><strong>Beaux Arts Trio</strong> (Menahem Pressler, Daniel Guilet later Isidore Cohen, Bernard Greenhouse) — the reference set, recorded multiple times for Philips. Pressler's piano playing is the gold standard: brilliant, transparent, never showy. The 1965 stereo recording is the canonical one.</li>
+<li><strong>Trio Wanderer</strong> (Harmonia Mundi, 2009) — modern French clarity, beautifully balanced sound, fast tempos, light pedaling. Probably the best contemporary version.</li>
+<li><strong>Florestan Trio</strong> (Hyperion, 2003) — Susan Tomes' piano playing is exceptional; warm British chamber-music tradition.</li>
+<li><strong>Daniel Barenboim / Itzhak Perlman / Jacqueline du Pré</strong> (EMI, 1969) — the celebrity reading. Du Pré's cello playing in the slow movement is unforgettable; the whole performance is more romantic and rubato-heavy than the Beaux Arts.</li>
+<li><strong>Trio Wanderer</strong>'s closest competitor for modern HIP-influenced playing: <strong>Gould Piano Trio</strong> on Champs Hill, or <strong>Atos Trio</strong> on CAvi-Music.</li>
+<li>For a historical-instruments approach, <strong>Trio Goya</strong> on period instruments brings out a leaner, more Schubertian sonority.</li>
+</ul>
+<p>Performance tradition has generally moved in the past 30 years from heavily romantic, rubato-laden readings (Barenboim/Perlman/du Pré) toward lighter, more transparent, fleeter accounts (Trio Wanderer, Atos) — a broader shift in romantic-repertoire performance.</p>
+</section>
+
+    <section id="sec9">
+  <h2><span class="secn">10</span>Listening Guide</h2>
+<p>Timings approximate, based on a ~30-minute performance (Beaux Arts Trio, 1965).</p>
+<ul>
+<li><strong>0:00</strong> — Cello enters alone with the great D-minor theme, piano triplets rippling beneath. The famous opening.</li>
+<li><strong>1:00</strong> — Violin takes the theme; piano figuration intensifies.</li>
+<li><strong>3:30</strong> — Second theme (A major), again on cello; more tender, more songful.</li>
+<li><strong>5:30</strong> — Exposition repeat begins (if observed). If not, development starts here.</li>
+<li><strong>9:00</strong> — Development: contrapuntal working of the opening theme through remote keys.</li>
+<li><strong>11:30</strong> — Recapitulation: opening theme returns in D minor.</li>
+<li><strong>14:00</strong> — Coda; the agitato intensifies; cadence in D minor ends Movement I.</li>
+<li><strong>14:30</strong> — <strong>Andante</strong> begins. Piano alone with the hymn melody. Listen for the moment (around 15:30) when the strings enter and take the theme over — one of the most beautiful entrances in chamber music.</li>
+<li><strong>17:00</strong> — B section in B♭ minor; darker, more chromatic.</li>
+<li><strong>19:00</strong> — Return of the hymn, now with strings woven through.</li>
+<li><strong>21:00</strong> — <strong>Scherzo</strong> begins. Listen for how <em>quiet</em> it is — almost the entire movement pianissimo. The piano writing is a study in feather-touch articulation.</li>
+<li><strong>24:30</strong> — <strong>Finale</strong> begins. Piano launches the leaping D-minor refrain.</li>
+<li><strong>26:00</strong> — First appearance of the chorale theme (F major) — calm, broad, almost liturgical.</li>
+<li><strong>28:30</strong> — Refrain returns, then development.</li>
+<li><strong>30:00</strong> — <strong>The transformation</strong>: chorale theme returns in radiant D major. <em>Più presto</em> coda blazes to the end.</li>
+</ul>
+<p><strong>First-listen focus</strong>: just follow the cello. It launches every major theme; if you track its line, you have the trio's emotional spine. <strong>Re-listen focus</strong>: pay attention to the piano writing — particularly how Mendelssohn keeps brilliant figuration out of the strings' way. And listen for the chorale theme's journey across the finale: its tentative F-major appearance, its disappearances, its triumphant D-major return.</p>
+</section>
+
+    <section id="sec10">
+  <h2><span class="secn">11</span>Must-Listen Tracks</h2>
+<div class="mustlisten"><p>If you have only 10–15 minutes:</p>
+<p><strong>1. Movement IV — Finale: Allegro assai appassionato</strong> <em>(if you only listen to one thing)</em></p>
+<p>This is the trio's destination and its emotional argument. The opening D-minor turbulence, the F-major chorale that arrives like a consoling voice, the return to darkness, and finally the chorale's blazing D-major apotheosis in the <em>Più presto</em> coda — it's a complete drama in nine minutes. If the first movement is famous for its singing opening, the finale is famous for <em>earning</em> its ending, and that's the rarer achievement.</p>
+<p><em>Recommended recording</em>: <strong>Trio Wanderer</strong> (Harmonia Mundi, 2009). Their finale has the cleanest articulation of the chorale's voice-leading and the most decisive <em>Più presto</em> on record — you can hear the major-key triumph arrive as a structural event, not just a louder ending.</p>
+<p><strong>2. Movement II — Andante con moto tranquillo</strong> <em>(the alternate entry point)</em></p>
+<p>If you want Mendelssohn at his most lyrical — the <em>Lieder ohne Worte</em> composer translated into chamber music — start here. It is the simplest movement on the surface and the most quietly perfect.</p>
+<p><em>Recommended recording</em>: <strong>Barenboim / Perlman / du Pré</strong> (EMI, 1969), for Jacqueline du Pré's cello playing alone. Her tone in the string entrance after the piano's opening hymn is one of the great moments in recorded chamber music.</p></div>
+</section>
+    <footer>
+      
+      <p>Companion to the Markdown analysis in the Obsidian vault at <code>Musical Analysis/Mendelssohn - Piano Trio No. 1 in D minor, Op. 49.md</code>.</p>
+      <p><a href="index.html">← back to music</a></p>
+    </footer>
+  </main>
+</div>
+</div>
+
+<script>
+  /* ---------- color palettes (Squarespace-style) ---------- */
+  const PALETTES = {
+    afternoon:{mode:'light',label:'Afternoon',v:{
+      '--bg':'#faf8f4','--panel':'#ffffff','--ink':'#1c1a17','--ink-soft':'#55504a','--ink-faint':'#8a8279',
+      '--line':'#e8e2d8','--line-strong':'#d8cfc0','--accent':'#9a5b2e','--accent-soft':'#f3e6d8','--accent-ink':'#7a4220',
+      '--gold':'#b8893b','--teal':'#2f6b6b','--code-bg':'#2b2722',
+      '--header-grad':'linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%)',
+      '--th-bg':'#f3ede3','--row-hover':'#fbf7f0','--epi-ink':'#5b3c20',
+      '--warm-bg':'#fbf3e2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f2f1','--cool-bd':'#bfdcda','--cool-ink':'#1f4f4f',
+      '--ml-grad':'linear-gradient(150deg,#fbf3e7,#f6e7d4)','--ml-bd':'#ebd7b8','--ml-ink':'#6b3f1c'}},
+    sage:{mode:'light',label:'Sage',v:{
+      '--bg':'#f5f7f2','--panel':'#ffffff','--ink':'#1c211a','--ink-soft':'#4e544a','--ink-faint':'#828a7c',
+      '--line':'#e3e8dc','--line-strong':'#d3dac8','--accent':'#5c7a52','--accent-soft':'#e6ede0','--accent-ink':'#3f592f',
+      '--gold':'#a98f3c','--teal':'#3a7a6b','--code-bg':'#1f2620',
+      '--header-grad':'linear-gradient(160deg,#1a231a 0%,#283a26 55%,#3a5232 100%)',
+      '--th-bg':'#edf1e7','--row-hover':'#f6f9f2','--epi-ink':'#3c4f30',
+      '--warm-bg':'#f4efdf','--warm-bd':'#e2dba9','--warm-ink':'#5f5520',
+      '--cool-bg':'#e6f1ec','--cool-bd':'#c0dccd','--cool-ink':'#1f4f3e',
+      '--ml-grad':'linear-gradient(150deg,#eef3e4,#e3ecd6)','--ml-bd':'#d2dcb8','--ml-ink':'#3f5224'}},
+    harbor:{mode:'light',label:'Harbor',v:{
+      '--bg':'#f4f6f9','--panel':'#ffffff','--ink':'#1a2026','--ink-soft':'#4b5560','--ink-faint':'#7d8794',
+      '--line':'#e1e7ec','--line-strong':'#cfd8e1','--accent':'#2f6690','--accent-soft':'#e0ebf2','--accent-ink':'#234e6b',
+      '--gold':'#b5862f','--teal':'#2f8682','--code-bg':'#192129',
+      '--header-grad':'linear-gradient(160deg,#121b24 0%,#1d2e3f 55%,#274a63 100%)',
+      '--th-bg':'#e9eef3','--row-hover':'#f4f8fb','--epi-ink':'#234e6b',
+      '--warm-bg':'#f6efe0','--warm-bd':'#e7d6b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e2eef2','--cool-bd':'#bcd6de','--cool-ink':'#1f4f55',
+      '--ml-grad':'linear-gradient(150deg,#e8f1f6,#dbe9f1)','--ml-bd':'#c2d6e4','--ml-ink':'#234e6b'}},
+    plum:{mode:'light',label:'Plum',v:{
+      '--bg':'#f8f5f8','--panel':'#ffffff','--ink':'#221c21','--ink-soft':'#564b54','--ink-faint':'#897e87',
+      '--line':'#e9e0e7','--line-strong':'#dccdd8','--accent':'#7d4a6b','--accent-soft':'#efe2ec','--accent-ink':'#5d3550',
+      '--gold':'#b07d3b','--teal':'#3a7a72','--code-bg':'#241c23',
+      '--header-grad':'linear-gradient(160deg,#201823 0%,#332338 55%,#4e2f53 100%)',
+      '--th-bg':'#f1e9f0','--row-hover':'#faf5f9','--epi-ink':'#5d3550',
+      '--warm-bg':'#f7efe2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f1f0','--cool-bd':'#c4d9d5','--cool-ink':'#1f4f48',
+      '--ml-grad':'linear-gradient(150deg,#f4e9f1,#ecdbe8)','--ml-bd':'#ddc4d6','--ml-ink':'#5d3550'}},
+    midnight:{mode:'dark',label:'Midnight',v:{
+      '--bg':'#0f1620','--panel':'#18212e','--ink':'#e8edf3','--ink-soft':'#a9b5c4','--ink-faint':'#6f7d8d',
+      '--line':'#25303f','--line-strong':'#34414f','--accent':'#5b9bd5','--accent-soft':'#1b2a3b','--accent-ink':'#9cc4e8',
+      '--gold':'#d2a85f','--teal':'#4db1a8','--code-bg':'#0b121b',
+      '--header-grad':'linear-gradient(160deg,#0b1220 0%,#13243a 55%,#1d3a5c 100%)',
+      '--th-bg':'#1f2a38','--row-hover':'#1d2735','--epi-ink':'#9cc4e8',
+      '--warm-bg':'#2a2418','--warm-bd':'#43381f','--warm-ink':'#e0b878',
+      '--cool-bg':'#11302d','--cool-bd':'#1f4a45','--cool-ink':'#7fd6cc',
+      '--ml-grad':'linear-gradient(150deg,#1c2a3b,#16222f)','--ml-bd':'#2c3f55','--ml-ink':'#9cc4e8'}},
+    charcoal:{mode:'dark',label:'Charcoal',v:{
+      '--bg':'#161514','--panel':'#201e1c','--ink':'#ece8e2','--ink-soft':'#b0a99f','--ink-faint':'#766f65',
+      '--line':'#2c2926','--line-strong':'#3a3631','--accent':'#c8895a','--accent-soft':'#2c2420','--accent-ink':'#e3a878',
+      '--gold':'#cda35e','--teal':'#5aada3','--code-bg':'#100f0e',
+      '--header-grad':'linear-gradient(160deg,#141210 0%,#241e18 55%,#3a2c20 100%)',
+      '--th-bg':'#25221f','--row-hover':'#211e1b','--epi-ink':'#e3a878',
+      '--warm-bg':'#2c2418','--warm-bd':'#443720','--warm-ink':'#e0b878',
+      '--cool-bg':'#1a2826','--cool-bd':'#2c4641','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#272019,#1d1814)','--ml-bd':'#3d3124','--ml-ink':'#e3a878'}},
+    forest:{mode:'dark',label:'Forest',v:{
+      '--bg':'#101713','--panel':'#18211b','--ink':'#e6ece6','--ink-soft':'#a6b3a6','--ink-faint':'#6e7c6e',
+      '--line':'#243029','--line-strong':'#324133','--accent':'#6fae7e','--accent-soft':'#1a2a20','--accent-ink':'#9fd3aa',
+      '--gold':'#cda35e','--teal':'#4fb0a0','--code-bg':'#0b110d',
+      '--header-grad':'linear-gradient(160deg,#0c1410 0%,#142a1d 55%,#1d4230 100%)',
+      '--th-bg':'#1d2922','--row-hover':'#1a241d','--epi-ink':'#9fd3aa',
+      '--warm-bg':'#28281a','--warm-bd':'#3f3f24','--warm-ink':'#d8b878',
+      '--cool-bg':'#16302a','--cool-bd':'#274a40','--cool-ink':'#7fd0bc',
+      '--ml-grad':'linear-gradient(150deg,#18271e,#132019)','--ml-bd':'#2a4231','--ml-ink':'#9fd3aa'}},
+    wine:{mode:'dark',label:'Wine',v:{
+      '--bg':'#1a1012','--panel':'#241619','--ink':'#f0e4e6','--ink-soft':'#c2a9af','--ink-faint':'#8c6f76',
+      '--line':'#321f24','--line-strong':'#43292f','--accent':'#c46b7e','--accent-soft':'#2e1a1f','--accent-ink':'#e49aa8',
+      '--gold':'#cda35e','--teal':'#5aa8a0','--code-bg':'#140c0e',
+      '--header-grad':'linear-gradient(160deg,#160c0e 0%,#2a141a 55%,#4a2230 100%)',
+      '--th-bg':'#2c1c20','--row-hover':'#271519','--epi-ink':'#e49aa8',
+      '--warm-bg':'#2e2418','--warm-bd':'#463720','--warm-ink':'#e0b878',
+      '--cool-bg':'#18302d','--cool-bd':'#2a4a45','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#2a181d,#201216)','--ml-bd':'#43272f','--ml-ink':'#e49aa8'}}
+  };
+
+  const root = document.documentElement;
+  function applyPalette(key){
+    const p = PALETTES[key]; if(!p) return;
+    for(const [k,val] of Object.entries(p.v)) root.style.setProperty(k,val);
+    root.setAttribute('data-mode', p.mode);
+    document.querySelectorAll('.pp-sw').forEach(b=>b.classList.toggle('active', b.dataset.pal===key));
+    try{ localStorage.setItem('faune-palette', key); }catch(e){}
+  }
+
+  // build swatches
+  const tick = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  for(const [key,p] of Object.entries(PALETTES)){
+    const btn = document.createElement('button');
+    btn.className = 'pp-sw'; btn.dataset.pal = key; btn.type = 'button';
+    btn.title = p.label;
+    btn.innerHTML =
+      '<div class="bars">'+
+        '<span style="background:'+p.v['--bg']+'"></span>'+
+        '<span style="background:'+p.v['--accent']+'"></span>'+
+        '<span style="background:'+p.v['--accent-ink']+'"></span>'+
+        '<span style="background:'+p.v['--gold']+'"></span>'+
+      '</div>'+
+      '<span class="nm">'+p.label+tick+'</span>';
+    btn.addEventListener('click', ()=>applyPalette(key));
+    document.getElementById(p.mode==='light'?'pp-light':'pp-dark').appendChild(btn);
+  }
+
+  // toggle panel
+  const picker = document.getElementById('picker');
+  const ppToggle = document.getElementById('ppToggle');
+  ppToggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = picker.classList.toggle('open');
+    ppToggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.addEventListener('click', (e)=>{
+    if(!picker.contains(e.target)) picker.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') picker.classList.remove('open'); });
+
+  // restore saved or honor OS dark preference
+  let saved=null; try{ saved = localStorage.getItem('faune-palette'); }catch(e){}
+  if(saved && PALETTES[saved]) applyPalette(saved);
+  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
+  else applyPalette('afternoon');
+
+  // active TOC highlighting
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const map = {};
+  links.forEach(a => { const id = a.getAttribute('href').slice(1); map[id] = a; });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = map[e.target.id];
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

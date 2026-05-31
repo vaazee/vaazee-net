@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ravel — Piano Concerto in G Major, M. 83 · Musical Analysis</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --panel:#ffffff;
+    --ink:#1c1a17;
+    --ink-soft:#55504a;
+    --ink-faint:#8a8279;
+    --line:#e8e2d8;
+    --line-strong:#d8cfc0;
+    --accent:#9a5b2e;       /* warm terracotta — faun / afternoon heat */
+    --accent-soft:#f3e6d8;
+    --accent-ink:#7a4220;
+    --gold:#b8893b;
+    --teal:#2f6b6b;
+    --code-bg:#2b2722;
+    --green:#2f7d4f;
+    --amber:#b07d18;
+    --red:#a8392f;
+    /* themeable extras (overridden by JS palettes) */
+    --header-grad:linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%);
+    --th-bg:#f3ede3;
+    --row-hover:#fbf7f0;
+    --epi-ink:#5b3c20;
+    --warm-bg:#fbf3e2; --warm-bd:#ecd9b0; --warm-ink:#6b4e1e;
+    --cool-bg:#e8f2f1; --cool-bd:#bfdcda; --cool-ink:#1f4f4f;
+    --ml-grad:linear-gradient(150deg,#fbf3e7,#f6e7d4); --ml-bd:#ebd7b8; --ml-ink:#6b3f1c;
+    --radius:12px;
+    --shadow:0 1px 2px rgba(40,30,15,.04),0 6px 22px rgba(40,30,15,.06);
+  }
+  html{transition:none}
+  body,.card,table,.tldr,.callout,.mustlisten,nav.toc a,.svgcard,.pp-panel,.pp-toggle,.pp-sw{
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+    line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  /* ---- header ---- */
+  header.top{
+    background:var(--header-grad);
+    color:#f4ece1;position:relative;overflow:hidden;
+    border-bottom:3px solid var(--accent);
+  }
+  header.top .glow{position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(212,160,90,.35),transparent 65%);pointer-events:none;}
+  header.top .wrap{padding:46px 28px 40px;position:relative;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#d9b384;font-weight:600;margin:0 0 14px}
+  header.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;
+    font-size:40px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+  header.top h1 em{font-style:italic;color:#f0cfa0}
+  header.top .sub{font-size:17px;color:#d8cab8;margin:10px 0 0;max-width:760px}
+  .metarow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-size:13.5px;color:#cdbca6}
+  .metarow b{color:#f4ece1;font-weight:600}
+  .stamp{font-size:12px;color:#b39c80;margin-top:18px;font-family:"SF Mono",Menlo,monospace}
+
+  /* ---- layout ---- */
+  .layout{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0 80px;align-items:start}
+  nav.toc{position:sticky;top:24px;font-size:14px}
+  nav.toc .title{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 12px}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border-radius:7px;border-left:2px solid transparent;line-height:1.35}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+  nav.toc a .n{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;margin-right:7px}
+  nav.toc a.active{background:var(--accent-soft);color:var(--accent-ink);border-left-color:var(--accent)}
+
+  main{min-width:0}
+  section{margin:0 0 50px;scroll-margin-top:24px}
+  h2{font-family:Georgia,serif;font-size:25px;font-weight:600;letter-spacing:-.01em;
+    margin:0 0 4px;display:flex;align-items:baseline;gap:12px}
+  h2 .secn{font-size:14px;font-weight:700;color:#fff;background:var(--accent);
+    width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:-apple-system,system-ui;}
+  .lead{color:var(--ink-soft);margin:2px 0 22px 42px;font-size:15px}
+  h3{font-size:17px;font-weight:650;margin:26px 0 8px;color:var(--ink)}
+  p{margin:0 0 14px}
+  strong{font-weight:650}
+  a.inline{color:var(--accent-ink);text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+
+  /* ---- tl;dr box ---- */
+  .tldr{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow);margin-bottom:8px}
+  .tldr h2{font-size:18px;margin-bottom:10px}
+  .tldr p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+  .tldr p:last-child{margin-bottom:0}
+
+  blockquote.epi{margin:0 0 30px;padding:18px 24px;background:var(--accent-soft);
+    border-radius:var(--radius);font-family:Georgia,serif;font-style:italic;font-size:16px;color:var(--epi-ink)}
+  blockquote.epi .who{display:block;font-style:normal;font-family:-apple-system,system-ui;
+    font-size:13px;color:var(--accent-ink);margin-top:10px;font-weight:600}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 24px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin:6px 0}
+  .keyval{margin:0;padding:0;list-style:none}
+  .keyval li{display:grid;grid-template-columns:165px 1fr;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);margin:0}
+  .keyval li:last-child{border-bottom:none}
+  .keyval .k{color:var(--ink-faint);font-size:13.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+
+  /* ---- tables ---- */
+  table{width:100%;border-collapse:collapse;margin:6px 0 20px;font-size:14.5px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  th{background:var(--th-bg);text-align:left;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line-strong)}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--row-hover)}
+  td.sec{font-weight:650;color:var(--accent-ink);white-space:nowrap}
+  .time{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);white-space:nowrap}
+
+  /* ---- pull callout ---- */
+  .callout{border-radius:var(--radius);padding:16px 20px;margin:18px 0;font-size:15px;border:1px solid}
+  .callout.gold{background:var(--warm-bg);border-color:var(--warm-bd);color:var(--warm-ink)}
+  .callout.teal{background:var(--cool-bg);border-color:var(--cool-bd);color:var(--cool-ink)}
+  .callout .lbl{font-weight:700;text-transform:uppercase;font-size:11.5px;letter-spacing:.1em;display:block;margin-bottom:4px;opacity:.8}
+
+  /* ---- timeline ---- */
+  .tl{list-style:none;margin:8px 0 0;padding:0;position:relative}
+  .tl:before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+  .tl li{position:relative;padding:10px 0 10px 86px;margin:0}
+  .tl .t{position:absolute;left:0;top:11px;width:52px;text-align:right;font-family:"SF Mono",Menlo,monospace;
+    font-size:12.5px;color:var(--teal);font-weight:600}
+  .tl .dot{position:absolute;left:57px;top:15px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--accent)}
+  .tl li.peak .dot{background:var(--accent);width:14px;height:14px;left:56px;top:14px;box-shadow:0 0 0 4px var(--accent-soft)}
+  .tl b{color:var(--ink)}
+
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:2px 8px;border-radius:20px;vertical-align:middle}
+  .b-heart{background:#fbe3df;color:var(--red)}
+  .b-key{background:#e6efe9;color:var(--green)}
+
+  figure{margin:18px 0 24px}
+  figcaption{font-size:13px;color:var(--ink-faint);margin-top:10px;text-align:center;font-style:italic}
+  .svgcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  /* theme-aware SVG strokes/fills */
+  .svgcard svg .sv-axis{stroke:var(--line-strong)}
+  .svgcard svg .sv-grid{stroke:var(--line)}
+  .svgcard svg .sv-curve{stroke:var(--accent)}
+  .svgcard svg .sv-area{fill:var(--accent);opacity:.13}
+  .svgcard svg .sv-gold-line{stroke:var(--gold)}
+  .svgcard svg .sv-gold,.svgcard svg .sv-gold-dot{fill:var(--gold)}
+  .svgcard svg .sv-accent,.svgcard svg .sv-accent-dot{fill:var(--accent)}
+  .svgcard svg .sv-lbl{fill:var(--ink-soft)}
+  .svgcard svg .sv-faint{fill:var(--ink-faint)}
+
+  code{font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:5px}
+
+  /* ---- palette picker ---- */
+  .palette-picker{position:fixed;top:14px;right:14px;z-index:60;font-size:13px;
+    font-family:-apple-system,system-ui,sans-serif}
+  .pp-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    background:rgba(255,255,255,.92);color:#241c14;border:1px solid rgba(0,0,0,.12);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    padding:8px 13px;border-radius:30px;font-weight:600;font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,.16)}
+  .pp-toggle svg{display:block}
+  .pp-toggle .chev{transition:transform .2s ease}
+  .palette-picker.open .pp-toggle .chev{transform:rotate(180deg)}
+  .pp-panel{position:absolute;top:46px;right:0;width:248px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.22);padding:14px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);
+    transform-origin:top right;transition:opacity .16s ease,transform .16s ease,visibility .16s}
+  .palette-picker.open .pp-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+  .pp-group{margin-bottom:12px}
+  .pp-group:last-child{margin-bottom:0}
+  .pp-label{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 2px 8px}
+  .pp-label .ico{width:13px;height:13px;opacity:.7}
+  .pp-swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pp-sw{cursor:pointer;border:1.5px solid var(--line);background:var(--panel);
+    border-radius:10px;padding:7px;display:flex;flex-direction:column;gap:6px;text-align:left;
+    transition:border-color .15s,transform .1s}
+  .pp-sw:hover{transform:translateY(-1px)}
+  .pp-sw .bars{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .pp-sw .bars span{flex:1}
+  .pp-sw .nm{font-size:11.5px;font-weight:600;color:var(--ink-soft);display:flex;
+    align-items:center;justify-content:space-between;gap:4px}
+  .pp-sw.active{border-color:var(--accent)}
+  .pp-sw.active .nm{color:var(--ink)}
+  .pp-sw .tick{width:13px;height:13px;color:var(--accent);opacity:0}
+  .pp-sw.active .tick{opacity:1}
+
+  .rec{display:grid;grid-template-columns:1fr;gap:0}
+  .rec .who{font-weight:650;color:var(--accent-ink)}
+
+  .mustlisten{background:var(--ml-grad);border:1px solid var(--ml-bd);
+    border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow)}
+  .mustlisten h3{margin-top:0;font-family:Georgia,serif;font-size:20px;color:var(--ml-ink)}
+  .mustlisten .span{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--ink-faint);font-size:13.5px}
+  footer a{color:var(--accent-ink);text-decoration:none}
+
+  @media (max-width:720px){
+    .layout{grid-template-columns:1fr;gap:0;padding:24px 0 60px}
+    nav.toc{display:none}
+    .wrap{padding:0 18px}
+    header.top h1{font-size:30px}
+    header.top .wrap{padding:34px 18px 30px}
+    .keyval li{grid-template-columns:1fr;gap:2px}
+    .lead{margin-left:0}
+    h2{font-size:21px}
+    .palette-picker{top:10px;right:10px}
+    .pp-toggle .pp-txt{display:none}
+    .pp-toggle{padding:9px;border-radius:50%}
+    .pp-panel{width:230px}
+  }
+</style>
+</head>
+<body>
+
+<div class="palette-picker" id="picker">
+  <button class="pp-toggle" id="ppToggle" aria-expanded="false" aria-label="Change color theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    <span class="pp-txt">Theme</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pp-panel" role="menu" aria-label="Color palettes">
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>Light</span>
+      <div class="pp-swatches" id="pp-light"></div>
+    </div>
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark</span>
+      <div class="pp-swatches" id="pp-dark"></div>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <p class="eyebrow">Musical Analysis · Concerto</p>
+    <h1>Piano Concerto in G Major, M. 83</h1>
+    <p class="sub">Ravel · 1929–1931</p>
+    <div class="metarow">
+      <span><b>Composed</b> 1929–1931</span>
+      <span><b>Premiere</b> 14 January 1932, Salle Pleyel, Paris. Marguerite Long as soloist, Ravel condu…</span>
+      <span><b>Duration</b> ~22 minutes</span>
+    </div>
+    <p class="stamp">Generated 2026-05-31 · musical-analysis</p>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <p class="title">Contents</p>
+    <a href="#tldr"><span class="n">·</span>In brief</a>
+    <a href="#sec0"><span class="n">1</span>Identity &amp; Context</a>
+    <a href="#sec1"><span class="n">2</span>Formal Structure</a>
+    <a href="#sec2"><span class="n">3</span>Melodic &amp; Thematic Content</a>
+    <a href="#sec3"><span class="n">4</span>Harmony &amp; Tonality</a>
+    <a href="#sec4"><span class="n">5</span>Rhythm, Meter &amp; Tempo</a>
+    <a href="#sec5"><span class="n">6</span>Orchestration, Texture &amp; Timbre</a>
+    <a href="#sec6"><span class="n">7</span>Emotional Arc &amp; Dramaturgy</a>
+    <a href="#sec7"><span class="n">8</span>Historical Significance &amp; Influence</a>
+    <a href="#sec8"><span class="n">9</span>Performance Practice &amp; Notable Recordings</a>
+    <a href="#sec9"><span class="n">10</span>Listening Guide</a>
+    <a href="#sec10"><span class="n">11</span>Must-Listen Tracks</a>
+  </nav>
+
+  <main>
+    <section id="tldr"><div class="tldr"><h2>In brief</h2><p>Ravel composed the G major concerto in tandem with the darker, single-movement Piano Concerto for the Left Hand (commissioned by Paul Wittgenstein, who had lost his right arm in WWI). He originally intended to premiere the G major himself, but illness — the early stages of the neurological disease that would silence him — forced him to hand it to Long. He would never write another major work; this is essentially his last public utterance for the concert hall (the <em>Don Quichotte à Dulcinée</em> songs followed, then nothing).</p></div></section>
+    <section id="sec0">
+  <h2><span class="secn">1</span>Identity &amp; Context</h2>
+<ul class="keyval">
+<li><span class="k">Full title</span><span>Piano Concerto in G major, M. 83</span></li>
+<li><span class="k">Composer</span><span>Maurice Ravel (1875–1937)</span></li>
+<li><span class="k">Composed</span><span>1929–1931</span></li>
+<li><span class="k">Premiere</span><span>14 January 1932, Salle Pleyel, Paris. Marguerite Long as soloist, Ravel conducting the Orchestre Lamoureux.</span></li>
+<li><span class="k">Dedicated to</span><span>Marguerite Long</span></li>
+<li><span class="k">Duration</span><span>~22 minutes</span></li>
+<li><span class="k">Instrumentation</span><span>Solo piano; piccolo, flute, oboe, English horn, E-flat clarinet, B-flat clarinet, two bassoons, two horns, trumpet, trombone, timpani, percussion (triangle, snare drum, cymbals, bass drum, tam-tam, wood block, whip), harp, strings. A notably lean, "chamber-like" orchestra by concerto standards.</span></li>
+</ul>
+<p>Ravel was unambiguous about the aesthetic. He told an interviewer: <em>"The music of a concerto should be light-hearted and brilliant, and not aim at profundity or dramatic effects."</em> He invoked Mozart and Saint-Saëns as models, and explicitly rejected the Brahmsian "symphony with piano obbligato" tradition. This is divertissement raised to high art — Ravel's most sustained engagement with jazz, with Basque material, and with the kind of sun-bleached neoclassicism then in fashion in Paris.</p>
+<p>The historical moment matters. Paris in 1929–31 was Stravinsky's <em>Capriccio</em>, Poulenc's <em>Aubade</em>, Milhaud's <em>Création du monde</em>, Gershwin's tours (Ravel and Gershwin had famously met in 1928), the lingering afterglow of <em>Rhapsody in Blue</em>, and the explosion of Harlem jazz on European stages. All of it leaves audible fingerprints on the G major.</p>
+</section>
+
+    <section id="sec1">
+  <h2><span class="secn">2</span>Formal Structure</h2>
+<p>Three movements, fast–slow–fast, lasting roughly 8' / 9' / 4'. The disproportion is striking: the slow movement is the longest, the finale is a brief electric coda to the whole arc.</p>
+<h3>I. Allegramente (G major, ~8')</h3>
+<p>A free sonata form in cut time, opening with a whip-crack.</p>
+<ul class="keyval">
+<li><span class="k">Exposition (mm. 1–~110)</span><span>After the whip, the piccolo unfolds the <strong>first theme</strong> — a folk-like tune in G with a Basque lilt (Ravel was Basque on his mother's side). The piano enters with chromatic glissandi underneath, then takes up a <strong>second idea</strong>, a bluesy, slithering line with flatted thirds and sevenths. A <strong>third theme</strong>, lyrical and modally inflected, appears in the piano alone, marked <em>expressif</em>.</span></li>
+<li><span class="k">Development (~mm. 110–230)</span><span>Fragmentation, jazz-tinged contrapuntal play between piano and winds. Trumpet writing here flirts openly with Gershwin and with New Orleans blues.</span></li>
+<li><span class="k">Cadenza zone (~mm. 230–290)</span><span>Unusually, Ravel provides <strong>two cadenzas</strong> in sequence — first for harp (a Ravelian fingerprint), then for the piano, the latter built over a long trill in the right hand while the left hand reprises themes. This is a near-direct homage to the Saint-Saëns concertos.</span></li>
+<li><span class="k">Recapitulation and coda (~mm. 290–end)</span><span>Compressed, brilliant, ending on a glittering G major.</span></li>
+</ul>
+<h3>II. Adagio assai (E major, then C-sharp minor inflections, ~9')</h3>
+<p>Ternary (A–B–A') with a single, unbroken arc. In 3/4, marked <em>Adagio assai</em>.</p>
+<ul class="keyval">
+<li><span class="k">A (mm. 1–34)</span><span>The piano enters <strong>alone</strong>, unaccompanied, with a 34-measure melody of breathtaking length and apparent simplicity. The accompaniment in the left hand is a quiet 3/4 ostinato in dotted-quarter / eighth groupings — meaning the melody (notated in 3/4 with a clear three-beat metric pulse) floats over a left hand in an implied 6/8. The right hand is in three, the left is in six. This metric dissonance is the structural secret of the entire movement.</span></li>
+<li><span class="k">B (mm. 34–~75)</span><span>Orchestra enters subtly — flute, then strings — taking over fragments of the melody while the piano begins to ornament, decorate, and finally accompany itself. The harmony grows more chromatic; brief tonicizations of mediant and submediant keys.</span></li>
+<li><span class="k">A' / coda (~mm. 75–end)</span><span>The English horn reclaims the melody (one of the most famous English horn solos in the repertoire) while the piano weaves filigree above. The movement dissolves rather than cadences.</span></li>
+</ul>
+<p>Ravel famously told Long that this melody, which sounds inevitable, came "two bars at a time" with terrible labor: <em>"That flowing phrase! How I worked over it bar by bar! It nearly killed me!"</em> The model, he admitted, was the Larghetto of Mozart's Clarinet Quintet, K. 581.</p>
+<h3>III. Presto (G major, ~4')</h3>
+<p>A scherzando rondo / perpetuum mobile in 2/4, the shortest movement.</p>
+<ul class="keyval">
+<li><span class="k">Fanfare opening</span><span>Four sharp chords from the piano announce the movement.</span></li>
+<li><span class="k">Refrain</span><span>A breakneck moto perpetuo in the piano (sixteenths) over orchestral interjections from clarinet, bassoon, trombone, and percussion.</span></li>
+<li><span class="k">Episodes</span><span>Jazz-inflected wind solos — particularly piccolo, E-flat clarinet, trombone glissandi — punctuated by snare drum.</span></li>
+<li><span class="k">Coda</span><span>Compressed return of the refrain, closing on a tonic chord with the same percussive snap as the whip that opened the work.</span></li>
+</ul>
+<h3>Macro-architecture</h3>
+<p>The three movements form an arc of acceleration: a brilliant outer movement, an inner movement of impossible stillness, then an even faster outer movement to release the tension. Key scheme is straightforward (G — E — G), with the Adagio's distant E major (♭VI from G's enharmonic perspective is more naturally read as mediant) providing tonal repose. The unifying gesture is <em>the bright sonic surface</em>: piccolo, harp, glockenspiel-like piano writing, percussion — Ravel's "watchmaker" orchestration applied to American material.</p>
+</section>
+
+    <section id="sec2">
+  <h2><span class="secn">3</span>Melodic &amp; Thematic Content</h2>
+<p><strong>Movement I themes</strong>:</p>
+<ul>
+<li><em>Piccolo theme</em>: pentatonic, dancelike, with a Basque modal flavor. Spans a tenth, mostly stepwise.</li>
+<li><em>Bluesy piano theme</em>: built on a flat-7 inflection over G; obvious Gershwin DNA.</li>
+<li><em>Lyrical piano theme</em>: modal (Dorian-leaning), in long-breathed phrases. This is the only "serious" lyric utterance in the outer movements.</li>
+</ul>
+<p><strong>Movement II theme</strong>: One of the longest single-breath melodies Ravel ever wrote — 34 bars before the orchestra enters. It is almost entirely diatonic in E major, with rare chromatic neighbor tones. Its genius is rhythmic: the right hand's three-beat phrasing constantly fights against the left hand's compound-time accompaniment, creating a feeling of <em>suspended forward motion</em> — neither pushing nor resting.</p>
+<p><strong>Movement III</strong>: motivic rather than thematic — built on rhythmic cells (snap chords, sixteenth-note runs, slide gestures) rather than memorable tunes.</p>
+<p>Thematic transformation across movements is minimal — these are three self-contained character pieces, not a cyclic structure.</p>
+</section>
+
+    <section id="sec3">
+  <h2><span class="secn">4</span>Harmony &amp; Tonality</h2>
+<p>Ravel's harmonic language here is <strong>tonal but spiced with blue notes, modal mixture, and added-note chords</strong>. Specific features:</p>
+<ul>
+<li><strong>Blue thirds and sevenths</strong> are systemic, especially in Mvt. I. The bluesy second theme is built on a flat-7 against a G major triad — a sonority pulled directly from jazz harmony.</li>
+<li><strong>Bitonality</strong> appears briefly: the opening of Mvt. I has piccolo material in G against piano figuration that flirts with F-sharp.</li>
+<li><strong>Added-sixth, added-ninth chords</strong> color cadential moments in all movements — particularly the famously gentle E major chords of Mvt. II.</li>
+<li><strong>Modal mixture</strong> between major and minor is constant; the lyrical themes lean Dorian.</li>
+<li><strong>Key plan</strong>: G → E (♭VI / III depending on spelling) → G. The E major of the Adagio is heard as a "sunset" key — distant, warm, not dramatically opposed.</li>
+<li><strong>Cadences are often softened or dissolved</strong> rather than emphatically closed. Mvt. II's ending is a slow disintegration over a tonic pedal.</li>
+</ul>
+</section>
+
+    <section id="sec4">
+  <h2><span class="secn">5</span>Rhythm, Meter &amp; Tempo</h2>
+<p>The concerto's rhythmic personality is its most underrated feature.</p>
+<ul>
+<li><strong>Mvt. I</strong> is in cut time, but Ravel constantly disrupts the duple feel with hemiolas, syncopations, and jazz back-beats. The bluesy theme in particular has the off-beat accents of a Harlem stride pianist.</li>
+<li><strong>Mvt. II's metric dissonance</strong> (3/4 melody over 6/8 accompaniment) is the most discussed compositional choice in the work. The hands literally agree on the bar line but disagree on every beat within it, which is why the melody sounds suspended in zero gravity.</li>
+<li><strong>Mvt. III</strong> is a strict 2/4 perpetuum mobile, but the orchestration plays games with metric grouping — three-against-two, four-against-three figures appear constantly in the wind interjections.</li>
+</ul>
+<p>Tempo discipline matters enormously. The Adagio is marked <em>Adagio assai</em>, and conductors who push it lose the floating quality entirely. The Presto demands sixteenths at roughly ♩ = 152, which is at the edge of human possibility for the piano writing.</p>
+</section>
+
+    <section id="sec5">
+  <h2><span class="secn">6</span>Orchestration, Texture &amp; Timbre</h2>
+<p>This is the Ravel of <em>L'Enfant et les sortilèges</em> and <em>Boléro</em> — a colorist working with surgical precision.</p>
+<ul>
+<li><strong>Lean forces</strong>: double winds plus harp, no second trombone or tuba. The orchestra is closer to Stravinsky's <em>Pulcinella</em> than to a late-Romantic concerto.</li>
+<li><strong>Soloistic wind writing</strong>: the piccolo opens Mvt. I, the English horn carries the melody at the end of Mvt. II, the E-flat clarinet snarls in Mvt. III. Every wind player has a starring moment.</li>
+<li><strong>Harp</strong> is treated as a <em>second soloist</em>. Ravel gives it a cadenza in Mvt. I — a famous fingerprint.</li>
+<li><strong>Percussion</strong> is jazz-band-influenced: snare drum, wood block, whip, slap. These are not orchestral colors; they are café-band colors.</li>
+<li><strong>Piano writing</strong> alternates between glassy, music-box filigree (Mvt. II's right-hand decoration over the English horn) and machine-gun virtuosity (Mvt. III). Ravel rarely lets the piano "sing" Romantically — he treats it more as a percussion-resonator hybrid.</li>
+<li><strong>Dynamics</strong>: the loudest moments are tutti chords lasting a beat or two; sustained fortissimo is avoided. Most of the work sits in mp–mf.</li>
+</ul>
+</section>
+
+    <section id="sec6">
+  <h2><span class="secn">7</span>Emotional Arc &amp; Dramaturgy</h2>
+<p>The concerto refuses the heroic narrative. There is no struggle, no triumph, no transcendence. Instead:</p>
+<ul>
+<li><strong>Mvt. I</strong> is <em>brilliant outdoor music</em>: a parade, a fairground, sun on water. The bluesy second theme injects a knowing, citified melancholy — Paris remembering its trip to Manhattan.</li>
+<li><strong>Mvt. II</strong> is the emotional center: not tragic, not lamenting, but a kind of clear-eyed serenity. Adorno called Ravel's melancholy "the smile of someone who has already accepted everything." Knowing this was composed by a man whose mind was beginning to fail, it is hard not to hear the Adagio as a private leave-taking.</li>
+<li><strong>Mvt. III</strong> is a deliberate refusal of valediction. After the Adagio's stillness, Ravel slams the door, runs out into the street, and ends in the middle of a laugh.</li>
+</ul>
+<p>The dramaturgy is therefore <em>trinitarian</em> rather than <em>teleological</em>: three irreconcilable moods juxtaposed without resolution.</p>
+</section>
+
+    <section id="sec7">
+  <h2><span class="secn">8</span>Historical Significance &amp; Influence</h2>
+<p>What was new:</p>
+<ul>
+<li><strong>First major French concerto to absorb jazz as structural language</strong>, not just exotic color. Gershwin's <em>Concerto in F</em> (1925) preceded it, but Ravel's synthesis of jazz with French neoclassical clarity is unique.</li>
+<li><strong>The Adagio's metric dissonance</strong> has been studied as a model of how to write a "modern" slow movement that is neither expressionist nor sentimental.</li>
+<li><strong>The two-cadenza structure in Mvt. I</strong> (harp, then piano) revived a Baroque/Classical concerto-grosso idea against the prevailing Romantic-cadenza tradition.</li>
+</ul>
+<p>Reception was strong from the start. Marguerite Long toured the work across Europe in 1932 — over twenty performances in a single year. It entered the standard repertoire immediately and has never left. Today it is, with the Left Hand Concerto, one of the two most-performed French piano concertos of the 20th century.</p>
+<p>Influence is harder to pin down because Ravel founded no school, but its DNA is audible in: Poulenc's piano concertos, Bernstein's <em>Age of Anxiety</em> (especially the jazz-inflected outer sections), and a great deal of mid-century film scoring (Henry Mancini was an avowed admirer).</p>
+</section>
+
+    <section id="sec8">
+  <h2><span class="secn">9</span>Performance Practice &amp; Notable Recordings</h2>
+<p>Interpretive questions cluster around three points:</p>
+<ol>
+<li><strong>Tempo of the Adagio</strong>. Ravel marked it <em>Adagio assai</em>. Many performers drag it; the music wants stillness, not slowness.</li>
+<li><strong>Swing or no swing</strong>. The blue-note material is jazz-derived but written in straight rhythms. Performers who add too much swing destroy Ravel's classicism; those who play it as pure French neoclassicism miss the joke.</li>
+<li><strong>Soloist's relationship to the orchestra</strong>. This is <em>not</em> a soloist-vs-orchestra concerto. It is chamber music with a piano in the middle. Recordings that treat it as a virtuoso vehicle (and there are many) flatten its character.</li>
+</ol>
+<p><strong>Landmark recordings</strong>:</p>
+<ul>
+<li><strong>Marguerite Long / Ravel / Orchestre Symphonique</strong> (1932, Pearl/Naxos Historical). The dedicatee's premiere-era recording with Ravel supervising. Sound is primitive, interpretive authority is total. The Adagio's tempo here is faster than most modern accounts — a crucial data point.</li>
+<li><strong>Samson François / André Cluytens / Paris Conservatoire Orchestra</strong> (1959, EMI). The classic French reading: elegant, witty, the Adagio limpid rather than tearful. The benchmark.</li>
+<li><strong>Martha Argerich / Claudio Abbado / Berlin Philharmonic</strong> (1984, DG). Argerich's pianism is supernaturally clean and rhythmically alive; Abbado matches her in the Adagio with the most beautifully shaped English horn solo on record. This is the most-recommended modern version.</li>
+<li><strong>Krystian Zimerman / Pierre Boulez / Cleveland Orchestra</strong> (1994, DG). Boulez's analytic ear illuminates every detail of the orchestration; Zimerman finds the perfect chamber-music balance. The reference recording for clarity.</li>
+<li><strong>Hélène Grimaud / David Zinman / Baltimore Symphony</strong> (1997, Erato). A more Romantic, expansive reading; the Adagio is the slowest of these five but never sentimental.</li>
+</ul>
+</section>
+
+    <section id="sec9">
+  <h2><span class="secn">10</span>Listening Guide</h2>
+<p>Approximate timings based on the Argerich/Abbado recording (~22:30 total):</p>
+<p><strong>Mvt. I — Allegramente (~8:00)</strong></p>
+<ul>
+<li>0:00 — The whip-crack. Piccolo enters with the Basque-flavored first theme.</li>
+<li>0:30 — Piano enters with chromatic glissandi, then takes up the bluesy second theme. Listen for the flatted thirds.</li>
+<li>2:00 — Lyrical third theme in the piano alone, <em>expressif</em>.</li>
+<li>4:00 — Development: jazz-inflected exchanges with the trumpet (overt Gershwin homage around 4:30).</li>
+<li>6:00 — Harp cadenza, then piano cadenza built over a long trill.</li>
+<li>7:20 — Compressed recap, brilliant coda.</li>
+</ul>
+<p><strong>Mvt. II — Adagio assai (~9:30)</strong></p>
+<ul>
+<li>0:00 — Piano alone. Listen for the right-hand melody in 3/4 over the left-hand accompaniment in implied 6/8. This is the structural secret of the movement.</li>
+<li>3:30 — Orchestra enters subtly, flute first.</li>
+<li>6:30 — English horn takes the melody. Piano weaves filigree above — one of the most exquisite moments in the orchestral repertoire.</li>
+<li>8:30 — Slow dissolution over a tonic pedal.</li>
+</ul>
+<p><strong>Mvt. III — Presto (~4:00)</strong></p>
+<ul>
+<li>0:00 — Four sharp piano chords.</li>
+<li>0:05 — Sixteenth-note moto perpetuo begins. Don't try to follow themes — feel the groove.</li>
+<li>1:30 — E-flat clarinet snarl, trombone glissandi.</li>
+<li>3:00 — Compressed return.</li>
+<li>3:50 — Final tonic chord, snapped shut.</li>
+</ul>
+<p><strong>First-listen focus</strong>: Surrender to the surface. Let the colors and the energy carry you. <strong>Re-listen focus</strong>: In Mvt. II, conduct in 3 with your right hand and in 6 with your left while listening to the piano's opening solo. The metric dissonance becomes physically tangible.</p>
+</section>
+
+    <section id="sec10">
+  <h2><span class="secn">11</span>Must-Listen Tracks</h2>
+<div class="mustlisten"><p><strong>Movement II — Adagio assai</strong></p>
+<p>If you only have ten minutes with this concerto, spend them here. The Adagio is the keystone of the work and one of the supreme slow movements of the 20th century — a 34-bar unaccompanied piano melody of seemingly impossible naturalness that Ravel agonized over for weeks, set above a left-hand accompaniment in a different meter from the right hand, and crowned by an English horn solo that takes back the tune while the piano spins filigree overhead. It is also the movement that hides Ravel's biographical wound most clearly: this was the last great melody he wrote before illness silenced him. Everything Ravel was — the watchmaker precision, the emotional reserve over a deep well of feeling, the absolute mastery of orchestral color — is here in a single arc.</p>
+<p><strong>Recommended recording for this movement</strong>: <strong>Martha Argerich with Claudio Abbado and the Berlin Philharmonic (DG, 1984)</strong>. Argerich's opening solo is perfectly paced — <em>adagio assai</em>, not funereal — and the Berlin Philharmonic's English horn at the recapitulation is heart-stopping. If you want a single-take entry into Ravel as a composer, this is it.</p></div>
+</section>
+    <footer>
+      
+      <p>Companion to the Markdown analysis in the Obsidian vault at <code>Musical Analysis/Ravel - Piano Concerto in G Major.md</code>.</p>
+      <p><a href="index.html">← back to music</a></p>
+    </footer>
+  </main>
+</div>
+</div>
+
+<script>
+  /* ---------- color palettes (Squarespace-style) ---------- */
+  const PALETTES = {
+    afternoon:{mode:'light',label:'Afternoon',v:{
+      '--bg':'#faf8f4','--panel':'#ffffff','--ink':'#1c1a17','--ink-soft':'#55504a','--ink-faint':'#8a8279',
+      '--line':'#e8e2d8','--line-strong':'#d8cfc0','--accent':'#9a5b2e','--accent-soft':'#f3e6d8','--accent-ink':'#7a4220',
+      '--gold':'#b8893b','--teal':'#2f6b6b','--code-bg':'#2b2722',
+      '--header-grad':'linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%)',
+      '--th-bg':'#f3ede3','--row-hover':'#fbf7f0','--epi-ink':'#5b3c20',
+      '--warm-bg':'#fbf3e2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f2f1','--cool-bd':'#bfdcda','--cool-ink':'#1f4f4f',
+      '--ml-grad':'linear-gradient(150deg,#fbf3e7,#f6e7d4)','--ml-bd':'#ebd7b8','--ml-ink':'#6b3f1c'}},
+    sage:{mode:'light',label:'Sage',v:{
+      '--bg':'#f5f7f2','--panel':'#ffffff','--ink':'#1c211a','--ink-soft':'#4e544a','--ink-faint':'#828a7c',
+      '--line':'#e3e8dc','--line-strong':'#d3dac8','--accent':'#5c7a52','--accent-soft':'#e6ede0','--accent-ink':'#3f592f',
+      '--gold':'#a98f3c','--teal':'#3a7a6b','--code-bg':'#1f2620',
+      '--header-grad':'linear-gradient(160deg,#1a231a 0%,#283a26 55%,#3a5232 100%)',
+      '--th-bg':'#edf1e7','--row-hover':'#f6f9f2','--epi-ink':'#3c4f30',
+      '--warm-bg':'#f4efdf','--warm-bd':'#e2dba9','--warm-ink':'#5f5520',
+      '--cool-bg':'#e6f1ec','--cool-bd':'#c0dccd','--cool-ink':'#1f4f3e',
+      '--ml-grad':'linear-gradient(150deg,#eef3e4,#e3ecd6)','--ml-bd':'#d2dcb8','--ml-ink':'#3f5224'}},
+    harbor:{mode:'light',label:'Harbor',v:{
+      '--bg':'#f4f6f9','--panel':'#ffffff','--ink':'#1a2026','--ink-soft':'#4b5560','--ink-faint':'#7d8794',
+      '--line':'#e1e7ec','--line-strong':'#cfd8e1','--accent':'#2f6690','--accent-soft':'#e0ebf2','--accent-ink':'#234e6b',
+      '--gold':'#b5862f','--teal':'#2f8682','--code-bg':'#192129',
+      '--header-grad':'linear-gradient(160deg,#121b24 0%,#1d2e3f 55%,#274a63 100%)',
+      '--th-bg':'#e9eef3','--row-hover':'#f4f8fb','--epi-ink':'#234e6b',
+      '--warm-bg':'#f6efe0','--warm-bd':'#e7d6b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e2eef2','--cool-bd':'#bcd6de','--cool-ink':'#1f4f55',
+      '--ml-grad':'linear-gradient(150deg,#e8f1f6,#dbe9f1)','--ml-bd':'#c2d6e4','--ml-ink':'#234e6b'}},
+    plum:{mode:'light',label:'Plum',v:{
+      '--bg':'#f8f5f8','--panel':'#ffffff','--ink':'#221c21','--ink-soft':'#564b54','--ink-faint':'#897e87',
+      '--line':'#e9e0e7','--line-strong':'#dccdd8','--accent':'#7d4a6b','--accent-soft':'#efe2ec','--accent-ink':'#5d3550',
+      '--gold':'#b07d3b','--teal':'#3a7a72','--code-bg':'#241c23',
+      '--header-grad':'linear-gradient(160deg,#201823 0%,#332338 55%,#4e2f53 100%)',
+      '--th-bg':'#f1e9f0','--row-hover':'#faf5f9','--epi-ink':'#5d3550',
+      '--warm-bg':'#f7efe2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f1f0','--cool-bd':'#c4d9d5','--cool-ink':'#1f4f48',
+      '--ml-grad':'linear-gradient(150deg,#f4e9f1,#ecdbe8)','--ml-bd':'#ddc4d6','--ml-ink':'#5d3550'}},
+    midnight:{mode:'dark',label:'Midnight',v:{
+      '--bg':'#0f1620','--panel':'#18212e','--ink':'#e8edf3','--ink-soft':'#a9b5c4','--ink-faint':'#6f7d8d',
+      '--line':'#25303f','--line-strong':'#34414f','--accent':'#5b9bd5','--accent-soft':'#1b2a3b','--accent-ink':'#9cc4e8',
+      '--gold':'#d2a85f','--teal':'#4db1a8','--code-bg':'#0b121b',
+      '--header-grad':'linear-gradient(160deg,#0b1220 0%,#13243a 55%,#1d3a5c 100%)',
+      '--th-bg':'#1f2a38','--row-hover':'#1d2735','--epi-ink':'#9cc4e8',
+      '--warm-bg':'#2a2418','--warm-bd':'#43381f','--warm-ink':'#e0b878',
+      '--cool-bg':'#11302d','--cool-bd':'#1f4a45','--cool-ink':'#7fd6cc',
+      '--ml-grad':'linear-gradient(150deg,#1c2a3b,#16222f)','--ml-bd':'#2c3f55','--ml-ink':'#9cc4e8'}},
+    charcoal:{mode:'dark',label:'Charcoal',v:{
+      '--bg':'#161514','--panel':'#201e1c','--ink':'#ece8e2','--ink-soft':'#b0a99f','--ink-faint':'#766f65',
+      '--line':'#2c2926','--line-strong':'#3a3631','--accent':'#c8895a','--accent-soft':'#2c2420','--accent-ink':'#e3a878',
+      '--gold':'#cda35e','--teal':'#5aada3','--code-bg':'#100f0e',
+      '--header-grad':'linear-gradient(160deg,#141210 0%,#241e18 55%,#3a2c20 100%)',
+      '--th-bg':'#25221f','--row-hover':'#211e1b','--epi-ink':'#e3a878',
+      '--warm-bg':'#2c2418','--warm-bd':'#443720','--warm-ink':'#e0b878',
+      '--cool-bg':'#1a2826','--cool-bd':'#2c4641','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#272019,#1d1814)','--ml-bd':'#3d3124','--ml-ink':'#e3a878'}},
+    forest:{mode:'dark',label:'Forest',v:{
+      '--bg':'#101713','--panel':'#18211b','--ink':'#e6ece6','--ink-soft':'#a6b3a6','--ink-faint':'#6e7c6e',
+      '--line':'#243029','--line-strong':'#324133','--accent':'#6fae7e','--accent-soft':'#1a2a20','--accent-ink':'#9fd3aa',
+      '--gold':'#cda35e','--teal':'#4fb0a0','--code-bg':'#0b110d',
+      '--header-grad':'linear-gradient(160deg,#0c1410 0%,#142a1d 55%,#1d4230 100%)',
+      '--th-bg':'#1d2922','--row-hover':'#1a241d','--epi-ink':'#9fd3aa',
+      '--warm-bg':'#28281a','--warm-bd':'#3f3f24','--warm-ink':'#d8b878',
+      '--cool-bg':'#16302a','--cool-bd':'#274a40','--cool-ink':'#7fd0bc',
+      '--ml-grad':'linear-gradient(150deg,#18271e,#132019)','--ml-bd':'#2a4231','--ml-ink':'#9fd3aa'}},
+    wine:{mode:'dark',label:'Wine',v:{
+      '--bg':'#1a1012','--panel':'#241619','--ink':'#f0e4e6','--ink-soft':'#c2a9af','--ink-faint':'#8c6f76',
+      '--line':'#321f24','--line-strong':'#43292f','--accent':'#c46b7e','--accent-soft':'#2e1a1f','--accent-ink':'#e49aa8',
+      '--gold':'#cda35e','--teal':'#5aa8a0','--code-bg':'#140c0e',
+      '--header-grad':'linear-gradient(160deg,#160c0e 0%,#2a141a 55%,#4a2230 100%)',
+      '--th-bg':'#2c1c20','--row-hover':'#271519','--epi-ink':'#e49aa8',
+      '--warm-bg':'#2e2418','--warm-bd':'#463720','--warm-ink':'#e0b878',
+      '--cool-bg':'#18302d','--cool-bd':'#2a4a45','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#2a181d,#201216)','--ml-bd':'#43272f','--ml-ink':'#e49aa8'}}
+  };
+
+  const root = document.documentElement;
+  function applyPalette(key){
+    const p = PALETTES[key]; if(!p) return;
+    for(const [k,val] of Object.entries(p.v)) root.style.setProperty(k,val);
+    root.setAttribute('data-mode', p.mode);
+    document.querySelectorAll('.pp-sw').forEach(b=>b.classList.toggle('active', b.dataset.pal===key));
+    try{ localStorage.setItem('faune-palette', key); }catch(e){}
+  }
+
+  // build swatches
+  const tick = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  for(const [key,p] of Object.entries(PALETTES)){
+    const btn = document.createElement('button');
+    btn.className = 'pp-sw'; btn.dataset.pal = key; btn.type = 'button';
+    btn.title = p.label;
+    btn.innerHTML =
+      '<div class="bars">'+
+        '<span style="background:'+p.v['--bg']+'"></span>'+
+        '<span style="background:'+p.v['--accent']+'"></span>'+
+        '<span style="background:'+p.v['--accent-ink']+'"></span>'+
+        '<span style="background:'+p.v['--gold']+'"></span>'+
+      '</div>'+
+      '<span class="nm">'+p.label+tick+'</span>';
+    btn.addEventListener('click', ()=>applyPalette(key));
+    document.getElementById(p.mode==='light'?'pp-light':'pp-dark').appendChild(btn);
+  }
+
+  // toggle panel
+  const picker = document.getElementById('picker');
+  const ppToggle = document.getElementById('ppToggle');
+  ppToggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = picker.classList.toggle('open');
+    ppToggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.addEventListener('click', (e)=>{
+    if(!picker.contains(e.target)) picker.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') picker.classList.remove('open'); });
+
+  // restore saved or honor OS dark preference
+  let saved=null; try{ saved = localStorage.getItem('faune-palette'); }catch(e){}
+  if(saved && PALETTES[saved]) applyPalette(saved);
+  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
+  else applyPalette('afternoon');
+
+  // active TOC highlighting
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const map = {};
+  links.forEach(a => { const id = a.getAttribute('href').slice(1); map[id] = a; });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = map[e.target.id];
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

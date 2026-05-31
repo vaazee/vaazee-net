@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>J.S. Bach — Mass in B minor, BWV 232 · Musical Analysis</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --panel:#ffffff;
+    --ink:#1c1a17;
+    --ink-soft:#55504a;
+    --ink-faint:#8a8279;
+    --line:#e8e2d8;
+    --line-strong:#d8cfc0;
+    --accent:#9a5b2e;       /* warm terracotta — faun / afternoon heat */
+    --accent-soft:#f3e6d8;
+    --accent-ink:#7a4220;
+    --gold:#b8893b;
+    --teal:#2f6b6b;
+    --code-bg:#2b2722;
+    --green:#2f7d4f;
+    --amber:#b07d18;
+    --red:#a8392f;
+    /* themeable extras (overridden by JS palettes) */
+    --header-grad:linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%);
+    --th-bg:#f3ede3;
+    --row-hover:#fbf7f0;
+    --epi-ink:#5b3c20;
+    --warm-bg:#fbf3e2; --warm-bd:#ecd9b0; --warm-ink:#6b4e1e;
+    --cool-bg:#e8f2f1; --cool-bd:#bfdcda; --cool-ink:#1f4f4f;
+    --ml-grad:linear-gradient(150deg,#fbf3e7,#f6e7d4); --ml-bd:#ebd7b8; --ml-ink:#6b3f1c;
+    --radius:12px;
+    --shadow:0 1px 2px rgba(40,30,15,.04),0 6px 22px rgba(40,30,15,.06);
+  }
+  html{transition:none}
+  body,.card,table,.tldr,.callout,.mustlisten,nav.toc a,.svgcard,.pp-panel,.pp-toggle,.pp-sw{
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+    line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  /* ---- header ---- */
+  header.top{
+    background:var(--header-grad);
+    color:#f4ece1;position:relative;overflow:hidden;
+    border-bottom:3px solid var(--accent);
+  }
+  header.top .glow{position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(212,160,90,.35),transparent 65%);pointer-events:none;}
+  header.top .wrap{padding:46px 28px 40px;position:relative;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#d9b384;font-weight:600;margin:0 0 14px}
+  header.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;
+    font-size:40px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+  header.top h1 em{font-style:italic;color:#f0cfa0}
+  header.top .sub{font-size:17px;color:#d8cab8;margin:10px 0 0;max-width:760px}
+  .metarow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-size:13.5px;color:#cdbca6}
+  .metarow b{color:#f4ece1;font-weight:600}
+  .stamp{font-size:12px;color:#b39c80;margin-top:18px;font-family:"SF Mono",Menlo,monospace}
+
+  /* ---- layout ---- */
+  .layout{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0 80px;align-items:start}
+  nav.toc{position:sticky;top:24px;font-size:14px}
+  nav.toc .title{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 12px}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border-radius:7px;border-left:2px solid transparent;line-height:1.35}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+  nav.toc a .n{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;margin-right:7px}
+  nav.toc a.active{background:var(--accent-soft);color:var(--accent-ink);border-left-color:var(--accent)}
+
+  main{min-width:0}
+  section{margin:0 0 50px;scroll-margin-top:24px}
+  h2{font-family:Georgia,serif;font-size:25px;font-weight:600;letter-spacing:-.01em;
+    margin:0 0 4px;display:flex;align-items:baseline;gap:12px}
+  h2 .secn{font-size:14px;font-weight:700;color:#fff;background:var(--accent);
+    width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:-apple-system,system-ui;}
+  .lead{color:var(--ink-soft);margin:2px 0 22px 42px;font-size:15px}
+  h3{font-size:17px;font-weight:650;margin:26px 0 8px;color:var(--ink)}
+  p{margin:0 0 14px}
+  strong{font-weight:650}
+  a.inline{color:var(--accent-ink);text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+
+  /* ---- tl;dr box ---- */
+  .tldr{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow);margin-bottom:8px}
+  .tldr h2{font-size:18px;margin-bottom:10px}
+  .tldr p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+  .tldr p:last-child{margin-bottom:0}
+
+  blockquote.epi{margin:0 0 30px;padding:18px 24px;background:var(--accent-soft);
+    border-radius:var(--radius);font-family:Georgia,serif;font-style:italic;font-size:16px;color:var(--epi-ink)}
+  blockquote.epi .who{display:block;font-style:normal;font-family:-apple-system,system-ui;
+    font-size:13px;color:var(--accent-ink);margin-top:10px;font-weight:600}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 24px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin:6px 0}
+  .keyval{margin:0;padding:0;list-style:none}
+  .keyval li{display:grid;grid-template-columns:165px 1fr;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);margin:0}
+  .keyval li:last-child{border-bottom:none}
+  .keyval .k{color:var(--ink-faint);font-size:13.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+
+  /* ---- tables ---- */
+  table{width:100%;border-collapse:collapse;margin:6px 0 20px;font-size:14.5px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  th{background:var(--th-bg);text-align:left;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line-strong)}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--row-hover)}
+  td.sec{font-weight:650;color:var(--accent-ink);white-space:nowrap}
+  .time{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);white-space:nowrap}
+
+  /* ---- pull callout ---- */
+  .callout{border-radius:var(--radius);padding:16px 20px;margin:18px 0;font-size:15px;border:1px solid}
+  .callout.gold{background:var(--warm-bg);border-color:var(--warm-bd);color:var(--warm-ink)}
+  .callout.teal{background:var(--cool-bg);border-color:var(--cool-bd);color:var(--cool-ink)}
+  .callout .lbl{font-weight:700;text-transform:uppercase;font-size:11.5px;letter-spacing:.1em;display:block;margin-bottom:4px;opacity:.8}
+
+  /* ---- timeline ---- */
+  .tl{list-style:none;margin:8px 0 0;padding:0;position:relative}
+  .tl:before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+  .tl li{position:relative;padding:10px 0 10px 86px;margin:0}
+  .tl .t{position:absolute;left:0;top:11px;width:52px;text-align:right;font-family:"SF Mono",Menlo,monospace;
+    font-size:12.5px;color:var(--teal);font-weight:600}
+  .tl .dot{position:absolute;left:57px;top:15px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--accent)}
+  .tl li.peak .dot{background:var(--accent);width:14px;height:14px;left:56px;top:14px;box-shadow:0 0 0 4px var(--accent-soft)}
+  .tl b{color:var(--ink)}
+
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:2px 8px;border-radius:20px;vertical-align:middle}
+  .b-heart{background:#fbe3df;color:var(--red)}
+  .b-key{background:#e6efe9;color:var(--green)}
+
+  figure{margin:18px 0 24px}
+  figcaption{font-size:13px;color:var(--ink-faint);margin-top:10px;text-align:center;font-style:italic}
+  .svgcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  /* theme-aware SVG strokes/fills */
+  .svgcard svg .sv-axis{stroke:var(--line-strong)}
+  .svgcard svg .sv-grid{stroke:var(--line)}
+  .svgcard svg .sv-curve{stroke:var(--accent)}
+  .svgcard svg .sv-area{fill:var(--accent);opacity:.13}
+  .svgcard svg .sv-gold-line{stroke:var(--gold)}
+  .svgcard svg .sv-gold,.svgcard svg .sv-gold-dot{fill:var(--gold)}
+  .svgcard svg .sv-accent,.svgcard svg .sv-accent-dot{fill:var(--accent)}
+  .svgcard svg .sv-lbl{fill:var(--ink-soft)}
+  .svgcard svg .sv-faint{fill:var(--ink-faint)}
+
+  code{font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:5px}
+
+  /* ---- palette picker ---- */
+  .palette-picker{position:fixed;top:14px;right:14px;z-index:60;font-size:13px;
+    font-family:-apple-system,system-ui,sans-serif}
+  .pp-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    background:rgba(255,255,255,.92);color:#241c14;border:1px solid rgba(0,0,0,.12);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    padding:8px 13px;border-radius:30px;font-weight:600;font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,.16)}
+  .pp-toggle svg{display:block}
+  .pp-toggle .chev{transition:transform .2s ease}
+  .palette-picker.open .pp-toggle .chev{transform:rotate(180deg)}
+  .pp-panel{position:absolute;top:46px;right:0;width:248px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.22);padding:14px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);
+    transform-origin:top right;transition:opacity .16s ease,transform .16s ease,visibility .16s}
+  .palette-picker.open .pp-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+  .pp-group{margin-bottom:12px}
+  .pp-group:last-child{margin-bottom:0}
+  .pp-label{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 2px 8px}
+  .pp-label .ico{width:13px;height:13px;opacity:.7}
+  .pp-swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pp-sw{cursor:pointer;border:1.5px solid var(--line);background:var(--panel);
+    border-radius:10px;padding:7px;display:flex;flex-direction:column;gap:6px;text-align:left;
+    transition:border-color .15s,transform .1s}
+  .pp-sw:hover{transform:translateY(-1px)}
+  .pp-sw .bars{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .pp-sw .bars span{flex:1}
+  .pp-sw .nm{font-size:11.5px;font-weight:600;color:var(--ink-soft);display:flex;
+    align-items:center;justify-content:space-between;gap:4px}
+  .pp-sw.active{border-color:var(--accent)}
+  .pp-sw.active .nm{color:var(--ink)}
+  .pp-sw .tick{width:13px;height:13px;color:var(--accent);opacity:0}
+  .pp-sw.active .tick{opacity:1}
+
+  .rec{display:grid;grid-template-columns:1fr;gap:0}
+  .rec .who{font-weight:650;color:var(--accent-ink)}
+
+  .mustlisten{background:var(--ml-grad);border:1px solid var(--ml-bd);
+    border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow)}
+  .mustlisten h3{margin-top:0;font-family:Georgia,serif;font-size:20px;color:var(--ml-ink)}
+  .mustlisten .span{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--ink-faint);font-size:13.5px}
+  footer a{color:var(--accent-ink);text-decoration:none}
+
+  @media (max-width:720px){
+    .layout{grid-template-columns:1fr;gap:0;padding:24px 0 60px}
+    nav.toc{display:none}
+    .wrap{padding:0 18px}
+    header.top h1{font-size:30px}
+    header.top .wrap{padding:34px 18px 30px}
+    .keyval li{grid-template-columns:1fr;gap:2px}
+    .lead{margin-left:0}
+    h2{font-size:21px}
+    .palette-picker{top:10px;right:10px}
+    .pp-toggle .pp-txt{display:none}
+    .pp-toggle{padding:9px;border-radius:50%}
+    .pp-panel{width:230px}
+  }
+</style>
+</head>
+<body>
+
+<div class="palette-picker" id="picker">
+  <button class="pp-toggle" id="ppToggle" aria-expanded="false" aria-label="Change color theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    <span class="pp-txt">Theme</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pp-panel" role="menu" aria-label="Color palettes">
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>Light</span>
+      <div class="pp-swatches" id="pp-light"></div>
+    </div>
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark</span>
+      <div class="pp-swatches" id="pp-dark"></div>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <p class="eyebrow">Musical Analysis · Choral / Mass</p>
+    <h1>Mass in B minor, BWV 232</h1>
+    <p class="sub">J.S. Bach · c. 1724–1749</p>
+    <div class="metarow">
+      <span><b>Composed</b> c. 1724–1749</span>
+      <span><b>Premiere</b> There was no complete premiere in Bach's lifetime. The Sanctus was performed …</span>
+    </div>
+    <p class="stamp">Generated 2026-05-31 · musical-analysis</p>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <p class="title">Contents</p>
+    <a href="#tldr"><span class="n">·</span>In brief</a>
+    <a href="#sec0"><span class="n">1</span>Identity &amp; Context</a>
+    <a href="#sec1"><span class="n">2</span>Formal Structure</a>
+    <a href="#sec2"><span class="n">3</span>Melodic &amp; Thematic Content</a>
+    <a href="#sec3"><span class="n">4</span>Harmony &amp; Tonality</a>
+    <a href="#sec4"><span class="n">5</span>Rhythm, Meter &amp; Tempo</a>
+    <a href="#sec5"><span class="n">6</span>Orchestration, Texture &amp; Timbre</a>
+    <a href="#sec6"><span class="n">7</span>Emotional Arc &amp; Dramaturgy</a>
+    <a href="#sec7"><span class="n">8</span>Historical Significance &amp; Influence</a>
+    <a href="#sec8"><span class="n">9</span>Performance Practice &amp; Notable Recordings</a>
+    <a href="#sec9"><span class="n">10</span>Listening Guide</a>
+    <a href="#sec10"><span class="n">11</span>Must-Listen Tracks</a>
+  </nav>
+
+  <main>
+    <section id="tldr"><div class="tldr"><h2>In brief</h2><p><strong>Full title:</strong> <em>Hohe Messe in h-moll</em> (Mass in B minor), BWV 232 <strong>Composer:</strong> Johann Sebastian Bach (1685–1750) <strong>Composed:</strong> Assembled over roughly 25 years (c. 1724–1749), with the bulk of compilation in 1748–49 — Bach's final year of productive work. <strong>Premiere:</strong> There was no complete premiere in Bach's lifetime. The <em>Sanctus</em> was performed in Leipzig on Christmas Day 1724; the <em>Kyrie</em> and <em>Gloria</em> (the "Missa") were sent to the Catholic Elector of Saxony Friedrich August II in Dresden in July 1733 with a letter soliciting a court title. The full work — all four sections joined — was first assembled only as a manuscript in Bach's final years and was not performed complete until long after his death (the first known complete performance was in Berlin, 1859, by the Berliner Singakademie under Eduard Grell). <strong>Dedicatee:</strong> The 1733 <em>Missa</em> (Kyrie + Gloria) was formally dedicated to Elector Friedrich August II of Saxony. The complete Mass has no dedicatee — it is, uniquely in Bach's output, a work without an immediate liturgical or patronal home.</p></div></section>
+    <section id="sec0">
+  <h2><span class="secn">1</span>Identity &amp; Context</h2>
+<p><strong>Where it sits in Bach's output:</strong> Alongside <em>The Art of Fugue</em> and the <em>Musical Offering</em>, the B minor Mass is one of the great encyclopedic works of Bach's final years — a summa of his art. Bach was a Lutheran serving a Lutheran church; the full Latin Mass Ordinary had no use in Leipzig's liturgy. The work's assembly was therefore an act of pure artistic ambition, a private summation addressed to God and to posterity rather than to any congregation.</p>
+<p><strong>Historical moment:</strong> The 1740s: Bach was increasingly out of fashion in a Europe turning to the galant style (his own son C.P.E. Bach was already celebrated in this mode). Handel was writing English oratorios; the Mannheim school was taking shape; the symphony was emerging. Bach, old-fashioned and nearly blind, was gathering his life's work into a few monumental late compilations. The B minor Mass is the greatest of these — the Lutheran cantor's paradoxical, transcendent embrace of the universal Latin Roman liturgy.</p>
+<p><strong>Crucially, most of the Mass is "parody"</strong> — in the Baroque sense of skillful re-texting. Bach reworked movements from earlier cantatas (BWV 12, 29, 46, 120, 171, 215, and others) and fitted them to the Latin Mass text. This is not laziness: it is curation. Bach chose, from the archive of a lifetime, the music worthy to be his final sacred testament.</p>
+</section>
+
+    <section id="sec1">
+  <h2><span class="secn">2</span>Formal Structure</h2>
+<p>Four large sections, 27 movements in the standard numbering, ~1 hour 45 minutes to 2 hours in performance.</p>
+<h3>I. Missa (Kyrie + Gloria) — the 1733 Dresden submission</h3>
+<p>The Catholic-flavored first half; the portion Bach most cared to present in polished form.</p>
+<ol>
+<li><strong>Kyrie eleison I</strong> — B minor, 4/4, double fugue. Begins with a stunning four-measure <em>adagio</em> choral outcry (the "gesture of supplication") before the instrumental fugal exposition and the monumental choral fugue proper.</li>
+<li><strong>Christe eleison</strong> — D major, duet for two sopranos with obbligato violins; galant, operatic.</li>
+<li><strong>Kyrie eleison II</strong> — F# minor, stile antico choral fugue, deliberately archaic (Palestrina-like).</li>
+<li><strong>Gloria in excelsis Deo</strong> — D major, 3/8, exuberant trumpet-and-chorus eruption. Launches the Gloria's long celebratory arc.</li>
+<li><strong>Et in terra pax</strong> — D major, 4/4, choral fugue growing out of the Gloria without pause.</li>
+<li><strong>Laudamus te</strong> — A major, soprano II aria with solo violin obbligato.</li>
+<li><strong>Gratias agimus tibi</strong> — D major, stile antico choral fugue (music recycled as the final "Dona nobis pacem").</li>
+<li><strong>Domine Deus</strong> — G major, duet for soprano and tenor, flute obbligato; pastoral, tender.</li>
+<li><strong>Qui tollis peccata mundi</strong> — B minor, 3/4, choral lament with two flutes; shattering in its sorrow.</li>
+<li><strong>Qui sedes ad dexteram Patris</strong> — B minor, alto aria with oboe d'amore.</li>
+<li><strong>Quoniam tu solus sanctus</strong> — D major, bass aria with <strong>corno da caccia (hunting horn)</strong> and two bassoons — one of the most unusual instrumental combinations in the Baroque repertoire.</li>
+<li><strong>Cum Sancto Spiritu</strong> — D major, 3/4, closing choral fugue; jubilant, virtuoso.</li>
+</ol>
+<h3>II. Symbolum Nicenum (Credo)</h3>
+<p>The theological core, organized in a remarkable <strong>chiastic</strong> (symmetrical) architecture, with the <strong>Crucifixus</strong> at the exact center.</p>
+<ol>
+<li><strong>Credo in unum Deum</strong> — A mixolydian, stile antico seven-voice fugue on the Gregorian chant intonation.</li>
+<li><strong>Patrem omnipotentem</strong> — D major, choral fugue.</li>
+<li><strong>Et in unum Dominum</strong> — G major, soprano-alto duet.</li>
+<li><strong>Et incarnatus est</strong> — B minor, choral movement of haunting descending lines (added last, c. 1749 — one of the last pieces Bach ever composed).</li>
+<li><strong>Crucifixus</strong> — E minor, 3/2, <strong>passacaglia</strong> over a descending chromatic bass (the classic <em>passus duriusculus</em> lament ground). The work's emotional center.</li>
+<li><strong>Et resurrexit</strong> — D major, 3/4, explosive choral eruption, the Crucifixus's direct answer.</li>
+<li><strong>Et in Spiritum Sanctum</strong> — A major, bass aria with two oboes d'amore.</li>
+<li><strong>Confiteor</strong> — F# minor, stile antico choral fugue on the Gregorian chant, leading into an astonishing <em>Adagio</em> harmonic passage at "Et expecto" before —</li>
+<li><strong>Et expecto resurrectionem</strong> — D major, explosive choral fugue.</li>
+</ol>
+<p>The Credo's chiasm: Credo–Patrem / Et in unum / <strong>Et incarnatus–Crucifixus–Et resurrexit</strong> / Et in Spiritum / Confiteor–Et expecto. The Crucifixus sits at the still center; creation (Patrem) and resurrection-expectation (Et expecto) mirror each other on either side.</p>
+<h3>III. Sanctus / Osanna / Benedictus / Agnus Dei</h3>
+<ol>
+<li><strong>Sanctus</strong> — D major, 4/4, six-voice chorus with three trumpets; oceanic grandeur, built on a mighty triadic motif. Composed 1724 for Leipzig.</li>
+<li><strong>Osanna in excelsis</strong> — D major, 3/8, double chorus (8 voices) — the work's largest texture.</li>
+<li><strong>Benedictus</strong> — B minor, tenor aria with flute (or violin) obbligato; intimate contrast.</li>
+<li><strong>Osanna (repeat)</strong>.</li>
+</ol>
+<h3>IV. Agnus Dei / Dona nobis pacem</h3>
+<ol>
+<li><strong>Agnus Dei</strong> — G minor, alto aria with violins; sorrowful, interior.</li>
+<li><strong>Dona nobis pacem</strong> — D major, choral fugue, <strong>reuses the music of the Gratias agimus tibi</strong>. Ending the entire work with the word "pacem" (peace) sung to music originally setting "gratias" (thanks) is one of the most moving structural choices in Western music.</li>
+</ol>
+<h3>Macro-architecture</h3>
+<p><strong>Key plan:</strong> B minor frames the work (Kyrie I, Qui tollis, Et incarnatus, Benedictus), but D major is the structural sun. The Mass is really in B minor / D major — the relative key pair — with the minor anchoring lament and the major anchoring praise.</p>
+<p><strong>Symmetries:</strong></p>
+<ul>
+<li>Dona nobis pacem reuses Gratias music — thanks and peace musically fused.</li>
+<li>The Credo is chiastic around the Crucifixus.</li>
+<li>Stile antico movements (archaic counterpoint) alternate with modern concerto-style movements throughout — a conscious summa of sacred styles from Palestrina to Bach's own present.</li>
+</ul>
+</section>
+
+    <section id="sec2">
+  <h2><span class="secn">3</span>Melodic &amp; Thematic Content</h2>
+<ul class="keyval">
+<li><span class="k">Kyrie I subject</span><span>A long, winding chromatic line — the "sigh" figure (a falling semitone) embedded in its opening gesture, supplication made melodic.</span></li>
+<li><span class="k">Gloria</span><span>Triadic fanfare — D major arpeggiation in the trumpets, a sonic image of heavenly joy.</span></li>
+<li><span class="k">Crucifixus bass</span><span>Four-bar descending chromatic tetrachord (B–A#–A–G#–G–F#) — the standard Baroque emblem of lament (cf. Purcell's <em>Dido</em>, Monteverdi's <em>Lamento</em>). Thirteen repetitions = the thirteen at the Last Supper? Scholars argue.</span></li>
+<li><span class="k">Et incarnatus</span><span>Descending stepwise line in the violins — a sonic image of incarnation, God descending into flesh.</span></li>
+<li><span class="k">Et resurrexit</span><span>Rising arpeggiated figure — the bodily image of resurrection, inverting the Crucifixus's descent.</span></li>
+<li><span class="k">Sanctus</span><span>Triadic ascent filling the octave with D major — a sonic icon of the threefold "holy, holy, holy," with the triadic motif itself trinitarian.</span></li>
+</ul>
+<p><strong>Motivic economy</strong> operates within movements rather than across them; but the rhetorical-figurative vocabulary (ascent = resurrection, descent = incarnation/crucifixion, chromaticism = grief, triadic fanfare = glory) is consistent and deeply considered.</p>
+</section>
+
+    <section id="sec3">
+  <h2><span class="secn">4</span>Harmony &amp; Tonality</h2>
+<p>Bach's harmonic language is functional-tonal at full maturity, saturated with chromatic voice-leading inflections. The Mass operates in two idioms simultaneously:</p>
+<ul>
+<li><strong>Stile antico</strong> (Kyrie II, Gratias, Credo, Confiteor, Et expecto): Modal-leaning, Palestrina-inflected counterpoint, written in a deliberately archaic style. Bach owned and studied Palestrina's music.</li>
+<li><strong>Stile moderno</strong> (Christe, Laudamus, Quoniam, Et in Spiritum): Full Baroque concerto style, galant-adjacent.</li>
+</ul>
+<p><strong>Key relationships:</strong> The B minor / D major axis; F# minor as the key of archaic rigor (Kyrie II, Confiteor); E minor for the Crucifixus (dropping a third from the Credo's reach toward A/G for extra depth); G minor for the Agnus Dei (unusual, sorrow-laden).</p>
+<p><strong>Harmonic high points:</strong></p>
+<ul>
+<li>The <strong>"Et expecto" transition</strong> (Confiteor's end): Bach uses a slow, chromatic modulation through remote harmonies that sound almost Wagnerian — a vision of eschatological suspension before the sudden burst into D major.</li>
+<li>The <strong>Crucifixus</strong>'s ground bass and its final <strong>G major</strong> cadence (a Picardy-like upward shift at "sepultus est") — death dissolving into a hushed major chord.</li>
+<li>The <strong>"Et incarnatus"</strong>'s chromatic descents — the word-painting of God taking on flesh.</li>
+</ul>
+</section>
+
+    <section id="sec4">
+  <h2><span class="secn">5</span>Rhythm, Meter &amp; Tempo</h2>
+<ul>
+<li><strong>Triple meters</strong> dominate the dance-influenced movements (Christe in 4/4 but many Gloria sections in 3/8, 3/4).</li>
+<li><strong>Crucifixus in 3/2</strong> — the traditional slow meter of Baroque lament.</li>
+<li><strong>Tempo relationships:</strong> Bach gives relatively few tempo markings; conductors reconstruct tempi from affect, text, and proportional relationships. Modern period practice tends toward brisker tempos than mid-20th-century tradition.</li>
+<li><strong>Rhythmic motifs:</strong> The <em>corta</em> (short-short-long) figure appears in celebratory movements; <em>passus duriusculus</em> (chromatic descent) in lament movements; <em>anabasis</em> (rising figures) in resurrection movements.</li>
+</ul>
+</section>
+
+    <section id="sec5">
+  <h2><span class="secn">6</span>Orchestration, Texture &amp; Timbre</h2>
+<ul>
+<li><strong>Forces:</strong> 5-part chorus (SSATB, occasionally splitting to 6 or 8 voices), soloists (2 sopranos, alto, tenor, bass — roles often distributed among chorus members in period practice), and an orchestra of <strong>3 trumpets, timpani, 2 flutes, 2 oboes (doubling oboes d'amore), corno da caccia, 2 bassoons, strings, continuo (organ, cello, bass, sometimes lute/bassoon)</strong>.</li>
+<li><strong>Chorus size:</strong> A live scholarly debate. Joshua Rifkin's "one voice per part" hypothesis (OVPP) is historically defensible for Bach's Leipzig forces; Helmuth Rilling and many older conductors use much larger choruses. The work accommodates both.</li>
+<li><strong>Textural signature:</strong> Fugal, contrapuntal, with extraordinary variety — from dense five- and eight-voice choruses to intimate duets to arias with obbligato.</li>
+<li><strong>Timbral highlights:</strong></li>
+<li>The <strong>horn solo</strong> in Quoniam (bass aria) — a deeply unusual scoring choice that reads as a kind of heraldic trumpet of holiness.</li>
+<li>The <strong>oboe d'amore</strong> duet in Et in Spiritum.</li>
+<li>The <strong>flute obbligato</strong> in the Benedictus — one of the most exquisite chamber moments in sacred music.</li>
+<li><strong>Dynamics:</strong> Baroque terraced dynamics (abrupt block shifts) predominate; within movements Bach's dynamic shaping is largely implicit in the counterpoint.</li>
+</ul>
+</section>
+
+    <section id="sec6">
+  <h2><span class="secn">7</span>Emotional Arc &amp; Dramaturgy</h2>
+<p>The Mass traces the full range of sacred affect: supplication (Kyrie) → jubilation (Gloria) → sorrow (Qui tollis) → celebration (Cum Sancto Spiritu) → faith (Credo) → incarnation (Et incarnatus) → crucifixion-grief (Crucifixus) → resurrection-joy (Et resurrexit) → eschatological awe (Et expecto) → sanctification (Sanctus) → benediction (Benedictus) → atonement-grief (Agnus Dei) → peace (Dona nobis pacem).</p>
+<p><strong>Climax placement:</strong> Multiple. The Cum Sancto Spiritu closes the Gloria with breathtaking momentum. The Crucifixus → Et resurrexit juxtaposition is the emotional fulcrum of the entire Western sacred repertoire. The Sanctus is the sonic image of divine glory. The Dona nobis pacem provides a quiet, overwhelming resolution.</p>
+<p><strong>Character:</strong> Bach's achievement is that the Mass feels both liturgically reverent and dramatically coherent. It is not an oratorio — there is no narrative — but its emotional architecture is as deliberate as any opera's.</p>
+</section>
+
+    <section id="sec7">
+  <h2><span class="secn">8</span>Historical Significance &amp; Influence</h2>
+<p>The B minor Mass is now almost universally regarded as one of the two or three greatest sacred works in Western music (with Bach's own <em>St. Matthew Passion</em> and — depending on taste — Handel's <em>Messiah</em> or Mozart's <em>Requiem</em>). Its significance:</p>
+<ul class="keyval">
+<li><span class="k">Stylistic summa</span><span>It unites the stile antico of Palestrina, the concerto style of Vivaldi, Bach's own fugal art, and the galant style of his sons into a single coherent sacred language. No earlier or later work achieves this breadth.</span></li>
+<li><span class="k">Ecumenical reach</span><span>A Lutheran setting the full Latin Ordinary — the work transcends its own denominational frame. This is part of why it became the universal "concert Mass" of the nineteenth and twentieth centuries.</span></li>
+<li><span class="k">Bach revival</span><span>Along with the 1829 Mendelssohn revival of the St. Matthew Passion, the 1859 Berlin premiere of the Mass helped establish Bach as the cornerstone of the Western canon.</span></li>
+</ul>
+<p>Reception since the late 19th century has been uniformly reverential. The work's influence on later composers is harder to trace than, say, the Beethoven symphonies' influence, because the Mass operates on a level of technical and devotional intensity that few have even attempted. But Brahms, Reger, Rheinberger, and Vaughan Williams all studied it deeply; its chiastic structures echo in Messiaen; its rhetorical intensity informs Pärt.</p>
+</section>
+
+    <section id="sec8">
+  <h2><span class="secn">9</span>Performance Practice &amp; Notable Recordings</h2>
+<p><strong>Interpretive questions:</strong></p>
+<ul class="keyval">
+<li><span class="k">Forces</span><span>OVPP (one voice per part, Rifkin, Parrott) vs. small chamber choir (Gardiner, Herreweghe) vs. large symphonic chorus (Klemperer, Richter, Rilling). Each yields a different work.</span></li>
+<li><span class="k">Instruments</span><span>Modern symphonic vs. period instruments. The latter are now dominant in new recordings.</span></li>
+<li><span class="k">Tempos</span><span>Modern period practice is considerably brisker than mid-century tradition. Richter's Crucifixus is nearly twice the length of Herreweghe's.</span></li>
+<li><span class="k">Ornamentation</span><span>Soloists are expected to add tasteful baroque ornamentation, especially in da capo returns.</span></li>
+<li><span class="k">Pitch</span><span>A=415 Hz (period) vs. A=440 Hz (modern) — a semitone difference that changes color and tessitura.</span></li>
+</ul>
+<p><strong>Landmark recordings:</strong></p>
+<ol>
+<li><strong>Karl Richter / Munich Bach Choir &amp; Orchestra (1961, Archiv)</strong> — The landmark symphonic-era recording. Grand, slow, weighty, reverential. The Crucifixus is devastating in its slowness.</li>
+<li><strong>Nikolaus Harnoncourt / Concentus Musicus Wien (1968, Teldec)</strong> — The first great period-instrument recording; opened the historically-informed era.</li>
+<li><strong>John Eliot Gardiner / English Baroque Soloists / Monteverdi Choir (1985, Archiv)</strong> — The modern benchmark. Propulsive, clear, rhythmically alert. Gardiner's later live recording (2015, SDG) is even finer.</li>
+<li><strong>Philippe Herreweghe / Collegium Vocale Gent (1988 and 1999, both Harmonia Mundi)</strong> — Luminous, intimate, spiritually inward. The 1999 remake is one of the most beautiful Bach recordings ever made.</li>
+<li><strong>Joshua Rifkin / Bach Ensemble (1982, Nonesuch)</strong> — The OVPP manifesto. Controversial, revelatory — the counterpoint's transparency is extraordinary; the grandeur of massed choruses is sacrificed for analytic clarity.</li>
+</ol>
+<p><strong>Performance tradition</strong> has moved decisively from the Richter/Klemperer symphonic grand manner to the chamber-scaled period practice of Gardiner, Herreweghe, Suzuki (the great Japanese Bach Collegium), and Butt. The best recent recordings combine historical information with intense devotional commitment.</p>
+</section>
+
+    <section id="sec9">
+  <h2><span class="secn">10</span>Listening Guide</h2>
+<p>Timings approximate, based on a period-instrument recording of ~1h 45m (e.g., Herreweghe 1999).</p>
+<p><strong>Kyrie &amp; Gloria (~40 min)</strong></p>
+<ul>
+<li><strong>0:00</strong> — Kyrie I: the four-measure <em>adagio</em> opening outcry, then the long chromatic fugue. Listen for the supplicating "sigh" embedded in the subject.</li>
+<li><strong>10:00</strong> — Christe eleison: soprano duet, galant and gentle.</li>
+<li><strong>14:00</strong> — Kyrie II: archaic, Palestrina-style fugue in F# minor.</li>
+<li><strong>18:00</strong> — Gloria: trumpet fanfare, explosive joy.</li>
+<li><strong>22:00</strong> — Laudamus te: violin solo weaving with soprano II.</li>
+<li><strong>27:00</strong> — Qui tollis: B minor lament with two flutes — listen for the extraordinary sadness.</li>
+<li><strong>33:00</strong> — Quoniam: bass aria with corno da caccia — a strange, noble, unique sound.</li>
+<li><strong>37:00</strong> — Cum Sancto Spiritu: the Gloria's jubilant closing fugue.</li>
+</ul>
+<p><strong>Credo (~35 min)</strong></p>
+<ul>
+<li><strong>0:00</strong> — Credo: seven-voice fugue on the Gregorian chant intonation.</li>
+<li><strong>5:00</strong> — Et in unum Dominum: soprano-alto duet; listen for the Father-Son imitation.</li>
+<li><strong>10:00</strong> — <strong>Et incarnatus est</strong>: descending lines in strings — God becoming flesh in sound.</li>
+<li><strong>13:00</strong> — <strong>Crucifixus</strong>: the work's center. Four-bar chromatic bass, relentless repetitions. At "sepultus est," listen for the astonishing cadence into <strong>G major</strong> — death dissolving into hush.</li>
+<li><strong>16:00</strong> — <strong>Et resurrexit</strong>: explosive eruption, the Crucifixus's direct answer.</li>
+<li><strong>21:00</strong> — Et in Spiritum: bass aria, oboes d'amore.</li>
+<li><strong>25:00</strong> — Confiteor: archaic F# minor fugue.</li>
+<li><strong>29:00</strong> — The astonishing chromatic <em>Adagio</em> transition at "Et expecto" — a vision of apocalyptic suspension.</li>
+<li><strong>30:30</strong> — Et expecto resurrectionem: sudden eruption into D major.</li>
+</ul>
+<p><strong>Sanctus, Osanna, Benedictus (~16 min)</strong></p>
+<ul>
+<li><strong>0:00</strong> — Sanctus: oceanic six-voice D major, trumpets blazing. The sonic image of heaven.</li>
+<li><strong>5:00</strong> — Osanna: double chorus, the largest forces in the work.</li>
+<li><strong>10:00</strong> — Benedictus: tenor aria with flute obbligato — radiant intimacy.</li>
+<li><strong>13:30</strong> — Osanna repeats.</li>
+</ul>
+<p><strong>Agnus Dei &amp; Dona nobis pacem (~10 min)</strong></p>
+<ul>
+<li><strong>0:00</strong> — Agnus Dei: alto aria, G minor, interior grief.</li>
+<li><strong>5:00</strong> — <strong>Dona nobis pacem</strong>: the music of the Gratias returns, now setting "grant us peace." Listen for the way Bach's summa ends: thanks and peace fused, the work's vast arc resolved in quiet monumentality.</li>
+</ul>
+<p><strong>First-listen focus:</strong> The emotional/theological arc: supplication → joy → faith → crucifixion → resurrection → sanctus → peace. The Crucifixus–Et resurrexit hinge is the one passage you should not miss. <strong>Deeper re-listen focus:</strong> The interplay of stile antico and stile moderno; the chiastic architecture of the Credo; the thematic return of Gratias music as Dona nobis pacem. Study the Crucifixus as a textbook of Baroque affect.</p>
+</section>
+
+    <section id="sec10">
+  <h2><span class="secn">11</span>Must-Listen Tracks</h2>
+<div class="mustlisten"><p><strong>Crucifixus → Et resurrexit (Credo nos. 17–18).</strong> These two movements must be heard as a pair — they are the emotional and structural fulcrum of the entire Mass, and arguably of Bach's whole sacred output. The Crucifixus is a passacaglia over a descending chromatic bass, the iconic Baroque emblem of grief; at "sepultus est" Bach cadences not in the expected E minor but in a hushed <strong>G major</strong>, death dissolving into light. Without pause, the Et resurrexit erupts — the same rhetoric inverted, rising arpeggios answering the descending lament. The theological argument and the musical argument are identical. <strong>Recommended:</strong> Herreweghe / Collegium Vocale Gent (1999, Harmonia Mundi) — the most devotionally inward reading of the Crucifixus on record, followed by an Et resurrexit of blazing clarity.</p>
+<p><strong>Sanctus.</strong> If you want a single movement that captures Bach's late majesty in one breath, it is the Sanctus — oceanic six-voice D major, three trumpets, a triadic motif that fills the octave, built on a rhythm (dotted three-note groupings) that feels like the slow sway of cosmic liturgy. It is the sonic image of the seraphim's "holy, holy, holy" — and it was the first piece of the Mass Bach composed (Leipzig, 1724). <strong>Recommended:</strong> Gardiner / Monteverdi Choir (2015 live, SDG).</p>
+<p><em>Bach's final testament. Written for no liturgy, no patron, and no premiere — assembled, slowly and late, as a summary of the sacred styles of a century and a half, and offered, in the composer's own inscription at the end of many of his works, "Soli Deo gloria."</em></p></div>
+</section>
+    <footer>
+      
+      <p>Companion to the Markdown analysis in the Obsidian vault at <code>Musical Analysis/Bach - Mass in B minor.md</code>.</p>
+      <p><a href="index.html">← back to music</a></p>
+    </footer>
+  </main>
+</div>
+</div>
+
+<script>
+  /* ---------- color palettes (Squarespace-style) ---------- */
+  const PALETTES = {
+    afternoon:{mode:'light',label:'Afternoon',v:{
+      '--bg':'#faf8f4','--panel':'#ffffff','--ink':'#1c1a17','--ink-soft':'#55504a','--ink-faint':'#8a8279',
+      '--line':'#e8e2d8','--line-strong':'#d8cfc0','--accent':'#9a5b2e','--accent-soft':'#f3e6d8','--accent-ink':'#7a4220',
+      '--gold':'#b8893b','--teal':'#2f6b6b','--code-bg':'#2b2722',
+      '--header-grad':'linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%)',
+      '--th-bg':'#f3ede3','--row-hover':'#fbf7f0','--epi-ink':'#5b3c20',
+      '--warm-bg':'#fbf3e2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f2f1','--cool-bd':'#bfdcda','--cool-ink':'#1f4f4f',
+      '--ml-grad':'linear-gradient(150deg,#fbf3e7,#f6e7d4)','--ml-bd':'#ebd7b8','--ml-ink':'#6b3f1c'}},
+    sage:{mode:'light',label:'Sage',v:{
+      '--bg':'#f5f7f2','--panel':'#ffffff','--ink':'#1c211a','--ink-soft':'#4e544a','--ink-faint':'#828a7c',
+      '--line':'#e3e8dc','--line-strong':'#d3dac8','--accent':'#5c7a52','--accent-soft':'#e6ede0','--accent-ink':'#3f592f',
+      '--gold':'#a98f3c','--teal':'#3a7a6b','--code-bg':'#1f2620',
+      '--header-grad':'linear-gradient(160deg,#1a231a 0%,#283a26 55%,#3a5232 100%)',
+      '--th-bg':'#edf1e7','--row-hover':'#f6f9f2','--epi-ink':'#3c4f30',
+      '--warm-bg':'#f4efdf','--warm-bd':'#e2dba9','--warm-ink':'#5f5520',
+      '--cool-bg':'#e6f1ec','--cool-bd':'#c0dccd','--cool-ink':'#1f4f3e',
+      '--ml-grad':'linear-gradient(150deg,#eef3e4,#e3ecd6)','--ml-bd':'#d2dcb8','--ml-ink':'#3f5224'}},
+    harbor:{mode:'light',label:'Harbor',v:{
+      '--bg':'#f4f6f9','--panel':'#ffffff','--ink':'#1a2026','--ink-soft':'#4b5560','--ink-faint':'#7d8794',
+      '--line':'#e1e7ec','--line-strong':'#cfd8e1','--accent':'#2f6690','--accent-soft':'#e0ebf2','--accent-ink':'#234e6b',
+      '--gold':'#b5862f','--teal':'#2f8682','--code-bg':'#192129',
+      '--header-grad':'linear-gradient(160deg,#121b24 0%,#1d2e3f 55%,#274a63 100%)',
+      '--th-bg':'#e9eef3','--row-hover':'#f4f8fb','--epi-ink':'#234e6b',
+      '--warm-bg':'#f6efe0','--warm-bd':'#e7d6b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e2eef2','--cool-bd':'#bcd6de','--cool-ink':'#1f4f55',
+      '--ml-grad':'linear-gradient(150deg,#e8f1f6,#dbe9f1)','--ml-bd':'#c2d6e4','--ml-ink':'#234e6b'}},
+    plum:{mode:'light',label:'Plum',v:{
+      '--bg':'#f8f5f8','--panel':'#ffffff','--ink':'#221c21','--ink-soft':'#564b54','--ink-faint':'#897e87',
+      '--line':'#e9e0e7','--line-strong':'#dccdd8','--accent':'#7d4a6b','--accent-soft':'#efe2ec','--accent-ink':'#5d3550',
+      '--gold':'#b07d3b','--teal':'#3a7a72','--code-bg':'#241c23',
+      '--header-grad':'linear-gradient(160deg,#201823 0%,#332338 55%,#4e2f53 100%)',
+      '--th-bg':'#f1e9f0','--row-hover':'#faf5f9','--epi-ink':'#5d3550',
+      '--warm-bg':'#f7efe2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f1f0','--cool-bd':'#c4d9d5','--cool-ink':'#1f4f48',
+      '--ml-grad':'linear-gradient(150deg,#f4e9f1,#ecdbe8)','--ml-bd':'#ddc4d6','--ml-ink':'#5d3550'}},
+    midnight:{mode:'dark',label:'Midnight',v:{
+      '--bg':'#0f1620','--panel':'#18212e','--ink':'#e8edf3','--ink-soft':'#a9b5c4','--ink-faint':'#6f7d8d',
+      '--line':'#25303f','--line-strong':'#34414f','--accent':'#5b9bd5','--accent-soft':'#1b2a3b','--accent-ink':'#9cc4e8',
+      '--gold':'#d2a85f','--teal':'#4db1a8','--code-bg':'#0b121b',
+      '--header-grad':'linear-gradient(160deg,#0b1220 0%,#13243a 55%,#1d3a5c 100%)',
+      '--th-bg':'#1f2a38','--row-hover':'#1d2735','--epi-ink':'#9cc4e8',
+      '--warm-bg':'#2a2418','--warm-bd':'#43381f','--warm-ink':'#e0b878',
+      '--cool-bg':'#11302d','--cool-bd':'#1f4a45','--cool-ink':'#7fd6cc',
+      '--ml-grad':'linear-gradient(150deg,#1c2a3b,#16222f)','--ml-bd':'#2c3f55','--ml-ink':'#9cc4e8'}},
+    charcoal:{mode:'dark',label:'Charcoal',v:{
+      '--bg':'#161514','--panel':'#201e1c','--ink':'#ece8e2','--ink-soft':'#b0a99f','--ink-faint':'#766f65',
+      '--line':'#2c2926','--line-strong':'#3a3631','--accent':'#c8895a','--accent-soft':'#2c2420','--accent-ink':'#e3a878',
+      '--gold':'#cda35e','--teal':'#5aada3','--code-bg':'#100f0e',
+      '--header-grad':'linear-gradient(160deg,#141210 0%,#241e18 55%,#3a2c20 100%)',
+      '--th-bg':'#25221f','--row-hover':'#211e1b','--epi-ink':'#e3a878',
+      '--warm-bg':'#2c2418','--warm-bd':'#443720','--warm-ink':'#e0b878',
+      '--cool-bg':'#1a2826','--cool-bd':'#2c4641','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#272019,#1d1814)','--ml-bd':'#3d3124','--ml-ink':'#e3a878'}},
+    forest:{mode:'dark',label:'Forest',v:{
+      '--bg':'#101713','--panel':'#18211b','--ink':'#e6ece6','--ink-soft':'#a6b3a6','--ink-faint':'#6e7c6e',
+      '--line':'#243029','--line-strong':'#324133','--accent':'#6fae7e','--accent-soft':'#1a2a20','--accent-ink':'#9fd3aa',
+      '--gold':'#cda35e','--teal':'#4fb0a0','--code-bg':'#0b110d',
+      '--header-grad':'linear-gradient(160deg,#0c1410 0%,#142a1d 55%,#1d4230 100%)',
+      '--th-bg':'#1d2922','--row-hover':'#1a241d','--epi-ink':'#9fd3aa',
+      '--warm-bg':'#28281a','--warm-bd':'#3f3f24','--warm-ink':'#d8b878',
+      '--cool-bg':'#16302a','--cool-bd':'#274a40','--cool-ink':'#7fd0bc',
+      '--ml-grad':'linear-gradient(150deg,#18271e,#132019)','--ml-bd':'#2a4231','--ml-ink':'#9fd3aa'}},
+    wine:{mode:'dark',label:'Wine',v:{
+      '--bg':'#1a1012','--panel':'#241619','--ink':'#f0e4e6','--ink-soft':'#c2a9af','--ink-faint':'#8c6f76',
+      '--line':'#321f24','--line-strong':'#43292f','--accent':'#c46b7e','--accent-soft':'#2e1a1f','--accent-ink':'#e49aa8',
+      '--gold':'#cda35e','--teal':'#5aa8a0','--code-bg':'#140c0e',
+      '--header-grad':'linear-gradient(160deg,#160c0e 0%,#2a141a 55%,#4a2230 100%)',
+      '--th-bg':'#2c1c20','--row-hover':'#271519','--epi-ink':'#e49aa8',
+      '--warm-bg':'#2e2418','--warm-bd':'#463720','--warm-ink':'#e0b878',
+      '--cool-bg':'#18302d','--cool-bd':'#2a4a45','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#2a181d,#201216)','--ml-bd':'#43272f','--ml-ink':'#e49aa8'}}
+  };
+
+  const root = document.documentElement;
+  function applyPalette(key){
+    const p = PALETTES[key]; if(!p) return;
+    for(const [k,val] of Object.entries(p.v)) root.style.setProperty(k,val);
+    root.setAttribute('data-mode', p.mode);
+    document.querySelectorAll('.pp-sw').forEach(b=>b.classList.toggle('active', b.dataset.pal===key));
+    try{ localStorage.setItem('faune-palette', key); }catch(e){}
+  }
+
+  // build swatches
+  const tick = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  for(const [key,p] of Object.entries(PALETTES)){
+    const btn = document.createElement('button');
+    btn.className = 'pp-sw'; btn.dataset.pal = key; btn.type = 'button';
+    btn.title = p.label;
+    btn.innerHTML =
+      '<div class="bars">'+
+        '<span style="background:'+p.v['--bg']+'"></span>'+
+        '<span style="background:'+p.v['--accent']+'"></span>'+
+        '<span style="background:'+p.v['--accent-ink']+'"></span>'+
+        '<span style="background:'+p.v['--gold']+'"></span>'+
+      '</div>'+
+      '<span class="nm">'+p.label+tick+'</span>';
+    btn.addEventListener('click', ()=>applyPalette(key));
+    document.getElementById(p.mode==='light'?'pp-light':'pp-dark').appendChild(btn);
+  }
+
+  // toggle panel
+  const picker = document.getElementById('picker');
+  const ppToggle = document.getElementById('ppToggle');
+  ppToggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = picker.classList.toggle('open');
+    ppToggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.addEventListener('click', (e)=>{
+    if(!picker.contains(e.target)) picker.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') picker.classList.remove('open'); });
+
+  // restore saved or honor OS dark preference
+  let saved=null; try{ saved = localStorage.getItem('faune-palette'); }catch(e){}
+  if(saved && PALETTES[saved]) applyPalette(saved);
+  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
+  else applyPalette('afternoon');
+
+  // active TOC highlighting
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const map = {};
+  links.forEach(a => { const id = a.getAttribute('href').slice(1); map[id] = a; });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = map[e.target.id];
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

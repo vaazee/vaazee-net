@@ -5,7 +5,7 @@ Static site served from this repo via GitHub Pages at **vaazee.net**.
 ## Structure
 
 ```
-index.html            Landing hub — links to Games and web-by-vaazee
+index.html            Landing hub — links to Games and Pages
 games/
   index.html          Games listing
   snake/              Classic Snake game
@@ -13,10 +13,15 @@ games/
     main.js           UI / game loop
     snake.js          Pure game logic (deterministic stepping)
     styles.css
+pages/                "web by vaazee" — static pages sorted by topic
+  index.html          Category listing
+  music/ movies/ tv/ books/ chess/ coding/ tech/ piano/ random/
 ```
 
-- The root page links to the **Games** page and to
-  [web by vaazee](https://vaazee.github.io/web-by-vaazee/) (separate repo).
+- The root page links to the **Games** page and to the **Pages** section
+  (`pages/`, formerly the separate `web-by-vaazee` repo).
+- Drop an HTML file into a `pages/<category>/` folder and it's live at
+  `vaazee.net/pages/<category>/<file>.html`.
 - `.nojekyll` disables Jekyll so files are served exactly as written.
 
 ## Run locally

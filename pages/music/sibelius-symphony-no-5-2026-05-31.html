@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sibelius — Symphony No. 5 in E-flat major, Op. 82 · Musical Analysis</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --panel:#ffffff;
+    --ink:#1c1a17;
+    --ink-soft:#55504a;
+    --ink-faint:#8a8279;
+    --line:#e8e2d8;
+    --line-strong:#d8cfc0;
+    --accent:#9a5b2e;       /* warm terracotta — faun / afternoon heat */
+    --accent-soft:#f3e6d8;
+    --accent-ink:#7a4220;
+    --gold:#b8893b;
+    --teal:#2f6b6b;
+    --code-bg:#2b2722;
+    --green:#2f7d4f;
+    --amber:#b07d18;
+    --red:#a8392f;
+    /* themeable extras (overridden by JS palettes) */
+    --header-grad:linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%);
+    --th-bg:#f3ede3;
+    --row-hover:#fbf7f0;
+    --epi-ink:#5b3c20;
+    --warm-bg:#fbf3e2; --warm-bd:#ecd9b0; --warm-ink:#6b4e1e;
+    --cool-bg:#e8f2f1; --cool-bd:#bfdcda; --cool-ink:#1f4f4f;
+    --ml-grad:linear-gradient(150deg,#fbf3e7,#f6e7d4); --ml-bd:#ebd7b8; --ml-ink:#6b3f1c;
+    --radius:12px;
+    --shadow:0 1px 2px rgba(40,30,15,.04),0 6px 22px rgba(40,30,15,.06);
+  }
+  html{transition:none}
+  body,.card,table,.tldr,.callout,.mustlisten,nav.toc a,.svgcard,.pp-panel,.pp-toggle,.pp-sw{
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+    line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  /* ---- header ---- */
+  header.top{
+    background:var(--header-grad);
+    color:#f4ece1;position:relative;overflow:hidden;
+    border-bottom:3px solid var(--accent);
+  }
+  header.top .glow{position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(212,160,90,.35),transparent 65%);pointer-events:none;}
+  header.top .wrap{padding:46px 28px 40px;position:relative;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#d9b384;font-weight:600;margin:0 0 14px}
+  header.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;
+    font-size:40px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+  header.top h1 em{font-style:italic;color:#f0cfa0}
+  header.top .sub{font-size:17px;color:#d8cab8;margin:10px 0 0;max-width:760px}
+  .metarow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-size:13.5px;color:#cdbca6}
+  .metarow b{color:#f4ece1;font-weight:600}
+  .stamp{font-size:12px;color:#b39c80;margin-top:18px;font-family:"SF Mono",Menlo,monospace}
+
+  /* ---- layout ---- */
+  .layout{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0 80px;align-items:start}
+  nav.toc{position:sticky;top:24px;font-size:14px}
+  nav.toc .title{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 12px}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border-radius:7px;border-left:2px solid transparent;line-height:1.35}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+  nav.toc a .n{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;margin-right:7px}
+  nav.toc a.active{background:var(--accent-soft);color:var(--accent-ink);border-left-color:var(--accent)}
+
+  main{min-width:0}
+  section{margin:0 0 50px;scroll-margin-top:24px}
+  h2{font-family:Georgia,serif;font-size:25px;font-weight:600;letter-spacing:-.01em;
+    margin:0 0 4px;display:flex;align-items:baseline;gap:12px}
+  h2 .secn{font-size:14px;font-weight:700;color:#fff;background:var(--accent);
+    width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:-apple-system,system-ui;}
+  .lead{color:var(--ink-soft);margin:2px 0 22px 42px;font-size:15px}
+  h3{font-size:17px;font-weight:650;margin:26px 0 8px;color:var(--ink)}
+  p{margin:0 0 14px}
+  strong{font-weight:650}
+  a.inline{color:var(--accent-ink);text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+
+  /* ---- tl;dr box ---- */
+  .tldr{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow);margin-bottom:8px}
+  .tldr h2{font-size:18px;margin-bottom:10px}
+  .tldr p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+  .tldr p:last-child{margin-bottom:0}
+
+  blockquote.epi{margin:0 0 30px;padding:18px 24px;background:var(--accent-soft);
+    border-radius:var(--radius);font-family:Georgia,serif;font-style:italic;font-size:16px;color:var(--epi-ink)}
+  blockquote.epi .who{display:block;font-style:normal;font-family:-apple-system,system-ui;
+    font-size:13px;color:var(--accent-ink);margin-top:10px;font-weight:600}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 24px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin:6px 0}
+  .keyval{margin:0;padding:0;list-style:none}
+  .keyval li{display:grid;grid-template-columns:165px 1fr;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);margin:0}
+  .keyval li:last-child{border-bottom:none}
+  .keyval .k{color:var(--ink-faint);font-size:13.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+
+  /* ---- tables ---- */
+  table{width:100%;border-collapse:collapse;margin:6px 0 20px;font-size:14.5px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  th{background:var(--th-bg);text-align:left;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line-strong)}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--row-hover)}
+  td.sec{font-weight:650;color:var(--accent-ink);white-space:nowrap}
+  .time{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);white-space:nowrap}
+
+  /* ---- pull callout ---- */
+  .callout{border-radius:var(--radius);padding:16px 20px;margin:18px 0;font-size:15px;border:1px solid}
+  .callout.gold{background:var(--warm-bg);border-color:var(--warm-bd);color:var(--warm-ink)}
+  .callout.teal{background:var(--cool-bg);border-color:var(--cool-bd);color:var(--cool-ink)}
+  .callout .lbl{font-weight:700;text-transform:uppercase;font-size:11.5px;letter-spacing:.1em;display:block;margin-bottom:4px;opacity:.8}
+
+  /* ---- timeline ---- */
+  .tl{list-style:none;margin:8px 0 0;padding:0;position:relative}
+  .tl:before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+  .tl li{position:relative;padding:10px 0 10px 86px;margin:0}
+  .tl .t{position:absolute;left:0;top:11px;width:52px;text-align:right;font-family:"SF Mono",Menlo,monospace;
+    font-size:12.5px;color:var(--teal);font-weight:600}
+  .tl .dot{position:absolute;left:57px;top:15px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--accent)}
+  .tl li.peak .dot{background:var(--accent);width:14px;height:14px;left:56px;top:14px;box-shadow:0 0 0 4px var(--accent-soft)}
+  .tl b{color:var(--ink)}
+
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:2px 8px;border-radius:20px;vertical-align:middle}
+  .b-heart{background:#fbe3df;color:var(--red)}
+  .b-key{background:#e6efe9;color:var(--green)}
+
+  figure{margin:18px 0 24px}
+  figcaption{font-size:13px;color:var(--ink-faint);margin-top:10px;text-align:center;font-style:italic}
+  .svgcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  /* theme-aware SVG strokes/fills */
+  .svgcard svg .sv-axis{stroke:var(--line-strong)}
+  .svgcard svg .sv-grid{stroke:var(--line)}
+  .svgcard svg .sv-curve{stroke:var(--accent)}
+  .svgcard svg .sv-area{fill:var(--accent);opacity:.13}
+  .svgcard svg .sv-gold-line{stroke:var(--gold)}
+  .svgcard svg .sv-gold,.svgcard svg .sv-gold-dot{fill:var(--gold)}
+  .svgcard svg .sv-accent,.svgcard svg .sv-accent-dot{fill:var(--accent)}
+  .svgcard svg .sv-lbl{fill:var(--ink-soft)}
+  .svgcard svg .sv-faint{fill:var(--ink-faint)}
+
+  code{font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:5px}
+
+  /* ---- palette picker ---- */
+  .palette-picker{position:fixed;top:14px;right:14px;z-index:60;font-size:13px;
+    font-family:-apple-system,system-ui,sans-serif}
+  .pp-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    background:rgba(255,255,255,.92);color:#241c14;border:1px solid rgba(0,0,0,.12);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    padding:8px 13px;border-radius:30px;font-weight:600;font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,.16)}
+  .pp-toggle svg{display:block}
+  .pp-toggle .chev{transition:transform .2s ease}
+  .palette-picker.open .pp-toggle .chev{transform:rotate(180deg)}
+  .pp-panel{position:absolute;top:46px;right:0;width:248px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.22);padding:14px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);
+    transform-origin:top right;transition:opacity .16s ease,transform .16s ease,visibility .16s}
+  .palette-picker.open .pp-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+  .pp-group{margin-bottom:12px}
+  .pp-group:last-child{margin-bottom:0}
+  .pp-label{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 2px 8px}
+  .pp-label .ico{width:13px;height:13px;opacity:.7}
+  .pp-swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pp-sw{cursor:pointer;border:1.5px solid var(--line);background:var(--panel);
+    border-radius:10px;padding:7px;display:flex;flex-direction:column;gap:6px;text-align:left;
+    transition:border-color .15s,transform .1s}
+  .pp-sw:hover{transform:translateY(-1px)}
+  .pp-sw .bars{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .pp-sw .bars span{flex:1}
+  .pp-sw .nm{font-size:11.5px;font-weight:600;color:var(--ink-soft);display:flex;
+    align-items:center;justify-content:space-between;gap:4px}
+  .pp-sw.active{border-color:var(--accent)}
+  .pp-sw.active .nm{color:var(--ink)}
+  .pp-sw .tick{width:13px;height:13px;color:var(--accent);opacity:0}
+  .pp-sw.active .tick{opacity:1}
+
+  .rec{display:grid;grid-template-columns:1fr;gap:0}
+  .rec .who{font-weight:650;color:var(--accent-ink)}
+
+  .mustlisten{background:var(--ml-grad);border:1px solid var(--ml-bd);
+    border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow)}
+  .mustlisten h3{margin-top:0;font-family:Georgia,serif;font-size:20px;color:var(--ml-ink)}
+  .mustlisten .span{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--ink-faint);font-size:13.5px}
+  footer a{color:var(--accent-ink);text-decoration:none}
+
+  @media (max-width:720px){
+    .layout{grid-template-columns:1fr;gap:0;padding:24px 0 60px}
+    nav.toc{display:none}
+    .wrap{padding:0 18px}
+    header.top h1{font-size:30px}
+    header.top .wrap{padding:34px 18px 30px}
+    .keyval li{grid-template-columns:1fr;gap:2px}
+    .lead{margin-left:0}
+    h2{font-size:21px}
+    .palette-picker{top:10px;right:10px}
+    .pp-toggle .pp-txt{display:none}
+    .pp-toggle{padding:9px;border-radius:50%}
+    .pp-panel{width:230px}
+  }
+</style>
+</head>
+<body>
+
+<div class="palette-picker" id="picker">
+  <button class="pp-toggle" id="ppToggle" aria-expanded="false" aria-label="Change color theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    <span class="pp-txt">Theme</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pp-panel" role="menu" aria-label="Color palettes">
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>Light</span>
+      <div class="pp-swatches" id="pp-light"></div>
+    </div>
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark</span>
+      <div class="pp-swatches" id="pp-dark"></div>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <p class="eyebrow">Musical Analysis · Symphony</p>
+    <h1>Symphony No. 5 in E-flat major, Op. 82</h1>
+    <p class="sub">Sibelius · 1914–15</p>
+    <div class="metarow">
+      <span><b>Composed</b> 1914–15</span>
+    </div>
+    <p class="stamp">Generated 2026-05-31 · musical-analysis</p>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <p class="title">Contents</p>
+    <a href="#tldr"><span class="n">·</span>In brief</a>
+    <a href="#sec0"><span class="n">1</span>Identity &amp; Context</a>
+    <a href="#sec1"><span class="n">2</span>Formal Structure</a>
+    <a href="#sec2"><span class="n">3</span>Melodic &amp; Thematic Content</a>
+    <a href="#sec3"><span class="n">4</span>Harmony &amp; Tonality</a>
+    <a href="#sec4"><span class="n">5</span>Rhythm, Meter &amp; Tempo</a>
+    <a href="#sec5"><span class="n">6</span>Orchestration, Texture &amp; Timbre</a>
+    <a href="#sec6"><span class="n">7</span>Emotional Arc &amp; Dramaturgy</a>
+    <a href="#sec7"><span class="n">8</span>Historical Significance &amp; Influence</a>
+    <a href="#sec8"><span class="n">9</span>Performance Practice &amp; Notable Recordings</a>
+    <a href="#sec9"><span class="n">10</span>Listening Guide</a>
+    <a href="#sec10"><span class="n">11</span>Must-Listen Tracks</a>
+  </nav>
+
+  <main>
+    <section id="tldr"><div class="tldr"><h2>In brief</h2><p>The symphony's three movements are perfectly weighted at roughly 14 / 9 / 9 minutes (≈ 32 minutes total). The radical innovation is the first movement.</p></div></section>
+    <section id="sec0">
+  <h2><span class="secn">1</span>Identity &amp; Context</h2>
+<ul class="keyval">
+<li><span class="k">Full title</span><span>Symphony No. 5 in E-flat major, Op. 82</span></li>
+<li><span class="k">Composer</span><span>Jean Sibelius (1865–1957)</span></li>
+<li><span class="k">Composed</span><span>First version 1914–15 (premiered 8 December 1915, Helsinki, on Sibelius's 50th birthday). Second version 1916. <strong>Final, definitive version: 1919</strong> (premiered 24 November 1919, Helsinki, with Sibelius conducting).</span></li>
+<li><span class="k">Commission</span><span>The Finnish government commissioned the work to celebrate Sibelius's 50th birthday — a national holiday by official decree. The pressure of writing a symphony to mark his own state-sponsored jubilee is part of the work's psychological backdrop.</span></li>
+<li><span class="k">Place in output</span><span>The Fifth marks the apex of Sibelius's middle period — the moment his radical, compressed late style is just becoming visible. It sits between the austere, neoclassical Fourth (1911) and the single-movement, cosmically integrated Seventh (1924). Tapiola (1926) and the suppressed Eighth lie ahead, then the famous "silence of Järvenpää" — three decades of near-total compositional withdrawal.</span></li>
+<li><span class="k">Historical moment</span><span>Composed during World War I, in a Finland still under Russian rule (independence came in 1917). Sibelius was cut off from his German publisher and from European concert life. While Schoenberg's <em>Pierrot lunaire</em> (1912), Stravinsky's <em>Rite of Spring</em> (1913), and Berg's <em>Wozzeck</em> (in progress) were demolishing tonal Europe, Sibelius — defiantly — wrote a triumphant E-flat symphony. He was not naïve about the modernist crisis; the Fifth is a deliberate, considered response to it. He famously wrote in his diary in 1915: "It is as if God the Father had thrown down pieces of a mosaic from heaven's floor and asked me to put them together."</span></li>
+<li><span class="k">Three versions</span><span>The 1915 original was in four movements. By 1919 Sibelius had fused the original first movement and scherzo into a single, evolutionary structure — one of the boldest formal decisions in symphonic history. The 1919 version is the canonical text.</span></li>
+</ul>
+</section>
+
+    <section id="sec1">
+  <h2><span class="secn">2</span>Formal Structure</h2>
+<p>The symphony's three movements are perfectly weighted at roughly 14 / 9 / 9 minutes (≈ 32 minutes total). The radical innovation is the first movement.</p>
+<h3>I. Tempo molto moderato — Allegro moderato (ma poco a poco stretto) — Vivace molto — Presto — Più Presto</h3>
+<p>This is the famous "fused movement" — a tempo-modulating continuum in which the original sonata-form first movement and the scherzo are welded into one organic structure. The seam is invisible to the ear; the music <em>accelerates into its own scherzo</em>.</p>
+<ul>
+<li><strong>Form:</strong> A unique hybrid. Conventionally analyzed as a sonata form whose development and recapitulation are absorbed into a scherzo, with the entire movement governed by an unbroken accelerando arc.</li>
+<li><strong>Key scheme:</strong> E-flat major → G major (second group, a chromatic mediant) → development through B minor / G minor / C / B → recapitulation in E-flat → scherzo coda in E-flat.</li>
+<li><strong>Sectional landmarks:</strong></li>
+<li><strong>mm. 1–35:</strong> Horn call opens (the four-note E-flat / F / B-flat / G-flat motif), woodwinds answer in long modal lines. Pastoral, expansive.</li>
+<li><strong>mm. ~36–105:</strong> First group develops; bassoon intones a desolate solo over tremolo strings (one of Sibelius's most haunting passages — pure Nordic loneliness).</li>
+<li><strong>mm. ~106–end of slow section:</strong> Second group in G; brass build to a great chord-pillar climax.</li>
+<li><strong>The pivot (~m. 218):</strong> Tempo begins to tighten. <em>Poco a poco stretto</em> — the music imperceptibly shifts gears from sonata to scherzo. There is no double bar, no "now scherzo" announcement; the metric framework just <em>intensifies</em>.</li>
+<li><strong>Scherzo (Vivace molto, ~m. 240+):</strong> Trumpets fanfare the original opening motif now in 3/4, transformed from elegy into dance.</li>
+<li><strong>Presto / Più Presto coda:</strong> Whirling, almost vertiginous E-flat affirmation.</li>
+</ul>
+<h3>II. Andante mosso, quasi allegretto</h3>
+<ul class="keyval">
+<li><span class="k">Form</span><span>Theme and variations, but loose — closer to a pastoral chaconne or a series of free reflections on a single rhythmic-melodic cell.</span></li>
+<li><span class="k">Key</span><span>G major, with excursions to C, F, and a poignant turn through E-flat minor that quietly foreshadows the finale's struggles.</span></li>
+<li><span class="k">Meter</span><span>3/2, with the famous pizzicato accompaniment giving the movement its lilting, mock-dance quality.</span></li>
+<li><span class="k">Material</span><span>A simple, almost childlike pizzicato theme in flutes is varied through six broad rotations. The variations grow more ambivalent — flute and bassoon intertwine in a melancholy duet, then strings cloud the harmony with chromatic descents.</span></li>
+<li><span class="k">Function</span><span>A psychological "rest" between two highly active movements, but with a darker undertow than its surface suggests.</span></li>
+</ul>
+<h3>III. Allegro molto — Misterioso — Un pochettino largamente — Largamente assai — Un pochettino stretto</h3>
+<ul>
+<li><strong>Form:</strong> Sonata-rondo hybrid — but the structural center of gravity is <strong>the Swan Hymn</strong>, a tolling theme in horns over a perpetual-motion string tremolo.</li>
+<li><strong>Key:</strong> E-flat major (with a long, suspenseful tonal recession before the final cadence).</li>
+<li><strong>Sectional landmarks:</strong></li>
+<li><strong>mm. 1–~100:</strong> Whirring tremolo strings ("the storm"), a hovering perpetual-motion texture in 12/8 feel.</li>
+<li><strong>The Swan Hymn enters in horns (m. ~106):</strong> four bell-strokes per measure — this is the theme Sibelius described after watching sixteen swans take flight over Lake Tuusula on 21 April 1915 ("One of the great experiences of my life. Lord God, what beauty!").</li>
+<li><strong>Misterioso (~m. 250):</strong> The texture darkens; the Swan motif is dragged through unstable harmony — G-flat, B minor, fragments.</li>
+<li><strong>Largamente assai (final pages):</strong> The Swan Hymn returns in apotheosis, broadens, and then — the legendary close.</li>
+<li><strong>The six chords:</strong> The symphony ends with <strong>six isolated, hammered E-flat chords</strong>, separated by silences. No conventional cadential drive. They function as ontological punctuation marks — as if E-flat is being pinned to the cosmos one nail at a time. There is nothing else like this ending in the symphonic literature.</li>
+</ul>
+<h3>Macro-architecture</h3>
+<p>The work's deepest design is <strong>rotational</strong> and <strong>teleological</strong>: the four-note horn motif of the opening and the bell-stroke Swan Hymn of the finale are intervallically and rhythmically related, so the entire symphony can be heard as a single 32-minute meditation on one cell. The arc moves from pastoral suggestion → metric acceleration → contemplative pause → mythic affirmation. Sibelius achieves Beethovenian "per aspera ad astra" without Beethoven's rhetoric — by <em>organic process</em> rather than by drama.</p>
+</section>
+
+    <section id="sec2">
+  <h2><span class="secn">3</span>Melodic &amp; Thematic Content</h2>
+<ul class="keyval">
+<li><span class="k">The horn motif (opening)</span><span>Four notes — E-flat, F, B-flat, G-flat — outlining a rising perfect fifth then a descending major third. Modal, ambiguous between major and minor. This is the symphony's DNA.</span></li>
+<li><span class="k">The bassoon lament (mvt I)</span><span>A long, drooping solo over icy string tremolo — perhaps the loneliest passage in Sibelius. Some commentators hear it as a death-figure; Sibelius's diary from these years is haunted by aging, alcoholism, and self-doubt.</span></li>
+<li><span class="k">The pizzicato theme (mvt II)</span><span>Disarmingly simple — almost a folk dance — but its symmetry is repeatedly disturbed by harmonic shadow.</span></li>
+<li><span class="k">The Swan Hymn (mvt III)</span><span>Four bell-strokes in horns: the rhythmic profile is <strong>long–short–long–short</strong>, the intervallic profile a swinging fourth. Sibelius's notation in his diary on the day he saw the swans actually depicts this rhythm. It is one of the few symphonic themes in the literature with a documented "found in nature" origin.</span></li>
+<li><span class="k">Thematic transformation</span><span>The horn motif of mvt I returns transfigured as the Swan Hymn — the same rocking interval, but now grand, mythic, slow. Sibelius's economy here rivals Beethoven's Fifth.</span></li>
+</ul>
+</section>
+
+    <section id="sec3">
+  <h2><span class="secn">4</span>Harmony &amp; Tonality</h2>
+<ul class="keyval">
+<li><span class="k">Language</span><span>Diatonic-modal, with deliberate use of mediant relationships, pedal points, and chord-pillar harmony. Sibelius rejects functional chromaticism in favor of <em>static blocks</em> of harmony that shift by third rather than by fifth.</span></li>
+<li><span class="k">Mediant relations</span><span>E-flat → G (mvt I exposition); E-flat → C (mvt III subsidiary); these third-related shifts give the symphony its characteristic "geological" feeling — tectonic plates of harmony sliding rather than progressing.</span></li>
+<li><span class="k">Pedal technique</span><span>Long-held bass pedals (sometimes 30+ measures) under shifting upper harmonies — a Sibelian fingerprint and a foundation for the Seventh Symphony.</span></li>
+<li><span class="k">Cadences</span><span>The famous "deferred cadence" is everywhere. Sibelius will spend dozens of measures circling a cadence point, releasing the tension only at the structural moment.</span></li>
+<li><span class="k">The closing chords</span><span>Pure E-flat triads, but their <em>separation by silence</em> is the harmonic statement. Tonality is not "resolved" — it is <strong>affirmed by repetition</strong>, like a credo recited.</span></li>
+</ul>
+</section>
+
+    <section id="sec4">
+  <h2><span class="secn">5</span>Rhythm, Meter &amp; Tempo</h2>
+<ul class="keyval">
+<li><span class="k">The acceleration arc of mvt I</span><span>The single greatest rhythmic innovation of the work. The tempo speeds up through <em>poco a poco stretto</em> over many minutes, with no double bar — the conductor's hardest task in the entire symphonic literature is making the seam between sonata and scherzo invisible.</span></li>
+<li><span class="k">Hemiola and metric ambiguity</span><span>Mvt II's 3/2 is repeatedly cross-cut with duple groupings; the listener loses track of the downbeat.</span></li>
+<li><span class="k">The Swan Hymn's rhythm</span><span>Long–short–long–short, riding above a perpetual-motion tremolo — two metric layers in tension, the lower restless, the upper monumental.</span></li>
+<li><span class="k">The closing silences</span><span><em>Negative rhythm</em> — silence as a structural beat. The space between the chords is part of the rhythm, not its absence.</span></li>
+</ul>
+</section>
+
+    <section id="sec5">
+  <h2><span class="secn">6</span>Orchestration, Texture &amp; Timbre</h2>
+<ul class="keyval">
+<li><span class="k">Forces</span><span>2 flutes, 2 oboes, 2 clarinets, 2 bassoons, 4 horns, 3 trumpets, 3 trombones, timpani, strings. <strong>No tuba, no percussion beyond timpani, no harp.</strong> Modest by late-romantic standards — Sibelius's mature orchestration is austere, not lush.</span></li>
+<li><span class="k">Texture types</span><span>Sibelius pioneered what scholars call "rotational" or "wave" textures — long swells of pulsating string tremolo over which winds and brass intone melodic shapes. The orchestra is often used as a single, breathing organism rather than as conversational sections.</span></li>
+<li><span class="k">Horn writing</span><span>The four horns carry the symphony's spiritual weight — the opening motif and the Swan Hymn are both theirs. Sibelius wrote some of the most beautiful horn music after Wagner.</span></li>
+<li><span class="k">String tremolo</span><span>The shimmering, undifferentiated string mass in the finale is one of the most distinctive sonic signatures in the orchestral repertoire — atmospheric, almost electronic in effect.</span></li>
+<li><span class="k">Dynamic architecture</span><span>Vast, slow crescendi over hundreds of measures. The arrival of the recapitulation in mvt I and the apotheosis of the Swan Hymn in mvt III are prepared by glacier-slow dynamic builds.</span></li>
+</ul>
+</section>
+
+    <section id="sec6">
+  <h2><span class="secn">7</span>Emotional Arc &amp; Dramaturgy</h2>
+<p>The Fifth is a <strong>symphony of affirmation written under siege</strong> — composed during a world war, by a 50-year-old composer struggling with alcoholism, depression, deafness in one ear, and the suspicion that history was passing him by. Its hard-won optimism is therefore not naïve but <em>earned</em>.</p>
+<ul class="keyval">
+<li><span class="k">Mvt I</span><span>Pastoral opening → wandering, lonely middle (the bassoon lament) → gathering metric energy → triumphant scherzo discharge. The emotional curve is from contemplation to ecstatic motion.</span></li>
+<li><span class="k">Mvt II</span><span>Surface charm with melancholy underneath — the symphony's "interlude," but not a relaxation. The minor-key shadows are real.</span></li>
+<li><span class="k">Mvt III</span><span>From restless atmospheric storm → the bell-strokes of the Swan Hymn → mysterious darkening → apotheosis → six chords of E-flat finality.</span></li>
+<li><span class="k">Climax</span><span>The Largamente assai return of the Swan Hymn, followed by the silence-punctuated chords — one of the most uncompromising endings in the literature. It refuses the conventional "tutti chord with timpani roll" by <em>isolating each affirmation</em>. The effect is austere, monumental, and slightly disquieting.</span></li>
+</ul>
+</section>
+
+    <section id="sec7">
+  <h2><span class="secn">8</span>Historical Significance &amp; Influence</h2>
+<ul class="keyval">
+<li><span class="k">The symphonic answer to modernism</span><span>While Schoenberg dissolved tonality and Stravinsky shattered meter, Sibelius — the third great innovator of his generation — chose to <em>concentrate</em> tonal language rather than abandon it. The Fifth proved that the symphony was not exhausted in 1915.</span></li>
+<li><span class="k">The fused-movement experiment</span><span>The dissolution of the boundary between movement I and the scherzo influenced symphonic thinking across the 20th century — from Sibelius's own Seventh (one continuous movement) through Vaughan Williams, Walton, and many later composers.</span></li>
+<li><span class="k">Reception history</span><span>The 1915 premiere was warmly received but Sibelius was dissatisfied; he revised, abandoned the 1916 version, and only with the 1919 version did he feel he had the work right. The symphony entered the international repertoire slowly. Its reputation soared in mid-century, fell during the high-modernist 1960s when Sibelius was unfashionable, and has since recovered completely. Today it is widely considered the greatest symphony composed during World War I.</span></li>
+<li><span class="k">Influence on Anglophone music</span><span>Vaughan Williams, Walton, Bax, Tippett, and (later) Peter Maxwell Davies all worked with Sibelian techniques — slow dynamic arcs, modal pedal harmonies, organic thematic transformation.</span></li>
+<li><span class="k">Cultural status in Finland</span><span>The Fifth is, with <em>Finlandia</em>, one of the founding artifacts of Finnish national identity.</span></li>
+</ul>
+</section>
+
+    <section id="sec8">
+  <h2><span class="secn">9</span>Performance Practice &amp; Notable Recordings</h2>
+<p>The hardest interpretive question is <strong>the seam in mvt I</strong>: how to manage the <em>poco a poco stretto</em> so that the tempo modulates organically rather than visibly shifts gears. Bad performances sound like two movements stitched together. Great ones sound like geological inevitability.</p>
+<p>The second great question is <strong>the closing chords</strong>: how much silence between them? Sibelius gives no metronome; the silences must be <em>heard</em> as part of the music, not as gaps. Too short and they feel like hammer-blows; too long and the ear loses the harmonic memory.</p>
+<ul class="keyval">
+<li><span class="k">Herbert von Karajan / Berlin Philharmonic (1965, DG)</span><span>The benchmark for sonic grandeur. Karajan's Sibelius cycle is the gold standard for sumptuous, slow-burning Sibelius. The string sound in the finale is unmatched.</span></li>
+<li><span class="k">Leonard Bernstein / New York Philharmonic (1961, Sony) and / Vienna Philharmonic (1987, DG)</span><span>Bernstein understood the symphony's emotional architecture viscerally. The 1987 Vienna recording is broader, more searching; the NY is leaner, more urgent.</span></li>
+<li><span class="k">Colin Davis / London Symphony Orchestra (multiple cycles, especially 1976 Philips and 2002 LSO Live)</span><span>Davis is the great modern Sibelian. Idiomatic, structurally lucid, never over-romanticized. The LSO Live recording is widely considered the finest modern Fifth.</span></li>
+<li><span class="k">Osmo Vänskä / Lahti Symphony (1997, BIS)</span><span>Vänskä's cycle is the most analytically precise on record — every textural detail is audible. The BIS recording uniquely includes the 1915 original version on a separate disc, an essential document.</span></li>
+<li><span class="k">Simon Rattle / Berlin Philharmonic (2015, BPO)</span><span>Modern, transparent, with extraordinary control of the mvt I accelerando. Recorded for the Sibelius 150th anniversary.</span></li>
+<li><span class="k">Paavo Berglund / Helsinki Philharmonic (1986, EMI)</span><span>The Finnish insider's Sibelius — austere, unsentimental, with a rough-hewn nobility that no non-Finn quite captures.</span></li>
+</ul>
+</section>
+
+    <section id="sec9">
+  <h2><span class="secn">10</span>Listening Guide</h2>
+<p>(Timings approximate, based on a ~32-minute performance.)</p>
+<ul>
+<li><strong>0:00 — Movement I opens:</strong> Horns intone the four-note motif. Notice the modal ambiguity.</li>
+<li><strong>2:30 — The bassoon lament:</strong> Solo bassoon over icy string tremolo. The symphony's loneliest moment.</li>
+<li><strong>6:30 — The G-major second group:</strong> Brass build to a chord-pillar climax.</li>
+<li><strong>9:00 — The acceleration begins:</strong> Listen for the <em>poco a poco stretto</em> — the music quietly tightening its metric grip.</li>
+<li><strong>11:00 — The scherzo emerges:</strong> Trumpets fanfare the opening motif, now transformed into 3/4 dance.</li>
+<li><strong>13:30 — Movement I closes</strong> in whirling E-flat triumph.</li>
+<li><strong>14:00 — Movement II begins:</strong> Pizzicato in flutes, lilting and almost childlike. Listen for the harmonic shadow underneath the simple surface.</li>
+<li><strong>18:00 — Variation darkening:</strong> The harmony clouds; chromatic descents foreshadow the finale.</li>
+<li><strong>23:00 — Movement III opens:</strong> Whirring string tremolo. A storm with no rain.</li>
+<li><strong>24:30 — THE SWAN HYMN ENTERS:</strong> Horns toll the bell-stroke theme. This is the symphony's mythic center.</li>
+<li><strong>27:00 — Misterioso passage:</strong> The Swan motif drags through unstable harmony.</li>
+<li><strong>30:00 — Largamente assai:</strong> The Swan Hymn returns in apotheosis.</li>
+<li><strong>31:00 — The six chords:</strong> Hammered E-flat triads separated by silence. Count them. Sit with the silences.</li>
+</ul>
+<p><strong>First-listen focus:</strong> Let the symphony wash over you — particularly the long arc of mvt I and the bell-strokes of the finale.</p>
+<p><strong>Re-listen focus:</strong> Track the four-note horn motif through the entire symphony. Notice how it generates the Swan Hymn. Pay attention to the seam in mvt I — try to hear exactly where sonata becomes scherzo (you can't, which is the point).</p>
+</section>
+
+    <section id="sec10">
+  <h2><span class="secn">11</span>Must-Listen Tracks</h2>
+<div class="mustlisten"><p><strong>Movement III — Allegro molto / Largamente assai / final chords (~9 minutes).</strong></p>
+<p>If you only have time for one piece of Sibelius in your life, this is it. The whirring string tremolo opens like wind across a Finnish lake; the horn-toll of the Swan Hymn enters like a vision; the apotheosis broadens into mythic affirmation; and the six closing chords — separated by silences — are the most uncompromising final cadence in the symphonic repertoire. Nothing else in the orchestral literature ends like this. The whole movement is a single arc from atmospheric unrest to monumental certainty.</p>
+<p><strong>Recommended recording:</strong> <strong>Colin Davis / London Symphony Orchestra, 2002 LSO Live.</strong> Davis paces the Largamente assai with utter authority and times the closing silences perfectly — they are heard as music, not as gaps. The LSO horns are magnificent. For sheer sonic luxury in the apotheosis, the 1965 Karajan / Berlin recording is the alternative; for analytic clarity, Vänskä / Lahti. But Davis is the most complete realization of what the movement <em>is</em>.</p></div>
+</section>
+    <footer>
+      
+      <p>Companion to the Markdown analysis in the Obsidian vault at <code>Musical Analysis/Sibelius - Symphony No. 5.md</code>.</p>
+      <p><a href="index.html">← back to music</a></p>
+    </footer>
+  </main>
+</div>
+</div>
+
+<script>
+  /* ---------- color palettes (Squarespace-style) ---------- */
+  const PALETTES = {
+    afternoon:{mode:'light',label:'Afternoon',v:{
+      '--bg':'#faf8f4','--panel':'#ffffff','--ink':'#1c1a17','--ink-soft':'#55504a','--ink-faint':'#8a8279',
+      '--line':'#e8e2d8','--line-strong':'#d8cfc0','--accent':'#9a5b2e','--accent-soft':'#f3e6d8','--accent-ink':'#7a4220',
+      '--gold':'#b8893b','--teal':'#2f6b6b','--code-bg':'#2b2722',
+      '--header-grad':'linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%)',
+      '--th-bg':'#f3ede3','--row-hover':'#fbf7f0','--epi-ink':'#5b3c20',
+      '--warm-bg':'#fbf3e2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f2f1','--cool-bd':'#bfdcda','--cool-ink':'#1f4f4f',
+      '--ml-grad':'linear-gradient(150deg,#fbf3e7,#f6e7d4)','--ml-bd':'#ebd7b8','--ml-ink':'#6b3f1c'}},
+    sage:{mode:'light',label:'Sage',v:{
+      '--bg':'#f5f7f2','--panel':'#ffffff','--ink':'#1c211a','--ink-soft':'#4e544a','--ink-faint':'#828a7c',
+      '--line':'#e3e8dc','--line-strong':'#d3dac8','--accent':'#5c7a52','--accent-soft':'#e6ede0','--accent-ink':'#3f592f',
+      '--gold':'#a98f3c','--teal':'#3a7a6b','--code-bg':'#1f2620',
+      '--header-grad':'linear-gradient(160deg,#1a231a 0%,#283a26 55%,#3a5232 100%)',
+      '--th-bg':'#edf1e7','--row-hover':'#f6f9f2','--epi-ink':'#3c4f30',
+      '--warm-bg':'#f4efdf','--warm-bd':'#e2dba9','--warm-ink':'#5f5520',
+      '--cool-bg':'#e6f1ec','--cool-bd':'#c0dccd','--cool-ink':'#1f4f3e',
+      '--ml-grad':'linear-gradient(150deg,#eef3e4,#e3ecd6)','--ml-bd':'#d2dcb8','--ml-ink':'#3f5224'}},
+    harbor:{mode:'light',label:'Harbor',v:{
+      '--bg':'#f4f6f9','--panel':'#ffffff','--ink':'#1a2026','--ink-soft':'#4b5560','--ink-faint':'#7d8794',
+      '--line':'#e1e7ec','--line-strong':'#cfd8e1','--accent':'#2f6690','--accent-soft':'#e0ebf2','--accent-ink':'#234e6b',
+      '--gold':'#b5862f','--teal':'#2f8682','--code-bg':'#192129',
+      '--header-grad':'linear-gradient(160deg,#121b24 0%,#1d2e3f 55%,#274a63 100%)',
+      '--th-bg':'#e9eef3','--row-hover':'#f4f8fb','--epi-ink':'#234e6b',
+      '--warm-bg':'#f6efe0','--warm-bd':'#e7d6b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e2eef2','--cool-bd':'#bcd6de','--cool-ink':'#1f4f55',
+      '--ml-grad':'linear-gradient(150deg,#e8f1f6,#dbe9f1)','--ml-bd':'#c2d6e4','--ml-ink':'#234e6b'}},
+    plum:{mode:'light',label:'Plum',v:{
+      '--bg':'#f8f5f8','--panel':'#ffffff','--ink':'#221c21','--ink-soft':'#564b54','--ink-faint':'#897e87',
+      '--line':'#e9e0e7','--line-strong':'#dccdd8','--accent':'#7d4a6b','--accent-soft':'#efe2ec','--accent-ink':'#5d3550',
+      '--gold':'#b07d3b','--teal':'#3a7a72','--code-bg':'#241c23',
+      '--header-grad':'linear-gradient(160deg,#201823 0%,#332338 55%,#4e2f53 100%)',
+      '--th-bg':'#f1e9f0','--row-hover':'#faf5f9','--epi-ink':'#5d3550',
+      '--warm-bg':'#f7efe2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f1f0','--cool-bd':'#c4d9d5','--cool-ink':'#1f4f48',
+      '--ml-grad':'linear-gradient(150deg,#f4e9f1,#ecdbe8)','--ml-bd':'#ddc4d6','--ml-ink':'#5d3550'}},
+    midnight:{mode:'dark',label:'Midnight',v:{
+      '--bg':'#0f1620','--panel':'#18212e','--ink':'#e8edf3','--ink-soft':'#a9b5c4','--ink-faint':'#6f7d8d',
+      '--line':'#25303f','--line-strong':'#34414f','--accent':'#5b9bd5','--accent-soft':'#1b2a3b','--accent-ink':'#9cc4e8',
+      '--gold':'#d2a85f','--teal':'#4db1a8','--code-bg':'#0b121b',
+      '--header-grad':'linear-gradient(160deg,#0b1220 0%,#13243a 55%,#1d3a5c 100%)',
+      '--th-bg':'#1f2a38','--row-hover':'#1d2735','--epi-ink':'#9cc4e8',
+      '--warm-bg':'#2a2418','--warm-bd':'#43381f','--warm-ink':'#e0b878',
+      '--cool-bg':'#11302d','--cool-bd':'#1f4a45','--cool-ink':'#7fd6cc',
+      '--ml-grad':'linear-gradient(150deg,#1c2a3b,#16222f)','--ml-bd':'#2c3f55','--ml-ink':'#9cc4e8'}},
+    charcoal:{mode:'dark',label:'Charcoal',v:{
+      '--bg':'#161514','--panel':'#201e1c','--ink':'#ece8e2','--ink-soft':'#b0a99f','--ink-faint':'#766f65',
+      '--line':'#2c2926','--line-strong':'#3a3631','--accent':'#c8895a','--accent-soft':'#2c2420','--accent-ink':'#e3a878',
+      '--gold':'#cda35e','--teal':'#5aada3','--code-bg':'#100f0e',
+      '--header-grad':'linear-gradient(160deg,#141210 0%,#241e18 55%,#3a2c20 100%)',
+      '--th-bg':'#25221f','--row-hover':'#211e1b','--epi-ink':'#e3a878',
+      '--warm-bg':'#2c2418','--warm-bd':'#443720','--warm-ink':'#e0b878',
+      '--cool-bg':'#1a2826','--cool-bd':'#2c4641','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#272019,#1d1814)','--ml-bd':'#3d3124','--ml-ink':'#e3a878'}},
+    forest:{mode:'dark',label:'Forest',v:{
+      '--bg':'#101713','--panel':'#18211b','--ink':'#e6ece6','--ink-soft':'#a6b3a6','--ink-faint':'#6e7c6e',
+      '--line':'#243029','--line-strong':'#324133','--accent':'#6fae7e','--accent-soft':'#1a2a20','--accent-ink':'#9fd3aa',
+      '--gold':'#cda35e','--teal':'#4fb0a0','--code-bg':'#0b110d',
+      '--header-grad':'linear-gradient(160deg,#0c1410 0%,#142a1d 55%,#1d4230 100%)',
+      '--th-bg':'#1d2922','--row-hover':'#1a241d','--epi-ink':'#9fd3aa',
+      '--warm-bg':'#28281a','--warm-bd':'#3f3f24','--warm-ink':'#d8b878',
+      '--cool-bg':'#16302a','--cool-bd':'#274a40','--cool-ink':'#7fd0bc',
+      '--ml-grad':'linear-gradient(150deg,#18271e,#132019)','--ml-bd':'#2a4231','--ml-ink':'#9fd3aa'}},
+    wine:{mode:'dark',label:'Wine',v:{
+      '--bg':'#1a1012','--panel':'#241619','--ink':'#f0e4e6','--ink-soft':'#c2a9af','--ink-faint':'#8c6f76',
+      '--line':'#321f24','--line-strong':'#43292f','--accent':'#c46b7e','--accent-soft':'#2e1a1f','--accent-ink':'#e49aa8',
+      '--gold':'#cda35e','--teal':'#5aa8a0','--code-bg':'#140c0e',
+      '--header-grad':'linear-gradient(160deg,#160c0e 0%,#2a141a 55%,#4a2230 100%)',
+      '--th-bg':'#2c1c20','--row-hover':'#271519','--epi-ink':'#e49aa8',
+      '--warm-bg':'#2e2418','--warm-bd':'#463720','--warm-ink':'#e0b878',
+      '--cool-bg':'#18302d','--cool-bd':'#2a4a45','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#2a181d,#201216)','--ml-bd':'#43272f','--ml-ink':'#e49aa8'}}
+  };
+
+  const root = document.documentElement;
+  function applyPalette(key){
+    const p = PALETTES[key]; if(!p) return;
+    for(const [k,val] of Object.entries(p.v)) root.style.setProperty(k,val);
+    root.setAttribute('data-mode', p.mode);
+    document.querySelectorAll('.pp-sw').forEach(b=>b.classList.toggle('active', b.dataset.pal===key));
+    try{ localStorage.setItem('faune-palette', key); }catch(e){}
+  }
+
+  // build swatches
+  const tick = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  for(const [key,p] of Object.entries(PALETTES)){
+    const btn = document.createElement('button');
+    btn.className = 'pp-sw'; btn.dataset.pal = key; btn.type = 'button';
+    btn.title = p.label;
+    btn.innerHTML =
+      '<div class="bars">'+
+        '<span style="background:'+p.v['--bg']+'"></span>'+
+        '<span style="background:'+p.v['--accent']+'"></span>'+
+        '<span style="background:'+p.v['--accent-ink']+'"></span>'+
+        '<span style="background:'+p.v['--gold']+'"></span>'+
+      '</div>'+
+      '<span class="nm">'+p.label+tick+'</span>';
+    btn.addEventListener('click', ()=>applyPalette(key));
+    document.getElementById(p.mode==='light'?'pp-light':'pp-dark').appendChild(btn);
+  }
+
+  // toggle panel
+  const picker = document.getElementById('picker');
+  const ppToggle = document.getElementById('ppToggle');
+  ppToggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = picker.classList.toggle('open');
+    ppToggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.addEventListener('click', (e)=>{
+    if(!picker.contains(e.target)) picker.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') picker.classList.remove('open'); });
+
+  // restore saved or honor OS dark preference
+  let saved=null; try{ saved = localStorage.getItem('faune-palette'); }catch(e){}
+  if(saved && PALETTES[saved]) applyPalette(saved);
+  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
+  else applyPalette('afternoon');
+
+  // active TOC highlighting
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const map = {};
+  links.forEach(a => { const id = a.getAttribute('href').slice(1); map[id] = a; });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = map[e.target.id];
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

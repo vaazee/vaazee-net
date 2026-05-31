@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bach — Concerto for Two Violins in D minor, BWV 1043 · Musical Analysis</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --panel:#ffffff;
+    --ink:#1c1a17;
+    --ink-soft:#55504a;
+    --ink-faint:#8a8279;
+    --line:#e8e2d8;
+    --line-strong:#d8cfc0;
+    --accent:#9a5b2e;       /* warm terracotta — faun / afternoon heat */
+    --accent-soft:#f3e6d8;
+    --accent-ink:#7a4220;
+    --gold:#b8893b;
+    --teal:#2f6b6b;
+    --code-bg:#2b2722;
+    --green:#2f7d4f;
+    --amber:#b07d18;
+    --red:#a8392f;
+    /* themeable extras (overridden by JS palettes) */
+    --header-grad:linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%);
+    --th-bg:#f3ede3;
+    --row-hover:#fbf7f0;
+    --epi-ink:#5b3c20;
+    --warm-bg:#fbf3e2; --warm-bd:#ecd9b0; --warm-ink:#6b4e1e;
+    --cool-bg:#e8f2f1; --cool-bd:#bfdcda; --cool-ink:#1f4f4f;
+    --ml-grad:linear-gradient(150deg,#fbf3e7,#f6e7d4); --ml-bd:#ebd7b8; --ml-ink:#6b3f1c;
+    --radius:12px;
+    --shadow:0 1px 2px rgba(40,30,15,.04),0 6px 22px rgba(40,30,15,.06);
+  }
+  html{transition:none}
+  body,.card,table,.tldr,.callout,.mustlisten,nav.toc a,.svgcard,.pp-panel,.pp-toggle,.pp-sw{
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+    line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  /* ---- header ---- */
+  header.top{
+    background:var(--header-grad);
+    color:#f4ece1;position:relative;overflow:hidden;
+    border-bottom:3px solid var(--accent);
+  }
+  header.top .glow{position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(212,160,90,.35),transparent 65%);pointer-events:none;}
+  header.top .wrap{padding:46px 28px 40px;position:relative;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#d9b384;font-weight:600;margin:0 0 14px}
+  header.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;
+    font-size:40px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+  header.top h1 em{font-style:italic;color:#f0cfa0}
+  header.top .sub{font-size:17px;color:#d8cab8;margin:10px 0 0;max-width:760px}
+  .metarow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-size:13.5px;color:#cdbca6}
+  .metarow b{color:#f4ece1;font-weight:600}
+  .stamp{font-size:12px;color:#b39c80;margin-top:18px;font-family:"SF Mono",Menlo,monospace}
+
+  /* ---- layout ---- */
+  .layout{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0 80px;align-items:start}
+  nav.toc{position:sticky;top:24px;font-size:14px}
+  nav.toc .title{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 12px}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border-radius:7px;border-left:2px solid transparent;line-height:1.35}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+  nav.toc a .n{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;margin-right:7px}
+  nav.toc a.active{background:var(--accent-soft);color:var(--accent-ink);border-left-color:var(--accent)}
+
+  main{min-width:0}
+  section{margin:0 0 50px;scroll-margin-top:24px}
+  h2{font-family:Georgia,serif;font-size:25px;font-weight:600;letter-spacing:-.01em;
+    margin:0 0 4px;display:flex;align-items:baseline;gap:12px}
+  h2 .secn{font-size:14px;font-weight:700;color:#fff;background:var(--accent);
+    width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:-apple-system,system-ui;}
+  .lead{color:var(--ink-soft);margin:2px 0 22px 42px;font-size:15px}
+  h3{font-size:17px;font-weight:650;margin:26px 0 8px;color:var(--ink)}
+  p{margin:0 0 14px}
+  strong{font-weight:650}
+  a.inline{color:var(--accent-ink);text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+
+  /* ---- tl;dr box ---- */
+  .tldr{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow);margin-bottom:8px}
+  .tldr h2{font-size:18px;margin-bottom:10px}
+  .tldr p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+  .tldr p:last-child{margin-bottom:0}
+
+  blockquote.epi{margin:0 0 30px;padding:18px 24px;background:var(--accent-soft);
+    border-radius:var(--radius);font-family:Georgia,serif;font-style:italic;font-size:16px;color:var(--epi-ink)}
+  blockquote.epi .who{display:block;font-style:normal;font-family:-apple-system,system-ui;
+    font-size:13px;color:var(--accent-ink);margin-top:10px;font-weight:600}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 24px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin:6px 0}
+  .keyval{margin:0;padding:0;list-style:none}
+  .keyval li{display:grid;grid-template-columns:165px 1fr;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);margin:0}
+  .keyval li:last-child{border-bottom:none}
+  .keyval .k{color:var(--ink-faint);font-size:13.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+
+  /* ---- tables ---- */
+  table{width:100%;border-collapse:collapse;margin:6px 0 20px;font-size:14.5px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  th{background:var(--th-bg);text-align:left;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line-strong)}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--row-hover)}
+  td.sec{font-weight:650;color:var(--accent-ink);white-space:nowrap}
+  .time{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);white-space:nowrap}
+
+  /* ---- pull callout ---- */
+  .callout{border-radius:var(--radius);padding:16px 20px;margin:18px 0;font-size:15px;border:1px solid}
+  .callout.gold{background:var(--warm-bg);border-color:var(--warm-bd);color:var(--warm-ink)}
+  .callout.teal{background:var(--cool-bg);border-color:var(--cool-bd);color:var(--cool-ink)}
+  .callout .lbl{font-weight:700;text-transform:uppercase;font-size:11.5px;letter-spacing:.1em;display:block;margin-bottom:4px;opacity:.8}
+
+  /* ---- timeline ---- */
+  .tl{list-style:none;margin:8px 0 0;padding:0;position:relative}
+  .tl:before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+  .tl li{position:relative;padding:10px 0 10px 86px;margin:0}
+  .tl .t{position:absolute;left:0;top:11px;width:52px;text-align:right;font-family:"SF Mono",Menlo,monospace;
+    font-size:12.5px;color:var(--teal);font-weight:600}
+  .tl .dot{position:absolute;left:57px;top:15px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--accent)}
+  .tl li.peak .dot{background:var(--accent);width:14px;height:14px;left:56px;top:14px;box-shadow:0 0 0 4px var(--accent-soft)}
+  .tl b{color:var(--ink)}
+
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:2px 8px;border-radius:20px;vertical-align:middle}
+  .b-heart{background:#fbe3df;color:var(--red)}
+  .b-key{background:#e6efe9;color:var(--green)}
+
+  figure{margin:18px 0 24px}
+  figcaption{font-size:13px;color:var(--ink-faint);margin-top:10px;text-align:center;font-style:italic}
+  .svgcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  /* theme-aware SVG strokes/fills */
+  .svgcard svg .sv-axis{stroke:var(--line-strong)}
+  .svgcard svg .sv-grid{stroke:var(--line)}
+  .svgcard svg .sv-curve{stroke:var(--accent)}
+  .svgcard svg .sv-area{fill:var(--accent);opacity:.13}
+  .svgcard svg .sv-gold-line{stroke:var(--gold)}
+  .svgcard svg .sv-gold,.svgcard svg .sv-gold-dot{fill:var(--gold)}
+  .svgcard svg .sv-accent,.svgcard svg .sv-accent-dot{fill:var(--accent)}
+  .svgcard svg .sv-lbl{fill:var(--ink-soft)}
+  .svgcard svg .sv-faint{fill:var(--ink-faint)}
+
+  code{font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:5px}
+
+  /* ---- palette picker ---- */
+  .palette-picker{position:fixed;top:14px;right:14px;z-index:60;font-size:13px;
+    font-family:-apple-system,system-ui,sans-serif}
+  .pp-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    background:rgba(255,255,255,.92);color:#241c14;border:1px solid rgba(0,0,0,.12);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    padding:8px 13px;border-radius:30px;font-weight:600;font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,.16)}
+  .pp-toggle svg{display:block}
+  .pp-toggle .chev{transition:transform .2s ease}
+  .palette-picker.open .pp-toggle .chev{transform:rotate(180deg)}
+  .pp-panel{position:absolute;top:46px;right:0;width:248px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.22);padding:14px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);
+    transform-origin:top right;transition:opacity .16s ease,transform .16s ease,visibility .16s}
+  .palette-picker.open .pp-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+  .pp-group{margin-bottom:12px}
+  .pp-group:last-child{margin-bottom:0}
+  .pp-label{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 2px 8px}
+  .pp-label .ico{width:13px;height:13px;opacity:.7}
+  .pp-swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pp-sw{cursor:pointer;border:1.5px solid var(--line);background:var(--panel);
+    border-radius:10px;padding:7px;display:flex;flex-direction:column;gap:6px;text-align:left;
+    transition:border-color .15s,transform .1s}
+  .pp-sw:hover{transform:translateY(-1px)}
+  .pp-sw .bars{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .pp-sw .bars span{flex:1}
+  .pp-sw .nm{font-size:11.5px;font-weight:600;color:var(--ink-soft);display:flex;
+    align-items:center;justify-content:space-between;gap:4px}
+  .pp-sw.active{border-color:var(--accent)}
+  .pp-sw.active .nm{color:var(--ink)}
+  .pp-sw .tick{width:13px;height:13px;color:var(--accent);opacity:0}
+  .pp-sw.active .tick{opacity:1}
+
+  .rec{display:grid;grid-template-columns:1fr;gap:0}
+  .rec .who{font-weight:650;color:var(--accent-ink)}
+
+  .mustlisten{background:var(--ml-grad);border:1px solid var(--ml-bd);
+    border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow)}
+  .mustlisten h3{margin-top:0;font-family:Georgia,serif;font-size:20px;color:var(--ml-ink)}
+  .mustlisten .span{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--ink-faint);font-size:13.5px}
+  footer a{color:var(--accent-ink);text-decoration:none}
+
+  @media (max-width:720px){
+    .layout{grid-template-columns:1fr;gap:0;padding:24px 0 60px}
+    nav.toc{display:none}
+    .wrap{padding:0 18px}
+    header.top h1{font-size:30px}
+    header.top .wrap{padding:34px 18px 30px}
+    .keyval li{grid-template-columns:1fr;gap:2px}
+    .lead{margin-left:0}
+    h2{font-size:21px}
+    .palette-picker{top:10px;right:10px}
+    .pp-toggle .pp-txt{display:none}
+    .pp-toggle{padding:9px;border-radius:50%}
+    .pp-panel{width:230px}
+  }
+</style>
+</head>
+<body>
+
+<div class="palette-picker" id="picker">
+  <button class="pp-toggle" id="ppToggle" aria-expanded="false" aria-label="Change color theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    <span class="pp-txt">Theme</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pp-panel" role="menu" aria-label="Color palettes">
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>Light</span>
+      <div class="pp-swatches" id="pp-light"></div>
+    </div>
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark</span>
+      <div class="pp-swatches" id="pp-dark"></div>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <p class="eyebrow">Musical Analysis · Concerto</p>
+    <h1>Concerto for Two Violins in D minor, BWV 1043</h1>
+    <p class="sub">Bach · 1730–1731</p>
+    <div class="metarow">
+      <span><b>Composed</b> 1730–1731</span>
+    </div>
+    <p class="stamp">Generated 2026-05-31 · musical-analysis</p>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <p class="title">Contents</p>
+    <a href="#tldr"><span class="n">·</span>In brief</a>
+    <a href="#sec0"><span class="n">1</span>Identity &amp; Context</a>
+    <a href="#sec1"><span class="n">2</span>Formal Structure</a>
+    <a href="#sec2"><span class="n">3</span>Melodic &amp; Thematic Content</a>
+    <a href="#sec3"><span class="n">4</span>Harmony &amp; Tonality</a>
+    <a href="#sec4"><span class="n">5</span>Rhythm, Meter &amp; Tempo</a>
+    <a href="#sec5"><span class="n">6</span>Orchestration, Texture &amp; Timbre</a>
+    <a href="#sec6"><span class="n">7</span>Emotional Arc &amp; Dramaturgy</a>
+    <a href="#sec7"><span class="n">8</span>Historical Significance &amp; Influence</a>
+    <a href="#sec8"><span class="n">9</span>Performance Practice &amp; Notable Recordings</a>
+    <a href="#sec9"><span class="n">10</span>Listening Guide</a>
+    <a href="#sec10"><span class="n">11</span>Must-Listen Track</a>
+  </nav>
+
+  <main>
+    <section id="tldr"><div class="tldr"><h2>In brief</h2><p>Bach's position in 1720s Cöthen, then 1730s Leipzig, placed him at a crossroads. The Italian concerto — codified by Vivaldi, Corelli, Torelli, and Albinoni — was the European lingua franca of instrumental virtuosity. Bach had absorbed it intensely around 1713–14, transcribing some 20 Vivaldi and other Italian concertos for solo keyboard and organ to study the form from the inside. BWV 1043 represents the maturity of that absorption: the ritornello apparatus is unmistakably Italian, but the contrapuntal saturation, the seriousness of affect, and the equality of the two soloists are unmistakably Bach.</p></div></section>
+    <section id="sec0">
+  <h2><span class="secn">1</span>Identity &amp; Context</h2>
+<ul class="keyval">
+<li><span class="k">Full title</span><span>Concerto for Two Violins, Strings, and Continuo in D minor, BWV 1043</span></li>
+<li><span class="k">Common name</span><span>The "Double Concerto" or "Bach Double"</span></li>
+<li><span class="k">Composer</span><span>Johann Sebastian Bach (1685–1750)</span></li>
+<li><span class="k">Date of composition</span><span>Long believed to date from Bach's Leipzig years (~1730–1731), composed for the Collegium Musicum he directed at Zimmermann's coffeehouse. Recent scholarship (Christoph Wolff, Peter Wollny) increasingly suggests origins in the Cöthen period (1717–1723), when Bach served as Kapellmeister to Prince Leopold of Anhalt-Cöthen — a court devoted to secular instrumental music. The surviving parts are Leipzig copies; the autograph score is lost.</span></li>
+<li><span class="k">Scoring</span><span>Two solo violins, ripieno strings (violins I &amp; II, viola), and basso continuo (cello, violone, harpsichord)</span></li>
+<li><span class="k">Companion / sibling work</span><span>Bach later transcribed the concerto for two harpsichords in C minor (BWV 1062), preserving the entire structure but transposing down a tone and idiomatically reconceiving the solo writing for keyboard.</span></li>
+</ul>
+<p>Of the surviving Bach violin concertos (BWV 1041 in A minor, 1042 in E major, and 1043), the Double is the most extroverted in its dialogue and the most introverted in its slow movement. It also sits in conversation with the Brandenburg Concertos (1721) — particularly No. 4, with its two recorders and solo violin — and the wider tradition of the <em>concerto grosso</em>.</p>
+</section>
+
+    <section id="sec1">
+  <h2><span class="secn">2</span>Formal Structure</h2>
+<p>The work follows the standard three-movement Italian concerto plan: fast–slow–fast, with the slow movement in a contrasting key (F major, the relative major).</p>
+<h3>I. Vivace, D minor, 3/8, ~3:30</h3>
+<ul class="keyval">
+<li><span class="k">Form</span><span>Ritornello form with strong fugal procedure built into the opening tutti.</span></li>
+<li><span class="k">Key plan</span><span>D minor → A minor (dominant) → F major (relative major, brief) → various minor-mode episodes → return to D minor.</span></li>
+<li><span class="k">Architecture</span><span>The opening ritornello is itself a fugal exposition — viola enters first with the subject, then ripieno violin II, then ripieno violin I, then bass — before the soloists join. The two solo violins then function as <em>concertino</em> against the ripieno <em>tutti</em>, but they also enter in canonic imitation with each other at the unison (or octave), at a distance of one bar. Ritornello returns punctuate the form at the principal key areas.</span></li>
+<li><span class="k">Proportions</span><span>Compact and driven; no repeats, no formal cadenza.</span></li>
+</ul>
+<h3>II. Largo ma non tanto, F major, 12/8, ~6:30–7:30</h3>
+<ul class="keyval">
+<li><span class="k">Form</span><span>An extended duet over a walking continuo, freely binary in feel but really through-composed. The ripieno is reduced to gentle harmonic support — this is essentially a chamber sonata movement embedded in a concerto.</span></li>
+<li><span class="k">Key plan</span><span>F major → C major → D minor (briefly) → F major. The harmonic terrain wanders more than it modulates structurally; this is a movement about <em>line</em>, not architecture.</span></li>
+<li><span class="k">Texture</span><span>The two soloists trade two intertwining melodic threads in continuous 6th- and 3rd-laden counterpoint, with imitation at distances of one or two beats. This is arguably the most famous slow movement Bach wrote for the violin family.</span></li>
+</ul>
+<h3>III. Allegro, D minor, 3/4, ~5:00</h3>
+<ul class="keyval">
+<li><span class="k">Form</span><span>Ritornello form with a strong dance character (gigue-like, but in 3/4 rather than the typical compound meter).</span></li>
+<li><span class="k">Key plan</span><span>D minor → A minor → F major → G minor → D minor. More extensive modulation than the first movement.</span></li>
+<li><span class="k">Architecture</span><span>A driving ritornello in three-bar phrases (a Bach signature — phrases that don't quite settle into four-bar regularity) framing episodes of solo dialogue. The finale is more openly virtuosic than the first movement, with string-crossing patterns, sequential passagework, and the two soloists tossing motives across the texture in rapid alternation.</span></li>
+</ul>
+<h3>Macro-architecture</h3>
+<p>The two outer movements are tightly bound by key (D minor), meter family (compound triple feel), and contrapuntal seriousness. The slow movement provides not just contrast but the work's emotional center of gravity — so much so that for most listeners, the Largo <em>is</em> the piece. The first movement's stern fugal opening and the finale's kinetic dance form an outer frame that holds the lyrical interior in relief.</p>
+</section>
+
+    <section id="sec2">
+  <h2><span class="secn">3</span>Melodic &amp; Thematic Content</h2>
+<h3>Movement I</h3>
+<p>The principal subject is one of Bach's great fugal openers: a striding D-minor head — a rising fourth from A to D, then a stepwise descent — followed by a tail of running eighth notes that supplies the movement's perpetual motion. The subject is austere, almost severe; there is no Italian <em>galant</em> lilt.</p>
+<p>The two soloists, when they enter, do not introduce new thematic material so much as <em>intensify</em> the ritornello's vocabulary, presenting the subject in canonic imitation at one bar's distance. The interlocking of the two solo violins is the movement's defining gesture — they are equals, mirror twins, never primus and secundus.</p>
+<h3>Movement II</h3>
+<p>The opening solo phrase (in Violin II first, answered by Violin I) is one of the most quoted melodies in all Bach: a serenely arched line in F major, marked by gentle suspensions and a downward sigh into the dominant. Each entry of one violin is answered by the other in close imitation, and the lines twine in parallel thirds and sixths — <em>seufzer</em> (sigh) figures, appoggiaturas, and tied syncopations producing a continuous emotional tension-and-release. The melody has a vocal quality, almost like a chamber aria with two obbligato voices.</p>
+<h3>Movement III</h3>
+<p>The finale's principal motive is more rhythmic than melodic: a hammered three-note pickup leaping a sixth, then a stepwise descent in eighth notes. It is a <em>gigue</em> DNA strand — but in a learned, fugue-aware register. Episodes feature scalar runs, broken chords, and bariolage-like string crossings.</p>
+<h3>Motivic economy</h3>
+<p>Like most Bach concertos, BWV 1043 is built from a few cells, exhaustively developed. There is no large catalog of themes — the listener returns again and again to the same intervallic shapes, but reharmonized, reorchestrated, and reordered. This economy is a hallmark of Bach's mature concerto style.</p>
+</section>
+
+    <section id="sec3">
+  <h2><span class="secn">4</span>Harmony &amp; Tonality</h2>
+<p>D minor is, for Bach, a key of seriousness and density — the key of the Chaconne from BWV 1004, the Toccata and Fugue BWV 565, the Art of Fugue. It carries gravitas without rhetorical extremity.</p>
+<p>The harmonic language throughout BWV 1043 is firmly tonal, late-Baroque, and contrapuntally driven. Notable features:</p>
+<ul>
+<li><strong>Suspensions everywhere</strong>, especially in the Largo: 4-3 and 7-6 suspensions saturate the texture, producing the movement's continuous bittersweet tension.</li>
+<li><strong>Modulation by step and by fifth</strong>, with brief excursions to mediant areas. The first movement's tonal plan is conservative; the finale's is more adventurous, touching G minor and exploring the subdominant region.</li>
+<li><strong>Pedal points</strong> at structural junctures, particularly under final tutti returns.</li>
+<li><strong>Picardy thirds</strong>: The slow movement closes on an F-major chord (in key) but ends with a transition that prepares D minor's return — a quiet pivot of mood, not a Picardy gesture.</li>
+<li><strong>Harmonic rhythm</strong>: dense in the outer movements (chord change every beat or half-beat), spacious in the slow movement (one or two changes per bar, allowing the melodic lines breathing room).</li>
+</ul>
+</section>
+
+    <section id="sec4">
+  <h2><span class="secn">5</span>Rhythm, Meter &amp; Tempo</h2>
+<ul class="keyval">
+<li><span class="k">Movement I (Vivace, 3/8)</span><span>An almost relentless eighth- and sixteenth-note pulse, with the 3/8 felt as one strong beat per bar. The effect is one-in-a-bar driving forward motion punctuated by the architectural arrivals of ritornello returns.</span></li>
+<li><span class="k">Movement II (Largo ma non tanto, 12/8)</span><span>A walking compound triple meter — four lilting groups of three per bar — that resembles a slow <em>siciliano</em>. The Italian inscription "<em>ma non tanto</em>" ("but not too much") warns performers against dragging; the movement must breathe but also flow.</span></li>
+<li><span class="k">Movement III (Allegro, 3/4)</span><span>Three-beat dance feeling with constant eighth-note motion. Crucially, Bach writes much of the rhythmic interest in <strong>three-bar phrase groups</strong>, which give the finale an off-kilter, propulsive quality — phrases never close where the ear expects.</span></li>
+</ul>
+<p>There is no metric modulation between movements in the modern sense, but performers often calibrate the tempo of the Largo so that its eighth-note pulse relates organically to the sixteenth-notes of the Vivace.</p>
+</section>
+
+    <section id="sec5">
+  <h2><span class="secn">6</span>Orchestration, Texture &amp; Timbre</h2>
+<p>The scoring is the minimum Italian <em>concerto grosso</em> setup: two solo violins, ripieno strings (typically one or two per part), and continuo (harpsichord plus cello and/or violone). There are no winds, no contrasting consorts — the entire color world is bowed strings plus keyboard.</p>
+<p>Within this monochrome, Bach achieves an extraordinary range of texture:</p>
+<ul class="keyval">
+<li><span class="k">Movement I</span><span>Genuine four- and five-voice counterpoint at full tutti, alternating with two-part canonic dialogue in solo passages. The ripieno often drops to bass-and-continuo accompaniment during solo episodes — a classic <em>concertino/ripieno</em> contrast.</span></li>
+<li><span class="k">Movement II</span><span>The ripieno is reduced almost to nothing. The two soloists carry the entire melodic argument, supported only by quiet pulsing chords from the ripieno strings and a walking continuo bass. This is essentially a trio sonata: two melody instruments plus continuo, scored on a concerto frame.</span></li>
+<li><span class="k">Movement III</span><span>Driving tutti unisons (a Vivaldian inheritance) alternate with rapid solo exchanges. The two soloists hand the motive back and forth so quickly that the line <em>seems</em> to belong to a single virtuoso who has fragmented across two bodies.</span></li>
+</ul>
+<h3>Timbral signature</h3>
+<p>The hallmark sound of the work is the two solo violins moving in close intervals — thirds, sixths, and unisons separated by one beat — which produces a shimmering, slightly out-of-phase consonance. In live performance, the slight imperfections of intonation between the two soloists actually <em>enhance</em> the effect: a beating, breathing sound that no synthesized double cannot replicate.</p>
+</section>
+
+    <section id="sec6">
+  <h2><span class="secn">7</span>Emotional Arc &amp; Dramaturgy</h2>
+<p>The work's emotional architecture is classic Baroque <em>affetti</em>:</p>
+<ul class="keyval">
+<li><span class="k">Movement I — Resolve and dialogue</span><span>Stern, purposeful, neither tragic nor triumphant. The mood is one of high seriousness conducted as a conversation between equals. There is no individual hero here; the work begins by declaring that this music is <em>fugal</em>, that voices share, that nobody dominates.</span></li>
+<li><span class="k">Movement II — Tenderness, longing</span><span>The emotional core. The two violins in the Largo are often described as a love duet, two voices in close embrace, the suspensions producing wave after wave of bittersweet yearning that never quite resolves before the next sigh begins. Whether one hears it as romantic, sacred, or simply contemplative, this is one of the most enduring melodies in Western music for a reason: it sustains continuous emotional flux without melodrama.</span></li>
+<li><span class="k">Movement III — Energetic release</span><span>After the meditative interior of the Largo, the finale leaps back to D minor with a dancing, vigorous resolve. The mood is not joyful exactly (D minor remains D minor) — it is <em>active</em>, propulsive, almost defiant. The work closes with the same fugal seriousness with which it began.</span></li>
+</ul>
+<h3>Climax placement</h3>
+<p>The expressive peak is firmly in the Largo, particularly the passages where the two soloists trade leads at the closest distance and where the chain of suspensions builds to its densest. There is no climactic <em>fortissimo</em> — the climax is harmonic and contrapuntal, not dynamic.</p>
+</section>
+
+    <section id="sec7">
+  <h2><span class="secn">8</span>Historical Significance &amp; Influence</h2>
+<p>In Bach's own time, BWV 1043 was not the "famous" work it later became — Bach was known as an organist and church composer, his concertos circulated in manuscript among colleagues and students, and the work was not published until 1851.</p>
+<p>Its rise to canonical status is a 19th- and 20th-century story. Joseph Joachim championed it in Germany and England in the late 19th century. The work became a staple of violin pedagogy: it is almost impossible to study violin at a serious level and not encounter BWV 1043. Generations of conservatory students have played its slow movement as a rite of passage in two-violin chamber playing — learning intonation, ensemble, phrasing, and breath together with a partner.</p>
+<h3>Influence</h3>
+<ul class="keyval">
+<li><span class="k">On concerto thinking</span><span>The model of two equal soloists in dialogue — neither subordinate — flowed into the Brahms Double Concerto (Op. 102) and the modern double concerto tradition (Vaughan Williams, Penderecki, etc.).</span></li>
+<li><span class="k">On performance pedagogy</span><span>As the canonical "first major concerto" for young violinists to play <em>with another violinist</em>, it has shaped how violinists learn to listen across a stand.</span></li>
+<li><span class="k">On popular consciousness</span><span>The Largo has been used in film (notably <em>Children of a Lesser God</em>), commercials, and weddings; it is one of the rare Bach movements that is genuinely familiar to non-classical listeners.</span></li>
+</ul>
+<h3>Place in the canon</h3>
+<p>Among Bach's surviving instrumental concertos, BWV 1043 is the most beloved and arguably the most perfect — more contained than the Brandenburgs, more contrapuntally integrated than the solo violin concertos, more emotionally generous than the harpsichord concertos. If you had to pick one Bach concerto to take to a desert island, this is most listeners' choice.</p>
+</section>
+
+    <section id="sec8">
+  <h2><span class="secn">9</span>Performance Practice &amp; Notable Recordings</h2>
+<h3>Interpretive questions</h3>
+<ul class="keyval">
+<li><span class="k">Tempo of the Largo</span><span>This is the great battleground. Older recordings (mid-20th century) often took it very slowly, ~7:30–8:00, emphasizing the romantic singing line. Period-instrument performances since the 1970s take it considerably faster, ~5:30–6:30, treating "Largo <em>ma non tanto</em>" as a moving meditation rather than an adagio. Neither is "correct" — but the inscription "<em>ma non tanto</em>" was Bach's own warning against indulgence.</span></li>
+<li><span class="k">Vibrato</span><span>Modern violinists use continuous vibrato; historically-informed players use it as an ornament. The work sounds quite different under each approach.</span></li>
+<li><span class="k">Ornamentation</span><span>Bach wrote relatively little ornamentation into his solo lines, and tradition supports tasteful added trills, mordents, and small melodic decorations, particularly on repeats and final cadences.</span></li>
+<li><span class="k">Continuo realization</span><span>The harpsichord part is unfigured in surviving sources; players realize the figured bass freshly each performance.</span></li>
+<li><span class="k">Solo violin balance</span><span>With two equal soloists, the question of <em>which violinist plays Solo I vs. Solo II</em> matters less than how the two listen to each other. The greatest performances feel like a single mind in two bodies.</span></li>
+</ul>
+<h3>Landmark recordings</h3>
+<ul>
+<li><strong>David Oistrakh &amp; Igor Oistrakh</strong> (with Eugene Goossens / Royal Philharmonic, 1961). The legendary father-and-son recording — broad, romantic, lyrical Largo, with an emotional weight born of the family bond. Still the reference for the post-Romantic style.</li>
+<li><strong>Yehudi Menuhin &amp; Christian Ferras</strong> (with the Festival Orchestra / Bath, 1958), or Menuhin with George Enescu (1932) — historic warmth, an earlier century's sensibility.</li>
+<li><strong>Itzhak Perlman &amp; Pinchas Zukerman</strong> (with Zubin Mehta / NYPO, 1972). Two superstar friends, glamorous tone, gorgeous Largo, broad gestures.</li>
+<li><strong>Viktoria Mullova &amp; Giuliano Carmignola</strong> (with Venice Baroque Orchestra / Andrea Marcon, 2008). The leading modern hybrid — virtuosic, historically informed, with period bows and gut strings but big personalities. Crisp tempos, transparent textures.</li>
+<li><strong>Rachel Podger &amp; Bojan Čičić</strong> (Brecon Baroque, 2018), or earlier Podger / Andrew Manze recordings. Period instruments, conversational and intimate; lean, articulate, dancing.</li>
+<li><strong>Hilary Hahn &amp; Margaret Batjer</strong> (with the LA Chamber Orchestra), and Hahn's earlier recording — clean, lyrical, modern instrument, beautifully balanced.</li>
+</ul>
+<h3>Performance tradition</h3>
+<p>The arc of performance history runs from broad Romantic Largos with continuous vibrato (Oistrakhs, Menuhin) → mid-century mainstream (Stern/Perlman/Zukerman) → period-instrument revolution (Pinnock, Manze, Podger) → modern hybrid playing that takes lessons from both worlds (Mullova, Faust, Hahn). Today, the live performance you are most likely to encounter probably draws on all of these traditions.</p>
+</section>
+
+    <section id="sec9">
+  <h2><span class="secn">10</span>Listening Guide</h2>
+<p>(Timings approximate, based on a moderately-paced modern recording around 15:00 total.)</p>
+<h3>Movement I — Vivace (~0:00–3:30)</h3>
+<ul>
+<li><strong>0:00</strong> — Viola enters alone with the fugal subject. Listen as ripieno violin II, then violin I, then bass enter in succession, building a four-voice exposition before the soloists arrive.</li>
+<li><strong>0:30</strong> — The two solo violins enter, one bar apart, in canon. Notice that they share the <em>same</em> material — there is no "first" and "second" soloist.</li>
+<li><strong>1:15</strong> — First ritornello return in a related key. The tutti reasserts; the soloists rest or accompany.</li>
+<li><strong>2:30</strong> — Listen for the soloists at their most virtuosic — running sixteenths, brief sequential climbs.</li>
+<li><strong>3:25</strong> — Final cadence in D minor; the movement ends without ceremony.</li>
+</ul>
+<h3>Movement II — Largo ma non tanto (~3:30–10:00)</h3>
+<ul>
+<li><strong>3:30</strong> — Violin II begins the famous melody (F major) over walking continuo. The line arches up, then sighs down.</li>
+<li><strong>3:45</strong> — Violin I enters with the same melody — listen as the two lines begin their continuous intertwining. From here until the end of the movement, you almost never hear one solo violin without the other.</li>
+<li><strong>5:00</strong> — Modulation to C major; the lines climb to higher registers.</li>
+<li><strong>6:30</strong> — A brief, plangent shift toward D minor — the work's home key bleeding back into the slow movement. Listen for how the suspensions get more pungent here.</li>
+<li><strong>8:30</strong> — Return to F major; the movement breathes out toward its close.</li>
+<li><strong>10:00</strong> — The final F-major cadence is hushed, almost suspended.</li>
+</ul>
+<h3>Movement III — Allegro (~10:00–15:00)</h3>
+<ul>
+<li><strong>10:00</strong> — Driving tutti launches D minor with a leaping gesture. Three-bar phrasing throws the ear slightly off-balance.</li>
+<li><strong>10:30</strong> — Soloists enter with rapid imitative dialogue, tossing the motive back and forth at one-beat distances.</li>
+<li><strong>12:00</strong> — Modulation to F major; lyrical interlude before driving back to minor.</li>
+<li><strong>13:30</strong> — G minor episode; the most adventurous tonal terrain.</li>
+<li><strong>14:30</strong> — Final tutti; the work closes with the same severity with which it opened. No Picardy third — Bach ends in clean D minor.</li>
+</ul>
+<h3>First-listen focus</h3>
+<p>Let the Largo wash over you. Don't try to follow the structure — track the dialogue between the two violins. Notice that one almost never finishes a phrase before the other begins answering.</p>
+<h3>Deeper re-listen focus</h3>
+<p>Trace the fugal entries in Movement I, and the three-bar phrase structure in Movement III. Notice how the two solo violins are mirrors of each other — interchangeable in role, equal in dignity, and yet constantly aware of one another.</p>
+</section>
+
+    <section id="sec10">
+  <h2><span class="secn">11</span>Must-Listen Track</h2>
+<div class="mustlisten"><p><strong>Movement II — Largo ma non tanto (F major)</strong></p>
+<p>If you have ten minutes with the work, give them to the Largo. It is the structural keystone, the emotional center, and the movement that has made the concerto immortal. Two voices in continuous embrace, suspensions sighing into resolution and immediately re-tensioning into the next sigh, walking bass providing patient ground under it all — there is nothing else quite like it in Bach, and nothing else quite like it in the Baroque repertory.</p>
+<p><strong>Recommended recording for this movement</strong>: <strong>Viktoria Mullova &amp; Giuliano Carmignola</strong> with the Venice Baroque Orchestra (2008) — lean, transparent, period-aware but not dogmatic, with a Largo that flows at Bach's actual tempo marking yet still aches. For a contrasting (slower, more romantic) view, the <strong>David and Igor Oistrakh</strong> father-and-son recording remains the great post-Romantic reading, and is essential listening at least once.</p></div>
+</section>
+    <footer>
+      
+      <p>Companion to the Markdown analysis in the Obsidian vault at <code>Musical Analysis/Bach - Concerto for 2 Violins in D minor, BWV 1043.md</code>.</p>
+      <p><a href="index.html">← back to music</a></p>
+    </footer>
+  </main>
+</div>
+</div>
+
+<script>
+  /* ---------- color palettes (Squarespace-style) ---------- */
+  const PALETTES = {
+    afternoon:{mode:'light',label:'Afternoon',v:{
+      '--bg':'#faf8f4','--panel':'#ffffff','--ink':'#1c1a17','--ink-soft':'#55504a','--ink-faint':'#8a8279',
+      '--line':'#e8e2d8','--line-strong':'#d8cfc0','--accent':'#9a5b2e','--accent-soft':'#f3e6d8','--accent-ink':'#7a4220',
+      '--gold':'#b8893b','--teal':'#2f6b6b','--code-bg':'#2b2722',
+      '--header-grad':'linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%)',
+      '--th-bg':'#f3ede3','--row-hover':'#fbf7f0','--epi-ink':'#5b3c20',
+      '--warm-bg':'#fbf3e2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f2f1','--cool-bd':'#bfdcda','--cool-ink':'#1f4f4f',
+      '--ml-grad':'linear-gradient(150deg,#fbf3e7,#f6e7d4)','--ml-bd':'#ebd7b8','--ml-ink':'#6b3f1c'}},
+    sage:{mode:'light',label:'Sage',v:{
+      '--bg':'#f5f7f2','--panel':'#ffffff','--ink':'#1c211a','--ink-soft':'#4e544a','--ink-faint':'#828a7c',
+      '--line':'#e3e8dc','--line-strong':'#d3dac8','--accent':'#5c7a52','--accent-soft':'#e6ede0','--accent-ink':'#3f592f',
+      '--gold':'#a98f3c','--teal':'#3a7a6b','--code-bg':'#1f2620',
+      '--header-grad':'linear-gradient(160deg,#1a231a 0%,#283a26 55%,#3a5232 100%)',
+      '--th-bg':'#edf1e7','--row-hover':'#f6f9f2','--epi-ink':'#3c4f30',
+      '--warm-bg':'#f4efdf','--warm-bd':'#e2dba9','--warm-ink':'#5f5520',
+      '--cool-bg':'#e6f1ec','--cool-bd':'#c0dccd','--cool-ink':'#1f4f3e',
+      '--ml-grad':'linear-gradient(150deg,#eef3e4,#e3ecd6)','--ml-bd':'#d2dcb8','--ml-ink':'#3f5224'}},
+    harbor:{mode:'light',label:'Harbor',v:{
+      '--bg':'#f4f6f9','--panel':'#ffffff','--ink':'#1a2026','--ink-soft':'#4b5560','--ink-faint':'#7d8794',
+      '--line':'#e1e7ec','--line-strong':'#cfd8e1','--accent':'#2f6690','--accent-soft':'#e0ebf2','--accent-ink':'#234e6b',
+      '--gold':'#b5862f','--teal':'#2f8682','--code-bg':'#192129',
+      '--header-grad':'linear-gradient(160deg,#121b24 0%,#1d2e3f 55%,#274a63 100%)',
+      '--th-bg':'#e9eef3','--row-hover':'#f4f8fb','--epi-ink':'#234e6b',
+      '--warm-bg':'#f6efe0','--warm-bd':'#e7d6b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e2eef2','--cool-bd':'#bcd6de','--cool-ink':'#1f4f55',
+      '--ml-grad':'linear-gradient(150deg,#e8f1f6,#dbe9f1)','--ml-bd':'#c2d6e4','--ml-ink':'#234e6b'}},
+    plum:{mode:'light',label:'Plum',v:{
+      '--bg':'#f8f5f8','--panel':'#ffffff','--ink':'#221c21','--ink-soft':'#564b54','--ink-faint':'#897e87',
+      '--line':'#e9e0e7','--line-strong':'#dccdd8','--accent':'#7d4a6b','--accent-soft':'#efe2ec','--accent-ink':'#5d3550',
+      '--gold':'#b07d3b','--teal':'#3a7a72','--code-bg':'#241c23',
+      '--header-grad':'linear-gradient(160deg,#201823 0%,#332338 55%,#4e2f53 100%)',
+      '--th-bg':'#f1e9f0','--row-hover':'#faf5f9','--epi-ink':'#5d3550',
+      '--warm-bg':'#f7efe2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f1f0','--cool-bd':'#c4d9d5','--cool-ink':'#1f4f48',
+      '--ml-grad':'linear-gradient(150deg,#f4e9f1,#ecdbe8)','--ml-bd':'#ddc4d6','--ml-ink':'#5d3550'}},
+    midnight:{mode:'dark',label:'Midnight',v:{
+      '--bg':'#0f1620','--panel':'#18212e','--ink':'#e8edf3','--ink-soft':'#a9b5c4','--ink-faint':'#6f7d8d',
+      '--line':'#25303f','--line-strong':'#34414f','--accent':'#5b9bd5','--accent-soft':'#1b2a3b','--accent-ink':'#9cc4e8',
+      '--gold':'#d2a85f','--teal':'#4db1a8','--code-bg':'#0b121b',
+      '--header-grad':'linear-gradient(160deg,#0b1220 0%,#13243a 55%,#1d3a5c 100%)',
+      '--th-bg':'#1f2a38','--row-hover':'#1d2735','--epi-ink':'#9cc4e8',
+      '--warm-bg':'#2a2418','--warm-bd':'#43381f','--warm-ink':'#e0b878',
+      '--cool-bg':'#11302d','--cool-bd':'#1f4a45','--cool-ink':'#7fd6cc',
+      '--ml-grad':'linear-gradient(150deg,#1c2a3b,#16222f)','--ml-bd':'#2c3f55','--ml-ink':'#9cc4e8'}},
+    charcoal:{mode:'dark',label:'Charcoal',v:{
+      '--bg':'#161514','--panel':'#201e1c','--ink':'#ece8e2','--ink-soft':'#b0a99f','--ink-faint':'#766f65',
+      '--line':'#2c2926','--line-strong':'#3a3631','--accent':'#c8895a','--accent-soft':'#2c2420','--accent-ink':'#e3a878',
+      '--gold':'#cda35e','--teal':'#5aada3','--code-bg':'#100f0e',
+      '--header-grad':'linear-gradient(160deg,#141210 0%,#241e18 55%,#3a2c20 100%)',
+      '--th-bg':'#25221f','--row-hover':'#211e1b','--epi-ink':'#e3a878',
+      '--warm-bg':'#2c2418','--warm-bd':'#443720','--warm-ink':'#e0b878',
+      '--cool-bg':'#1a2826','--cool-bd':'#2c4641','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#272019,#1d1814)','--ml-bd':'#3d3124','--ml-ink':'#e3a878'}},
+    forest:{mode:'dark',label:'Forest',v:{
+      '--bg':'#101713','--panel':'#18211b','--ink':'#e6ece6','--ink-soft':'#a6b3a6','--ink-faint':'#6e7c6e',
+      '--line':'#243029','--line-strong':'#324133','--accent':'#6fae7e','--accent-soft':'#1a2a20','--accent-ink':'#9fd3aa',
+      '--gold':'#cda35e','--teal':'#4fb0a0','--code-bg':'#0b110d',
+      '--header-grad':'linear-gradient(160deg,#0c1410 0%,#142a1d 55%,#1d4230 100%)',
+      '--th-bg':'#1d2922','--row-hover':'#1a241d','--epi-ink':'#9fd3aa',
+      '--warm-bg':'#28281a','--warm-bd':'#3f3f24','--warm-ink':'#d8b878',
+      '--cool-bg':'#16302a','--cool-bd':'#274a40','--cool-ink':'#7fd0bc',
+      '--ml-grad':'linear-gradient(150deg,#18271e,#132019)','--ml-bd':'#2a4231','--ml-ink':'#9fd3aa'}},
+    wine:{mode:'dark',label:'Wine',v:{
+      '--bg':'#1a1012','--panel':'#241619','--ink':'#f0e4e6','--ink-soft':'#c2a9af','--ink-faint':'#8c6f76',
+      '--line':'#321f24','--line-strong':'#43292f','--accent':'#c46b7e','--accent-soft':'#2e1a1f','--accent-ink':'#e49aa8',
+      '--gold':'#cda35e','--teal':'#5aa8a0','--code-bg':'#140c0e',
+      '--header-grad':'linear-gradient(160deg,#160c0e 0%,#2a141a 55%,#4a2230 100%)',
+      '--th-bg':'#2c1c20','--row-hover':'#271519','--epi-ink':'#e49aa8',
+      '--warm-bg':'#2e2418','--warm-bd':'#463720','--warm-ink':'#e0b878',
+      '--cool-bg':'#18302d','--cool-bd':'#2a4a45','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#2a181d,#201216)','--ml-bd':'#43272f','--ml-ink':'#e49aa8'}}
+  };
+
+  const root = document.documentElement;
+  function applyPalette(key){
+    const p = PALETTES[key]; if(!p) return;
+    for(const [k,val] of Object.entries(p.v)) root.style.setProperty(k,val);
+    root.setAttribute('data-mode', p.mode);
+    document.querySelectorAll('.pp-sw').forEach(b=>b.classList.toggle('active', b.dataset.pal===key));
+    try{ localStorage.setItem('faune-palette', key); }catch(e){}
+  }
+
+  // build swatches
+  const tick = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  for(const [key,p] of Object.entries(PALETTES)){
+    const btn = document.createElement('button');
+    btn.className = 'pp-sw'; btn.dataset.pal = key; btn.type = 'button';
+    btn.title = p.label;
+    btn.innerHTML =
+      '<div class="bars">'+
+        '<span style="background:'+p.v['--bg']+'"></span>'+
+        '<span style="background:'+p.v['--accent']+'"></span>'+
+        '<span style="background:'+p.v['--accent-ink']+'"></span>'+
+        '<span style="background:'+p.v['--gold']+'"></span>'+
+      '</div>'+
+      '<span class="nm">'+p.label+tick+'</span>';
+    btn.addEventListener('click', ()=>applyPalette(key));
+    document.getElementById(p.mode==='light'?'pp-light':'pp-dark').appendChild(btn);
+  }
+
+  // toggle panel
+  const picker = document.getElementById('picker');
+  const ppToggle = document.getElementById('ppToggle');
+  ppToggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = picker.classList.toggle('open');
+    ppToggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.addEventListener('click', (e)=>{
+    if(!picker.contains(e.target)) picker.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') picker.classList.remove('open'); });
+
+  // restore saved or honor OS dark preference
+  let saved=null; try{ saved = localStorage.getItem('faune-palette'); }catch(e){}
+  if(saved && PALETTES[saved]) applyPalette(saved);
+  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
+  else applyPalette('afternoon');
+
+  // active TOC highlighting
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const map = {};
+  links.forEach(a => { const id = a.getAttribute('href').slice(1); map[id] = a; });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = map[e.target.id];
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

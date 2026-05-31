@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tchaikovsky — Violin Concerto in D major, Op. 35 · Musical Analysis</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --panel:#ffffff;
+    --ink:#1c1a17;
+    --ink-soft:#55504a;
+    --ink-faint:#8a8279;
+    --line:#e8e2d8;
+    --line-strong:#d8cfc0;
+    --accent:#9a5b2e;       /* warm terracotta — faun / afternoon heat */
+    --accent-soft:#f3e6d8;
+    --accent-ink:#7a4220;
+    --gold:#b8893b;
+    --teal:#2f6b6b;
+    --code-bg:#2b2722;
+    --green:#2f7d4f;
+    --amber:#b07d18;
+    --red:#a8392f;
+    /* themeable extras (overridden by JS palettes) */
+    --header-grad:linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%);
+    --th-bg:#f3ede3;
+    --row-hover:#fbf7f0;
+    --epi-ink:#5b3c20;
+    --warm-bg:#fbf3e2; --warm-bd:#ecd9b0; --warm-ink:#6b4e1e;
+    --cool-bg:#e8f2f1; --cool-bd:#bfdcda; --cool-ink:#1f4f4f;
+    --ml-grad:linear-gradient(150deg,#fbf3e7,#f6e7d4); --ml-bd:#ebd7b8; --ml-ink:#6b3f1c;
+    --radius:12px;
+    --shadow:0 1px 2px rgba(40,30,15,.04),0 6px 22px rgba(40,30,15,.06);
+  }
+  html{transition:none}
+  body,.card,table,.tldr,.callout,.mustlisten,nav.toc a,.svgcard,.pp-panel,.pp-toggle,.pp-sw{
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+    line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  /* ---- header ---- */
+  header.top{
+    background:var(--header-grad);
+    color:#f4ece1;position:relative;overflow:hidden;
+    border-bottom:3px solid var(--accent);
+  }
+  header.top .glow{position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(212,160,90,.35),transparent 65%);pointer-events:none;}
+  header.top .wrap{padding:46px 28px 40px;position:relative;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#d9b384;font-weight:600;margin:0 0 14px}
+  header.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;
+    font-size:40px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+  header.top h1 em{font-style:italic;color:#f0cfa0}
+  header.top .sub{font-size:17px;color:#d8cab8;margin:10px 0 0;max-width:760px}
+  .metarow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-size:13.5px;color:#cdbca6}
+  .metarow b{color:#f4ece1;font-weight:600}
+  .stamp{font-size:12px;color:#b39c80;margin-top:18px;font-family:"SF Mono",Menlo,monospace}
+
+  /* ---- layout ---- */
+  .layout{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0 80px;align-items:start}
+  nav.toc{position:sticky;top:24px;font-size:14px}
+  nav.toc .title{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 12px}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border-radius:7px;border-left:2px solid transparent;line-height:1.35}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+  nav.toc a .n{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;margin-right:7px}
+  nav.toc a.active{background:var(--accent-soft);color:var(--accent-ink);border-left-color:var(--accent)}
+
+  main{min-width:0}
+  section{margin:0 0 50px;scroll-margin-top:24px}
+  h2{font-family:Georgia,serif;font-size:25px;font-weight:600;letter-spacing:-.01em;
+    margin:0 0 4px;display:flex;align-items:baseline;gap:12px}
+  h2 .secn{font-size:14px;font-weight:700;color:#fff;background:var(--accent);
+    width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:-apple-system,system-ui;}
+  .lead{color:var(--ink-soft);margin:2px 0 22px 42px;font-size:15px}
+  h3{font-size:17px;font-weight:650;margin:26px 0 8px;color:var(--ink)}
+  p{margin:0 0 14px}
+  strong{font-weight:650}
+  a.inline{color:var(--accent-ink);text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+
+  /* ---- tl;dr box ---- */
+  .tldr{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow);margin-bottom:8px}
+  .tldr h2{font-size:18px;margin-bottom:10px}
+  .tldr p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+  .tldr p:last-child{margin-bottom:0}
+
+  blockquote.epi{margin:0 0 30px;padding:18px 24px;background:var(--accent-soft);
+    border-radius:var(--radius);font-family:Georgia,serif;font-style:italic;font-size:16px;color:var(--epi-ink)}
+  blockquote.epi .who{display:block;font-style:normal;font-family:-apple-system,system-ui;
+    font-size:13px;color:var(--accent-ink);margin-top:10px;font-weight:600}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 24px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin:6px 0}
+  .keyval{margin:0;padding:0;list-style:none}
+  .keyval li{display:grid;grid-template-columns:165px 1fr;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);margin:0}
+  .keyval li:last-child{border-bottom:none}
+  .keyval .k{color:var(--ink-faint);font-size:13.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+
+  /* ---- tables ---- */
+  table{width:100%;border-collapse:collapse;margin:6px 0 20px;font-size:14.5px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  th{background:var(--th-bg);text-align:left;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line-strong)}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--row-hover)}
+  td.sec{font-weight:650;color:var(--accent-ink);white-space:nowrap}
+  .time{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);white-space:nowrap}
+
+  /* ---- pull callout ---- */
+  .callout{border-radius:var(--radius);padding:16px 20px;margin:18px 0;font-size:15px;border:1px solid}
+  .callout.gold{background:var(--warm-bg);border-color:var(--warm-bd);color:var(--warm-ink)}
+  .callout.teal{background:var(--cool-bg);border-color:var(--cool-bd);color:var(--cool-ink)}
+  .callout .lbl{font-weight:700;text-transform:uppercase;font-size:11.5px;letter-spacing:.1em;display:block;margin-bottom:4px;opacity:.8}
+
+  /* ---- timeline ---- */
+  .tl{list-style:none;margin:8px 0 0;padding:0;position:relative}
+  .tl:before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+  .tl li{position:relative;padding:10px 0 10px 86px;margin:0}
+  .tl .t{position:absolute;left:0;top:11px;width:52px;text-align:right;font-family:"SF Mono",Menlo,monospace;
+    font-size:12.5px;color:var(--teal);font-weight:600}
+  .tl .dot{position:absolute;left:57px;top:15px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--accent)}
+  .tl li.peak .dot{background:var(--accent);width:14px;height:14px;left:56px;top:14px;box-shadow:0 0 0 4px var(--accent-soft)}
+  .tl b{color:var(--ink)}
+
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:2px 8px;border-radius:20px;vertical-align:middle}
+  .b-heart{background:#fbe3df;color:var(--red)}
+  .b-key{background:#e6efe9;color:var(--green)}
+
+  figure{margin:18px 0 24px}
+  figcaption{font-size:13px;color:var(--ink-faint);margin-top:10px;text-align:center;font-style:italic}
+  .svgcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  /* theme-aware SVG strokes/fills */
+  .svgcard svg .sv-axis{stroke:var(--line-strong)}
+  .svgcard svg .sv-grid{stroke:var(--line)}
+  .svgcard svg .sv-curve{stroke:var(--accent)}
+  .svgcard svg .sv-area{fill:var(--accent);opacity:.13}
+  .svgcard svg .sv-gold-line{stroke:var(--gold)}
+  .svgcard svg .sv-gold,.svgcard svg .sv-gold-dot{fill:var(--gold)}
+  .svgcard svg .sv-accent,.svgcard svg .sv-accent-dot{fill:var(--accent)}
+  .svgcard svg .sv-lbl{fill:var(--ink-soft)}
+  .svgcard svg .sv-faint{fill:var(--ink-faint)}
+
+  code{font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:5px}
+
+  /* ---- palette picker ---- */
+  .palette-picker{position:fixed;top:14px;right:14px;z-index:60;font-size:13px;
+    font-family:-apple-system,system-ui,sans-serif}
+  .pp-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    background:rgba(255,255,255,.92);color:#241c14;border:1px solid rgba(0,0,0,.12);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    padding:8px 13px;border-radius:30px;font-weight:600;font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,.16)}
+  .pp-toggle svg{display:block}
+  .pp-toggle .chev{transition:transform .2s ease}
+  .palette-picker.open .pp-toggle .chev{transform:rotate(180deg)}
+  .pp-panel{position:absolute;top:46px;right:0;width:248px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.22);padding:14px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);
+    transform-origin:top right;transition:opacity .16s ease,transform .16s ease,visibility .16s}
+  .palette-picker.open .pp-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+  .pp-group{margin-bottom:12px}
+  .pp-group:last-child{margin-bottom:0}
+  .pp-label{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 2px 8px}
+  .pp-label .ico{width:13px;height:13px;opacity:.7}
+  .pp-swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pp-sw{cursor:pointer;border:1.5px solid var(--line);background:var(--panel);
+    border-radius:10px;padding:7px;display:flex;flex-direction:column;gap:6px;text-align:left;
+    transition:border-color .15s,transform .1s}
+  .pp-sw:hover{transform:translateY(-1px)}
+  .pp-sw .bars{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .pp-sw .bars span{flex:1}
+  .pp-sw .nm{font-size:11.5px;font-weight:600;color:var(--ink-soft);display:flex;
+    align-items:center;justify-content:space-between;gap:4px}
+  .pp-sw.active{border-color:var(--accent)}
+  .pp-sw.active .nm{color:var(--ink)}
+  .pp-sw .tick{width:13px;height:13px;color:var(--accent);opacity:0}
+  .pp-sw.active .tick{opacity:1}
+
+  .rec{display:grid;grid-template-columns:1fr;gap:0}
+  .rec .who{font-weight:650;color:var(--accent-ink)}
+
+  .mustlisten{background:var(--ml-grad);border:1px solid var(--ml-bd);
+    border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow)}
+  .mustlisten h3{margin-top:0;font-family:Georgia,serif;font-size:20px;color:var(--ml-ink)}
+  .mustlisten .span{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--ink-faint);font-size:13.5px}
+  footer a{color:var(--accent-ink);text-decoration:none}
+
+  @media (max-width:720px){
+    .layout{grid-template-columns:1fr;gap:0;padding:24px 0 60px}
+    nav.toc{display:none}
+    .wrap{padding:0 18px}
+    header.top h1{font-size:30px}
+    header.top .wrap{padding:34px 18px 30px}
+    .keyval li{grid-template-columns:1fr;gap:2px}
+    .lead{margin-left:0}
+    h2{font-size:21px}
+    .palette-picker{top:10px;right:10px}
+    .pp-toggle .pp-txt{display:none}
+    .pp-toggle{padding:9px;border-radius:50%}
+    .pp-panel{width:230px}
+  }
+</style>
+</head>
+<body>
+
+<div class="palette-picker" id="picker">
+  <button class="pp-toggle" id="ppToggle" aria-expanded="false" aria-label="Change color theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    <span class="pp-txt">Theme</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pp-panel" role="menu" aria-label="Color palettes">
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>Light</span>
+      <div class="pp-swatches" id="pp-light"></div>
+    </div>
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark</span>
+      <div class="pp-swatches" id="pp-dark"></div>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <p class="eyebrow">Musical Analysis · Concerto</p>
+    <h1>Violin Concerto in D major, Op. 35</h1>
+    <p class="sub">Tchaikovsky · 1878</p>
+    <div class="metarow">
+      <span><b>Composed</b> 1878</span>
+      <span><b>Premiere</b> 4 December 1881, Vienna</span>
+      <span><b>Duration</b> ~35 minutes</span>
+    </div>
+    <p class="stamp">Generated 2026-05-31 · musical-analysis</p>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <p class="title">Contents</p>
+    <a href="#tldr"><span class="n">·</span>In brief</a>
+    <a href="#sec0"><span class="n">1</span>Identity &amp; Context</a>
+    <a href="#sec1"><span class="n">2</span>Formal Structure</a>
+    <a href="#sec2"><span class="n">3</span>Melodic &amp; Thematic Content</a>
+    <a href="#sec3"><span class="n">4</span>Harmony &amp; Tonality</a>
+    <a href="#sec4"><span class="n">5</span>Rhythm, Meter &amp; Tempo</a>
+    <a href="#sec5"><span class="n">6</span>Orchestration, Texture &amp; Timbre</a>
+    <a href="#sec6"><span class="n">7</span>Emotional Arc &amp; Dramaturgy</a>
+    <a href="#sec7"><span class="n">8</span>Historical Significance &amp; Influence</a>
+    <a href="#sec8"><span class="n">9</span>Performance Practice &amp; Notable Recordings</a>
+    <a href="#sec9"><span class="n">10</span>Listening Guide</a>
+    <a href="#sec10"><span class="n">11</span>Must-Listen Tracks</a>
+  </nav>
+
+  <main>
+    <section id="tldr"><div class="tldr"><h2>In brief</h2><p><strong>Commission &amp; occasion:</strong> The concerto was not formally commissioned. Tchaikovsky composed it during a period of intense personal crisis — he had fled Russia after the catastrophic collapse of his brief marriage to Antonina Miliukova and a subsequent nervous breakdown. Convalescing on the shores of Lake Geneva, he found himself in a burst of creative energy. His former student and close companion Iosif Kotek, a gifted violinist, was visiting and served as both muse and technical consultant, playing through passages as Tchaikovsky composed them.</p></div></section>
+    <section id="sec0">
+  <h2><span class="secn">1</span>Identity &amp; Context</h2>
+<ul class="keyval">
+<li><span class="k">Full title</span><span>Concerto for Violin and Orchestra in D major, Op. 35</span></li>
+<li><span class="k">Composer</span><span>Pyotr Ilyich Tchaikovsky (1840–1893)</span></li>
+<li><span class="k">Year of composition</span><span>March–April 1878, Clarens, Switzerland</span></li>
+<li><span class="k">Premiere</span><span>4 December 1881, Vienna; soloist Adolph Brodsky, Vienna Philharmonic, conducted by Hans Richter</span></li>
+<li><span class="k">Duration</span><span>~35 minutes</span></li>
+</ul>
+<p><strong>Where it sits in the composer's output:</strong> This is middle-period Tchaikovsky — composed just months after the Fourth Symphony and the opera <em>Eugene Onegin</em>, both completed in 1878. The concerto shares the Fourth Symphony's emotional volatility and large-scale ambition, but channels it into a more extroverted, virtuosic idiom. It is Tchaikovsky's only violin concerto and stands alongside his Piano Concerto No. 1 as one of his two towering solo concertos.</p>
+<p><strong>Historical moment:</strong> 1878 was a pivotal year in European music. Brahms had just premiered his own Violin Concerto (also in D major) that same year — the two works would become inseparable companions in the repertoire. The Franco-Prussian War's aftermath was reshaping European culture; Russian nationalism in music was in full bloom with the Mighty Five, yet Tchaikovsky stood somewhat apart, synthesizing Russian lyricism with Western formal structures.</p>
+<p><strong>Dedicatee:</strong> Tchaikovsky originally intended the dedication for Kotek, who had helped shape the solo part, but societal propriety made this impossible — the nature of their relationship could not be publicly acknowledged. The dedication went instead to Leopold Auer, the preeminent violinist of the Russian Imperial court. Ironically, Auer initially refused to perform it, calling the writing "unviolinistic," delaying the premiere by over three years.</p>
+</section>
+
+    <section id="sec1">
+  <h2><span class="secn">2</span>Formal Structure</h2>
+<h3>Movement I: Allegro moderato — Moderato assai</h3>
+<ul class="keyval">
+<li><span class="k">Form</span><span>Sonata-allegro, with an unusual orchestral introduction</span></li>
+<li><span class="k">Key</span><span>D major</span></li>
+<li><span class="k">Duration</span><span>~18–20 minutes (the concerto's center of gravity)</span></li>
+<li><span class="k">Meter</span><span>4/4</span></li>
+</ul>
+<p><strong>Sectional breakdown:</strong></p>
+<ul class="keyval">
+<li><span class="k">Introduction (mm. 1–28)</span><span>The orchestra presents a warm, hymn-like theme in D major — remarkably, this theme never returns. It functions as a curtain-raiser, establishing the tonal home and emotional warmth before the soloist enters.</span></li>
+<li><span class="k">Exposition (mm. 29–~127)</span><span>The solo violin enters with a gentle, almost improvisatory passage that flowers into the <strong>first theme</strong> — a soaring, lyrical melody in D major of extraordinary breadth. A virtuosic transition leads to the <strong>second theme</strong> in A major, more intimate and yearning, marked by sighing appoggiaturas.</span></li>
+<li><span class="k">Development (mm. ~128–~223)</span><span>Tchaikovsky subjects the thematic material to dramatic fragmentation and modulation. The development builds to a powerful orchestral climax before yielding to the <strong>cadenza</strong> — placed before the recapitulation, an unconventional structural choice that heightens the drama. The cadenza is enormous (roughly 3–4 minutes), functioning almost as a second development section in its own right.</span></li>
+<li><span class="k">Recapitulation (mm. ~224–end)</span><span>Themes return in the tonic, telescoped and intensified, driving to a brilliant coda.</span></li>
+</ul>
+<h3>Movement II: Canzonetta — Andante</h3>
+<ul class="keyval">
+<li><span class="k">Form</span><span>Ternary (ABA')</span></li>
+<li><span class="k">Key</span><span>G minor</span></li>
+<li><span class="k">Duration</span><span>~6–7 minutes</span></li>
+<li><span class="k">Meter</span><span>3/4</span></li>
+</ul>
+<p>This movement is a replacement. Tchaikovsky's original slow movement was discarded on Kotek's advice (it was later published separately as the <em>Méditation</em>, Op. 42 No. 1). The Canzonetta ("little song") that replaced it is a small miracle of economy and emotional depth.</p>
+<ul class="keyval">
+<li><span class="k">A section</span><span>A mournful woodwind introduction (flute and oboe over muted strings) establishes the melancholy G minor mood. The solo violin enters with a plaintive, song-like melody — simple, almost folk-like, with an aching quality created by its narrow intervallic range and chromatic inflections.</span></li>
+<li><span class="k">B section</span><span>A brief, warmer middle episode modulates toward B-flat major, offering a glimmer of consolation.</span></li>
+<li><span class="k">A' section</span><span>The opening melody returns, now ornamented, before the movement dissolves without a full cadence — a brief transitional passage (<em>attacca</em>) plunges directly into the finale.</span></li>
+</ul>
+<h3>Movement III: Finale — Allegro vivacissimo</h3>
+<ul class="keyval">
+<li><span class="k">Form</span><span>Sonata-rondo (ABACABA)</span></li>
+<li><span class="k">Key</span><span>D major</span></li>
+<li><span class="k">Duration</span><span>~10–11 minutes</span></li>
+<li><span class="k">Meter</span><span>2/4</span></li>
+<li><span class="k">A (Refrain)</span><span>The main theme erupts with ferocious energy — a <em>trepak</em>-like Russian dance in D major, built on stamping rhythms and open-string sonorities. It is unmistakably folk-derived, with the raw, whirling energy of a village festival.</span></li>
+<li><span class="k">B (First episode)</span><span>A contrasting lyrical theme offers brief respite, though the virtuosic energy never fully subsides.</span></li>
+<li><span class="k">A (Return)</span><span>The dance theme returns, intensified.</span></li>
+<li><span class="k">C (Central episode)</span><span>A more extended contrasting section, developmental in character.</span></li>
+<li><span class="k">Final returns and Coda</span><span>The rondo theme returns with increasing brilliance, driving toward a coda of electrifying velocity and culminating in a blaze of D major.</span></li>
+</ul>
+<h3>Macro-architecture</h3>
+<p>The three movements form a clear dramatic arc: <strong>heroic lyricism → intimate sorrow → ecstatic celebration</strong>. The key plan — D major / G minor / D major — is conventional but effective, with the subdominant-minor slow movement providing maximum contrast. The <em>attacca</em> link between movements II and III creates a powerful dramatic jolt, the listener plunged from fragile melancholy into explosive dance.</p>
+</section>
+
+    <section id="sec2">
+  <h2><span class="secn">3</span>Melodic &amp; Thematic Content</h2>
+<p><strong>First movement, first theme:</strong> One of the great Romantic violin melodies. It begins with a rising fourth (D to G), then unfolds in long, arching phrases that exploit the violin's singing upper register. The contour is predominantly stepwise with expressive leaps at emotional peaks — the melody breathes like a human voice. Rhythmically, it moves in flowing eighth notes with occasional dotted figures that give it a sense of noble aspiration.</p>
+<p><strong>First movement, second theme:</strong> More inward-turning, built on descending appoggiaturas that create a sighing, yearning quality. Where the first theme is confident, the second is tender and vulnerable.</p>
+<p><strong>Canzonetta melody:</strong> Narrow range, mostly stepwise, with chromatic neighbor tones that lend it a quality of suppressed weeping. Its simplicity is its power — it sounds like a half-remembered folk song heard through a veil of sadness.</p>
+<p><strong>Finale theme:</strong> Constructed from short, punchy motifs built on fourths and fifths — open intervals that evoke folk fiddling. The rhythm is the melody's primary identity: insistent, accented, driving.</p>
+<p><strong>Thematic transformation:</strong> Tchaikovsky does not employ the Lisztian technique of radical thematic transformation across movements. Instead, each movement has its own distinct thematic material. Unity comes from tonal architecture, orchestral color, and emotional narrative rather than motivic economy. This is a fundamentally different approach from, say, Brahms's concerto — Tchaikovsky prioritizes melodic abundance over developmental rigor.</p>
+<p><strong>Melodic style:</strong> Overwhelmingly lyrical and vocal in character. Even the most virtuosic passages are melodically driven rather than being pure figuration. This is a concerto that sings.</p>
+</section>
+
+    <section id="sec3">
+  <h2><span class="secn">4</span>Harmony &amp; Tonality</h2>
+<p><strong>Harmonic language:</strong> Richly chromatic within a firmly tonal framework. Tchaikovsky's harmony is more adventurous than it sometimes gets credit for — beneath the surface lyricism lies sophisticated voice-leading and bold modulatory moves.</p>
+<p><strong>Key relationships:</strong></p>
+<ul>
+<li>I → iv (D major to G minor between movements I and II) — the subdominant minor relationship creates a darkening effect</li>
+<li>The first movement's second theme in the dominant (A major) is conventional sonata practice</li>
+<li>The finale's tonal plan stays largely in D major, reinforcing the work's ultimate trajectory toward triumphant affirmation</li>
+</ul>
+<p><strong>Notable progressions:</strong></p>
+<ul>
+<li>The introduction's warm diatonic opening gives way to increasingly chromatic harmony as the soloist enters, as if the violin's presence destabilizes the orchestral serenity</li>
+<li>The Canzonetta's opening woodwind passage features exquisite chromatic inner voices beneath a simple surface</li>
+<li>The first movement's development section employs dramatic diminished-seventh eruptions and sequential modulations that build enormous tension</li>
+</ul>
+<p><strong>Dissonance treatment:</strong> Tchaikovsky handles dissonance expressively — appoggiaturas and suspensions are the primary vehicles of emotional intensity. The first theme's most poignant moments come from non-chord tones resolving by step, creating an ache that is both harmonic and melodic simultaneously.</p>
+<p><strong>Cadential patterns:</strong> Tchaikovsky favors strong, emphatic cadences — perfect authentic cadences that provide structural clarity. The finale's coda piles dominant-tonic affirmations on top of each other with almost reckless exuberance.</p>
+</section>
+
+    <section id="sec4">
+  <h2><span class="secn">5</span>Rhythm, Meter &amp; Tempo</h2>
+<p><strong>First movement:</strong> The Allegro moderato marking is crucial — this is not a headlong rush but a spacious, breathing tempo. The rhythmic profile alternates between flowing lyricism (the themes) and more agitated, driven passages (transitions and development). Rubato is essential to the first theme — a metronomic performance kills it.</p>
+<p><strong>Canzonetta:</strong> The 3/4 meter gives the movement a gentle waltz-like sway, though it is too slow and melancholy for actual dancing. The rhythm is simple and song-like — long notes connected by brief ornamental turns.</p>
+<p><strong>Finale:</strong> Here rhythm becomes the primary structural element. The 2/4 meter is relentless and driving. The main theme's rhythmic profile — heavy downbeat accents with quick upbeat figures — evokes the <em>trepak</em>, the Cossack squat-kick dance. Hemiola figures appear in transitional passages, creating metric ambiguity before the downbeat reasserts itself. The acceleration in the coda pushes the music to the limits of physical playability.</p>
+<p><strong>Tempo relationships:</strong> The three movements form a classic slow–fast arc within the outer movements framing a central repose: moderate → slow → very fast. The <em>attacca</em> transition amplifies the contrast between II and III — the effect is like being jolted awake.</p>
+</section>
+
+    <section id="sec5">
+  <h2><span class="secn">6</span>Orchestration, Texture &amp; Timbre</h2>
+<p><strong>Instrumentation:</strong> 2 flutes, 2 oboes, 2 clarinets (in A and B-flat), 2 bassoons, 4 horns in F, 2 trumpets in D, timpani, and strings. Notably, there are no trombones or tuba in the standard version (though some editions include an optional trombone) — this keeps the orchestral sound lighter and more transparent, giving the soloist room to project.</p>
+<p><strong>Textural approach:</strong> Tchaikovsky is masterful at managing the balance between solo violin and orchestra. The orchestra is rarely in full force when the violin is playing exposed thematic material. Common textures include:</p>
+<ul>
+<li>Violin melody over sustained string chords</li>
+<li>Violin in dialogue with individual woodwinds (especially clarinet and oboe)</li>
+<li>Full orchestral tuttis in ritornello passages, with the violin silent or joining the texture</li>
+</ul>
+<p><strong>Orchestration highlights:</strong></p>
+<ul>
+<li>The Canzonetta's opening is a gem of woodwind writing — flute, oboe, and clarinet weave a delicate tapestry over muted strings that sets the emotional stage before the violin enters</li>
+<li>The first movement's introduction features warm, divided strings that create a chorale-like sonority</li>
+<li>In the finale, the brass punctuate the dance rhythms with sharp accents while the strings provide rhythmic motor energy</li>
+<li>Tchaikovsky frequently uses pizzicato strings as accompaniment to the solo violin, creating space and lightness</li>
+</ul>
+<p><strong>Dynamic architecture:</strong> The first movement has the widest dynamic range — from the soloist's hushed, intimate entrance to the massive orchestral climaxes of the development. The Canzonetta stays in a restrained dynamic world (<em>piano</em> to <em>mezzo-forte</em>). The finale operates primarily in the upper dynamic range, with fortissimo as the default and only brief dips for the lyrical episodes.</p>
+</section>
+
+    <section id="sec6">
+  <h2><span class="secn">7</span>Emotional Arc &amp; Dramaturgy</h2>
+<p><strong>Narrative trajectory:</strong> The concerto tells a story that mirrors Tchaikovsky's own emotional state during its composition — a journey from turbulent longing through grief to ecstatic release.</p>
+<ul>
+<li><strong>Movement I</strong> is the emotional core: it encompasses the full range of human feeling — tenderness, passion, struggle, triumph, and doubt. The enormous cadenza functions as a solitary confession, the violin alone with its thoughts before the world (orchestra) reasserts itself.</li>
+<li><strong>Movement II</strong> is the heart's quiet center — a song of pure melancholy, unadorned and deeply personal. It is brief but devastating in its simplicity.</li>
+<li><strong>Movement III</strong> is liberation through physical joy — the folk dance obliterates introspection with sheer kinetic energy. It is Tchaikovsky choosing life, choosing celebration, choosing the body over the mind.</li>
+</ul>
+<p><strong>Climax placement:</strong> The work has two great climaxes. The first is in the development section of Movement I, where the orchestra builds to a shattering fortissimo before yielding to the cadenza — this is the climax of struggle. The second is the finale's coda — the climax of triumph. Between them, the Canzonetta provides the necessary emotional valley.</p>
+<p><strong>Programmatic content:</strong> There is no explicit program, but the autobiographical resonance is inescapable. Tchaikovsky composed this while recovering from his worst personal crisis, aided by the one person who understood him most intimately. The concerto's emotional arc — from vulnerability through sorrow to defiant joy — reads as a document of survival.</p>
+</section>
+
+    <section id="sec7">
+  <h2><span class="secn">8</span>Historical Significance &amp; Influence</h2>
+<p><strong>What was radical:</strong> The concerto was revolutionary in several respects:</p>
+<ul>
+<li>The sheer scale and ambition of the solo part — it demanded a new level of virtuosity that went beyond the Mendelssohn concerto (the previous benchmark)</li>
+<li>The folk-derived finale was considered vulgar by some — Tchaikovsky brought the sound of Russian peasant music into the concert hall with an unapologetic directness</li>
+<li>The emotional transparency was unsettling to critics accustomed to more "noble" restraint</li>
+</ul>
+<p><strong>Reception history:</strong> The premiere was a disaster. Brodsky performed it with an under-rehearsed Vienna Philharmonic, and the powerful critic Eduard Hanslick delivered one of the most savage reviews in music history: <em>"The violin is no longer played; it is pulled, torn, shredded... Tchaikovsky's Violin Concerto brings us face to face with the revolting thought that there may be music that stinks to the ear."</em> Tchaikovsky was so wounded that he could recite the review from memory for the rest of his life.</p>
+<p>Yet within a decade, the concerto conquered the repertoire. Brodsky championed it tirelessly, and once Auer finally relented and began teaching it to his legendary pupils — Elman, Milstein, Heifetz — it became the supreme test and supreme vehicle for every violinist.</p>
+<p><strong>Influence:</strong> The concerto essentially defined the template for the late-Romantic violin concerto. Its synthesis of lyricism, virtuosity, and orchestral drama influenced Glazunov's Violin Concerto (1904), Sibelius's Violin Concerto (1905), and even the Khachaturian concerto (1940). The Brahms and Tchaikovsky concertos together established the twin poles — intellectual rigor vs. emotional abandon — between which virtually every subsequent violin concerto positions itself.</p>
+<p><strong>Place in the canon:</strong> It is, by almost any measure, one of the three or four most-performed violin concertos in the world, alongside Beethoven, Brahms, and Mendelssohn. Its popularity with audiences has never wavered, even when critical fashion briefly deemed it vulgar or sentimental. It has outlasted all such objections.</p>
+</section>
+
+    <section id="sec8">
+  <h2><span class="secn">9</span>Performance Practice &amp; Notable Recordings</h2>
+<p><strong>Interpretive questions:</strong></p>
+<ul class="keyval">
+<li><span class="k">The Auer edition vs. the original</span><span>Auer made cuts and modifications to the solo part (especially in the first movement), and his pupils — Heifetz, Milstein, Elman — perpetuated these changes. Modern performers increasingly return to Tchaikovsky's original text. The differences are mostly in passage-work details, but purists care deeply.</span></li>
+<li><span class="k">Cadenza</span><span>Tchaikovsky wrote his own cadenza for the first movement. Some performers have used alternatives, but the original is now standard.</span></li>
+<li><span class="k">First movement tempo</span><span>The Allegro moderato is a trap — too fast and the lyricism is destroyed; too slow and the architecture sags. Finding the breathing tempo that serves both the singing themes and the dramatic structure is the central interpretive challenge.</span></li>
+<li><span class="k">Finale tempo</span><span>The <em>Allegro vivacissimo</em> marking licenses extreme speed, but clarity must not be sacrificed. The greatest performances find a tempo that is electrifying without becoming a blur.</span></li>
+</ul>
+<p><strong>Landmark recordings:</strong></p>
+<ol>
+<li><strong>Jascha Heifetz / Sir Thomas Beecham / London Philharmonic (1937, EMI):</strong> The gold standard of incandescent virtuosity. Heifetz's tone is white-hot, his technique so flawless it seems almost inhuman. The finale is taken at a speed that remains breathtaking nearly ninety years later. Plays the Auer edition. If you want to hear the concerto as a vehicle of transcendent bravura, start here.</li>
+<li><strong>David Oistrakh / Gennady Rozhdestvensky / Moscow Philharmonic (1968, Melodiya):</strong> The great Russian alternative to Heifetz. Where Heifetz burns, Oistrakh glows — his tone is warmer, broader, more humanly tender. The Canzonetta under Oistrakh's bow becomes one of the most beautiful things in all recorded music. A deeply felt, generous interpretation.</li>
+<li><strong>Maxim Vengerov / Claudio Abbado / Berlin Philharmonic (1995, Teldec):</strong> Recorded when Vengerov was just 21, this has the spontaneity of youth combined with staggering technical command. Abbado's orchestral support is superb — transparent and responsive. A modern reference recording.</li>
+<li><strong>Julia Fischer / Yakov Kreizberg / Russian National Orchestra (2006, PentaTone):</strong> Fischer brings impeccable intonation, a pure and focused tone, and structural intelligence. This is a beautifully proportioned reading that reveals the concerto's architecture without sacrificing passion. Excellent recorded sound.</li>
+<li><strong>Hilary Hahn / Vasily Petrenko / Royal Liverpool Philharmonic (2010, Deutsche Grammophon):</strong> Hahn performs Tchaikovsky's original score without Auer's modifications. Her playing is precise, luminous, and intensely communicative. A landmark recording for textual fidelity and musical integrity.</li>
+</ol>
+<p><strong>Performance tradition evolution:</strong> The trajectory has been from the Auer-edited, freely rubato Russian school (Heifetz, Oistrakh, Milstein) toward greater fidelity to Tchaikovsky's original text and a more balanced soloist-orchestra relationship. Modern performances tend to be somewhat less freely rhapsodic than Golden Age recordings but often achieve greater structural coherence.</p>
+</section>
+
+    <section id="sec9">
+  <h2><span class="secn">10</span>Listening Guide</h2>
+<p><em>Timings below are approximate, based on a standard ~35-minute performance.</em></p>
+<h3>First Listen — Follow the Melody</h3>
+<table>
+<thead><tr>
+<th>Timestamp</th>
+<th>What to Listen For</th>
+</tr></thead>
+<tbody>
+<tr><td><strong>0:00–1:30</strong></td><td>The orchestral introduction — warm, hymn-like strings in D major. This theme will never return; it exists solely to welcome you.</td></tr>
+<tr><td><strong>1:30–2:00</strong></td><td>The violin enters quietly, almost tentatively, with a gentle preparatory passage. Notice how it gradually gains confidence.</td></tr>
+<tr><td><strong>2:00–4:00</strong></td><td>The <strong>great first theme</strong> blossoms — one of the most beautiful melodies Tchaikovsky ever wrote. Let it wash over you. Notice how the violin seems to be singing.</td></tr>
+<tr><td><strong>5:00–6:30</strong></td><td>The <strong>second theme</strong> — more tender, yearning, built on sighing figures.</td></tr>
+<tr><td><strong>8:00–11:00</strong></td><td>The <strong>development</strong> — the mood darkens, the orchestra grows agitated, themes are fragmented and tossed about. Tension builds to a massive orchestral climax.</td></tr>
+<tr><td><strong>11:00–14:30</strong></td><td>The <strong>cadenza</strong> — the violin alone, ranging from whispered meditation to explosive virtuosity. This is the movement's emotional confessional.</td></tr>
+<tr><td><strong>14:30–18:00</strong></td><td>The themes return (recapitulation) and the movement drives to a brilliant conclusion.</td></tr>
+<tr><td><strong>18:00–19:00</strong></td><td><strong>Canzonetta begins</strong> — woodwinds weave a delicate, mournful introduction. Muted strings create a veiled, intimate atmosphere.</td></tr>
+<tr><td><strong>19:30–22:00</strong></td><td>The violin enters with its <strong>plaintive song</strong>. This is music of pure, unguarded sadness.</td></tr>
+<tr><td><strong>24:00–24:30</strong></td><td>The transition — a brief, restless passage that suddenly accelerates into...</td></tr>
+<tr><td><strong>24:30–25:00</strong></td><td>The <strong>finale explodes</strong> — the Russian dance erupts with startling force after the Canzonetta's hush. This contrast is one of the concerto's great dramatic strokes.</td></tr>
+<tr><td><strong>25:00–27:00</strong></td><td>The <strong>trepak theme</strong> — stamping, whirling, folk-like. Imagine a Cossack dance at a village celebration.</td></tr>
+<tr><td><strong>30:00–32:00</strong></td><td>The lyrical episodes provide brief breathing room amid the virtuosic storm.</td></tr>
+<tr><td><strong>33:00–35:00</strong></td><td>The <strong>coda</strong> — faster and faster, louder and louder, a headlong rush to the final blazing D major chord.</td></tr>
+</tbody></table>
+<h3>Deeper Re-Listen Focus</h3>
+<ul class="keyval">
+<li><span class="k">Listen for the orchestration</span><span>How Tchaikovsky uses the woodwinds as the violin's confidants, especially in the Canzonetta.</span></li>
+<li><span class="k">Listen for the breathing</span><span>Great performances of the first theme have an almost vocal quality of inhaling and exhaling. Notice where the violinist takes time and where they push forward.</span></li>
+<li><span class="k">Listen for the folk roots</span><span>The finale's rhythms connect Tchaikovsky to Russian soil — this is peasant music elevated to the concert stage.</span></li>
+<li><span class="k">Listen for the cadenza's architecture</span><span>It's not just fireworks — it has its own emotional narrative, from meditation to fury to transcendence.</span></li>
+</ul>
+</section>
+
+    <section id="sec10">
+  <h2><span class="secn">11</span>Must-Listen Tracks</h2>
+<div class="mustlisten"><p><strong>II. Canzonetta.</strong> The most perfect single movement in the concerto — a muted, veiled song in G minor that answers the first movement's extroverted brilliance with unguarded interior grief. The woodwind introduction alone is one of Tchaikovsky's great textural inventions: clarinets and bassoons weaving a hymn-like frame into which the violin enters as a plaintive human voice. Its brevity (barely six minutes) makes it the ideal entry point. The attacca rush into the finale, moments later, is one of the great dramatic strokes in the concerto literature. <strong>Recommended:</strong> Jascha Heifetz / Chicago Symphony / Reiner (1957, RCA) — his Canzonetta is a miracle of restrained ache.</p>
+<p><strong>I. Allegro moderato — the first theme and cadenza.</strong> If you want the grand melodic heart of the concerto, listen from the violin's first entrance through to the end of the cadenza. The great D major melody that blossoms in the second minute is one of Tchaikovsky's supreme lyrical inspirations, and the cadenza — played without orchestra — is the soloist's private confessional, travelling from whispered meditation to ecstatic virtuosity. <strong>Recommended:</strong> David Oistrakh / Staatskapelle Dresden / Konwitschny (1954, DG) — the definitive reading of the long lines.</p>
+<p><em>This concerto is, at its core, a love letter to the violin — to its capacity for song, for spectacle, for the full range of human emotion from grief to wild joy. That Tchaikovsky wrote it during the darkest period of his life only makes its ultimate affirmation more moving. It is music that insists, against all evidence, that beauty and joy are possible.</em></p></div>
+</section>
+    <footer>
+      <p><strong>Sources</strong></p><ul><li><a class="inline" href="https://en.wikipedia.org/wiki/Violin_Concerto_(Tchaikovsky" target="_blank" rel="noopener">Violin Concerto (Tchaikovsky) — Wikipedia</a>)</li>
+<li><a class="inline" href="https://en.tchaikovsky-research.net/pages/Violin_Concerto" target="_blank" rel="noopener">Violin Concerto — Tchaikovsky Research</a></li>
+<li><a class="inline" href="https://www.riphil.org/blog/the-story-behind-tchaikovsky-s-violin-concerto" target="_blank" rel="noopener">The Story Behind: Tchaikovsky's Violin Concerto — Rhode Island Philharmonic</a></li>
+<li><a class="inline" href="https://www.gramophone.co.uk/content/features/tchaikovskys-violin-concerto-a-deep-dive-into-the-best-recordings" target="_blank" rel="noopener">Tchaikovsky's Violin Concerto: A Deep-Dive into the Best Recordings — Gramophone</a></li>
+<li><a class="inline" href="https://a2so.org/behind-tchaikovsky-violin-concerto/" target="_blank" rel="noopener">Disastrous Premiere, Eventual Fame — Ann Arbor Symphony Orchestra</a></li>
+<li><a class="inline" href="https://www.classical-music.com/features/recordings/best-recordings-tchaikovskys-violin-concerto" target="_blank" rel="noopener">Best Recordings of Tchaikovsky's Violin Concerto — Classical Music</a></li>
+<li><a class="inline" href="https://houstonsymphony.org/tchaikovsky-violin-concerto/" target="_blank" rel="noopener">Great Escape: Tchaikovsky's Violin Concerto — Houston Symphony</a></li></ul>
+      <p>Companion to the Markdown analysis in the Obsidian vault at <code>Musical Analysis/Tchaikovsky - Violin Concerto in D major, Op. 35.md</code>.</p>
+      <p><a href="index.html">← back to music</a></p>
+    </footer>
+  </main>
+</div>
+</div>
+
+<script>
+  /* ---------- color palettes (Squarespace-style) ---------- */
+  const PALETTES = {
+    afternoon:{mode:'light',label:'Afternoon',v:{
+      '--bg':'#faf8f4','--panel':'#ffffff','--ink':'#1c1a17','--ink-soft':'#55504a','--ink-faint':'#8a8279',
+      '--line':'#e8e2d8','--line-strong':'#d8cfc0','--accent':'#9a5b2e','--accent-soft':'#f3e6d8','--accent-ink':'#7a4220',
+      '--gold':'#b8893b','--teal':'#2f6b6b','--code-bg':'#2b2722',
+      '--header-grad':'linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%)',
+      '--th-bg':'#f3ede3','--row-hover':'#fbf7f0','--epi-ink':'#5b3c20',
+      '--warm-bg':'#fbf3e2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f2f1','--cool-bd':'#bfdcda','--cool-ink':'#1f4f4f',
+      '--ml-grad':'linear-gradient(150deg,#fbf3e7,#f6e7d4)','--ml-bd':'#ebd7b8','--ml-ink':'#6b3f1c'}},
+    sage:{mode:'light',label:'Sage',v:{
+      '--bg':'#f5f7f2','--panel':'#ffffff','--ink':'#1c211a','--ink-soft':'#4e544a','--ink-faint':'#828a7c',
+      '--line':'#e3e8dc','--line-strong':'#d3dac8','--accent':'#5c7a52','--accent-soft':'#e6ede0','--accent-ink':'#3f592f',
+      '--gold':'#a98f3c','--teal':'#3a7a6b','--code-bg':'#1f2620',
+      '--header-grad':'linear-gradient(160deg,#1a231a 0%,#283a26 55%,#3a5232 100%)',
+      '--th-bg':'#edf1e7','--row-hover':'#f6f9f2','--epi-ink':'#3c4f30',
+      '--warm-bg':'#f4efdf','--warm-bd':'#e2dba9','--warm-ink':'#5f5520',
+      '--cool-bg':'#e6f1ec','--cool-bd':'#c0dccd','--cool-ink':'#1f4f3e',
+      '--ml-grad':'linear-gradient(150deg,#eef3e4,#e3ecd6)','--ml-bd':'#d2dcb8','--ml-ink':'#3f5224'}},
+    harbor:{mode:'light',label:'Harbor',v:{
+      '--bg':'#f4f6f9','--panel':'#ffffff','--ink':'#1a2026','--ink-soft':'#4b5560','--ink-faint':'#7d8794',
+      '--line':'#e1e7ec','--line-strong':'#cfd8e1','--accent':'#2f6690','--accent-soft':'#e0ebf2','--accent-ink':'#234e6b',
+      '--gold':'#b5862f','--teal':'#2f8682','--code-bg':'#192129',
+      '--header-grad':'linear-gradient(160deg,#121b24 0%,#1d2e3f 55%,#274a63 100%)',
+      '--th-bg':'#e9eef3','--row-hover':'#f4f8fb','--epi-ink':'#234e6b',
+      '--warm-bg':'#f6efe0','--warm-bd':'#e7d6b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e2eef2','--cool-bd':'#bcd6de','--cool-ink':'#1f4f55',
+      '--ml-grad':'linear-gradient(150deg,#e8f1f6,#dbe9f1)','--ml-bd':'#c2d6e4','--ml-ink':'#234e6b'}},
+    plum:{mode:'light',label:'Plum',v:{
+      '--bg':'#f8f5f8','--panel':'#ffffff','--ink':'#221c21','--ink-soft':'#564b54','--ink-faint':'#897e87',
+      '--line':'#e9e0e7','--line-strong':'#dccdd8','--accent':'#7d4a6b','--accent-soft':'#efe2ec','--accent-ink':'#5d3550',
+      '--gold':'#b07d3b','--teal':'#3a7a72','--code-bg':'#241c23',
+      '--header-grad':'linear-gradient(160deg,#201823 0%,#332338 55%,#4e2f53 100%)',
+      '--th-bg':'#f1e9f0','--row-hover':'#faf5f9','--epi-ink':'#5d3550',
+      '--warm-bg':'#f7efe2','--warm-bd':'#ecd9b0','--warm-ink':'#6b4e1e',
+      '--cool-bg':'#e8f1f0','--cool-bd':'#c4d9d5','--cool-ink':'#1f4f48',
+      '--ml-grad':'linear-gradient(150deg,#f4e9f1,#ecdbe8)','--ml-bd':'#ddc4d6','--ml-ink':'#5d3550'}},
+    midnight:{mode:'dark',label:'Midnight',v:{
+      '--bg':'#0f1620','--panel':'#18212e','--ink':'#e8edf3','--ink-soft':'#a9b5c4','--ink-faint':'#6f7d8d',
+      '--line':'#25303f','--line-strong':'#34414f','--accent':'#5b9bd5','--accent-soft':'#1b2a3b','--accent-ink':'#9cc4e8',
+      '--gold':'#d2a85f','--teal':'#4db1a8','--code-bg':'#0b121b',
+      '--header-grad':'linear-gradient(160deg,#0b1220 0%,#13243a 55%,#1d3a5c 100%)',
+      '--th-bg':'#1f2a38','--row-hover':'#1d2735','--epi-ink':'#9cc4e8',
+      '--warm-bg':'#2a2418','--warm-bd':'#43381f','--warm-ink':'#e0b878',
+      '--cool-bg':'#11302d','--cool-bd':'#1f4a45','--cool-ink':'#7fd6cc',
+      '--ml-grad':'linear-gradient(150deg,#1c2a3b,#16222f)','--ml-bd':'#2c3f55','--ml-ink':'#9cc4e8'}},
+    charcoal:{mode:'dark',label:'Charcoal',v:{
+      '--bg':'#161514','--panel':'#201e1c','--ink':'#ece8e2','--ink-soft':'#b0a99f','--ink-faint':'#766f65',
+      '--line':'#2c2926','--line-strong':'#3a3631','--accent':'#c8895a','--accent-soft':'#2c2420','--accent-ink':'#e3a878',
+      '--gold':'#cda35e','--teal':'#5aada3','--code-bg':'#100f0e',
+      '--header-grad':'linear-gradient(160deg,#141210 0%,#241e18 55%,#3a2c20 100%)',
+      '--th-bg':'#25221f','--row-hover':'#211e1b','--epi-ink':'#e3a878',
+      '--warm-bg':'#2c2418','--warm-bd':'#443720','--warm-ink':'#e0b878',
+      '--cool-bg':'#1a2826','--cool-bd':'#2c4641','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#272019,#1d1814)','--ml-bd':'#3d3124','--ml-ink':'#e3a878'}},
+    forest:{mode:'dark',label:'Forest',v:{
+      '--bg':'#101713','--panel':'#18211b','--ink':'#e6ece6','--ink-soft':'#a6b3a6','--ink-faint':'#6e7c6e',
+      '--line':'#243029','--line-strong':'#324133','--accent':'#6fae7e','--accent-soft':'#1a2a20','--accent-ink':'#9fd3aa',
+      '--gold':'#cda35e','--teal':'#4fb0a0','--code-bg':'#0b110d',
+      '--header-grad':'linear-gradient(160deg,#0c1410 0%,#142a1d 55%,#1d4230 100%)',
+      '--th-bg':'#1d2922','--row-hover':'#1a241d','--epi-ink':'#9fd3aa',
+      '--warm-bg':'#28281a','--warm-bd':'#3f3f24','--warm-ink':'#d8b878',
+      '--cool-bg':'#16302a','--cool-bd':'#274a40','--cool-ink':'#7fd0bc',
+      '--ml-grad':'linear-gradient(150deg,#18271e,#132019)','--ml-bd':'#2a4231','--ml-ink':'#9fd3aa'}},
+    wine:{mode:'dark',label:'Wine',v:{
+      '--bg':'#1a1012','--panel':'#241619','--ink':'#f0e4e6','--ink-soft':'#c2a9af','--ink-faint':'#8c6f76',
+      '--line':'#321f24','--line-strong':'#43292f','--accent':'#c46b7e','--accent-soft':'#2e1a1f','--accent-ink':'#e49aa8',
+      '--gold':'#cda35e','--teal':'#5aa8a0','--code-bg':'#140c0e',
+      '--header-grad':'linear-gradient(160deg,#160c0e 0%,#2a141a 55%,#4a2230 100%)',
+      '--th-bg':'#2c1c20','--row-hover':'#271519','--epi-ink':'#e49aa8',
+      '--warm-bg':'#2e2418','--warm-bd':'#463720','--warm-ink':'#e0b878',
+      '--cool-bg':'#18302d','--cool-bd':'#2a4a45','--cool-ink':'#7fd0c5',
+      '--ml-grad':'linear-gradient(150deg,#2a181d,#201216)','--ml-bd':'#43272f','--ml-ink':'#e49aa8'}}
+  };
+
+  const root = document.documentElement;
+  function applyPalette(key){
+    const p = PALETTES[key]; if(!p) return;
+    for(const [k,val] of Object.entries(p.v)) root.style.setProperty(k,val);
+    root.setAttribute('data-mode', p.mode);
+    document.querySelectorAll('.pp-sw').forEach(b=>b.classList.toggle('active', b.dataset.pal===key));
+    try{ localStorage.setItem('faune-palette', key); }catch(e){}
+  }
+
+  // build swatches
+  const tick = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  for(const [key,p] of Object.entries(PALETTES)){
+    const btn = document.createElement('button');
+    btn.className = 'pp-sw'; btn.dataset.pal = key; btn.type = 'button';
+    btn.title = p.label;
+    btn.innerHTML =
+      '<div class="bars">'+
+        '<span style="background:'+p.v['--bg']+'"></span>'+
+        '<span style="background:'+p.v['--accent']+'"></span>'+
+        '<span style="background:'+p.v['--accent-ink']+'"></span>'+
+        '<span style="background:'+p.v['--gold']+'"></span>'+
+      '</div>'+
+      '<span class="nm">'+p.label+tick+'</span>';
+    btn.addEventListener('click', ()=>applyPalette(key));
+    document.getElementById(p.mode==='light'?'pp-light':'pp-dark').appendChild(btn);
+  }
+
+  // toggle panel
+  const picker = document.getElementById('picker');
+  const ppToggle = document.getElementById('ppToggle');
+  ppToggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = picker.classList.toggle('open');
+    ppToggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.addEventListener('click', (e)=>{
+    if(!picker.contains(e.target)) picker.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') picker.classList.remove('open'); });
+
+  // restore saved or honor OS dark preference
+  let saved=null; try{ saved = localStorage.getItem('faune-palette'); }catch(e){}
+  if(saved && PALETTES[saved]) applyPalette(saved);
+  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
+  else applyPalette('afternoon');
+
+  // active TOC highlighting
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const map = {};
+  links.forEach(a => { const id = a.getAttribute('href').slice(1); map[id] = a; });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = map[e.target.id];
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
