@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>vaazee.net</title>
+  <title>Games · vaazee.net</title>
   <style>
     :root {
       --bg: #0d1117;
@@ -22,14 +22,16 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 5rem 1.5rem;
+      padding: 4rem 1.5rem;
     }
+    .back { align-self: flex-start; max-width: 720px; width: 100%; margin-bottom: 1.5rem; }
+    .back a { color: var(--accent); text-decoration: none; font-size: 0.95rem; }
     header { text-align: center; margin-bottom: 3rem; }
-    h1 { font-size: 2.75rem; font-weight: 700; letter-spacing: -0.02em; }
+    h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.02em; }
     header p { color: var(--muted); margin-top: 0.75rem; font-size: 1.05rem; }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 1rem;
       width: 100%;
       max-width: 720px;
@@ -55,21 +57,18 @@
   </style>
 </head>
 <body>
+  <div class="back"><a href="../">&larr; vaazee.net</a></div>
+
   <header>
-    <h1>vaazee.net</h1>
-    <p>A few things I built for the web.</p>
+    <h1>Games</h1>
+    <p>Browser games to play right here.</p>
   </header>
 
   <main class="grid">
-    <a class="card" href="games/">
-      <span class="emoji">🎮</span>
-      <span class="name">Games</span>
-      <span class="desc">Browser games to play right here.</span>
-    </a>
-    <a class="card" href="https://vaazee.github.io/web-by-vaazee/">
-      <span class="emoji">🗂️</span>
-      <span class="name">web by vaazee</span>
-      <span class="desc">A collection of pages, sorted by topic.</span>
+    <a class="card" href="snake/">
+      <span class="emoji">🐍</span>
+      <span class="name">Snake</span>
+      <span class="desc">Classic grid movement. Eat, grow, survive.</span>
     </a>
   </main>
 

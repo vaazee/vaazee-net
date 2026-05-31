@@ -1,27 +1,33 @@
-Implemented a minimal classic Snake game with deterministic core logic and a simple canvas UI.
+# vaazee.net
 
-**Files Added**
-- `/Users/vaazee/Documents/New project/index.html`
-- `/Users/vaazee/Documents/New project/styles.css`
-- `/Users/vaazee/Documents/New project/snake.js`
-- `/Users/vaazee/Documents/New project/main.js`
+Static site served from this repo via GitHub Pages at **vaazee.net**.
 
-**Notes**
-- Core logic is in `/Users/vaazee/Documents/New project/snake.js` with pure functions for deterministic stepping.
-- No new dependencies were added.
-- No tests were added because this repo has no test runner yet.
+## Structure
 
-**Run Instructions**
-1. From `/Users/vaazee/Documents/New project`, start a simple server:
-   ```bash
-   python3 -m http.server 5173
-   ```
-2. Open [http://localhost:5173](http://localhost:5173) in your browser.
+```
+index.html            Landing hub — links to Games and web-by-vaazee
+games/
+  index.html          Games listing
+  snake/              Classic Snake game
+    index.html
+    main.js           UI / game loop
+    snake.js          Pure game logic (deterministic stepping)
+    styles.css
+```
 
-**Manual Verification Checklist**
-1. Controls: Arrow keys/WASD change direction; on-screen buttons work on mobile.
-2. Pause/Restart: Space or Pause button toggles pause; Restart resets score and snake.
-3. Boundaries: Hitting a wall ends the game; self-collision ends the game.
-4. Growth & Score: Eating food increases length and score; food never spawns on the snake.
+- The root page links to the **Games** page and to
+  [web by vaazee](https://vaazee.github.io/web-by-vaazee/) (separate repo).
+- `.nojekyll` disables Jekyll so files are served exactly as written.
 
-If you want tests, tell me which runner you prefer (or if you want a minimal no-deps test script), and I’ll add them.
+## Run locally
+
+```bash
+python3 -m http.server 5173
+```
+
+Then open <http://localhost:5173>. Snake assets use relative paths, so it also
+works from any subpath.
+
+## Snake controls
+
+Arrow keys or WASD to move, Space to pause, on-screen d-pad for touch.
