@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mahler — Symphony No. 1 in D major ("Titan") · Musical Analysis</title>
+<title>Mahler — Symphony No. 1 (“Titan”) · Musical Analysis</title>
 <style>
   :root{
     --bg:#faf8f4;
@@ -218,6 +218,66 @@
     .pp-panel{width:230px}
   }
 </style>
+<style>
+/* ---- movement cards ---- */
+.mv{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+  border-radius:var(--radius);padding:15px 20px;margin:0 0 13px;box-shadow:var(--shadow)}
+.mv .mvhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:4px}
+.mv .mvno{font-family:Georgia,serif;font-weight:700;color:var(--accent);font-size:17px;line-height:1}
+.mv .mvname{font-weight:650;font-size:15.5px}
+.mv .mvit{font-style:italic;color:var(--ink-faint);font-size:13.5px;font-weight:400}
+.mv .mvkey{font-family:"SF Mono",Menlo,monospace;font-size:11.5px;color:var(--cool-ink);
+  background:var(--cool-bg);border:1px solid var(--cool-bd);padding:1px 8px;border-radius:20px}
+.mv .mvdur{font-family:"SF Mono",Menlo,monospace;font-size:11.5px;color:var(--ink-faint);margin-left:auto}
+.mv p{margin:6px 0 0;font-size:14.5px;color:var(--ink-soft)}
+.mv ul{margin:6px 0 0}
+.mv li{font-size:14px;color:var(--ink-soft);margin:3px 0}
+/* ---- interactive timeline tabs ---- */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 20px}
+.tab{cursor:pointer;border:1px solid var(--line-strong);background:var(--panel);color:var(--ink-soft);
+  border-radius:22px;padding:6px 14px;font-size:13px;font-weight:600;font-family:inherit;transition:.15s}
+.tab:hover{border-color:var(--accent);color:var(--accent-ink)}
+.tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tl li.tlhide{display:none}
+.tl li .mvtag{display:inline-block;font-family:"SF Mono",Menlo,monospace;font-size:11px;
+  color:var(--ink-faint);margin-left:8px}
+/* ---- tempo comparison ---- */
+.tempo{margin:8px 0 2px}
+.tempo .trow{display:grid;grid-template-columns:200px 1fr 58px;gap:14px;align-items:center;
+  padding:7px 8px;border-radius:8px;cursor:pointer;transition:background .15s}
+.tempo .trow:hover{background:var(--row-hover)}
+.tempo .who{font-size:13.5px;font-weight:600;color:var(--ink-soft)}
+.tempo .who small{display:block;font-weight:400;color:var(--ink-faint);font-size:11.5px}
+.tempo .track{height:15px;background:var(--th-bg);border-radius:8px;border:1px solid var(--line);overflow:hidden}
+.tempo .fill{height:100%;width:0;border-radius:8px;transition:width .9s cubic-bezier(.2,.7,.2,1)}
+.tempo .trow.love .fill{background:linear-gradient(90deg,var(--teal),var(--cool-ink))}
+.tempo .trow.elegy .fill{background:linear-gradient(90deg,var(--accent),var(--gold))}
+.tempo .mins{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--teal);text-align:right;font-weight:600}
+.tempo .legend{display:flex;gap:20px;margin:14px 0 2px;font-size:12.5px;color:var(--ink-soft)}
+.tempo .legend i{width:22px;height:10px;border-radius:5px;display:inline-block;vertical-align:middle;margin-right:6px}
+.tempo .lg-love i{background:linear-gradient(90deg,var(--teal),var(--cool-ink))}
+.tempo .lg-elegy i{background:linear-gradient(90deg,var(--accent),var(--gold))}
+.tnote{font-size:13px;color:var(--ink-faint);margin-top:10px}
+/* ---- transform toggle ---- */
+.xform{display:flex;gap:9px;margin:10px 0 6px;flex-wrap:wrap}
+.xbtn{cursor:pointer;border:1px solid var(--line-strong);background:var(--panel);border-radius:9px;
+  padding:8px 15px;font-size:13px;font-weight:600;font-family:inherit;color:var(--ink-soft);transition:.15s}
+.xbtn:hover{border-color:var(--accent)}
+.xbtn.active{border-color:var(--accent);color:var(--accent-ink);background:var(--accent-soft)}
+.xcap{font-size:13.5px;color:var(--ink-soft);margin-top:8px;min-height:2.6em}
+/* svg transform diagram states */
+svg .x-despair,svg .x-chorale{transition:opacity .45s ease}
+svg.show-despair .x-chorale{opacity:.16}
+svg.show-chorale .x-despair{opacity:.16}
+.sv-cool{stroke:var(--teal)}
+.sv-cool-dot{fill:var(--teal)}
+/* keyboard (semitone diagram) */
+.kbd .wkey{fill:var(--panel);stroke:var(--line-strong)}
+.kbd .bkey{fill:var(--ink)}
+.kbd .lit-min{fill:var(--cool-bg);stroke:var(--cool-ink);stroke-width:2}
+.kbd .lit-maj{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2}
+.kbd .klbl{fill:var(--ink-faint);font-family:monospace;font-size:11px}
+</style>
 </head>
 <body>
 
@@ -242,14 +302,16 @@
 <header class="top">
   <div class="glow"></div>
   <div class="wrap">
-    <p class="eyebrow">Musical Analysis · Symphony</p>
-    <h1>Symphony No. 1 in D major ("Titan")</h1>
-    <p class="sub">Mahler · 1887–1888</p>
+    <p class="eyebrow">Musical Analysis · Symphony · late-Romantic</p>
+    <h1>Symphony No. 1 in D major <em>(“Titan”)</em></h1>
+    <p class="sub">Gustav Mahler · composed 1887–88 · the symphony as world-novel — from morning innocence to hard-won triumph.</p>
     <div class="metarow">
+      <span><b>Form</b> Four movements (orig. five)</span>
       <span><b>Composed</b> 1887–1888</span>
-      <span><b>Premiere</b> 20 November 1889, Budapest, conducted by the composer — as a five-movement "S…</span>
+      <span><b>Premiere</b> 20 Nov 1889, Budapest</span>
+      <span><b>Duration</b> ~55 min</span>
     </div>
-    <p class="stamp">Generated 2026-05-31 · musical-analysis</p>
+    <p class="stamp">Generated 2026-05-31 · musical-analysis · hand-crafted edition</p>
   </div>
 </header>
 
@@ -259,225 +321,270 @@
   <nav class="toc" id="toc">
     <p class="title">Contents</p>
     <a href="#tldr"><span class="n">·</span>In brief</a>
-    <a href="#sec0"><span class="n">1</span>Identity &amp; Context</a>
-    <a href="#sec1"><span class="n">2</span>Formal Structure</a>
-    <a href="#sec2"><span class="n">3</span>Melodic &amp; Thematic Content</a>
-    <a href="#sec3"><span class="n">4</span>Harmony &amp; Tonality</a>
-    <a href="#sec4"><span class="n">5</span>Rhythm, Meter &amp; Tempo</a>
-    <a href="#sec5"><span class="n">6</span>Orchestration, Texture &amp; Timbre</a>
-    <a href="#sec6"><span class="n">7</span>Emotional Arc &amp; Dramaturgy</a>
-    <a href="#sec7"><span class="n">8</span>Historical Significance &amp; Influence</a>
-    <a href="#sec8"><span class="n">9</span>Performance Practice &amp; Notable Recordings</a>
-    <a href="#sec9"><span class="n">10</span>Listening Guide</a>
-    <a href="#sec10"><span class="n">11</span>Must-Listen Tracks</a>
+    <a href="#identity"><span class="n">1</span>Identity &amp; Context</a>
+    <a href="#form"><span class="n">2</span>Formal Structure</a>
+    <a href="#theme"><span class="n">3</span>Melody &amp; Transformation</a>
+    <a href="#harmony"><span class="n">4</span>Harmony &amp; Tonality</a>
+    <a href="#rhythm"><span class="n">5</span>Rhythm &amp; Tempo</a>
+    <a href="#orch"><span class="n">6</span>Orchestration</a>
+    <a href="#arc"><span class="n">7</span>Emotional Arc</a>
+    <a href="#sig"><span class="n">8</span>Significance</a>
+    <a href="#perf"><span class="n">9</span>Recordings</a>
+    <a href="#guide"><span class="n">10</span>Listening Guide</a>
+    <a href="#must"><span class="n">11</span>Must-Listen</a>
   </nav>
 
   <main>
-    <section id="tldr"><div class="tldr"><h2>In brief</h2><p>This is Mahler's first essay in the genre that would consume him. He had been Kapellmeister in Kassel, Prague, Leipzig, and was about to take Budapest. The symphony emerged in white heat — six weeks of composition, by his own (probably embellished) account — drawing heavily on his own <em>Lieder eines fahrenden Gesellen</em> (1884–85), themselves rooted in the bruising end of his affair with Johanna Richter.</p></div></section>
-    <section id="sec0">
-  <h2><span class="secn">1</span>Identity &amp; Context</h2>
-<ul class="keyval">
-<li><span class="k">Full title</span><span>Symphony No. 1 in D major (originally subtitled, then withdrawn: <em>"Titan, eine Tondichtung in Symphonieform"</em> — "Titan, a tone poem in symphonic form")</span></li>
-<li><span class="k">Composer</span><span>Gustav Mahler (1860–1911)</span></li>
-<li><span class="k">Composition</span><span>1887–1888 (Leipzig and Prague), with substantial revisions through 1896 and beyond</span></li>
-<li><span class="k">Premiere</span><span>20 November 1889, Budapest, conducted by the composer — as a five-movement "Symphonic Poem in Two Parts." The work was a near-fiasco; the audience was bewildered, the critics hostile.</span></li>
-<li><span class="k">Standard four-movement version</span><span>Definitive form arrived in 1896 (Berlin), after Mahler excised the original second movement, <em>Blumine</em> — a tender Andante later rediscovered in 1966 and occasionally performed.</span></li>
-</ul>
-<p>The work sits at the gateway of late Romanticism. Bruckner had just completed his Eighth; Brahms was still alive and writing his clarinet works; Strauss was about to launch the modern tone poem with <em>Don Juan</em> (1888). Wagner had been dead five years but still ruled the imagination of every German composer under forty. Mahler's First absorbs all of this — Wagnerian harmony, Brucknerian breadth, Schubertian song, the rustic Austrian landscape — and detonates it into something unmistakably new: the symphony as autobiographical confession, as world-novel, as cosmic theater.</p>
-<p>The "Titan" subtitle refers to Jean Paul's 1803 novel of the same name, beloved by Mahler in youth — but Mahler insisted the connection was only atmospheric, not programmatic, and eventually withdrew all programs. Wisely. The music tells its own story.</p>
-</section>
 
-    <section id="sec1">
-  <h2><span class="secn">2</span>Formal Structure</h2>
-<p>The four movements span roughly 55 minutes. The macro-architecture traces an arc from pastoral awakening through rustic dance and ironic funeral to apocalyptic struggle and triumph — D major bookending D minor at the symphony's emotional nadir.</p>
-<h3>I. Langsam, schleppend — Immer sehr gemächlich ("Slowly, dragging — Always very leisurely") — D major</h3>
-<ul>
-<li><strong>Form</strong>: Sonata-allegro with an extraordinary slow introduction</li>
-<li><strong>Duration</strong>: ~15 minutes</li>
-<li><strong>Structure</strong>:</li>
-<li><strong>Introduction (mm. 1–62)</strong>: A seven-octave A pedal across the entire orchestra — "wie ein Naturlaut" ("like a sound of nature"). Distant fanfares, cuckoo calls (a falling fourth, not the natural minor third), horn calls.</li>
-<li><strong>Exposition (mm. 63–207)</strong>: Main theme — borrowed wholesale from <em>Lieder eines fahrenden Gesellen</em> No. 2, "Ging heut' Morgen übers Feld" — a sunny D-major walking song. No true second subject; the development of the wanderer-theme is the substance.</li>
-<li><strong>Development (mm. 208–351)</strong>: Returns to the introduction's pedal-drone world; gathers darker material; a long crescendo.</li>
-<li><strong>Recapitulation/coda (mm. 352–end)</strong>: Triumphant horn calls, brilliant D-major peroration.</li>
-</ul>
-<h3>II. Kräftig bewegt, doch nicht zu schnell ("Strongly moving, but not too fast") — A major</h3>
-<ul>
-<li><strong>Form</strong>: Scherzo with Trio (ländler-based)</li>
-<li><strong>Duration</strong>: ~7 minutes</li>
-<li><strong>Scherzo</strong>: A stomping Austrian peasant dance in 3/4, robust and rough-shod. Bass strings dig in like boots in mud.</li>
-<li><strong>Trio</strong>: A tenderer, more graceful Viennese waltz in F major — sentimental, with portamento strings and gemütlich horn writing.</li>
-<li><strong>Da capo Scherzo</strong>, with coda.</li>
-</ul>
-<h3>III. Feierlich und gemessen, ohne zu schleppen ("Solemn and measured, without dragging") — D minor</h3>
-<ul class="keyval">
-<li><span class="k">Form</span><span>A loose ternary/rondo built on a <em>minor-mode</em> canon of "Frère Jacques" ("Bruder Jakob")</span></li>
-<li><span class="k">Duration</span><span>~11 minutes</span></li>
-<li><span class="k">A</span><span>Solo double bass intones the canon at the top of its register over muted timpani. Other instruments enter in canon: bassoon, cello, tuba, clarinets. A grotesque funeral procession.</span></li>
-<li><span class="k">B</span><span>A klezmer-tinged interruption — oboes, E-flat clarinet, trumpets — vulgar, parodistic, a Bohemian village band.</span></li>
-<li><span class="k">A'</span><span>Return of the canon, more sustained.</span></li>
-<li><span class="k">C (central episode)</span><span>A heartbreakingly tender G-major passage, again drawn from <em>Gesellen</em> No. 4 ("Die zwei blauen Augen") — the wanderer lying down under the linden tree.</span></li>
-<li><span class="k">A''</span><span>Canon returns, fades into ambiguous oblivion.</span></li>
-</ul>
-<h3>IV. Stürmisch bewegt ("Stormily agitated") — F minor → D major</h3>
-<ul class="keyval">
-<li><span class="k">Form</span><span>Vastly expanded sonata form with multiple expositions of contrasting material — what Mahler called "the cry of a wounded heart"</span></li>
-<li><span class="k">Duration</span><span>~20 minutes</span></li>
-<li><span class="k">Opening</span><span>Cymbal crash and orchestral shriek launches a turbulent F-minor first subject — frantic, demonic.</span></li>
-<li><span class="k">Second subject</span><span>A long-breathed, yearning D-flat major theme — one of the great Mahlerian <em>Gesangsperioden</em>.</span></li>
-<li><span class="k">Development</span><span>Cyclic returns of material from Movement I, including the introduction's nature-sounds and main theme — the first major instance of Mahler's life-long technique of cross-movement quotation.</span></li>
-<li><span class="k">Triumph</span><span>A premature D-major chorale on horns, then collapse, then a final hard-won breakthrough — the famous instruction <em>Alle Hörner auf! Schalltrichter hoch!</em> ("All horns up, bells in the air!") — eight horns standing for the apotheosis. Coda hurls toward D major.</span></li>
-</ul>
-<h3>Macro-architecture</h3>
-<p>The tonal plan — D major / A major / D minor / F minor → D major — is striking. The third movement's D minor functions as the symphony's "shadow," and the finale's F minor is far from D, requiring the full twenty-minute span to claw its way back. The symphony enacts a <em>progressive tonality</em> in miniature: not just home → away → home, but home → contracted home → shadow → distant darkness → reconquered home. This becomes the structural fingerprint of mature Mahler.</p>
-</section>
+    <section id="tldr">
+      <div class="tldr">
+        <h2>In brief</h2>
+        <p>Mahler's First is the symphony reinvented as <strong>world-novel and autobiographical confession</strong>. Written in white heat at 28, it opens not with a theme but with <em>sound itself</em> — a seven-octave A held "wie ein Naturlaut" ("like a sound of nature") — and recycles his own <em>Lieder eines fahrenden Gesellen</em> into a four-movement journey from sunlit morning innocence to apocalyptic struggle and hard-won D-major triumph.</p>
+        <p>The signature move to listen for: the finale's victory is <strong>not a new melody but the same melody saved</strong> — the despair theme reborn in the major. And the structural dare is the tonal plan, <strong>D → A → D minor → F minor → D</strong>: the finale starts a world away from home and must claw its way back across twenty minutes. This is the architecture — "from innocence to wisdom, and the wisdom is dearly bought" — that Mahler would refine across nine more symphonies.</p>
+      </div>
+    </section>
 
-    <section id="sec2">
-  <h2><span class="secn">3</span>Melodic &amp; Thematic Content</h2>
-<p>The symphony is a network of recycled and transformed song.</p>
-<ul>
-<li><strong>Wanderer theme (Mvt I, main subject)</strong>: Quoted from <em>Gesellen</em> No. 2. Stepwise diatonic, walking-tempo, cuckoo-fourths embedded — radiates morning sunshine. Throughout the movement it is fragmented, layered, contrapuntally combined with itself.</li>
-<li><strong>Nature-sound</strong> ("Naturlaut"): Not a theme so much as an <em>aural symbol</em> — the seven-octave A, distant fanfares, cuckoo calls. It returns in the finale's development as memory.</li>
-<li><strong>Ländler theme</strong> (Mvt II): A muscular, descending-fifth-saturated dance — first cousin to Schubert and Bruckner's ländlers, but rougher.</li>
-<li><strong>Frère Jacques canon</strong> (Mvt III): An act of theatrical perversity — a child's round in minor mode, dragged by double bass at funereal tempo. The shock isn't the canon itself but the <em>flatness</em> of affect.</li>
-<li><strong>Linden-tree melody</strong> (Mvt III, central episode): From <em>Gesellen</em> No. 4. Pure, tender, G major; a moment of utter sincerity in the middle of the parody.</li>
-<li><strong>Finale's first subject</strong>: Jagged minor-mode wail, derived through inversion and rhythmic reshaping from material in Mvt I.</li>
-<li><strong>Finale's second subject</strong>: A long Wagner-like Sehnsucht melody in D-flat — the symphony's emotional heart on its sleeve.</li>
-<li><strong>Chorale of triumph</strong> (Finale coda): A new, hymn-like theme in D major — but listen carefully and you hear it is a major-mode transformation of the despair theme.</li>
-</ul>
-<p>This last point is crucial: Mahler's victory is not a <em>new</em> melody, but the <em>same</em> melody saved. The dialectic of transformation — minor-to-major, twisted-to-noble — is the bone of the work.</p>
-</section>
+    <blockquote class="epi">
+      "A symphony must be like the world. It must contain everything."
+      <span class="who">— Gustav Mahler, to Sibelius</span>
+    </blockquote>
 
-    <section id="sec3">
-  <h2><span class="secn">4</span>Harmony &amp; Tonality</h2>
-<p>The harmonic language is Wagnerian-late-Romantic, but with idiosyncratic features that mark Mahler off from his peers:</p>
-<ul class="keyval">
-<li><span class="k">Pedal points as world-building</span><span>The opening seven-octave A pedal lasts for nearly sixty measures. Mahler will use this device throughout his career to suggest a primordial, non-temporal soundscape.</span></li>
-<li><span class="k">Plagal and modal coloring</span><span>Frequent use of modal mixture, IV-of-IV motion, and Lydian/Mixolydian inflections rooted in Austrian and Bohemian folk music.</span></li>
-<li><span class="k">Long-range tonal architecture as drama</span><span>F minor for the finale is a daring choice — <em>not</em> the parallel minor of D, not the relative minor, but a key whose distance is itself the dramatic problem. The finale's twenty-minute return to D major is therefore a tonal struggle, not a foregone conclusion.</span></li>
-<li><span class="k">Mediant relationships</span><span>D ↔ B-flat, D ↔ F, are favored over dominant relations. This loosens functional tonality without abandoning it — characteristic of late-19th-century post-Wagnerian harmony.</span></li>
-<li><span class="k">Cadential evasion</span><span>Mahler delays full closure for paragraph after paragraph, using deceptive resolutions and sustained dominants.</span></li>
-<li><span class="k">The "Mahler chord"</span><span>Already present in nascent form — superimposed triads, added-sixth and added-ninth sonorities that color rather than functionally drive harmony.</span></li>
-</ul>
-</section>
+    <section id="identity">
+      <h2><span class="secn">1</span>Identity &amp; Context</h2>
+      <p class="lead">Mahler's first essay in the genre that would consume him — and his quiet declaration that the symphony could hold an entire life.</p>
+      <div class="card">
+        <ul class="keyval">
+          <li><span class="k">Full title</span><span>Symphony No. 1 in D major — originally subtitled, then withdrawn, <em>"Titan, eine Tondichtung in Symphonieform"</em></span></li>
+          <li><span class="k">Composer</span><span>Gustav Mahler (1860–1911), aged ~28 at composition</span></li>
+          <li><span class="k">Composed</span><span>1887–1888, Leipzig &amp; Prague — revised heavily through 1896 and beyond</span></li>
+          <li><span class="k">Premiere</span><span>20 November 1889, Budapest, cond. the composer — as a five-movement "Symphonic Poem in Two Parts." A near-fiasco.</span></li>
+          <li><span class="k">Definitive form</span><span>Four movements, 1896 (Berlin), after excising the original Andante <em>Blumine</em> (rediscovered 1966)</span></li>
+        </ul>
+      </div>
+      <h3>Six weeks, and a borrowed song</h3>
+      <p>The symphony emerged in white heat — six weeks of composition by Mahler's own (probably embellished) account — drawing heavily on his <em>Lieder eines fahrenden Gesellen</em> (1884–85), themselves rooted in the bruising end of his affair with the soprano Johanna Richter. The whole walking-song first movement is lifted wholesale from the cycle's second song.</p>
+      <h3>Where it sits</h3>
+      <p>It stands at the gateway of late Romanticism: Bruckner had just finished his Eighth, Brahms was writing his clarinet works, Strauss was about to launch the modern tone poem with <em>Don Juan</em> (1888), and Wagner — five years dead — still ruled every German imagination. Mahler's First absorbs all of it and detonates it into something new. The "Titan" subtitle nods to Jean Paul's 1803 novel, but Mahler insisted the link was only atmospheric and eventually withdrew every program. Wisely — the music tells its own story.</p>
+    </section>
 
-    <section id="sec4">
-  <h2><span class="secn">5</span>Rhythm, Meter &amp; Tempo</h2>
-<ul>
-<li><strong>Rhythmic character ranges from glacial to demonic</strong>: The first movement's introduction is essentially metric-free natural sound; the finale's opening is a maelstrom of triplets against duplets.</li>
-<li><strong>Ländler rhythm</strong> (Mvt II): The dance's heavy first beat with off-beat accents on 2 and 3 — peasant kinetics.</li>
-<li><strong>Funeral march tread</strong> (Mvt III): The double bass canon over a steady ostinato — a dragging quarter-note pulse that resists resolution.</li>
-<li><strong>Mahlerian elasticity</strong>: The score is densely marked — <em>zurückhaltend, drängend, nicht eilen, allmählich ruhiger, immer dasselbe Tempo</em>. Mahler treats tempo as a dramatic variable, not a constant. Performances that ignore his rubato indications flatten the work catastrophically.</li>
-<li><strong>Metric modulation in the finale</strong>: Tempo relationships across the finale's sections are explicitly notated — proportional tempi connect the storm, the lyrical second subject, and the developmental returns to Mvt I material.</li>
-</ul>
-</section>
+    <section id="form">
+      <h2><span class="secn">2</span>Formal Structure</h2>
+      <p class="lead">A four-movement arc, ~55 minutes — pastoral awakening, rustic dance, ironic funeral, and a twenty-minute fight back to the light.</p>
 
-    <section id="sec5">
-  <h2><span class="secn">6</span>Orchestration, Texture &amp; Timbre</h2>
-<p>The orchestration is enormous for 1888, and revolutionary in its handling.</p>
-<ul>
-<li><strong>Forces</strong>: 4 flutes (3rd &amp; 4th doubling piccolo), 4 oboes (3rd doubling English horn), 4 clarinets (3rd doubling bass clarinet, 4th doubling E-flat clarinet), 3 bassoons (3rd doubling contrabassoon), <strong>7 horns</strong> (Mahler asks for an additional horn doubling the trumpets, and in the finale all seven plus a doubling player stand and raise their bells), 4 trumpets, 3 trombones, tuba, timpani (2 players), bass drum, cymbals, triangle, tam-tam, harp, strings.</li>
-<li><strong>Texture</strong>: Mahler treats the orchestra as chamber-sized when he wants — solo double bass, solo oboe over muted strings, a single horn against silence — and only later unleashes the full mass. This calibration of <em>registral and dynamic space</em> is his great innovation.</li>
-<li><strong>Color devices</strong>:</li>
-<li><strong>Harmonics in violins</strong> to thin the texture in the introduction</li>
-<li><strong>Stopped horns</strong> ("+") for sneering and grotesque effects</li>
-<li><strong>Bells-up brass</strong> ("Schalltrichter hoch") for raw, projecting power</li>
-<li><strong>Klezmer band</strong> in Mvt III — E-flat clarinet, oboe with reedy attack, snare-drum-like effects in cellos</li>
-<li><strong>Solo double bass</strong> in his upper register opening Mvt III — almost unheard before this</li>
-<li><strong>Dynamic range</strong>: From <em>ppppp</em> to <em>ffff</em>, with extreme calibration. The opening is barely audible; the closing pages annihilate.</li>
-</ul>
-</section>
+      <figure>
+        <div class="svgcard">
+          <svg viewBox="0 0 860 270" width="100%" role="img" aria-label="Intensity arch across the four movements, with the D-minor nadir and the finale's false and real triumphs">
+            <line x1="50" y1="215" x2="815" y2="215" class="sv-axis" stroke-width="1"/>
+            <line x1="250" y1="70" x2="250" y2="215" class="sv-grid" stroke-dasharray="3 5"/>
+            <line x1="415" y1="70" x2="415" y2="215" class="sv-grid" stroke-dasharray="3 5"/>
+            <line x1="560" y1="70" x2="560" y2="215" class="sv-grid" stroke-dasharray="3 5"/>
+            <path d="M50,190 C120,182 175,150 235,120 C270,132 290,150 330,150 C360,150 385,158 415,152 C445,150 470,178 500,182 C525,184 545,170 560,162 C585,150 600,108 615,100 C645,118 665,150 690,150 C712,150 722,138 735,132 C765,120 790,80 805,60 L805,215 L50,215 Z" class="sv-area"/>
+            <path d="M50,190 C120,182 175,150 235,120 C270,132 290,150 330,150 C360,150 385,158 415,152 C445,150 470,178 500,182 C525,184 545,170 560,162 C585,150 600,108 615,100 C645,118 665,150 690,150 C712,150 722,138 735,132 C765,120 790,80 805,60" fill="none" class="sv-curve" stroke-width="2.6"/>
+            <circle cx="235" cy="120" r="4.5" class="sv-gold-dot"/>
+            <circle cx="500" cy="182" r="5" class="sv-cool-dot"/>
+            <circle cx="690" cy="150" r="4.5" class="sv-faint"/>
+            <circle cx="805" cy="60" r="6" class="sv-accent-dot"/>
+            <text x="235" y="108" text-anchor="middle" font-size="10.5" class="sv-gold" font-weight="700">morning peak</text>
+            <text x="500" y="200" text-anchor="middle" font-size="10.5" class="sv-cool" font-weight="700">nadir · Frère Jacques</text>
+            <text x="690" y="142" text-anchor="middle" font-size="10" class="sv-faint">false triumph denied</text>
+            <text x="805" y="50" text-anchor="end" font-size="11" class="sv-accent" font-weight="700">real triumph</text>
+            <g font-family="-apple-system,system-ui" font-size="12">
+              <text x="150" y="234" text-anchor="middle" class="sv-accent" font-weight="700">I · D major</text>
+              <text x="332" y="234" text-anchor="middle" class="sv-lbl" font-weight="600">II · A major</text>
+              <text x="487" y="234" text-anchor="middle" class="sv-cool" font-weight="700">III · D minor</text>
+              <text x="688" y="234" text-anchor="middle" class="sv-lbl" font-weight="600">IV · F minor → D</text>
+              <text x="150" y="250" text-anchor="middle" font-size="10.5" class="sv-faint">Naturlaut · walking-song</text>
+              <text x="332" y="250" text-anchor="middle" font-size="10.5" class="sv-faint">stomping ländler</text>
+              <text x="487" y="250" text-anchor="middle" font-size="10.5" class="sv-faint">funeral canon</text>
+              <text x="688" y="250" text-anchor="middle" font-size="10.5" class="sv-faint">Stürmisch bewegt</text>
+            </g>
+            <text x="22" y="135" font-size="11" class="sv-faint" transform="rotate(-90 22 135)" text-anchor="middle">intensity</text>
+          </svg>
+        </div>
+        <figcaption>The emotional low is the third-movement funeral, not the finale's start; the finale itself peaks twice — a premature D-major chorale that collapses, then the genuine breakthrough.</figcaption>
+      </figure>
 
-    <section id="sec6">
-  <h2><span class="secn">7</span>Emotional Arc &amp; Dramaturgy</h2>
-<p>The symphony enacts what Mahler later called the journey "from sunny morning, through love and loss and parody, to the final hard-won affirmation."</p>
-<ul class="keyval">
-<li><span class="k">Movement I</span><span>Awakening, innocence, nature consciousness. A young man walks across a sunlit field; the world is fresh.</span></li>
-<li><span class="k">Movement II</span><span>Earthly pleasure, peasant vigor, then sentimental waltz — the world of the body and the village square.</span></li>
-<li><span class="k">Movement III</span><span>Disillusionment, irony, parody, but <em>also</em> tenderness at the center. The young man's death — or rather, the death of his innocence. The klezmer interruption is critical: it is not just grotesque, it is <em>vulgar</em> — Mahler called it "the unspeakable irony and bitterness of a real Bohemian band trying to play sincerely while being utterly out of place." The central episode quoting "Die zwei blauen Augen" is the moment of pure grief.</span></li>
-<li><span class="k">Movement IV</span><span>Cosmic struggle. The wounded heart cries out; memories of Movement I return as wreckage; the chorale rises, fails, rises again, and finally — through twenty minutes of effort — wins. The <em>meaning</em> of the D-major triumph is inseparable from how hard it was to reach.</span></li>
-</ul>
-<p>This is the architecture Mahler would refine across nine more symphonies: not "from darkness to light" (that's Beethoven Five) but "from innocence to wisdom," and the wisdom is dearly bought.</p>
-</section>
+      <div class="mv"><div class="mvhead"><span class="mvno">I</span><span class="mvname">Langsam, schleppend — Immer sehr gemächlich</span><span class="mvit">"slowly, dragging — always leisurely"</span><span class="mvkey">D major</span><span class="mvdur">~15 min</span></div>
+        <p>Sonata-allegro behind an extraordinary slow introduction. A seven-octave A pedal — "wie ein Naturlaut" — hangs across the whole orchestra under distant fanfares and cuckoo-calls (a falling <em>fourth</em>, not the natural minor third). The main theme is the sunny D-major walking song borrowed from <em>Gesellen</em> No. 2, "Ging heut' Morgen übers Feld." There is no true second subject; working the wanderer-theme against itself <em>is</em> the substance.</p></div>
+      <div class="mv"><div class="mvhead"><span class="mvno">II</span><span class="mvname">Kräftig bewegt, doch nicht zu schnell</span><span class="mvit">"strongly moving, but not too fast"</span><span class="mvkey">A major</span><span class="mvdur">~7 min</span></div>
+        <p>A scherzo on an Austrian peasant ländler — stomping 3/4, bass strings dug in like boots in mud — framing a tenderer Viennese waltz in F major with portamento strings and <em>gemütlich</em> horns. Da capo, then coda.</p></div>
+      <div class="mv"><div class="mvhead"><span class="mvno">III</span><span class="mvname">Feierlich und gemessen, ohne zu schleppen</span><span class="mvit">"solemn and measured, without dragging"</span><span class="mvkey">D minor</span><span class="mvdur">~11 min</span></div>
+        <p>An act of theatrical perversity: a <em>minor-mode</em> canon on "Frère Jacques," intoned by solo double bass at the top of its register over muted timpani — a grotesque funeral procession. A vulgar klezmer band interrupts (oboes, E-flat clarinet, trumpets), then at the center a heartbreaking G-major episode from <em>Gesellen</em> No. 4, "Die zwei blauen Augen," before the canon fades into oblivion.</p></div>
+      <div class="mv"><div class="mvhead"><span class="mvno">IV</span><span class="mvname">Stürmisch bewegt</span><span class="mvit">"stormily agitated" — "the cry of a wounded heart"</span><span class="mvkey">F minor → D major</span><span class="mvdur">~20 min</span></div>
+        <p>A vastly expanded sonata launched by a cymbal crash and orchestral shriek into a demonic F-minor storm, answered by a long-breathed, yearning D-flat major second subject. The development calls back Movement I's nature-sounds as <em>memory</em>. A premature D-major chorale rises on horns, collapses, and finally — through the famous instruction <code>Alle Hörner auf! Schalltrichter hoch!</code> ("all horns up, bells in the air!") — wins.</p></div>
 
-    <section id="sec7">
-  <h2><span class="secn">8</span>Historical Significance &amp; Influence</h2>
-<p>What was new and radical in 1888:</p>
-<ul class="keyval">
-<li><span class="k">The opening Naturlaut</span><span>No symphony had ever begun like that. Pure ambient sound, a held A across the orchestra, distant offstage fanfares — ambient music sixty years before Eno conceived the term.</span></li>
-<li><span class="k">The minor-mode "Frère Jacques"</span><span>An audacious, almost Dadaist gesture — taking a child's nursery round and making it the basis of a funeral march. Critics in Budapest hated it. Now it is the most quoted passage of the symphony.</span></li>
-<li><span class="k">Klezmer and folk music in the symphony orchestra</span><span>Mahler smuggles in not just folk material (Beethoven, Schubert, Brahms had done that) but <em>the sound of folk performance</em> — the wrong-notes, the nasal reeds, the vulgar swagger. This opens the door to Bartók, Janáček, Stravinsky.</span></li>
-<li><span class="k">Cyclic recall as memory, not just unification</span><span>When Movement I's nature-sounds return in the finale, they are explicitly <em>recollected</em> — the past intruding on the present. This narrative use of cyclic form points toward Berg, Shostakovich.</span></li>
-<li><span class="k">Symphony as world-novel</span><span>Mahler's famous later remark — "A symphony must be like the world: it must contain everything" — is already operative here.</span></li>
-</ul>
-<p>Reception history: hostile at premiere (Budapest 1889), tepid through the 1890s, gradually accepted in the 1900s, ignored again after WWII alongside most of Mahler's output, then triumphantly resurrected by Bruno Walter, Leonard Bernstein, and Bernard Haitink in the 1960s. Now standard repertoire, performed everywhere, recorded constantly.</p>
-<p>Influence: traceable in Sibelius (the Naturlaut → Sibelius Five), Shostakovich (irony, parody, cross-movement quotation), Britten, Berio, Schnittke. Without Mahler I there is no Berg <em>Three Pieces for Orchestra</em>, perhaps no Shostakovich at all.</p>
-</section>
+      <h3>Macro-architecture: progressive tonality in miniature</h3>
+      <figure>
+        <div class="svgcard">
+          <svg viewBox="0 0 860 165" width="100%" role="img" aria-label="Tonal journey: D major, A major, D minor, F minor, returning to D major">
+            <path d="M70,78 C150,40 175,40 235,78" fill="none" class="sv-faint" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <path d="M235,78 C310,118 330,112 400,112" fill="none" class="sv-faint" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <path d="M400,112 C470,128 505,118 565,118" fill="none" class="sv-faint" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <path d="M565,118 C640,4 720,4 790,72" fill="none" class="sv-gold-line" stroke-width="2"/>
+            <text x="678" y="22" text-anchor="middle" font-size="11" class="sv-gold" font-weight="700">the 20-minute reconquest</text>
+            <g font-family="monospace" font-weight="700" font-size="13">
+              <circle cx="70" cy="78" r="11" class="sv-accent"/><text x="70" y="104" text-anchor="middle" class="sv-lbl" font-size="11">D maj</text><text x="70" y="118" text-anchor="middle" class="sv-faint" font-size="9.5">home</text>
+              <circle cx="235" cy="78" r="11" class="sv-accent"/><text x="235" y="104" text-anchor="middle" class="sv-lbl" font-size="11">A maj</text><text x="235" y="118" text-anchor="middle" class="sv-faint" font-size="9.5">contracted home</text>
+              <circle cx="400" cy="112" r="11" class="sv-cool-dot"/><text x="400" y="138" text-anchor="middle" class="sv-lbl" font-size="11">D min</text><text x="400" y="152" text-anchor="middle" class="sv-faint" font-size="9.5">the shadow</text>
+              <circle cx="565" cy="118" r="11" class="sv-cool-dot"/><text x="565" y="144" text-anchor="middle" class="sv-lbl" font-size="11">F min</text><text x="565" y="158" text-anchor="middle" class="sv-faint" font-size="9.5">distant dark</text>
+              <circle cx="790" cy="72" r="13" class="sv-accent-dot"/><text x="790" y="100" text-anchor="middle" class="sv-lbl" font-size="11">D maj</text><text x="790" y="114" text-anchor="middle" class="sv-faint" font-size="9.5">reconquered</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption>Not "home → away → home" but home → contracted home → shadow → distant darkness → reconquered home. F minor is far from D by design — its distance <em>is</em> the dramatic problem.</figcaption>
+      </figure>
+      <div class="callout gold"><span class="lbl">Structural keystone</span>The finale's twenty-minute return to D is a tonal <em>struggle</em>, not a foregone conclusion. The meaning of the triumph is inseparable from how hard it was to reach.</div>
+    </section>
 
-    <section id="sec8">
-  <h2><span class="secn">9</span>Performance Practice &amp; Notable Recordings</h2>
-<p>Interpretive cruxes:</p>
-<ul>
-<li><strong>Tempo flexibility</strong>: Mahler's score is annotated to the millimeter. Conductors who play it "straight" — at a single tempo per section — produce a pale shadow of the work. The tempo <em>must</em> breathe.</li>
-<li><strong>The funeral march tempo (III)</strong>: Too slow and it drags; too fast and the parody loses its bite. The double bass solo's intonation is famously treacherous.</li>
-<li><strong>Eight horns standing in the finale</strong>: Some conductors observe Mahler's instruction (it transforms the sonic balance), some do not. The visual is theatrical, almost Mahlerian camp — but the projection is genuine.</li>
-<li><strong>Inclusion of <em>Blumine</strong></em>: Some conductors restore the original second movement (a tender Andante in C major). The five-movement version is a curiosity worth hearing once; the four-movement version is the work as Mahler ultimately conceived it.</li>
-</ul>
-<p>Landmark recordings:</p>
-<ol>
-<li><strong>Bruno Walter / Columbia Symphony Orchestra (1961)</strong> — Walter knew Mahler personally and assisted at the early performances. His recording is patriarchal, lyrical, profoundly humane, and slightly understated in the finale. The Mahler-Walter sound: warmth, line, breath.</li>
-<li><strong>Leonard Bernstein / New York Philharmonic (1966), and again with Concertgebouw (1987)</strong>: The 1966 is fierce, propulsive, theatrical; the 1987 broader, weightier, more stricken. Bernstein understood that Mahler is <em>acted</em> as much as played. Both essential.</li>
-<li><strong>Bernard Haitink / Concertgebouw (1972, also 1987)</strong>: The opposite pole — clean, balanced, classical, allowing the structure to speak. The Concertgebouw's horn section is the gold standard.</li>
-<li><strong>Pierre Boulez / Chicago Symphony (1998)</strong>: Cool, lucid, surgically transparent. Reveals the modernity of the orchestration. Some find it under-charged; others find it revelatory.</li>
-<li><strong>Claudio Abbado / Berlin Philharmonic (live, 1989) or Lucerne Festival Orchestra (live, 2009)</strong>: Late Abbado is luminous, weightless, valedictory — particularly the Lucerne, recorded after his cancer treatment, which has the quality of a man hearing the music from a great distance and treasuring every note.</li>
-</ol>
-</section>
+    <section id="theme">
+      <h2><span class="secn">3</span>Melody &amp; Transformation</h2>
+      <p class="lead">A network of recycled and transformed song — and a victory that is the same melody <em>saved</em>.</p>
+      <p>The symphony is woven from Mahler's own <em>Gesellen</em> songs and from aural symbols rather than tunes: the <strong>Naturlaut</strong> (the seven-octave A, distant fanfares, cuckoo-fourths) is less a theme than a sound-world that returns in the finale as haunted memory. The <strong>wanderer theme</strong> radiates morning; the <strong>ländler</strong> stomps; the <strong>Frère Jacques canon</strong> shocks not by its counterpoint but by the <em>flatness of its affect</em>; the <strong>linden-tree melody</strong> is a moment of utter sincerity in the middle of the parody.</p>
+      <p>The crucial point lands in the coda. Mahler's chorale of triumph is not a new idea — it is a <strong>major-mode transformation of the finale's despair theme</strong>. The dialectic of transformation, minor-to-major, twisted-to-noble, is the bone of the work.</p>
 
-    <section id="sec9">
-  <h2><span class="secn">10</span>Listening Guide</h2>
-<p>(Timings approximate, based on a ~55-minute recording.)</p>
-<p><strong>Movement I (15')</strong></p>
-<ul>
-<li>0:00 — The seven-octave A. <em>Listen for</em>: distant trumpets, the cuckoo calls (falling fourths, not minor thirds — Mahler's cuckoo is unnatural).</li>
-<li>3:00 — The wanderer's theme enters in the cellos: a sunny D-major walk.</li>
-<li>9:00 — Development darkens; the pedal returns; tension builds.</li>
-<li>13:00 — Triumphant horn calls; brilliant peroration to end.</li>
-</ul>
-<p><strong>Movement II (7')</strong></p>
-<ul>
-<li>0:00 — Stomping ländler in A major. Heavy bass-string accents; rough Austrian dance.</li>
-<li>3:30 — Trio in F major: tender Viennese waltz, sweet horn solo, portamento strings.</li>
-<li>5:30 — Da capo of the ländler, with vigorous coda.</li>
-</ul>
-<p><strong>Movement III (11')</strong></p>
-<ul>
-<li>0:00 — Timpani strokes; solo double bass intones "Frère Jacques" in D minor.</li>
-<li>1:30 — Other instruments join in canon (bassoon, cellos, tuba).</li>
-<li>3:30 — <em>Klezmer band interrupts</em>: oboes and E-flat clarinet — vulgar, parodistic.</li>
-<li>6:00 — <em>Tender G-major episode</em>: the linden-tree melody from <em>Gesellen</em> No. 4. The symphony's most heartbreaking passage. Listen for the harp and the muted strings.</li>
-<li>9:00 — Funeral canon returns and dissolves.</li>
-</ul>
-<p><strong>Movement IV (20')</strong></p>
-<ul>
-<li>0:00 — <em>Cymbal crash and orchestral shriek</em>. F-minor storm.</li>
-<li>3:30 — Long-breathed D-flat major second subject. Yearning, Wagnerian.</li>
-<li>7:00 — Memories of Movement I return — the cuckoo, the nature-sounds. <em>Listen for</em> the way they are now haunted, no longer innocent.</li>
-<li>11:00 — Premature D-major chorale on horns; collapses.</li>
-<li>16:00 — Renewed struggle.</li>
-<li>18:00 — Final breakthrough. Eight horns rise. <em>Schalltrichter hoch!</em></li>
-<li>19:00 — D major peroration. Annihilating final cadence.</li>
-</ul>
-</section>
+      <div class="card">
+        <h3 style="margin-top:0">The despair theme, transfigured</h3>
+        <div class="xform" id="x1">
+          <button class="xbtn" data-x="despair">Despair (F minor)</button>
+          <button class="xbtn active" data-x="chorale">Chorale of triumph (D major)</button>
+        </div>
+        <svg id="x1svg" class="show-chorale" viewBox="0 0 800 150" width="100%" role="img" aria-label="The same melodic contour as jagged minor-mode despair and as a noble major-mode chorale">
+          <line x1="30" y1="75" x2="780" y2="75" class="sv-grid"/>
+          <path class="x-despair" d="M40,70 L95,116 L150,58 L205,120 L260,70 L320,118 L380,80 L440,121 L500,82 L560,119 L620,86 L690,117 L770,92" fill="none" stroke-width="2.4" stroke-linejoin="round" stroke="var(--teal)"/>
+          <path class="x-chorale" d="M40,88 C110,64 150,70 210,56 C280,40 330,50 400,40 C470,30 520,42 600,30 C672,20 720,30 770,18" fill="none" stroke-width="2.8" class="sv-curve"/>
+        </svg>
+        <p class="xcap" id="x1cap">The coda's hymn rises and broadens — the bells-up brass making audible Mahler's claim that the symphony must contain everything. It is the despair theme, lifted into the major and finally at peace.</p>
+      </div>
+    </section>
 
-    <section id="sec10">
-  <h2><span class="secn">11</span>Must-Listen Tracks</h2>
-<div class="mustlisten"><p><strong>Movement IV — <em>Stürmisch bewegt</em> (the finale).</strong></p>
-<p>If you only have twenty minutes with this symphony, spend them here. The finale contains everything — the storm, the long-breathed lyrical theme, the cyclic recall of the first movement, the false triumph and the real one. It is the proving ground for Mahler's central artistic claim: that the symphony can stage a soul's struggle and victory in real time, with no external program, using only the resources of the orchestra.</p>
-<p>Listen especially for the moment around 18 minutes in when the eight horns rise and the brass blaze the D-major chorale: Mahler's instruction <em>"Alle Hörner auf, Schalltrichter hoch!"</em> is one of the great moments of theatrical conducting in the repertoire, and it makes audible what Mahler meant when he said the symphony must contain everything.</p>
-<p><strong>Recommended recording for this movement</strong>: Leonard Bernstein / Concertgebouw Orchestra, 1987 (DG). Bernstein at his late-period weightiest — broader than his 1966 New York account, stricken with the awareness of mortality that haunts all his late Mahler. The horns at the peroration are unforgettable. If you want a colder, more architectural reading, Haitink/Concertgebouw 1972 is the classic alternative.</p></div>
-</section>
+    <section id="harmony">
+      <h2><span class="secn">4</span>Harmony &amp; Tonality</h2>
+      <p class="lead">Wagnerian late-Romanticism, bent by folk modality and turned into long-range drama.</p>
+      <table>
+        <thead><tr><th>Device</th><th>What Mahler does with it</th></tr></thead>
+        <tbody>
+          <tr><td class="sec">Pedal points as world-building</td><td>The opening seven-octave A lasts nearly sixty bars — a primordial, non-temporal soundscape. A device he kept for life.</td></tr>
+          <tr><td class="sec">Plagal &amp; modal coloring</td><td>Modal mixture, IV-of-IV motion, Lydian/Mixolydian inflections rooted in Austrian and Bohemian folk song.</td></tr>
+          <tr><td class="sec">Long-range tonality as plot</td><td>F minor for the finale — not parallel, not relative minor of D, but a key whose <em>distance is the problem</em>.</td></tr>
+          <tr><td class="sec">Mediant relations</td><td>D ↔ B♭, D ↔ F favored over dominants — loosening functional tonality without abandoning it.</td></tr>
+          <tr><td class="sec">Cadential evasion</td><td>Closure delayed paragraph after paragraph via deceptive resolutions and sustained dominants.</td></tr>
+          <tr><td class="sec">The nascent "Mahler chord"</td><td>Superimposed triads, added-sixth/ninth sonorities that <em>color</em> rather than functionally drive.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="rhythm">
+      <h2><span class="secn">5</span>Rhythm, Meter &amp; Tempo</h2>
+      <p class="lead">From glacial to demonic — and densely annotated so the pulse must breathe.</p>
+      <ul>
+        <li><strong>Metric extremes.</strong> The introduction is essentially metre-free natural sound; the finale's opening is a maelstrom of triplets against duplets.</li>
+        <li><strong>Ländler kinetics (II).</strong> Heavy downbeat with off-beat accents on 2 and 3 — peasant dance.</li>
+        <li><strong>Funeral tread (III).</strong> A dragging quarter-note ostinato under the double-bass canon that resists resolution.</li>
+        <li><strong>Mahlerian elasticity.</strong> <em>zurückhaltend, drängend, nicht eilen, allmählich ruhiger</em> — tempo is a dramatic variable, not a constant. Play it "straight" and the work collapses.</li>
+        <li><strong>Proportional tempi in the finale.</strong> Storm, lyrical second subject, and the developmental returns of Movement I are explicitly tempo-related.</li>
+      </ul>
+    </section>
+
+    <section id="orch">
+      <h2><span class="secn">6</span>Orchestration, Texture &amp; Timbre</h2>
+      <p class="lead">Enormous for 1888, and revolutionary in how it calibrates space rather than just mass.</p>
+      <div class="card">
+        <h3 style="margin-top:0">The forces</h3>
+        <p style="margin-top:4px">4 flutes (dbl. piccolos), 4 oboes (dbl. English horn), 4 clarinets (dbl. bass &amp; E-flat clarinet), 3 bassoons (dbl. contrabassoon), <strong>7 horns</strong>, 4 trumpets, 3 trombones, tuba, timpani (2 players), bass drum, cymbals, triangle, tam-tam, harp, strings.</p>
+      </div>
+      <h3>Timbral highlights</h3>
+      <ul>
+        <li><strong>Chamber-within-the-mass.</strong> Solo double bass, solo oboe over muted strings, a single horn against silence — then, only later, the full weight. This calibration of registral and dynamic space is the great innovation.</li>
+        <li><strong>Violin harmonics</strong> thin the introduction to gossamer; <strong>stopped horns</strong> ("+") sneer and grimace.</li>
+        <li><strong>The klezmer band</strong> in III — reedy E-flat clarinet and nasal oboe — smuggles the <em>sound of folk performance</em>, wrong-notes and all, into the symphony orchestra.</li>
+        <li><strong>Bells-up brass</strong> ("Schalltrichter hoch") for raw, projecting power; dynamics span <em>ppppp</em> to <em>ffff</em>.</li>
+      </ul>
+    </section>
+
+    <section id="arc">
+      <h2><span class="secn">7</span>Emotional Arc &amp; Dramaturgy</h2>
+      <p class="lead">Not "darkness to light" (that is Beethoven Five) but "innocence to wisdom" — and the wisdom is dearly bought.</p>
+      <ul class="tl">
+        <li><span class="t">I</span><span class="dot"></span><b>Awakening</b> — innocence, nature consciousness; a young man walks across a sunlit field, the world fresh.</li>
+        <li><span class="t">II</span><span class="dot"></span><b>Earthly pleasure</b> — peasant vigor and sentimental waltz; the body and the village square.</li>
+        <li class="peak"><span class="t">III</span><span class="dot"></span><b>Disillusion &amp; grief</b> <span class="badge b-heart">turn</span> — irony and parody, but tenderness at the center: the death of innocence, the klezmer band "trying to play sincerely while utterly out of place."</li>
+        <li><span class="t">IV</span><span class="dot"></span><b>Cosmic struggle → triumph</b> — the wounded heart cries out, memories of Movement I return as wreckage, the chorale fails and rises again until, after twenty minutes, it wins.</li>
+      </ul>
+    </section>
+
+    <section id="sig">
+      <h2><span class="secn">8</span>Historical Significance &amp; Influence</h2>
+      <p class="lead">In 1888, almost nothing about this piece had been heard before.</p>
+      <h3>What was radical</h3>
+      <ul>
+        <li><strong>The opening Naturlaut</strong> — ambient sound as a symphonic beginning, sixty years before Eno named the idea.</li>
+        <li><strong>The minor-mode "Frère Jacques"</strong> — a nursery round turned funeral march; an almost Dadaist gesture that Budapest hated and posterity quotes most.</li>
+        <li><strong>Folk <em>performance</em>, not just folk material</strong> — the vulgar swagger of the village band, opening the door to Bartók, Janáček, Stravinsky.</li>
+        <li><strong>Cyclic recall as memory</strong> — Movement I's nature-sounds returning as the past intruding on the present; toward Berg and Shostakovich.</li>
+        <li><strong>Symphony as world-novel</strong> — "it must contain everything," already operative here.</li>
+      </ul>
+      <div class="callout teal"><span class="lbl">Reception</span>Hostile in Budapest (1889), tepid through the 1890s, ignored again after WWII, then triumphantly resurrected by Walter, Bernstein and Haitink in the 1960s. Now performed everywhere. Without Mahler I there is no Berg <em>Three Pieces</em>, perhaps no Shostakovich at all.</div>
+    </section>
+
+    <section id="perf">
+      <h2><span class="secn">9</span>Performance Practice &amp; Notable Recordings</h2>
+      <p class="lead">Everything hinges on tempo flexibility, the funeral-march tread, and the theatre of the eight horns.</p>
+      <table>
+        <thead><tr><th>Recording</th><th>Character</th></tr></thead>
+        <tbody>
+          <tr><td class="sec">Bruno Walter / Columbia SO<br><span style="font-weight:400;color:var(--ink-faint);font-size:13px">1961</span></td><td>Patriarchal, lyrical, profoundly humane — Walter knew Mahler and assisted at early performances. Warmth, line, breath; slightly understated in the finale.</td></tr>
+          <tr><td class="sec">Bernstein / NY Phil (1966) &amp; Concertgebouw (1987)<br><span style="font-weight:400;color:var(--ink-faint);font-size:13px">CBS / DG</span></td><td>1966 fierce, propulsive, theatrical; 1987 broader, weightier, stricken with mortality. Mahler <em>acted</em> as much as played. Both essential.</td></tr>
+          <tr><td class="sec">Haitink / Concertgebouw<br><span style="font-weight:400;color:var(--ink-faint);font-size:13px">1972</span></td><td>The opposite pole — clean, balanced, classical, letting structure speak. The Concertgebouw horns are the gold standard.</td></tr>
+          <tr><td class="sec">Boulez / Chicago SO<br><span style="font-weight:400;color:var(--ink-faint);font-size:13px">1998</span></td><td>Cool, lucid, surgically transparent; reveals the modernity of the orchestration. Under-charged to some, revelatory to others.</td></tr>
+          <tr><td class="sec">Abbado / Lucerne FO<br><span style="font-weight:400;color:var(--ink-faint);font-size:13px">live, 2009</span></td><td>Luminous, weightless, valedictory — recorded after his cancer treatment, hearing the music from a great distance and treasuring every note.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="guide">
+      <h2><span class="secn">10</span>Listening Guide</h2>
+      <p class="lead">Timings approximate (~55-minute recording). Filter by movement:</p>
+      <div class="tabs" id="g1tabs">
+        <button class="tab active" data-mv="all">Whole symphony</button>
+        <button class="tab" data-mv="1">I · D major</button>
+        <button class="tab" data-mv="2">II · ländler</button>
+        <button class="tab" data-mv="3">III · funeral</button>
+        <button class="tab" data-mv="4">IV · finale</button>
+      </div>
+      <ul class="tl" id="g1list">
+        <li data-mv="1"><span class="t">0:00</span><span class="dot"></span><b>The seven-octave A</b> <span class="mvtag">I</span> — distant trumpets and cuckoo-calls (falling fourths — Mahler's cuckoo is "unnatural").</li>
+        <li data-mv="1"><span class="t">3:00</span><span class="dot"></span><b>Wanderer's theme</b> <span class="mvtag">I</span> — a sunny D-major walk enters in the cellos.</li>
+        <li data-mv="1"><span class="t">9:00</span><span class="dot"></span><b>Development darkens</b> <span class="mvtag">I</span> — the pedal returns, tension builds.</li>
+        <li data-mv="1"><span class="t">13:00</span><span class="dot"></span><b>Triumphant horn calls</b> <span class="mvtag">I</span> — brilliant peroration to close.</li>
+        <li data-mv="2"><span class="t">0:00</span><span class="dot"></span><b>Stomping ländler</b> <span class="mvtag">II</span> — heavy bass-string accents, rough Austrian dance.</li>
+        <li data-mv="2"><span class="t">3:30</span><span class="dot"></span><b>Trio in F major</b> <span class="mvtag">II</span> — tender Viennese waltz, sweet horn solo, portamento strings.</li>
+        <li data-mv="2"><span class="t">5:30</span><span class="dot"></span><b>Da capo</b> <span class="mvtag">II</span> — the ländler returns with a vigorous coda.</li>
+        <li data-mv="3"><span class="t">0:00</span><span class="dot"></span><b>Solo double bass</b> <span class="mvtag">III</span> — "Frère Jacques" in D minor over muted timpani.</li>
+        <li data-mv="3"><span class="t">1:30</span><span class="dot"></span><b>Canon spreads</b> <span class="mvtag">III</span> — bassoon, cellos, tuba enter.</li>
+        <li data-mv="3"><span class="t">3:30</span><span class="dot"></span><b>Klezmer interruption</b> <span class="mvtag">III</span> — oboes and E-flat clarinet, vulgar and parodistic.</li>
+        <li data-mv="3" class="peak"><span class="t">6:00</span><span class="dot"></span><b>The linden-tree episode</b> <span class="badge b-heart">heart</span> <span class="mvtag">III</span> — tender G major from <em>Gesellen</em> No. 4; the symphony's most heartbreaking passage.</li>
+        <li data-mv="3"><span class="t">9:00</span><span class="dot"></span><b>Canon dissolves</b> <span class="mvtag">III</span> — into ambiguous oblivion.</li>
+        <li data-mv="4"><span class="t">0:00</span><span class="dot"></span><b>Cymbal crash &amp; shriek</b> <span class="mvtag">IV</span> — the F-minor storm erupts.</li>
+        <li data-mv="4"><span class="t">3:30</span><span class="dot"></span><b>D-flat second subject</b> <span class="mvtag">IV</span> — long-breathed, yearning, Wagnerian.</li>
+        <li data-mv="4"><span class="t">7:00</span><span class="dot"></span><b>Memories of Movement I</b> <span class="mvtag">IV</span> — the cuckoo and nature-sounds return, now haunted.</li>
+        <li data-mv="4"><span class="t">11:00</span><span class="dot"></span><b>Premature chorale</b> <span class="mvtag">IV</span> — a D-major hymn on horns that collapses.</li>
+        <li data-mv="4" class="peak"><span class="t">18:00</span><span class="dot"></span><b>The breakthrough</b> <span class="badge b-key">listen</span> <span class="mvtag">IV</span> — eight horns rise: <code>Schalltrichter hoch!</code> D-major peroration, annihilating final cadence.</li>
+      </ul>
+    </section>
+
+    <section id="must">
+      <h2><span class="secn">11</span>Must-Listen</h2>
+      <p class="lead">If you have only twenty minutes — spend them on the finale.</p>
+      <div class="mustlisten">
+        <h3>Movement IV — <em>Stürmisch bewegt</em></h3>
+        <p class="span">≈ the whole finale · storm → lyrical theme → cyclic recall → false &amp; real triumph</p>
+        <p style="margin-top:14px"><strong>Why this one.</strong> The finale contains everything — the storm, the long-breathed lyrical theme, the cyclic return of the first movement, the false triumph and the real one. It is the proving ground for Mahler's central claim: that a symphony can stage a soul's struggle and victory in real time, with no external program, using only the orchestra. Listen especially around the 18-minute mark, when the eight horns rise and the brass blaze the D-major chorale — <em>"Alle Hörner auf, Schalltrichter hoch!"</em> is one of the great moments of theatrical conducting in the repertoire.</p>
+        <p style="margin-bottom:0"><strong>Recommended recording.</strong> <span class="rec"><span class="who">Bernstein / Concertgebouw, 1987 (DG)</span></span> — late-Bernstein at his weightiest, the horns at the peroration unforgettable. For a colder, more architectural reading, <strong>Haitink / Concertgebouw, 1972</strong>.</p>
+      </div>
+    </section>
+
     <footer>
-      
-      <p>Companion to the Markdown analysis in the Obsidian vault at <code>Musical Analysis/Mahler - Symphony No. 1 in D major.md</code>.</p>
+      <p><strong>Companion</strong> to the Markdown analysis in the Obsidian vault at <code>Musical Analysis/Mahler - Symphony No. 1 in D major.md</code>.</p>
       <p><a href="index.html">← back to music</a></p>
     </footer>
   </main>
@@ -605,7 +712,7 @@
   let saved=null; try{ saved = localStorage.getItem('faune-palette'); }catch(e){}
   if(saved && PALETTES[saved]) applyPalette(saved);
   else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
-  else applyPalette('afternoon');
+  else applyPalette('sage');
 
   // active TOC highlighting
   const links = [...document.querySelectorAll('nav.toc a')];
@@ -621,6 +728,37 @@
     });
   }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
   document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+<script>
+// transform toggle (despair <-> chorale)
+(function(){
+  var svg=document.getElementById('x1svg'), cap=document.getElementById('x1cap');
+  var caps={despair:"The finale's first subject is a jagged minor-mode wail, all leaps and demonic energy — the wounded heart at full cry.",
+            chorale:"The coda's hymn rises and broadens — the bells-up brass making audible Mahler's claim that the symphony must contain everything. It is the despair theme, lifted into the major and finally at peace."};
+  document.querySelectorAll('#x1 .xbtn').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('#x1 .xbtn').forEach(function(x){x.classList.remove('active')});
+      b.classList.add('active');
+      var k=b.dataset.x;
+      svg.classList.remove('show-despair','show-chorale');
+      svg.classList.add('show-'+k);
+      cap.textContent=caps[k];
+    });
+  });
+})();
+// listening-guide movement filter
+(function(){
+  var tabs=document.getElementById('g1tabs'), items=document.querySelectorAll('#g1list li');
+  tabs.addEventListener('click',function(e){
+    var b=e.target.closest('.tab'); if(!b) return;
+    tabs.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});
+    b.classList.add('active');
+    var mv=b.dataset.mv;
+    items.forEach(function(li){
+      li.classList.toggle('tlhide', mv!=='all' && li.dataset.mv!==mv);
+    });
+  });
+})();
 </script>
 </body>
 </html>
