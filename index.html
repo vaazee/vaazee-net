@@ -29,48 +29,47 @@
     header p { color: var(--muted); margin-top: 0.75rem; font-size: 1.05rem; }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 1rem;
       width: 100%;
-      max-width: 720px;
+      max-width: 880px;
     }
     a.card {
       display: flex;
       flex-direction: column;
-      gap: 0.45rem;
+      gap: 0.4rem;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 1.6rem 1.4rem;
+      padding: 1.4rem 1.25rem;
       text-decoration: none;
       color: var(--text);
       transition: border-color 0.15s ease, transform 0.15s ease;
     }
     a.card:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .card .emoji { font-size: 2rem; }
-    .card .name { font-weight: 600; font-size: 1.2rem; }
-    .card .desc { color: var(--muted); font-size: 0.9rem; }
+    .card .emoji { font-size: 1.8rem; }
+    .card .name { font-weight: 600; font-size: 1.1rem; text-transform: capitalize; }
     footer { margin-top: 3.5rem; color: var(--muted); font-size: 0.85rem; }
     footer a { color: var(--accent); text-decoration: none; }
   </style>
 </head>
 <body>
   <header>
-    <h1>vaazee.net</h1>
-    <p>A few things I built for the web.</p>
+    <h1>web by vaazee</h1>
+    <p>A small collection of things I built and pages, sorted by what they're about.</p>
   </header>
 
   <main class="grid">
-    <a class="card" href="games/">
-      <span class="emoji">🎮</span>
-      <span class="name">Games</span>
-      <span class="desc">Browser games to play right here.</span>
-    </a>
-    <a class="card" href="pages/">
-      <span class="emoji">🗂️</span>
-      <span class="name">web by vaazee</span>
-      <span class="desc">A collection of pages, sorted by topic.</span>
-    </a>
+    <a class="card" href="games/"><span class="emoji">🎮</span><span class="name">games</span></a>
+    <a class="card" href="pages/random/"><span class="emoji">🎲</span><span class="name">random</span></a>
+    <a class="card" href="pages/music/"><span class="emoji">🎵</span><span class="name">music</span></a>
+    <a class="card" href="pages/movies/"><span class="emoji">🎬</span><span class="name">movies</span></a>
+    <a class="card" href="pages/tv/"><span class="emoji">📺</span><span class="name">tv</span></a>
+    <a class="card" href="pages/piano/"><span class="emoji">🎹</span><span class="name">piano</span></a>
+    <a class="card" href="pages/tech/"><span class="emoji">⚙️</span><span class="name">tech</span></a>
+    <a class="card" href="pages/coding/"><span class="emoji">💻</span><span class="name">coding</span></a>
+    <a class="card" href="pages/books/"><span class="emoji">📚</span><span class="name">books</span></a>
+    <a class="card" href="pages/chess/"><span class="emoji">♟️</span><span class="name">chess</span></a>
   </main>
 
   <footer>Hosted on GitHub Pages.</footer>

@@ -4,74 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>web by vaazee</title>
+  <meta http-equiv="refresh" content="0; url=../">
+  <link rel="canonical" href="https://vaazee.net/">
   <style>
-    :root {
-      --bg: #0d1117;
-      --card: #161b22;
-      --border: #30363d;
-      --text: #e6edf3;
-      --muted: #8b949e;
-      --accent: #58a6ff;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 4rem 1.5rem;
-    }
-    header { text-align: center; margin-bottom: 3rem; }
-    h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.02em; }
-    header p { color: var(--muted); margin-top: 0.75rem; font-size: 1.05rem; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1rem;
-      width: 100%;
-      max-width: 880px;
-    }
-    a.card {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.4rem 1.25rem;
-      text-decoration: none;
-      color: var(--text);
-      transition: border-color 0.15s ease, transform 0.15s ease;
-    }
-    a.card:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .card .emoji { font-size: 1.8rem; }
-    .card .name { font-weight: 600; font-size: 1.1rem; text-transform: capitalize; }
-    footer { margin-top: 3.5rem; color: var(--muted); font-size: 0.85rem; }
-    footer a { color: var(--accent); text-decoration: none; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: #0d1117; color: #e6edf3; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center; }
+    a { color: #58a6ff; }
   </style>
 </head>
 <body>
-  <p style="width:100%;max-width:880px;margin-bottom:1.5rem"><a href="../" style="color:var(--accent);text-decoration:none;font-size:0.95rem">&larr; vaazee.net</a></p>
-  <header>
-    <h1>web by vaazee</h1>
-    <p>A small collection of pages, sorted by what they're about.</p>
-  </header>
-
-  <main class="grid">
-    <a class="card" href="random/"><span class="emoji">🎲</span><span class="name">random</span></a>
-    <a class="card" href="music/"><span class="emoji">🎵</span><span class="name">music</span></a>
-    <a class="card" href="movies/"><span class="emoji">🎬</span><span class="name">movies</span></a>
-    <a class="card" href="tv/"><span class="emoji">📺</span><span class="name">tv</span></a>
-    <a class="card" href="piano/"><span class="emoji">🎹</span><span class="name">piano</span></a>
-    <a class="card" href="tech/"><span class="emoji">⚙️</span><span class="name">tech</span></a>
-    <a class="card" href="coding/"><span class="emoji">💻</span><span class="name">coding</span></a>
-    <a class="card" href="books/"><span class="emoji">📚</span><span class="name">books</span></a>
-    <a class="card" href="chess/"><span class="emoji">♟️</span><span class="name">chess</span></a>
-  </main>
-
-  <footer>Hosted on GitHub Pages.</footer>
+  <p>Moved to <a href="../">vaazee.net</a>…</p>
+  <script>location.replace("../");</script>
 </body>
 </html>
