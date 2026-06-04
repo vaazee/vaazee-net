@@ -704,7 +704,7 @@
   // restore saved or honor OS dark preference
   let saved=null; try{ saved = localStorage.getItem('faune-palette'); }catch(e){}
   if(saved && PALETTES[saved]) applyPalette(saved);
-  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
+  else if((function(){try{var _t=localStorage.getItem('vaazee-theme');if(_t==='dark')return true;if(_t==='light')return false;}catch(e){}return window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;})()) applyPalette('midnight');
   else applyPalette('afternoon');
 
   // active TOC highlighting
