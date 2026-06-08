@@ -707,6 +707,8 @@
     {id:'kharahara', name:'Kharaharapriya (22 · = Dorian mode)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',9:'D₂',10:'N₂'}},
     {id:'kalyani', name:'Kalyani (65 · = Lydian mode)', map:{0:'S',2:'R₂',4:'G₃',6:'M₂',7:'P',9:'D₂',11:'N₃'}},
     {id:'todi', name:'Hanumatodi (8 · = Phrygian ♭6)', map:{0:'S',1:'R₁',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'}},
+    {id:'kambhoji', name:'Kambhoji (janya of Harikambhoji · 28 · asymmetric, no Ni in ascent)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,2,4,5,7,9,12], avaro:[12,10,9,7,5,4,2,0]},
+    {id:'darbari', name:'Darbari Kānada (janya of Natabhairavi · 20)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'}, aro:[0,2,3,5,7,8,10,12], avaro:[12,10,8,7,5,3,2,0]},
     {id:'mohanam', name:'Mohanam (pentatonic · no Ma, no Ni)', map:{0:'S',2:'R₂',4:'G₃',7:'P',9:'D₂'}},
     {id:'hindolam', name:'Hindolam (pentatonic · no Ri, no Pa)', map:{0:'S',3:'G₂',5:'M₁',8:'D₁',10:'N₂'}},
     {id:'chromatic', name:'All 12 swarasthanas (chromatic — show everything)', map:(function(){const o={};SEMI.forEach(s=>{o[s.pos]=s.sym+(s.alt?'/'+s.alt:'');});return o;})()}
@@ -777,11 +779,16 @@
       else if(raga.map.hasOwnProperty(off)) label=raga.map[off];
       sw.textContent = inRaga ? label : '';
     });
-    // aro/avaro hint line
-    const offs=Object.keys(raga.map).map(Number).sort((a,b)=>a-b);
-    const aro=offs.map(o=>raga.map[o]).concat(['Ṡ']);
-    document.getElementById('aroLine').innerHTML='<strong>Arohana:</strong> '+aro.join(' ')+' &nbsp;·&nbsp; <strong>Avarohana:</strong> '+aro.slice().reverse().join(' ');
+    // aro/avaro hint line (honors asymmetric ragas via raga.aro / raga.avaro)
+    const aroSeq=aroOf(raga), avaroSeq=avaroOf(raga);
+    document.getElementById('aroLine').innerHTML='<strong>Arohana:</strong> '+aroSeq.map(o=>symOf(raga,o)).join(' ')+' &nbsp;·&nbsp; <strong>Avarohana:</strong> '+avaroSeq.map(o=>symOf(raga,o)).join(' ');
   }
+
+  /* ---------- Arohana / Avarohana helpers (support asymmetric ragas) ---------- */
+  function autoScale(raga){ return Object.keys(raga.map).map(Number).filter(o=>o<12).sort((a,b)=>a-b).concat([12]); }
+  function aroOf(raga){ return raga.aro || autoScale(raga); }
+  function avaroOf(raga){ return raga.avaro || aroOf(raga).slice().reverse(); }
+  function symOf(raga, off){ return off%12===0 ? (off===0?'S':'Ṡ') : (raga.map[off]||raga.map[off%12]||''); }
 
   function flash(el){ if(!el)return; el.classList.add('down'); setTimeout(()=>el.classList.remove('down'),160); }
   function play(m,el){ pluck(m); flash(el||keyEls[m]); }
@@ -811,22 +818,15 @@
     tick();
   }
 
-  // Sarali Varisai 1 in current raga's scale degrees → semitone offsets
-  function scaleOffsets(){
-    const raga=curRaga();
-    const offs=Object.keys(raga.map).map(Number).sort((a,b)=>a-b);
-    return offs.concat([12]); // add upper Sa
-  }
+  // Play arohana up then avarohana down (avaro[0] === Ṡ === last of aro, so drop the repeat)
+  function aroAvaroRun(raga){ return aroOf(raga).concat(avaroOf(raga).slice(1)); }
   document.getElementById('scaleBtn').addEventListener('click',()=>{
-    const up=scaleOffsets(); const down=up.slice(0,-1).reverse(); down.unshift(12);
-    playSequence(up.concat(down));
+    playSequence(aroAvaroRun(curRaga()));
   });
 
   document.getElementById('saraliBtn').addEventListener('click',()=>{
-    // Sarali Varisai 1: S R G M P D N Ṡ  /  Ṡ N D P M G R S  — using current raga's notes
-    const up=scaleOffsets();            // 8 notes ending at Ṡ(12)
-    const down=up.slice().reverse();    // Ṡ ... S
-    playSequence(up.concat(down.slice(1)));
+    // Sarali Varisai 1: up the arohana, down the avarohana — using the current raga's notes
+    playSequence(aroAvaroRun(curRaga()));
   });
 
   /* ---------- Semitone map grid ---------- */
