@@ -237,8 +237,12 @@
     border-radius:22px;padding:6px 14px;font-size:13px;font-weight:600;font-family:inherit;transition:.15s}
   .tab:hover{border-color:var(--accent);color:var(--accent-ink)}
   .tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .tl li.tlhide{display:none}
+  .tl li.tlhide,li.tlhide{display:none}
   .tl li .mvtag{display:inline-block;font-family:"SF Mono",Menlo,monospace;font-size:11px;color:var(--ink-faint);margin-left:8px}
+  #reflist{list-style:none;padding-left:0}
+  #reflist li{padding:9px 12px;border-bottom:1px dashed var(--line)}
+  #reflist li:last-child{border-bottom:none}
+  #reflist .mvtag{display:inline-block;font-family:"SF Mono",Menlo,monospace;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent-soft);padding:1px 7px;border-radius:20px;margin-right:8px}
   /* tempo / quantity comparison bars */
   .tempo{margin:8px 0 2px}
   .tempo .trow{display:grid;grid-template-columns:200px 1fr 58px;gap:14px;align-items:center;
