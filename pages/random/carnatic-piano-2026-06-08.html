@@ -125,6 +125,18 @@
   .wkey.lit .swlab{color:var(--accent-ink)}
   .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-soft);margin-top:4px}
   .legend i{display:inline-block;width:13px;height:13px;border-radius:3px;vertical-align:-2px;margin-right:5px}
+  .legend .gam-glyph{color:var(--accent3);font-weight:800;font-size:15px;vertical-align:-1px}
+
+  /* gamaka indicator: a wavy mark on keys whose swara carries a defining oscillation */
+  .gam-mark{position:absolute;top:7px;left:50%;transform:translateX(-50%);
+    font-size:15px;font-weight:800;line-height:1;color:var(--accent3);pointer-events:none;
+    animation:gam-wobble 1.5s ease-in-out infinite}
+  .bkey .gam-mark{top:6px;color:#7fded3}
+  @keyframes gam-wobble{0%,100%{transform:translateX(-50%) translateY(0)}
+    50%{transform:translateX(-50%) translateY(2.5px)}}
+  @media (prefers-reduced-motion:reduce){ .gam-mark{animation:none} }
+  .gam-note{color:var(--cool-ink)}
+  .gam-note b{color:var(--accent3)}
 
   /* swarasthana map */
   .semi-grid{display:grid;grid-template-columns:repeat(13,1fr);gap:4px;margin:14px 0;min-width:620px}
@@ -284,9 +296,11 @@
           <span><i style="background:var(--accent2)"></i>Sa (home note)</span>
           <span><i style="background:#ffcf9e"></i>Note in selected raga</span>
           <span><i style="background:#15110d"></i>Black key / komal-tivra position</span>
+          <span class="gam-key"><span class="gam-glyph">∿</span> gamaka swara (oscillated)</span>
           <span id="ragaName" style="margin-left:auto;font-weight:700;color:var(--accent-ink)"></span>
         </div>
         <p class="hint" id="aroLine"></p>
+        <p class="hint gam-note" id="gamNote" hidden></p>
       </div>
 
       <div class="callout cool">
@@ -707,8 +721,12 @@
     {id:'kharahara', name:'Kharaharapriya (22 · = Dorian mode)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',9:'D₂',10:'N₂'}},
     {id:'kalyani', name:'Kalyani (65 · = Lydian mode)', map:{0:'S',2:'R₂',4:'G₃',6:'M₂',7:'P',9:'D₂',11:'N₃'}},
     {id:'todi', name:'Hanumatodi (8 · = Phrygian mode)', map:{0:'S',1:'R₁',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'}},
-    {id:'kambhoji', name:'Kambhoji (janya of Harikambhoji · 28 · asymmetric, no Ni in ascent)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,2,4,5,7,9,12], avaro:[12,10,9,7,5,4,2,0]},
-    {id:'darbari', name:'Darbari Kānada (janya of Natabhairavi · 20 · vakra avarohana)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'}, aro:[0,2,3,5,7,8,10,12], avaro:[12,8,10,7,5,7,3,5,2,0]},
+    {id:'kambhoji', name:'Kambhoji (janya of Harikambhoji · 28 · asymmetric, no Ni in ascent)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,2,4,5,7,9,12], avaro:[12,10,9,7,5,4,2,0],
+      gamaka:{4:'G₃ — kampita (oscillation)',9:'D₂ — nokku / kampita',10:'N₂ — jaru, in descent phrases'},
+      gnote:'Kambhoji is coloured by a <b>kampita</b> (oscillation) on G₃ and characteristic gamakas on D₂ and N₂ — and a sliding anya N₃ in phrases like D₂ N₃ Ṡ. The keyboard plays them straight.'},
+    {id:'darbari', name:'Darbari Kānada (janya of Natabhairavi · 20 · vakra avarohana)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'}, aro:[0,2,3,5,7,8,10,12], avaro:[12,8,10,7,5,7,3,5,2,0],
+      gamaka:{3:'G₂ — slow heavy andolana (its signature)',8:'D₁ — andolana'},
+      gnote:'Darbari’s whole identity is the slow, weighty <b>andolana</b> (oscillation) on G₂ and D₁ — without it the raga collapses into plain Natabhairavi. A fixed-pitch piano can only point at it.'},
     {id:'mohanam', name:'Mohanam (pentatonic · no Ma, no Ni)', map:{0:'S',2:'R₂',4:'G₃',7:'P',9:'D₂'}},
     {id:'hindolam', name:'Hindolam (pentatonic · no Ri, no Pa)', map:{0:'S',3:'G₂',5:'M₁',8:'D₁',10:'N₂'}},
     {id:'chromatic', name:'All 12 swarasthanas (chromatic — show everything)', map:(function(){const o={};SEMI.forEach(s=>{o[s.pos]=s.sym+(s.alt?'/'+s.alt:'');});return o;})()}
@@ -767,6 +785,7 @@
     const base=saMidi(), raga=curRaga();
     document.getElementById('ragaName').textContent=raga.name.split(' (')[0];
     document.getElementById('saEcho').textContent=NOTE_NAMES[base%12];
+    const gam=raga.gamaka||{};
     Object.keys(keyEls).forEach(mm=>{
       const m=parseInt(mm,10), el=keyEls[m];
       const off=((m-base)%12+12)%12;
@@ -778,10 +797,21 @@
       if(off===0) label='S';
       else if(raga.map.hasOwnProperty(off)) label=raga.map[off];
       sw.textContent = inRaga ? label : '';
+      // gamaka indicator
+      let mark=el.querySelector('.gam-mark');
+      const isGam = inRaga && gam.hasOwnProperty(off);
+      if(isGam){
+        if(!mark){ mark=document.createElement('span'); mark.className='gam-mark'; mark.textContent='∿'; el.appendChild(mark); }
+        el.title=gam[off];
+      } else if(mark){ mark.remove(); el.removeAttribute('title'); }
     });
     // aro/avaro hint line (honors asymmetric ragas via raga.aro / raga.avaro)
     const aroSeq=aroOf(raga), avaroSeq=avaroOf(raga);
     document.getElementById('aroLine').innerHTML='<strong>Arohana:</strong> '+aroSeq.map(o=>symOf(raga,o)).join(' ')+' &nbsp;·&nbsp; <strong>Avarohana:</strong> '+avaroSeq.map(o=>symOf(raga,o)).join(' ');
+    // gamaka note line
+    const gn=document.getElementById('gamNote');
+    if(raga.gnote){ gn.innerHTML='<b>∿ Gamaka:</b> '+raga.gnote; gn.hidden=false; }
+    else { gn.hidden=true; gn.innerHTML=''; }
   }
 
   /* ---------- Arohana / Avarohana helpers (support asymmetric ragas) ---------- */
