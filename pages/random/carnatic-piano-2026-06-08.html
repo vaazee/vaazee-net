@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learning Carnatic Music on the Piano — An Interactive Beginner's Plan</title>
+<style>
+  :root{
+    --bg:#faf8f4; --panel:#ffffff; --ink:#1c1a17; --ink-soft:#55504a; --ink-faint:#8a8279;
+    --line:#e8e2d8; --line-strong:#d8cfc0; --accent:#9a5b2e; --accent-soft:#f3e6d8; --accent-ink:#7a4220;
+    --accent2:#b8893b; --accent3:#2f6b6b; --code-bg:#2b2722;
+    --header-grad:linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%);
+  }
+  /* derived tints */
+  :root{
+    --th-bg:color-mix(in srgb, var(--accent) 9%, var(--panel));
+    --row-hover:color-mix(in srgb, var(--accent) 6%, var(--panel));
+    --warm-bg:color-mix(in srgb, var(--accent2) 15%, var(--panel));
+    --warm-bd:color-mix(in srgb, var(--accent2) 38%, var(--panel));
+    --warm-ink:color-mix(in srgb, var(--accent2) 72%, var(--ink));
+    --cool-bg:color-mix(in srgb, var(--accent3) 13%, var(--panel));
+    --cool-bd:color-mix(in srgb, var(--accent3) 36%, var(--panel));
+    --cool-ink:color-mix(in srgb, var(--accent3) 72%, var(--ink));
+    --epi-ink:var(--accent-ink);
+    --green:#2f7d4f; --amber:#b07d18; --red:#a8392f;
+  }
+  :root[data-mode="dark"]{ --green:#5cba82; --amber:#d6a542; --red:#e07a6f; }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+    line-height:1.62;-webkit-font-smoothing:antialiased;font-size:16px}
+  body,.card,table,.tldr,.callout,nav.toc a,section,th,td,.pp-panel,.pp-toggle,.pp-sw{
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease;}
+  @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+
+  header.top{background:var(--header-grad);color:#f6efe6;padding:54px 28px 46px;text-align:center}
+  header.top .kicker{font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;
+    color:#e9c9a3;font-weight:700;margin-bottom:16px}
+  header.top h1{margin:0 auto;max-width:760px;font-size:38px;line-height:1.15;font-weight:800;letter-spacing:-.02em}
+  header.top p.sub{margin:16px auto 0;max-width:640px;color:#d9c6b2;font-size:16.5px;line-height:1.55}
+  header.top .stamp{margin-top:22px;font-size:12px;color:#b89a7e;letter-spacing:.04em}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;display:grid;
+    grid-template-columns:228px minmax(0,1fr);gap:44px;align-items:start}
+  nav.toc{position:sticky;top:20px;padding-top:38px;font-size:13.5px}
+  nav.toc .toc-h{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);
+    font-weight:700;margin:0 0 12px 12px}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 12px;
+    border-left:2px solid var(--line);line-height:1.35}
+  nav.toc a:hover{color:var(--accent);border-left-color:var(--accent)}
+  nav.toc a.active{color:var(--accent-ink);border-left-color:var(--accent);font-weight:600;background:var(--accent-soft)}
+
+  main{padding:38px 0 90px;min-width:0}
+  section{scroll-margin-top:20px;margin-bottom:46px}
+  h2{font-size:25px;font-weight:800;letter-spacing:-.015em;margin:0 0 6px;padding-top:8px}
+  h2 .num{color:var(--accent);font-weight:800;margin-right:10px}
+  h3{font-size:18px;font-weight:700;margin:30px 0 8px}
+  h4{font-size:14.5px;font-weight:700;margin:20px 0 6px;color:var(--ink-soft)}
+  p{margin:10px 0}
+  a{color:var(--accent-ink)}
+  strong{font-weight:700}
+  ul,ol{padding-left:22px}
+  li{margin:6px 0}
+  hr{border:none;border-top:1px solid var(--line);margin:38px 0}
+
+  .tldr{background:var(--accent-soft);border:1px solid var(--line-strong);border-radius:14px;
+    padding:20px 24px;margin:0 0 40px}
+  .tldr h2{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-ink);margin:0 0 8px;padding:0}
+  .tldr p{margin:6px 0;color:var(--ink-soft)}
+
+  .callout{border-radius:12px;padding:14px 18px;margin:18px 0;font-size:14.5px;line-height:1.55}
+  .callout .lab{font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:4px}
+  .callout.warm{background:var(--warm-bg);border:1px solid var(--warm-bd)} .callout.warm .lab{color:var(--warm-ink)}
+  .callout.cool{background:var(--cool-bg);border:1px solid var(--cool-bd)} .callout.cool .lab{color:var(--cool-ink)}
+
+  table{border-collapse:collapse;width:100%;margin:16px 0;font-size:14.5px;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  th,td{padding:9px 13px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:var(--th-bg);font-weight:700;font-size:12.5px;letter-spacing:.02em;color:var(--ink-soft)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:var(--row-hover)}
+  td.k{font-family:"SF Mono",Menlo,monospace;font-size:13px}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:18px 0;
+    box-shadow:0 1px 3px rgba(0,0,0,.04)}
+
+  /* ===== Interactive lab ===== */
+  .lab-shell{background:var(--panel);border:1px solid var(--line-strong);border-radius:16px;
+    padding:22px;margin:20px 0;box-shadow:0 4px 22px rgba(0,0,0,.07)}
+  .controls{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;margin-bottom:20px}
+  .ctrl{display:flex;flex-direction:column;gap:5px}
+  .ctrl label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+  select,.btn{font-family:inherit;font-size:14px;border-radius:9px;border:1px solid var(--line-strong);
+    background:var(--panel);color:var(--ink);padding:9px 13px;cursor:pointer}
+  select:hover,.btn:hover{border-color:var(--accent)}
+  .btn{font-weight:600;display:inline-flex;align-items:center;gap:7px}
+  .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .btn.primary:hover{filter:brightness(1.07)}
+  .btn.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .btn:disabled{opacity:.45;cursor:default}
+  .hint{font-size:12.5px;color:var(--ink-faint);margin:6px 2px 0}
+
+  /* piano */
+  .piano-scroll{overflow-x:auto;padding:6px 2px 14px}
+  .piano{position:relative;display:flex;height:200px;min-width:560px;user-select:none}
+  .wkey{position:relative;flex:1 1 0;min-width:0;background:linear-gradient(180deg,#fff 0%,#f3efe8 100%);
+    border:1px solid var(--line-strong);border-radius:0 0 7px 7px;
+    margin-right:-1px;cursor:pointer;transition:background .08s;display:flex;flex-direction:column;
+    justify-content:flex-end;align-items:center;padding-bottom:10px}
+  .wkey:hover{background:linear-gradient(180deg,#fff,#ffe9d4)}
+  .wkey.down,.wkey.lit{background:linear-gradient(180deg,#ffe2c2,#ffcf9e)}
+  .bkey{position:absolute;top:0;height:60%;background:linear-gradient(180deg,#3a322b,#15110d);
+    border-radius:0 0 6px 6px;cursor:pointer;z-index:3;transform:translateX(-50%);
+    display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-bottom:8px;
+    box-shadow:0 3px 6px rgba(0,0,0,.4)}
+  .bkey:hover{background:linear-gradient(180deg,#5a4a3a,#241a12)}
+  .bkey.down,.bkey.lit{background:linear-gradient(180deg,#d68a45,#9a5b2e)}
+  .keylab{font-size:10.5px;font-weight:700;color:#9a8f80;pointer-events:none;line-height:1.1;text-align:center}
+  .wkey .swlab{font-size:13px;font-weight:800;color:var(--accent-ink);pointer-events:none;min-height:15px}
+  .bkey .keylab{color:#cbb89e}
+  .bkey .swlab{font-size:12px;font-weight:800;color:#ffe2c2;pointer-events:none;min-height:14px}
+  .wkey.sa,.bkey.sa{outline:3px solid var(--accent2);outline-offset:-3px}
+  .wkey.lit .swlab{color:var(--accent-ink)}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-soft);margin-top:4px}
+  .legend i{display:inline-block;width:13px;height:13px;border-radius:3px;vertical-align:-2px;margin-right:5px}
+
+  /* swarasthana map */
+  .semi-grid{display:grid;grid-template-columns:repeat(13,1fr);gap:4px;margin:14px 0;min-width:620px}
+  .semi-scroll{overflow-x:auto}
+  .semi-cell{border:1px solid var(--line);border-radius:8px;padding:8px 4px;text-align:center;cursor:pointer;
+    background:var(--panel);transition:transform .08s,background .12s}
+  .semi-cell:hover{transform:translateY(-2px);background:var(--accent-soft)}
+  .semi-cell.flash{background:var(--accent);color:#fff}
+  .semi-cell .pos{font-size:10px;color:var(--ink-faint);font-weight:700}
+  .semi-cell .nm{font-size:15px;font-weight:800;color:var(--accent-ink);margin-top:2px}
+  .semi-cell.flash .nm,.semi-cell.flash .pos{color:#fff}
+  .semi-cell .alt{font-size:9.5px;color:var(--ink-faint);margin-top:2px;line-height:1.2}
+  .semi-cell.flash .alt{color:#ffe2c2}
+  .semi-cell.wt{}
+  .semi-cell.bk{background:var(--code-bg)} .semi-cell.bk .pos{color:#998} .semi-cell.bk .nm{color:#ffd9b0}
+  .semi-cell.bk .alt{color:#9a8} .semi-cell.bk:hover{background:#3d362e}
+
+  .footer{max-width:1180px;margin:0 auto;padding:30px 24px 60px;color:var(--ink-faint);font-size:13px;
+    border-top:1px solid var(--line)}
+
+  @media (max-width:820px){
+    .wrap{grid-template-columns:1fr;gap:0}
+    nav.toc{display:none}
+  }
+  @media (max-width:720px){
+    header.top h1{font-size:28px}
+    main{padding:24px 0 60px}
+    .controls{gap:11px}
+  }
+</style>
+</head>
+<body>
+
+<!-- THEME PICKER -->
+<div class="palette-picker" id="picker">
+  <button class="pp-toggle" id="ppToggle" aria-expanded="false" aria-label="Change color theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    <span class="pp-txt">Theme</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pp-panel" role="menu" aria-label="Color palettes">
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>Light</span>
+      <div class="pp-swatches" id="pp-light"></div>
+    </div>
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark</span>
+      <div class="pp-swatches" id="pp-dark"></div>
+    </div>
+  </div>
+</div>
+<style>
+  .palette-picker{position:fixed;top:14px;right:14px;z-index:60;font-size:13px;
+    font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif}
+  .pp-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    background:rgba(255,255,255,.92);color:#1c1a17;border:1px solid rgba(0,0,0,.12);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    padding:8px 13px;border-radius:30px;font-weight:600;font-size:13px;box-shadow:0 2px 10px rgba(0,0,0,.16)}
+  .pp-toggle svg{display:block}
+  .pp-toggle .chev{transition:transform .2s ease}
+  .palette-picker.open .pp-toggle .chev{transform:rotate(180deg)}
+  .pp-panel{position:absolute;top:46px;right:0;width:248px;background:var(--panel);
+    border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.22);padding:14px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);transform-origin:top right;
+    transition:opacity .16s ease,transform .16s ease,visibility .16s}
+  .palette-picker.open .pp-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+  .pp-group{margin-bottom:12px} .pp-group:last-child{margin-bottom:0}
+  .pp-label{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:700;margin:0 2px 8px}
+  .pp-label .ico{width:13px;height:13px;opacity:.7}
+  .pp-swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pp-sw{cursor:pointer;border:1.5px solid var(--line);background:var(--panel);border-radius:10px;padding:7px;
+    display:flex;flex-direction:column;gap:6px;text-align:left;transition:border-color .15s,transform .1s}
+  .pp-sw:hover{transform:translateY(-1px)}
+  .pp-sw .bars{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .pp-sw .bars span{flex:1}
+  .pp-sw .nm{font-size:11.5px;font-weight:600;color:var(--ink-soft);display:flex;align-items:center;justify-content:space-between;gap:4px}
+  .pp-sw.active{border-color:var(--accent)} .pp-sw.active .nm{color:var(--ink)}
+  .pp-sw .tick{width:13px;height:13px;color:var(--accent);opacity:0} .pp-sw.active .tick{opacity:1}
+  @media (max-width:720px){.palette-picker{top:10px;right:10px}.pp-toggle .pp-txt{display:none}
+    .pp-toggle{padding:9px;border-radius:50%}.pp-panel{width:230px}}
+</style>
+
+<header class="top">
+  <div class="kicker">South Indian Classical · for the keyboard player</div>
+  <h1>Learning Carnatic Music on the Piano</h1>
+  <p class="sub">An interactive beginner's plan — play the swaras under your fingers, see how the 12 Western semitones become the 16 Carnatic swarasthanas, and follow a week-by-week path to your first song.</p>
+  <div class="stamp">Interactive guide · generated 2026-06-08 · turn on your sound 🔊</div>
+</header>
+
+<div class="wrap">
+  <nav class="toc" id="toc">
+    <div class="toc-h">Contents</div>
+    <a href="#play">▶ Interactive keyboard</a>
+    <a href="#map">▶ 12 semitones → swaras</a>
+    <a href="#honest">0 · The honest version</a>
+    <a href="#basics">1 · The basics</a>
+    <a href="#sequence">2 · Learning sequence</a>
+    <a href="#resources">3 · Resources</a>
+    <a href="#video">4 · Video tutorials</a>
+    <a href="#books">5 · Books</a>
+    <a href="#apps">6 · Apps &amp; tools</a>
+    <a href="#plan">7 · Week-by-week plan</a>
+    <a href="#daily">8 · Daily template</a>
+    <a href="#listen">9 · Listen actively</a>
+    <a href="#mistakes">10 · Common mistakes</a>
+    <a href="#checklist">✓ Quick-start</a>
+  </nav>
+
+  <main>
+    <div class="tldr">
+      <h2>The one-paragraph version</h2>
+      <p>The piano is a <strong>brilliant teacher</strong> of Carnatic <em>grammar</em> — every swara is laid out visually and always in tune. Its one limit is <em>gamakas</em> (the slides and oscillations), which a fixed-pitch keyboard can't bend — so prefer a digital keyboard with a pitch-bend wheel and add gamakas later. Pick <strong>Sa = C</strong>, keep a drone running, and spend your first month on <strong>Sarali Varisai</strong> in the raga <strong>Mayamalavagowla</strong>. You can reach your first real song in 3–4 months. Everything below is playable — start with the keyboard.</p>
+    </div>
+
+    <!-- ============ INTERACTIVE KEYBOARD ============ -->
+    <section id="play">
+      <h2><span class="num">▶</span>Play the swaras</h2>
+      <p>Click any key to hear it and see its swara name. Choose where <strong>Sa</strong> sits, pick a <strong>raga</strong> to light up its scale, turn on the <strong>drone</strong>, or let the <strong>Sarali Varisai</strong> play itself. (Sound is synthesized in your browser — no files, no network.)</p>
+
+      <div class="lab-shell">
+        <div class="controls">
+          <div class="ctrl">
+            <label for="saSel">Sa (tonic) =</label>
+            <select id="saSel"></select>
+          </div>
+          <div class="ctrl">
+            <label for="ragaSel">Raga / scale</label>
+            <select id="ragaSel"></select>
+          </div>
+          <div class="ctrl">
+            <label>Drone (Sa–Pa–Sa)</label>
+            <button class="btn" id="droneBtn">🔇 Drone off</button>
+          </div>
+          <div class="ctrl">
+            <label for="tempo">Sarali tempo</label>
+            <select id="tempo">
+              <option value="700">Slow</option>
+              <option value="480" selected>Medium</option>
+              <option value="320">Brisk</option>
+            </select>
+          </div>
+          <div class="ctrl">
+            <label>&nbsp;</label>
+            <button class="btn primary" id="saraliBtn">▶ Play Sarali Varisai 1</button>
+          </div>
+          <div class="ctrl">
+            <label>&nbsp;</label>
+            <button class="btn" id="scaleBtn">▶ Play scale (Aro/Avaro)</button>
+          </div>
+        </div>
+
+        <div class="piano-scroll">
+          <div class="piano" id="piano"></div>
+        </div>
+        <div class="legend">
+          <span><i style="background:var(--accent2)"></i>Sa (home note)</span>
+          <span><i style="background:#ffcf9e"></i>Note in selected raga</span>
+          <span><i style="background:#15110d"></i>Black key / komal-tivra position</span>
+          <span id="ragaName" style="margin-left:auto;font-weight:700;color:var(--accent-ink)"></span>
+        </div>
+        <p class="hint" id="aroLine"></p>
+      </div>
+
+      <div class="callout cool">
+        <span class="lab">Why a drone changes everything</span>
+        Once you pick your Sa, leave the drone running while you practise — it trains your ear to "hear home," the single most important habit in Indian music. Toggle it above and play a few notes; every swara suddenly has a <em>gravity</em> relative to Sa.
+      </div>
+    </section>
+
+    <!-- ============ SEMITONE MAP ============ -->
+    <section id="map">
+      <h2><span class="num">▶</span>The 12 semitones → 16 swarasthanas</h2>
+      <p>Here is the crux that unlocks Carnatic theory for a keyboard player. An octave on the piano has <strong>12 semitones</strong> (7 white + 5 black). Carnatic music names <strong>12 positions</strong> too — called <em>swarasthanas</em> — but uses <strong>16 names</strong>, because three positions each carry two names (one read as a Rishabham/Dhaivatam, one as a Gandharam/Nishadam). Same key, two roles depending on the raga.</p>
+      <p>Click any cell below to hear that position relative to the current Sa (<strong id="saEcho">C</strong>). White cells are white keys; dark cells are black keys, <em>when Sa = C</em>.</p>
+
+      <div class="semi-scroll">
+        <div class="semi-grid" id="semiGrid"></div>
+      </div>
+
+      <div class="callout warm">
+        <span class="lab">Read the doubles like this</span>
+        Position 2 is <strong>R₂</strong> (Chatushruti Rishabham) <em>or</em> <strong>G₁</strong> (Shuddha Gandharam) — same pitch, different name depending on which neighbours the raga uses. A raga never uses both names for one position. <strong>Sa</strong> (pos 0) and <strong>Pa</strong> (pos 7) are fixed — they have exactly one name and never move.
+      </div>
+
+      <h3>Full reference table</h3>
+      <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>Semitones from Sa</th><th>Key (if Sa = C)</th><th>Swarasthana name(s)</th><th>Symbol</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>0</td><td class="k">C</td><td>Shadjam</td><td class="k">S</td><td>Tonic — fixed</td></tr>
+          <tr><td>1</td><td class="k">C♯ / D♭</td><td>Shuddha Rishabham</td><td class="k">R₁</td><td></td></tr>
+          <tr><td>2</td><td class="k">D</td><td>Chatushruti Rishabham · Shuddha Gandharam</td><td class="k">R₂ · G₁</td><td>Doubled name</td></tr>
+          <tr><td>3</td><td class="k">D♯ / E♭</td><td>Shatshruti Rishabham · Sadharana Gandharam</td><td class="k">R₃ · G₂</td><td>Doubled name</td></tr>
+          <tr><td>4</td><td class="k">E</td><td>Antara Gandharam</td><td class="k">G₃</td><td></td></tr>
+          <tr><td>5</td><td class="k">F</td><td>Shuddha Madhyamam</td><td class="k">M₁</td><td></td></tr>
+          <tr><td>6</td><td class="k">F♯ / G♭</td><td>Prati Madhyamam</td><td class="k">M₂</td><td></td></tr>
+          <tr><td>7</td><td class="k">G</td><td>Panchamam</td><td class="k">P</td><td>Fifth — fixed</td></tr>
+          <tr><td>8</td><td class="k">G♯ / A♭</td><td>Shuddha Dhaivatam</td><td class="k">D₁</td><td></td></tr>
+          <tr><td>9</td><td class="k">A</td><td>Chatushruti Dhaivatam · Shuddha Nishadam</td><td class="k">D₂ · N₁</td><td>Doubled name</td></tr>
+          <tr><td>10</td><td class="k">A♯ / B♭</td><td>Shatshruti Dhaivatam · Kaisiki Nishadam</td><td class="k">D₃ · N₂</td><td>Doubled name</td></tr>
+          <tr><td>11</td><td class="k">B</td><td>Kakali Nishadam</td><td class="k">N₃</td><td></td></tr>
+          <tr><td>12</td><td class="k">C′</td><td>Shadjam (upper)</td><td class="k">Ṡ</td><td>Octave</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="hint">Different combinations of these 12 positions create the different <strong>ragas</strong>. The 72 "parent" scales (melakartas) are simply every valid way of choosing one R, one G, one M, one D and one N from this grid.</p>
+    </section>
+
+    <hr>
+
+    <!-- ============ 0 HONEST ============ -->
+    <section id="honest">
+      <h2><span class="num">0</span>Read this first: piano + Carnatic, the honest version</h2>
+      <p>The piano (or a digital keyboard) is a <strong>great way to <em>learn</em> Carnatic music</strong> because every note is laid out visually and always perfectly in tune. It is excellent for internalizing swaras, pitch relationships, raga scales, and melodies.</p>
+      <p>There is <strong>one real limitation</strong>: Carnatic music lives on <em>gamakas</em> — the slides, oscillations, and graceful bends between notes that give each raga its character. A fixed-pitch acoustic piano can't bend a note, so it can't reproduce gamakas naturally. This doesn't stop you from learning — it just means:</p>
+      <ul>
+        <li><strong>Prefer a digital keyboard with a pitch-bend wheel and touch-sensitive keys</strong> over an acoustic piano. The pitch-bend wheel lets you approximate gamakas later.</li>
+        <li>In the beginning you'll play notes "straight" (no gamaka). That's exactly how every beginner starts anyway, including vocalists.</li>
+        <li>Think of the piano as your <strong>pitch-perfect training partner</strong>, not the final performance instrument. Many learners use it alongside their voice.</li>
+      </ul>
+      <div class="callout warm"><span class="lab">Bottom line</span>The piano will teach you the <em>grammar</em> of Carnatic music beautifully. Gamakas come later, with a pitch-bend wheel or by transferring what you learn to voice/violin.</div>
+    </section>
+
+    <!-- ============ 1 BASICS ============ -->
+    <section id="basics">
+      <h2><span class="num">1</span>The basics you must know</h2>
+
+      <h3>1.1 The seven swaras</h3>
+      <p>Carnatic music has seven basic swaras, just like Western solfège:</p>
+      <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>Carnatic</th><th>Sa</th><th>Ri</th><th>Ga</th><th>Ma</th><th>Pa</th><th>Da</th><th>Ni</th><th>Sa (high)</th></tr></thead>
+        <tbody>
+          <tr><td>Western (solfège)</td><td>Do</td><td>Re</td><td>Mi</td><td>Fa</td><td>So</td><td>La</td><td>Ti</td><td>Do</td></tr>
+          <tr><td>Piano (if Sa = C)</td><td class="k">C</td><td class="k">D</td><td class="k">E</td><td class="k">F</td><td class="k">G</td><td class="k">A</td><td class="k">B</td><td class="k">C</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p><strong>Sa</strong> (the tonic) and <strong>Pa</strong> (the fifth) never change. The other five each have variations, giving <strong>12 swara positions</strong> across the octave — exactly the 12 keys in one octave. (See the interactive map above.)</p>
+
+      <h3>1.2 Shruti — choosing your "Sa"</h3>
+      <p>Your <strong>Sa is wherever you decide to put it.</strong> Singers pick a Sa that fits their voice; on piano you can simply choose C as Sa to start. Once you pick your Sa, keep a <strong>drone</strong> (tanpura / shruti box) playing Sa–Pa–Sa continuously while you practise. This trains your ear to "hear home" — the single most important habit in Indian music.</p>
+
+      <h3>1.3 Your first raga: Mayamalavagowla</h3>
+      <p>Every beginner — vocal or instrumental — starts in <strong>Mayamalavagowla</strong>, because its notes are evenly spaced and easy to find. With <strong>Sa = C</strong>:</p>
+      <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>Swara</th><th>Sa</th><th>Ri₁</th><th>Ga₃</th><th>Ma₁</th><th>Pa</th><th>Da₁</th><th>Ni₃</th><th>Sa</th></tr></thead>
+        <tbody><tr><td>Key</td><td class="k">C</td><td class="k">C♯/D♭</td><td class="k">E</td><td class="k">F</td><td class="k">G</td><td class="k">G♯/A♭</td><td class="k">B</td><td class="k">C</td></tr></tbody>
+      </table>
+      </div>
+      <ul>
+        <li><strong>Arohana (ascending):</strong> <code>C – D♭ – E – F – G – A♭ – B – C</code></li>
+        <li><strong>Avarohana (descending):</strong> <code>C – B – A♭ – G – F – E – D♭ – C</code></li>
+      </ul>
+      <p>Practise finding these eight keys up and down until your fingers know them cold. (Select Mayamalavagowla in the keyboard above and hit "Play scale".)</p>
+
+      <h3>1.4 Tala — keeping time</h3>
+      <p>Carnatic rhythm is organized into <strong>talas</strong> (cycles). Beginners use <strong>Adi Tala</strong>, an 8-beat cycle counted as a clap-pattern. For now, just keep a steady 8-count with your hand or a metronome/tala app while you play. Even, unhurried timing matters more than speed.</p>
+    </section>
+
+    <!-- ============ 2 SEQUENCE ============ -->
+    <section id="sequence">
+      <h2><span class="num">2</span>The learning sequence</h2>
+      <p>Carnatic pedagogy is famously systematic. Follow this order — don't skip ahead:</p>
+      <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>#</th><th>Stage</th><th>What it builds</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Swara recognition</strong></td><td>Find and name all notes of Mayamalavagowla instantly.</td></tr>
+          <tr><td>2</td><td><strong>Sarali Varisai</strong></td><td>The foundational note exercises (7 patterns, up/down). <em>Your first month lives here.</em></td></tr>
+          <tr><td>3</td><td><strong>Janta Varisai</strong></td><td>Paired/doubled notes (SS RR GG…) — finger strength and clarity.</td></tr>
+          <tr><td>4</td><td><strong>Dhatu / Datu Varisai</strong></td><td>"Jumping" patterns across non-adjacent notes.</td></tr>
+          <tr><td>5</td><td><strong>Alankaram</strong></td><td>Swara patterns set to different talas — rhythm training.</td></tr>
+          <tr><td>6</td><td><strong>Geetham</strong></td><td>Your first simple songs with lyrics + notation (e.g. <em>Lambodara</em>).</td></tr>
+          <tr><td>7</td><td><strong>Swarajati</strong></td><td>Slightly more complex compositions.</td></tr>
+          <tr><td>8</td><td><strong>Varnam</strong></td><td>The bridge to advanced repertoire; played in two speeds.</td></tr>
+          <tr><td>9</td><td><strong>Krithi</strong></td><td>Full classical compositions — the "real songs" of concerts.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="callout cool"><span class="lab">Milestone</span>Most beginners reach Geetham (step 6) within 3–4 months of steady practice. That first recognizable song is a very satisfying moment — celebrate it.</div>
+    </section>
+
+    <!-- ============ 3 RESOURCES ============ -->
+    <section id="resources">
+      <h2><span class="num">3</span>Resources to start</h2>
+
+      <h3>3.1 Free websites</h3>
+      <div class="card">
+        <ul>
+          <li><strong>Shivkumar.org</strong> — huge free archive with downloadable audio <em>and</em> notation, beginner → advanced. → <a href="https://www.shivkumar.org/music/">shivkumar.org/music</a></li>
+          <li><strong>Karnatik.com</strong> — lessons, ragas, glossary, beginner PDF. → <a href="https://www.karnatik.com/lesson1.shtml">lessons</a> · <a href="https://www.karnatik.com/beginners.pdf">beginner PDF</a></li>
+          <li><strong>Learn Carnatic Music (blog)</strong> — written walkthroughs of Sarali Varisai. → <a href="https://learncarnaticmusicblog.wordpress.com/">blog</a></li>
+          <li><strong>Saamaveda Music Academy</strong> — organized free video lesson index. → <a href="https://www.saamavedamusicacademy.in/Free-Basic-Carnatic-Music.php">free lessons</a></li>
+          <li><strong>MusicLegato</strong> — interactive raga-on-piano tool; see &amp; hear any raga scale. → <a href="https://musiclegato.com/">musiclegato.com</a></li>
+          <li><strong>Artium Academy blog</strong> — clean primer on reading notation. → <a href="https://artiumacademy.com/blogs/understanding-the-basics-of-carnatic-music-notation/">notation basics</a></li>
+        </ul>
+      </div>
+
+      <h3>3.2 Keyboard-specific lesson sites</h3>
+      <div class="card">
+        <ul>
+          <li><strong>BMusician</strong> — structured online keyboard course on Carnatic concepts. → <a href="https://bmusician.com/keyboard/carnatic-keyboard-lessons/">bmusician.com</a></li>
+          <li><strong>BM Institute (bhmurali.com)</strong> — keyboard syllabus + free Handbook of Keyboard. → <a href="https://bhmurali.com/syllabus_carnatic.html">syllabus</a> · <a href="https://bhmurali.com/handbook_of_keyboard.html">handbook</a></li>
+        </ul>
+      </div>
+
+      <h3>3.3 Structured courses / live teachers</h3>
+      <div class="card">
+        <ul>
+          <li><strong>Artium Academy</strong> — live 1:1 classes, graded Prep → Intermediate → Advanced (faculty headed by Padma Shri Aruna Sairam); free trial. → <a href="https://artiumacademy.com/course/online-carnatic-music-classes">course</a></li>
+        </ul>
+      </div>
+      <div class="callout warm"><span class="lab">On finding a guru</span>Carnatic music is traditionally learned one-on-one because a teacher hears and corrects your pitch and gamakas in ways video can't. Self-study takes you a long way through fundamentals — but once you're comfortable with Sarali and Janta Varisai, even <em>occasional</em> feedback from a teacher dramatically accelerates progress.</div>
+    </section>
+
+    <!-- ============ 4 VIDEO ============ -->
+    <section id="video">
+      <h2><span class="num">4</span>Video tutorials</h2>
+      <h3>4.1 Keyboard-focused</h3>
+      <ul>
+        <li><strong>"Carnatic Lessons on Keyboard — Fundamentals"</strong> (YouTube playlist) — beginner series on keyboard. → <a href="https://www.youtube.com/playlist?list=PLcX9XCRX70AZ_Xsl_zg3oJ9EpJsRHBxea">playlist</a></li>
+        <li><strong>Saamaveda Music Academy (YouTube)</strong> — self-practice beginner tutorials (via their free lessons page).</li>
+        <li><strong>Sankeerthana Music Channel (YouTube)</strong> — keyboard lessons on the seven swaras, melakarta ragas, Adi tala.</li>
+      </ul>
+      <h3>4.2 Theory / vocal foundation (essential even for keyboard players)</h3>
+      <ul>
+        <li><strong>Class Central</strong> — free curated Carnatic YouTube course, a structured foundational playlist. → <a href="https://www.classcentral.com/course/youtube-carnatic-music-59083">course</a></li>
+      </ul>
+      <div class="callout cool"><span class="lab">Tip</span>Even though you play keyboard, watch a few <em>vocal</em> Sarali Varisai videos. Hearing the notes sung — with correct stress and flow — teaches you how the lines should <em>feel</em>, then you reproduce that feel on the keys.</div>
+    </section>
+
+    <!-- ============ 5 BOOKS ============ -->
+    <section id="books">
+      <h2><span class="num">5</span>Books</h2>
+      <h3>Primary practice book (get this first)</h3>
+      <ul>
+        <li><strong>Ganamrutha Bodhini</strong> — <em>A.S. Panchapakesa Iyer.</em> The standard beginner workbook: Sarali/Janta/Dhatu Varisai, Alankaram, Geethams and basic Varnams, all with notation. <strong>If you buy one book, buy this.</strong></li>
+        <li><strong>Ganamrutha Varna Malika</strong> — <em>A.S. Panchapakesa Iyer.</em> Companion volume of Varnams for when you progress.</li>
+      </ul>
+      <h3>Theory / reference</h3>
+      <ul>
+        <li><strong>South Indian Music</strong> (multi-volume) — <em>Prof. P. Sambamoorthy.</em> The classic thorough theory reference.</li>
+        <li><strong>Carnatic Music for Beginners</strong> — <em>Dr. S. Ramanathan.</em> Friendly introduction to theory and practice.</li>
+        <li><strong>A Handbook of Carnatic Music</strong> — <em>Dr. S. Sathyavathy.</em> Concise reference on swaras, ragas, talas.</li>
+      </ul>
+      <p class="hint">Most are available from Indian music-book retailers (e.g. exoticindiaart.com); many also circulate as PDFs.</p>
+    </section>
+
+    <!-- ============ 6 APPS ============ -->
+    <section id="apps">
+      <h2><span class="num">6</span>Apps &amp; tools</h2>
+      <h3>6.1 Drone — your practice essential</h3>
+      <ul>
+        <li><strong>iOS:</strong> <em>iTanpura</em> / <em>iTanpura Lite</em> (free) · <em>iSruthi</em></li>
+        <li><strong>Android:</strong> <em>Tanpura Droid</em>, <em>Pocket Shruti Box</em>, <em>Bheema Tanpura</em></li>
+      </ul>
+      <p>Set the drone to your Sa (e.g. C) and leave it running. Non-negotiable for ear training. <em>(You can use the built-in drone in the keyboard above to feel the idea right now.)</em></p>
+      <h3>6.2 Tala / rhythm</h3>
+      <p>A simple metronome app, or a Carnatic-specific tala app (e.g. <em>iTablaPro</em> on iOS) to keep an 8-beat Adi tala cycle.</p>
+      <h3>6.3 Keyboard + raga apps</h3>
+      <ul><li><strong>Carnatic Keys (Upbeat Labs)</strong> — keyboard app designed around ragas, with pitch-bend to approximate gamakas. → <a href="https://www.upbeatlabs.com/carnatic-keys/">upbeatlabs.com</a></li></ul>
+    </section>
+
+    <!-- ============ 7 PLAN ============ -->
+    <section id="plan">
+      <h2><span class="num">7</span>The detailed execution plan</h2>
+      <p>A realistic, low-pressure plan assuming <strong>~30 minutes a day, 5–6 days a week.</strong> Consistency beats intensity.</p>
+
+      <div class="card">
+        <h4>Phase 0 — Setup (this week, ~1 hour total)</h4>
+        <ul style="list-style:none;padding-left:0">
+          <li>☐ Get a <strong>digital keyboard with a pitch-bend wheel</strong> (or use any keyboard to start).</li>
+          <li>☐ Install a <strong>tanpura/drone app</strong> and a <strong>metronome/tala app</strong>.</li>
+          <li>☐ Decide <strong>Sa = C</strong>. Locate the Mayamalavagowla keys (C, D♭, E, F, G, A♭, B, C).</li>
+          <li>☐ Buy or download <strong>Ganamrutha Bodhini</strong>.</li>
+          <li>☐ Bookmark <strong>shivkumar.org</strong> and <strong>karnatik.com</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4 style="color:var(--accent-ink)">Phase 1 · Weeks 1–4 — Swaras + Sarali Varisai</h4>
+        <p><strong>Goal:</strong> play all Sarali Varisai cleanly and in time, drone running.</p>
+        <ul>
+          <li><strong>Week 1:</strong> Learn the Mayamalavagowla scale up and down until automatic. Play each note slowly with the drone, saying the swara name aloud. Start <strong>Sarali Varisai 1</strong>.<br><span class="hint">Sarali 1 (Sa=C): up <code>C D♭ E F G A♭ B C</code> · down <code>C B A♭ G F E D♭ C</code></span></li>
+          <li><strong>Week 2:</strong> Sarali Varisai 1–3, slow tempo, even timing in Adi tala.</li>
+          <li><strong>Week 3:</strong> Sarali Varisai 4–5; revisit 1–3 slightly faster.</li>
+          <li><strong>Week 4:</strong> Sarali Varisai 6–7. Play 1–7 from memory, slowly, with the drone.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4 style="color:var(--accent-ink)">Phase 2 · Weeks 5–8 — Janta Varisai + Alankaram</h4>
+        <p><strong>Goal:</strong> clean paired notes and rhythm awareness across talas.</p>
+        <ul>
+          <li><strong>Weeks 5–6:</strong> <strong>Janta Varisai</strong> (doubled notes <code>SS RR GG MM…</code>) — equal weight on both notes of each pair.</li>
+          <li><strong>Weeks 7–8:</strong> <strong>Alankaram</strong> — same swaras in different talas. Your rhythm gym; count aloud, metronome on.</li>
+          <li>Keep Sarali Varisai as a 5-minute daily warm-up.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4 style="color:var(--accent-ink)">Phase 3 · Weeks 9–12 — Datu Varisai + your first song</h4>
+        <p><strong>Goal:</strong> play your first recognizable Geetham.</p>
+        <ul>
+          <li><strong>Weeks 9–10:</strong> <strong>Datu/Dhatu Varisai</strong> (jumping patterns) — accuracy across non-adjacent notes.</li>
+          <li><strong>Weeks 11–12:</strong> Learn a beginner <strong>Geetham</strong> such as <em>Lambodara</em> or <em>Sri Gananatha</em> (Malahari raga). Play the melody with drone and steady tala. <strong>This is your first "song" — celebrate it.</strong></li>
+        </ul>
+      </div>
+
+      <div class="callout warm"><span class="lab">Beyond week 12</span>Swarajati → Varnam → simple Krithis. Around here, <strong>start adding gamakas</strong> with the pitch-bend wheel, strongly consider a <strong>teacher</strong> (even monthly online), and begin <strong>active listening</strong> to master recordings.</div>
+    </section>
+
+    <!-- ============ 8 DAILY ============ -->
+    <section id="daily">
+      <h2><span class="num">8</span>Your daily 30-minute practice template</h2>
+      <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th style="text-align:right">Min</th><th>Activity</th></tr></thead>
+        <tbody>
+          <tr><td style="text-align:right" class="k">2</td><td><strong>Tune in:</strong> start the drone on Sa, play Sa, hum/match it, breathe.</td></tr>
+          <tr><td style="text-align:right" class="k">5</td><td><strong>Swara drill:</strong> play notes of the day's raga, name each aloud; play random notes and name them.</td></tr>
+          <tr><td style="text-align:right" class="k">15</td><td><strong>Core exercise of the week</strong> (Sarali / Janta / Alankaram), slow → medium, with tala.</td></tr>
+          <tr><td style="text-align:right" class="k">5</td><td><strong>Apply:</strong> play last week's material from memory, or pick out a simple tune by ear.</td></tr>
+          <tr><td style="text-align:right" class="k">3</td><td><strong>Listen:</strong> one short reference recording; just absorb it.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="callout cool"><span class="lab">Golden rules</span>Drone always on · slow and accurate beats fast and sloppy · name your swaras out loud · daily-but-short beats weekly-but-long.</div>
+    </section>
+
+    <!-- ============ 9 LISTEN ============ -->
+    <section id="listen">
+      <h2><span class="num">9</span>Listen actively (this is half the training)</h2>
+      <p>Carnatic music is learned as much by ear as by exercise. Put these masters on while commuting or relaxing — your ear will absorb the grammar:</p>
+      <ul>
+        <li><strong>M.S. Subbulakshmi</strong> (vocal) — the classic reference voice.</li>
+        <li><strong>Lalgudi Jayaraman</strong> (violin) — gorgeous, melodic phrasing.</li>
+        <li><strong>U. Srinivas</strong> (mandolin) — a Western/fretted instrument playing Carnatic beautifully; inspiring for instrumentalists.</li>
+        <li><strong>Sanjay Subrahmanyan, T.M. Krishna, Bombay Jayashri</strong> — leading contemporary vocalists.</li>
+      </ul>
+      <p>Listen for: where Sa sits, how notes <em>slide</em> (gamakas), and how a raga "feels."</p>
+    </section>
+
+    <!-- ============ 10 MISTAKES ============ -->
+    <section id="mistakes">
+      <h2><span class="num">10</span>Common beginner mistakes to avoid</h2>
+      <div class="card">
+        <ul>
+          <li><strong>Practising without a drone.</strong> You won't develop pitch sense. Always run the tanpura.</li>
+          <li><strong>Rushing tempo.</strong> Speed without evenness is a dead end. Stay slow longer than feels necessary.</li>
+          <li><strong>Skipping the boring exercises.</strong> Sarali/Janta Varisai <em>are</em> the foundation — masters still warm up with them.</li>
+          <li><strong>Silent fingers.</strong> Say the swara names aloud; it links sound, name and key in memory.</li>
+          <li><strong>Expecting gamakas immediately on piano.</strong> Learn the notes straight first; add bends later with a pitch-wheel.</li>
+          <li><strong>Going it fully alone forever.</strong> Self-study is great for fundamentals; get a teacher's ear once past the basics.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CHECKLIST ============ -->
+    <section id="checklist">
+      <h2><span class="num">✓</span>Quick-start checklist (do this today)</h2>
+      <div class="card" style="background:var(--accent-soft);border-color:var(--line-strong)">
+        <ol>
+          <li>Pick <strong>Sa = C</strong>; find Mayamalavagowla: <code>C D♭ E F G A♭ B C</code>.</li>
+          <li>Open a <strong>tanpura app</strong> on C; let it drone.</li>
+          <li>Play the scale up and down, naming each swara aloud.</li>
+          <li>Open <strong>shivkumar.org → Basics → Sarali Varisai</strong> and play <strong>Varisai 1</strong> slowly.</li>
+          <li>Do 20–30 minutes. Come back tomorrow. <strong>That's the whole secret.</strong></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="footer">
+  Interactive guide rendered from <em>"Learning Carnatic Music on the Piano — A Beginner's Plan."</em> Audio is synthesized live in your browser with the Web Audio API; equal-tempered tuning (a real tanpura is just-intoned, so treat pitches as approximate). Swarasthana names follow the standard 16-name / 12-position melakarta scheme.
+</div>
+
+<!-- ============ THEME SWITCHER SCRIPT ============ -->
+<script>
+(function(){
+  const PALETTES = {
+    afternoon:{mode:'light',label:'Afternoon',v:{'--bg':'#faf8f4','--panel':'#ffffff','--ink':'#1c1a17','--ink-soft':'#55504a','--ink-faint':'#8a8279','--line':'#e8e2d8','--line-strong':'#d8cfc0','--accent':'#9a5b2e','--accent-soft':'#f3e6d8','--accent-ink':'#7a4220','--accent2':'#b8893b','--accent3':'#2f6b6b','--code-bg':'#2b2722','--header-grad':'linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%)'}},
+    sage:{mode:'light',label:'Sage',v:{'--bg':'#f5f7f2','--panel':'#ffffff','--ink':'#1c211a','--ink-soft':'#4e544a','--ink-faint':'#828a7c','--line':'#e3e8dc','--line-strong':'#d3dac8','--accent':'#5c7a52','--accent-soft':'#e6ede0','--accent-ink':'#3f592f','--accent2':'#a98f3c','--accent3':'#3a7a6b','--code-bg':'#1f2620','--header-grad':'linear-gradient(160deg,#1a231a 0%,#283a26 55%,#3a5232 100%)'}},
+    harbor:{mode:'light',label:'Harbor',v:{'--bg':'#f4f6f9','--panel':'#ffffff','--ink':'#1a2026','--ink-soft':'#4b5560','--ink-faint':'#7d8794','--line':'#e1e7ec','--line-strong':'#cfd8e1','--accent':'#2f6690','--accent-soft':'#e0ebf2','--accent-ink':'#234e6b','--accent2':'#b5862f','--accent3':'#2f8682','--code-bg':'#192129','--header-grad':'linear-gradient(160deg,#121b24 0%,#1d2e3f 55%,#274a63 100%)'}},
+    plum:{mode:'light',label:'Plum',v:{'--bg':'#f8f5f8','--panel':'#ffffff','--ink':'#221c21','--ink-soft':'#564b54','--ink-faint':'#897e87','--line':'#e9e0e7','--line-strong':'#dccdd8','--accent':'#7d4a6b','--accent-soft':'#efe2ec','--accent-ink':'#5d3550','--accent2':'#b07d3b','--accent3':'#3a7a72','--code-bg':'#241c23','--header-grad':'linear-gradient(160deg,#201823 0%,#332338 55%,#4e2f53 100%)'}},
+    midnight:{mode:'dark',label:'Midnight',v:{'--bg':'#0f1620','--panel':'#18212e','--ink':'#e8edf3','--ink-soft':'#a9b5c4','--ink-faint':'#6f7d8d','--line':'#25303f','--line-strong':'#34414f','--accent':'#5b9bd5','--accent-soft':'#1b2a3b','--accent-ink':'#9cc4e8','--accent2':'#d2a85f','--accent3':'#4db1a8','--code-bg':'#0b121b','--header-grad':'linear-gradient(160deg,#0b1220 0%,#13243a 55%,#1d3a5c 100%)'}},
+    charcoal:{mode:'dark',label:'Charcoal',v:{'--bg':'#161514','--panel':'#201e1c','--ink':'#ece8e2','--ink-soft':'#b0a99f','--ink-faint':'#766f65','--line':'#2c2926','--line-strong':'#3a3631','--accent':'#c8895a','--accent-soft':'#2c2420','--accent-ink':'#e3a878','--accent2':'#cda35e','--accent3':'#5aada3','--code-bg':'#100f0e','--header-grad':'linear-gradient(160deg,#141210 0%,#241e18 55%,#3a2c20 100%)'}},
+    forest:{mode:'dark',label:'Forest',v:{'--bg':'#101713','--panel':'#18211b','--ink':'#e6ece6','--ink-soft':'#a6b3a6','--ink-faint':'#6e7c6e','--line':'#243029','--line-strong':'#324133','--accent':'#6fae7e','--accent-soft':'#1a2a20','--accent-ink':'#9fd3aa','--accent2':'#cda35e','--accent3':'#4fb0a0','--code-bg':'#0b110d','--header-grad':'linear-gradient(160deg,#0c1410 0%,#142a1d 55%,#1d4230 100%)'}},
+    wine:{mode:'dark',label:'Wine',v:{'--bg':'#1a1012','--panel':'#241619','--ink':'#f0e4e6','--ink-soft':'#c2a9af','--ink-faint':'#8c6f76','--line':'#321f24','--line-strong':'#43292f','--accent':'#c46b7e','--accent-soft':'#2e1a1f','--accent-ink':'#e49aa8','--accent2':'#cda35e','--accent3':'#5aa8a0','--code-bg':'#140c0e','--header-grad':'linear-gradient(160deg,#160c0e 0%,#2a141a 55%,#4a2230 100%)'}}
+  };
+  const root=document.documentElement;
+  function applyPalette(key){const p=PALETTES[key];if(!p)return;for(const k in p.v)root.style.setProperty(k,p.v[k]);
+    root.setAttribute('data-mode',p.mode);
+    document.querySelectorAll('.pp-sw').forEach(b=>b.classList.toggle('active',b.dataset.pal===key));
+    try{localStorage.setItem('html-output-palette',key);}catch(e){}}
+  const tick='<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  for(const key in PALETTES){const p=PALETTES[key];const btn=document.createElement('button');
+    btn.className='pp-sw';btn.dataset.pal=key;btn.type='button';btn.title=p.label;
+    btn.innerHTML='<div class="bars"><span style="background:'+p.v['--bg']+'"></span><span style="background:'+p.v['--accent']+'"></span><span style="background:'+p.v['--accent-ink']+'"></span><span style="background:'+p.v['--accent2']+'"></span></div><span class="nm">'+p.label+tick+'</span>';
+    btn.addEventListener('click',()=>applyPalette(key));
+    document.getElementById(p.mode==='light'?'pp-light':'pp-dark').appendChild(btn);}
+  const picker=document.getElementById('picker'),ppToggle=document.getElementById('ppToggle');
+  ppToggle.addEventListener('click',e=>{e.stopPropagation();const open=picker.classList.toggle('open');ppToggle.setAttribute('aria-expanded',open?'true':'false');});
+  document.addEventListener('click',e=>{if(!picker.contains(e.target))picker.classList.remove('open');});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')picker.classList.remove('open');});
+  let saved=null;try{saved=localStorage.getItem('html-output-palette');}catch(e){}
+  if(saved&&PALETTES[saved])applyPalette(saved);
+  else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)applyPalette('midnight');
+  else applyPalette('afternoon');
+})();
+</script>
+
+<!-- ============ INTERACTIVE MUSIC ENGINE ============ -->
+<script>
+(function(){
+  /* ---------- Audio ---------- */
+  let ac=null;
+  function ctx(){ if(!ac) ac=new (window.AudioContext||window.webkitAudioContext)(); if(ac.state==='suspended')ac.resume(); return ac; }
+  function midiFreq(m){ return 440*Math.pow(2,(m-69)/12); }
+  function pluck(m,dur=0.6,vol=0.22){
+    const c=ctx(),t=c.currentTime,f=midiFreq(m);
+    const o=c.createOscillator(),o2=c.createOscillator(),g=c.createGain();
+    o.type='triangle'; o2.type='sine'; o.frequency.value=f; o2.frequency.value=f*2;
+    const g2=c.createGain(); g2.gain.value=0.35; o2.connect(g2).connect(g);
+    o.connect(g); g.connect(c.destination);
+    g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(vol,t+0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    o.start(t); o2.start(t); o.stop(t+dur+0.05); o2.stop(t+dur+0.05);
+  }
+
+  /* ---------- Drone ---------- */
+  let droneNodes=null;
+  function startDrone(saMidi){
+    const c=ctx(); stopDrone();
+    droneNodes=[];
+    [saMidi-12, saMidi+7-12, saMidi].forEach((m,i)=>{
+      const o=c.createOscillator(),g=c.createGain();
+      o.type='sawtooth'; o.frequency.value=midiFreq(m);
+      g.gain.value=0.0001; o.connect(g); g.connect(c.destination);
+      g.gain.exponentialRampToValueAtTime(0.05,c.currentTime+0.4);
+      o.start(); droneNodes.push({o,g});
+      // gentle low-pass for warmth
+    });
+  }
+  function stopDrone(){ if(!droneNodes)return; const c=ctx();
+    droneNodes.forEach(n=>{ n.g.gain.exponentialRampToValueAtTime(0.0001,c.currentTime+0.3); n.o.stop(c.currentTime+0.4); });
+    droneNodes=null;
+  }
+
+  /* ---------- Note names ---------- */
+  const NOTE_NAMES=['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
+  function midiName(m){ return NOTE_NAMES[m%12]+(Math.floor(m/12)-1); }
+
+  /* ---------- Swarasthanas (12 positions, 16 names) ---------- */
+  const SEMI=[
+    {pos:0, sym:'S',  alt:'',         names:'Shadjam', black:false},
+    {pos:1, sym:'R₁', alt:'',         names:'Shuddha Rishabham', black:true},
+    {pos:2, sym:'R₂', alt:'G₁',       names:'Chatushruti Ri / Shuddha Ga', black:false},
+    {pos:3, sym:'R₃', alt:'G₂',       names:'Shatshruti Ri / Sadharana Ga', black:true},
+    {pos:4, sym:'G₃', alt:'',         names:'Antara Gandharam', black:false},
+    {pos:5, sym:'M₁', alt:'',         names:'Shuddha Madhyamam', black:false},
+    {pos:6, sym:'M₂', alt:'',         names:'Prati Madhyamam', black:true},
+    {pos:7, sym:'P',  alt:'',         names:'Panchamam', black:false},
+    {pos:8, sym:'D₁', alt:'',         names:'Shuddha Dhaivatam', black:true},
+    {pos:9, sym:'D₂', alt:'N₁',       names:'Chatushruti Da / Shuddha Ni', black:false},
+    {pos:10,sym:'D₃', alt:'N₂',       names:'Shatshruti Da / Kaisiki Ni', black:true},
+    {pos:11,sym:'N₃', alt:'',         names:'Kakali Nishadam', black:false},
+    {pos:12,sym:'Ṡ',  alt:'',         names:'Shadjam (upper)', black:false}
+  ];
+
+  /* ---------- Ragas: map semitone offset -> displayed swara symbol ---------- */
+  const RAGAS=[
+    {id:'maya', name:'Mayamalavagowla (15th melakarta · the beginner raga)', map:{0:'S',1:'R₁',4:'G₃',5:'M₁',7:'P',8:'D₁',11:'N₃'}},
+    {id:'shankara', name:'Shankarabharanam (29 · = Western major scale)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',11:'N₃'}},
+    {id:'kharahara', name:'Kharaharapriya (22 · = Dorian mode)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',9:'D₂',10:'N₂'}},
+    {id:'kalyani', name:'Kalyani (65 · = Lydian mode)', map:{0:'S',2:'R₂',4:'G₃',6:'M₂',7:'P',9:'D₂',11:'N₃'}},
+    {id:'todi', name:'Hanumatodi (8 · = Phrygian ♭6)', map:{0:'S',1:'R₁',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'}},
+    {id:'mohanam', name:'Mohanam (pentatonic · no Ma, no Ni)', map:{0:'S',2:'R₂',4:'G₃',7:'P',9:'D₂'}},
+    {id:'hindolam', name:'Hindolam (pentatonic · no Ri, no Pa)', map:{0:'S',3:'G₂',5:'M₁',8:'D₁',10:'N₂'}},
+    {id:'chromatic', name:'All 12 swarasthanas (chromatic — show everything)', map:(function(){const o={};SEMI.forEach(s=>{o[s.pos]=s.sym+(s.alt?'/'+s.alt:'');});return o;})()}
+  ];
+
+  /* ---------- Build Sa selector (C3..B4 sensible range), default C4=60 ---------- */
+  const saSel=document.getElementById('saSel');
+  for(let m=55;m<=67;m++){ // G3 .. G4
+    const o=document.createElement('option'); o.value=m; o.textContent=midiName(m); if(m===60)o.selected=true; saSel.appendChild(o);
+  }
+  const ragaSel=document.getElementById('ragaSel');
+  RAGAS.forEach(r=>{const o=document.createElement('option');o.value=r.id;o.textContent=r.name;ragaSel.appendChild(o);});
+
+  function saMidi(){ return parseInt(saSel.value,10); }
+  function curRaga(){ return RAGAS.find(r=>r.id===ragaSel.value)||RAGAS[0]; }
+
+  /* ---------- Build piano (2 octaves from Sa-? : show Sa-1 .. Sa+13 white-key span) ---------- */
+  // We render a fixed visual piano spanning saMidi .. saMidi+24 (two octaves) starting at Sa.
+  const piano=document.getElementById('piano');
+  const WHITE_OFFSETS={0:true,2:true,4:true,5:true,7:true,9:true,11:true};
+  let keyEls={}; // midi -> element
+
+  function buildPiano(){
+    piano.innerHTML=''; keyEls={};
+    const base=saMidi();
+    const span=24; // two octaves
+    // collect white keys
+    const whites=[];
+    for(let i=0;i<=span;i++){ const m=base+i; if(WHITE_OFFSETS[m%12]) whites.push(m); }
+    const n=whites.length;
+    whites.forEach((m,idx)=>{
+      const w=document.createElement('div'); w.className='wkey'; w.dataset.midi=m;
+      w.innerHTML='<span class="swlab"></span><span class="keylab">'+NOTE_NAMES[m%12]+'</span>';
+      w.style.flex='1';
+      piano.appendChild(w); keyEls[m]=w;
+      w.addEventListener('pointerdown',()=>{ play(m,w); });
+    });
+    piano.style.minWidth=(n*40)+'px';
+    // black keys positioned over the white-key boundaries
+    const whitePct=100/n;
+    whites.forEach((m,idx)=>{
+      const next=m+1;
+      if(!WHITE_OFFSETS[next%12] && idx<n-1){ // there is a black key between this white and the next
+        const b=document.createElement('div'); b.className='bkey'; b.dataset.midi=next;
+        b.innerHTML='<span class="swlab"></span><span class="keylab">'+NOTE_NAMES[next%12]+'</span>';
+        b.style.left=( (idx+1)*whitePct )+'%';
+        b.style.width=( whitePct*0.62 )+'%';   // 62% of ONE white key, not of the whole piano
+        piano.appendChild(b); keyEls[next]=b;
+        b.addEventListener('pointerdown',e=>{ e.stopPropagation(); play(next,b); });
+      }
+    });
+    refreshLabels();
+  }
+
+  function refreshLabels(){
+    const base=saMidi(), raga=curRaga();
+    document.getElementById('ragaName').textContent=raga.name.split(' (')[0];
+    document.getElementById('saEcho').textContent=NOTE_NAMES[base%12];
+    Object.keys(keyEls).forEach(mm=>{
+      const m=parseInt(mm,10), el=keyEls[m];
+      const off=((m-base)%12+12)%12;
+      const inRaga = raga.map.hasOwnProperty(off) || (m===base+12) || (m===base+24);
+      el.classList.toggle('lit', inRaga && !el.classList.contains('bkeyhide'));
+      el.classList.toggle('sa', off===0);
+      const sw=el.querySelector('.swlab');
+      let label='';
+      if(off===0) label='S';
+      else if(raga.map.hasOwnProperty(off)) label=raga.map[off];
+      sw.textContent = inRaga ? label : '';
+    });
+    // aro/avaro hint line
+    const offs=Object.keys(raga.map).map(Number).sort((a,b)=>a-b);
+    const aro=offs.map(o=>raga.map[o]).concat(['Ṡ']);
+    document.getElementById('aroLine').innerHTML='<strong>Arohana:</strong> '+aro.join(' ')+' &nbsp;·&nbsp; <strong>Avarohana:</strong> '+aro.slice().reverse().join(' ');
+  }
+
+  function flash(el){ if(!el)return; el.classList.add('down'); setTimeout(()=>el.classList.remove('down'),160); }
+  function play(m,el){ pluck(m); flash(el||keyEls[m]); }
+
+  /* ---------- Drone button ---------- */
+  let droneOn=false;
+  const droneBtn=document.getElementById('droneBtn');
+  droneBtn.addEventListener('click',()=>{
+    droneOn=!droneOn;
+    if(droneOn){ startDrone(saMidi()); droneBtn.textContent='🔊 Drone on'; droneBtn.classList.add('on'); }
+    else { stopDrone(); droneBtn.textContent='🔇 Drone off'; droneBtn.classList.remove('on'); }
+  });
+
+  /* ---------- Sequence player ---------- */
+  let playing=false;
+  function playSequence(offsets, done){
+    if(playing){ return; }
+    playing=true;
+    const base=saMidi(), step=parseInt(document.getElementById('tempo').value,10);
+    let i=0;
+    function tick(){
+      if(i>=offsets.length){ playing=false; if(done)done(); return; }
+      const off=offsets[i]; const m=base+off;
+      play(m, keyEls[m]);
+      i++; setTimeout(tick, step);
+    }
+    tick();
+  }
+
+  // Sarali Varisai 1 in current raga's scale degrees → semitone offsets
+  function scaleOffsets(){
+    const raga=curRaga();
+    const offs=Object.keys(raga.map).map(Number).sort((a,b)=>a-b);
+    return offs.concat([12]); // add upper Sa
+  }
+  document.getElementById('scaleBtn').addEventListener('click',()=>{
+    const up=scaleOffsets(); const down=up.slice(0,-1).reverse(); down.unshift(12);
+    playSequence(up.concat(down));
+  });
+
+  document.getElementById('saraliBtn').addEventListener('click',()=>{
+    // Sarali Varisai 1: S R G M P D N Ṡ  /  Ṡ N D P M G R S  — using current raga's notes
+    const up=scaleOffsets();            // 8 notes ending at Ṡ(12)
+    const down=up.slice().reverse();    // Ṡ ... S
+    playSequence(up.concat(down.slice(1)));
+  });
+
+  /* ---------- Semitone map grid ---------- */
+  const grid=document.getElementById('semiGrid');
+  SEMI.forEach(s=>{
+    const c=document.createElement('div');
+    c.className='semi-cell '+(s.black?'bk':'wt');
+    c.innerHTML='<div class="pos">'+s.pos+'</div><div class="nm">'+s.sym+'</div>'+
+                (s.alt?'<div class="alt">/ '+s.alt+'</div>':'<div class="alt">&nbsp;</div>');
+    c.title=s.names;
+    c.addEventListener('pointerdown',()=>{
+      pluck(saMidi()+s.pos);
+      c.classList.add('flash'); setTimeout(()=>c.classList.remove('flash'),220);
+      // also flash matching piano key if visible
+      const m=saMidi()+s.pos; if(keyEls[m]) flash(keyEls[m]);
+    });
+    grid.appendChild(c);
+  });
+
+  /* ---------- Wire selectors ---------- */
+  saSel.addEventListener('change',()=>{ buildPiano(); if(droneOn){ startDrone(saMidi()); } });
+  ragaSel.addEventListener('change',refreshLabels);
+
+  buildPiano();
+
+  /* ---------- Active TOC highlight ---------- */
+  const links=[...document.querySelectorAll('nav.toc a')];
+  const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){
+      const id='#'+e.target.id;
+      links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')===id));
+    }});
+  },{rootMargin:'-20% 0px -70% 0px'});
+  secs.forEach(s=>obs.observe(s));
+})();
+</script>
+</body>
+</html>
