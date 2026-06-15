@@ -195,6 +195,10 @@
   footer a{color:var(--accent-ink);text-decoration:none}
 
   @media (max-width:720px){
+    /* mobile: contain wide tables instead of letting them push the page */
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    /* mobile: relax the fixed tempo-bar grid so it stops cramping */
+    .tempo .trow{grid-template-columns:104px 1fr 42px;gap:8px}
     .layout{grid-template-columns:1fr;gap:0;padding:24px 0 60px}
     nav.toc{display:none}
     .wrap{padding:0 18px}
