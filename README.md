@@ -15,7 +15,7 @@ games/
     styles.css
 pages/                "web by vaazee" — static pages sorted by topic
   index.html          Category listing
-  music/ movies/ tv/ books/ chess/ coding/ tech/ piano/ random/
+  music/ movies/ tv/ books/ chess/ coding/ tech/ piano-guitar/ random/
 ```
 
 - The root page links to the **Games** page and to the **Pages** section
