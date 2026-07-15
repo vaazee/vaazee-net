@@ -138,6 +138,14 @@
   .gam-note{color:var(--cool-ink)}
   .gam-note b{color:var(--accent3)}
 
+  /* popular compositions box */
+  .comps{margin:14px 2px 0;padding:12px 16px;background:var(--warm-bg);border:1px solid var(--warm-bd);
+    border-radius:10px;font-size:13.5px;line-height:1.5}
+  .comps .lab{font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--warm-ink);display:block;margin-bottom:5px}
+  .comps ul{margin:0;padding-left:18px}
+  .comps li{margin:3px 0}
+
   /* swarasthana map */
   .semi-grid{display:grid;grid-template-columns:repeat(13,1fr);gap:4px;margin:14px 0;min-width:620px}
   .semi-scroll{overflow-x:auto}
@@ -301,6 +309,10 @@
         </div>
         <p class="hint" id="aroLine"></p>
         <p class="hint gam-note" id="gamNote" hidden></p>
+        <div class="comps" id="compsBox" hidden>
+          <span class="lab">🎵 Popular compositions in this raga</span>
+          <ul id="compsList"></ul>
+        </div>
       </div>
 
       <div class="callout cool">
@@ -716,37 +728,69 @@
 
   /* ---------- Ragas: map semitone offset -> displayed swara symbol ---------- */
   const RAGAS=[
-    {id:'maya', name:'Mayamalavagowla (15th melakarta · the beginner raga)', map:{0:'S',1:'R₁',4:'G₃',5:'M₁',7:'P',8:'D₁',11:'N₃'}},
-    {id:'shankara', name:'Shankarabharanam (29 · = Western major scale)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',11:'N₃'}},
-    {id:'kharahara', name:'Kharaharapriya (22 · = Dorian mode)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',9:'D₂',10:'N₂'}},
-    {id:'kalyani', name:'Kalyani (65 · = Lydian mode)', map:{0:'S',2:'R₂',4:'G₃',6:'M₂',7:'P',9:'D₂',11:'N₃'}},
-    {id:'todi', name:'Hanumatodi (8 · = Phrygian mode)', map:{0:'S',1:'R₁',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'}},
+    {id:'maya', name:'Mayamalavagowla (15th melakarta · the beginner raga)', map:{0:'S',1:'R₁',4:'G₃',5:'M₁',7:'P',8:'D₁',11:'N₃'},
+      gamaka:{1:'R₁ — kampita, swung between S and G₃',8:'D₁ — kampita, swung between P and N₃'},
+      gnote:'Even the beginner raga has gamakas: in full renditions R₁ and D₁ take a gentle <b>kampita</b>, swung from their neighbours. Beginners play the exercises straight first — the oscillation comes later, and that’s the intended order.',
+      comps:['“Tulasi Dala” — Tyagaraja','“Deva Deva Kalayamite” — Swati Tirunal','“Sri Gananatha” (gitam) — Purandara Dasa']},
+    {id:'shankara', name:'Shankarabharanam (29 · = Western major scale)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',11:'N₃'},
+      gamaka:{2:'R₂ — approached by jaru (glide)',4:'G₃ — gentle kampita',11:'N₃ — gentle kampita'},
+      gnote:'Same notes as the Western major scale, yet it never sounds "major" in Carnatic hands: R₂ arrives by glide and G₃ and N₃ carry a gentle <b>kampita</b>. The phrasing, not the scale, is the raga.',
+      comps:['“Swara Raga Sudha” — Tyagaraja','“Akshaya Linga Vibho” — Muthuswami Dikshitar','“Saroja Dala Netri” — Syama Sastri']},
+    {id:'kharahara', name:'Kharaharapriya (22 · = Dorian mode)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',9:'D₂',10:'N₂'},
+      gamaka:{3:'G₂ — kampita (its signature)',10:'N₂ — kampita'},
+      gnote:'Kharaharapriya’s soul is the <b>kampita</b> on G₂ and N₂ — sung as slow, even oscillations that give the raga its meditative depth. Tyagaraja practically owns this raga.',
+      comps:['“Chakkani Raja Margamu” — Tyagaraja','“Rama Nee Samanamevaru” — Tyagaraja','“Pakkala Nilabadi” — Tyagaraja']},
+    {id:'kalyani', name:'Kalyani (65 · = Lydian mode)', map:{0:'S',2:'R₂',4:'G₃',6:'M₂',7:'P',9:'D₂',11:'N₃'},
+      gamaka:{2:'R₂ — nokku approach, often elongated',4:'G₃ — kampita',11:'N₃ — kampita'},
+      gnote:'Kalyani is majestic and expansive: G₃ and N₃ are oscillated, R₂ is leaned into with a <b>nokku</b>, and the raised M₂ is held long and proud. One of the "big three" concert ragas (with Todi and Shankarabharanam).',
+      comps:['“Vanajakshiro” (Ata tala varnam) — Pallavi Gopala Iyer','“Nidhi Chala Sukhama” — Tyagaraja','“Kamalambam Bhajare” — Muthuswami Dikshitar','“Himadri Sute” — Syama Sastri']},
+    {id:'todi', name:'Hanumatodi (8 · = Phrygian mode)', map:{0:'S',1:'R₁',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'},
+      gamaka:{1:'R₁ — shaken, hugging S',3:'G₂ — heavy kampita',8:'D₁ — heavy kampita',10:'N₂ — kampita'},
+      gnote:'Hanumatodi is perhaps the most gamaka-saturated raga in the repertoire — almost no note is struck plain, and G₂ and D₁ in particular live inside their oscillations. On a fixed-pitch keyboard you get its skeleton; the flesh is all gamaka.',
+      comps:['“Era Napai” (Adi tala varnam) — Patnam Subramania Iyer','“Koluvamaregada” — Tyagaraja','“Thaye Yashoda” — Oothukkadu Venkata Kavi']},
     {id:'charukesi', name:'Charukesi (26 · major below Pa, minor above)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',8:'D₁',10:'N₂'},
-      gnote:'Charukesi splits the octave: a bright major lower half (S R₂ G₃ M₁ P) meets a dark minor upper half (D₁ N₂) — that bittersweet turn at Da is its whole mood. A film-composer favourite (Ilaiyaraaja, Rahman); relatively gamaka-light, so it sits well on a keyboard.'},
+      gamaka:{8:'D₁ — leaned on with gentle kampita (the emotional pivot)',10:'N₂ — kampita in descent'},
+      gnote:'Charukesi splits the octave: a bright major lower half (S R₂ G₃ M₁ P) meets a dark minor upper half (D₁ N₂) — that bittersweet turn at Da is its whole mood. A film-composer favourite (Ilaiyaraaja, Rahman); relatively gamaka-light, so it sits well on a keyboard.',
+      comps:['“Adamodi Galade” — Tyagaraja','“Kripaya Palaya Saure” — Swati Tirunal']},
     {id:'simhendra', name:'Simhendramadhyamam (57 · = harmonic minor with prati Ma)', map:{0:'S',2:'R₂',3:'G₂',6:'M₂',7:'P',8:'D₁',11:'N₃'},
-      gnote:'Take the Western harmonic minor and raise the fourth to M₂ and you get Simhendramadhyamam (the "Hungarian minor"). The two augmented-second leaps — G₂→M₂ and D₁→N₃ — give it its brooding intensity. Notes are mostly rendered firm rather than heavily oscillated.'},
+      gamaka:{3:'G₂ — kampita',8:'D₁ — kampita'},
+      gnote:'Take the Western harmonic minor and raise the fourth to M₂ and you get Simhendramadhyamam (the "Hungarian minor"). The two augmented-second leaps — G₂→M₂ and D₁→N₃ — give it its brooding intensity; G₂ and D₁ take a moderate kampita.',
+      comps:['“Ninne Nammiti” — Mysore Vasudevachar','“Needu Charanamule” — Tyagaraja','“Rama Rama Guna Seema” — Swati Tirunal']},
     {id:'kambhoji', name:'Kambhoji (janya of Harikambhoji · 28 · asymmetric, no Ni in ascent)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,2,4,5,7,9,12], avaro:[12,10,9,7,5,4,2,0],
       gamaka:{4:'G₃ — kampita (oscillation)',9:'D₂ — nokku / kampita',10:'N₂ — jaru, in descent phrases'},
-      gnote:'Kambhoji is coloured by a <b>kampita</b> (oscillation) on G₃ and characteristic gamakas on D₂ and N₂ — and a sliding anya N₃ in phrases like D₂ N₃ Ṡ. The keyboard plays them straight.'},
+      gnote:'Kambhoji is coloured by a <b>kampita</b> (oscillation) on G₃ and characteristic gamakas on D₂ and N₂ — and a sliding anya N₃ in phrases like D₂ N₃ Ṡ. The keyboard plays them straight.',
+      comps:['“O Rangasayee” — Tyagaraja','“Sri Subrahmanyaya Namaste” — Muthuswami Dikshitar','“Evari Mata” — Tyagaraja']},
     {id:'darbari', name:'Darbari Kānada (janya of Natabhairavi · 20 · vakra avarohana)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'}, aro:[0,2,3,5,7,8,10,12], avaro:[12,8,10,7,5,7,3,5,2,0],
       gamaka:{3:'G₂ — slow heavy andolana (its signature)',8:'D₁ — andolana'},
-      gnote:'Darbari’s whole identity is the slow, weighty <b>andolana</b> (oscillation) on G₂ and D₁ — without it the raga collapses into plain Natabhairavi. A fixed-pitch piano can only point at it.'},
+      gnote:'Darbari’s whole identity is the slow, weighty <b>andolana</b> (oscillation) on G₂ and D₁ — without it the raga collapses into plain Natabhairavi. A fixed-pitch piano can only point at it.',
+      comps:['“Yochana Kamala Lochana” — Tyagaraja','A Hindustani import — classics like “O Duniya Ke Rakhwale” (Naushad) live in the same raga']},
     {id:'reethigowla', name:'Reethigowla (janya of Kharaharapriya · 22 · vakra, gamaka-pradhana)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,3,2,3,5,10,10,12], avaro:[12,10,9,5,3,5,7,5,3,2,0],
       gamaka:{3:'G₂ — heavy kampita, the ga-ri-ga-ma turn (its signature)',10:'N₂ — elongated / oscillated'},
-      gnote:'Reethigowla shares Kharaharapriya’s seven notes but is a different raga entirely — defined by its <b>vakra</b> (zig-zag) phrasing, Pa &amp; Da dropped in ascent, and a heavy <b>kampita</b> on G₂ (the ga-ri-ga-ma turn). The scale alone will never sound like it. (Ilaiyaraaja’s “Chinna Kannan Azhaikkiran” is the classic film example.)'},
+      gnote:'Reethigowla shares Kharaharapriya’s seven notes but is a different raga entirely — defined by its <b>vakra</b> (zig-zag) phrasing, Pa &amp; Da dropped in ascent, and a heavy <b>kampita</b> on G₂ (the ga-ri-ga-ma turn). The scale alone will never sound like it.',
+      comps:['“Janani Ninnuvina” — Subbaraya Sastri','“Dwaitamu Sukhama” — Tyagaraja','“Chinna Kannan Azhaikkiran” (film) — Ilaiyaraaja']},
     {id:'kadana', name:'Kadanakutuhalam (janya of Shankarabharanam · 29 · vakra ascent)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',11:'N₃'}, aro:[0,2,5,9,11,4,7,12], avaro:[12,11,9,7,5,4,2,0],
-      gnote:'All seven notes of the major scale, but the ascent leaps around — S R₂ M₁ D₂ N₃ G₃ P Ṡ — which is exactly the <b>kutuhalam</b> ("playful surprise") of the name. Brisk, sparkling and played almost straight, it is one of the most keyboard-friendly ragas there is (Patnam Subramania Iyer’s “Raghuvamsa Sudha” is the showpiece).'},
+      gnote:'All seven notes of the major scale, but the ascent leaps around — S R₂ M₁ D₂ N₃ G₃ P Ṡ — which is exactly the <b>kutuhalam</b> ("playful surprise") of the name. Brisk, sparkling and played almost straight, it is one of the most keyboard-friendly ragas there is.',
+      comps:['“Raghuvamsa Sudha” — Patnam Subramania Iyer (the raga’s signature showpiece)']},
     {id:'begada', name:'Begada (janya of Shankarabharanam · 29 · vakra, rakti)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,4,2,4,5,7,9,7,12], avaro:[12,10,9,7,5,4,2,0],
       gamaka:{4:'G₃ — kampita in the opening S G₃ R₂ G₃ turn',5:'M₁ — pulled sharp by jaru (the famous "Begada ma")',10:'N₂ — deflected downward, never plain'},
-      gnote:'Begada is a <b>rakti</b> raga — its identity lives in phrasing and gamaka, not the scale. The ascent curls S G₃ R₂ G₃ M₁ P D₂ P Ṡ, the Ma is pulled slightly sharp (the "Begada ma"), and the descending N₂ is always deflected. Straight keys give you the skeleton only.'},
+      gnote:'Begada is a <b>rakti</b> raga — its identity lives in phrasing and gamaka, not the scale. The ascent curls S G₃ R₂ G₃ M₁ P D₂ P Ṡ, the Ma is pulled slightly sharp (the "Begada ma"), and the descending N₂ is always deflected. Straight keys give you the skeleton only.',
+      comps:['“Vallabha Nayakasya” — Muthuswami Dikshitar','“Nadopasana” — Tyagaraja','“Sankari Neeve” — Subbaraya Sastri']},
     {id:'athana', name:'Athana (janya of Shankarabharanam · 29 · vakra descent, ghana)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',11:'N₃'}, aro:[0,2,5,7,11,12], avaro:[12,11,9,7,5,7,4,2,0],
       gamaka:{4:'G₃ — heavy kampita, approached from M₁',9:'D₂ — oscillated',11:'N₃ — weighty kampita in Ṡ N₃ P phrases'},
-      gnote:'Athana is majestic and martial — Ga and Ni are never struck plain but swung wide from their neighbours, and some phrases borrow anya touches of G₂ and N₂. The zig-zag descent (Ṡ N₃ D₂ P M₁ P G₃ R₂ S) is part of its signature. Tyagaraja’s “Ela Nee Dayaradu” is the classic reference.'},
+      gnote:'Athana is majestic and martial — Ga and Ni are never struck plain but swung wide from their neighbours, and some phrases borrow anya touches of G₂ and N₂. The zig-zag descent (Ṡ N₃ D₂ P M₁ P G₃ R₂ S) is part of its signature.',
+      comps:['“Ela Nee Dayaradu” — Tyagaraja','“Anupama Gunambudhi” — Tyagaraja']},
     {id:'kedaragowla', name:'Kedaragowla (janya of Harikambhoji · 28 · audava–sampoorna)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,2,5,7,10,12], avaro:[12,10,9,7,5,4,2,0],
       gamaka:{10:'N₂ — jaru slides from Ṡ',4:'G₃ — descent-only, softly oscillated'},
-      gnote:'Kedaragowla climbs a spare pentatonic path (S R₂ M₁ P N₂ Ṡ) and descends through all seven notes — G₃ and D₂ appear only on the way down. A flowing <b>rakti</b> raga whose N₂ arrives by slide; keep the ascent airy and the descent smooth.'},
-    {id:'mohanam', name:'Mohanam (pentatonic · no Ma, no Ni)', map:{0:'S',2:'R₂',4:'G₃',7:'P',9:'D₂'}},
-    {id:'hindolam', name:'Hindolam (pentatonic · no Ri, no Pa)', map:{0:'S',3:'G₂',5:'M₁',8:'D₁',10:'N₂'}},
+      gnote:'Kedaragowla climbs a spare pentatonic path (S R₂ M₁ P N₂ Ṡ) and descends through all seven notes — G₃ and D₂ appear only on the way down. A flowing <b>rakti</b> raga whose N₂ arrives by slide; keep the ascent airy and the descent smooth.',
+      comps:['“Saraguna Palimpa” — Poochi Srinivasa Iyengar','“Tulasi Bilva” — Tyagaraja','“Venugana Loluni” — Tyagaraja']},
+    {id:'mohanam', name:'Mohanam (pentatonic · no Ma, no Ni)', map:{0:'S',2:'R₂',4:'G₃',7:'P',9:'D₂'},
+      gamaka:{4:'G₃ — kampita in G₃ R₂ turns',9:'D₂ — nokku / gentle oscillation'},
+      gnote:'Mohanam is bright and open — the major pentatonic — with light gamakas: a <b>kampita</b> on G₃ and a leaned-on D₂. One of the friendliest ragas for a keyboard player.',
+      comps:['“Ninnu Kori” (Adi tala varnam) — Ramnad Srinivasa Iyengar','“Nannu Palimpa” — Tyagaraja','“Mohana Rama” — Tyagaraja']},
+    {id:'hindolam', name:'Hindolam (pentatonic · no Ri, no Pa)', map:{0:'S',3:'G₂',5:'M₁',8:'D₁',10:'N₂'},
+      gamaka:{3:'G₂ — andolana (its signature)',8:'D₁ — andolana',10:'N₂ — jaru slide'},
+      gnote:'Hindolam (Hindustani Malkauns) floats without Ri or Pa; its character comes from the swinging <b>andolana</b> on G₂ and D₁ and the slide into N₂.',
+      comps:['“Samajavaragamana” — Tyagaraja','“Neerajakshi Kamakshi” — Muthuswami Dikshitar','“Ma Ramanan” — Papanasam Sivan']},
     {id:'chromatic', name:'All 12 swarasthanas (chromatic — show everything)', map:(function(){const o={};SEMI.forEach(s=>{o[s.pos]=s.sym+(s.alt?'/'+s.alt:'');});return o;})()}
   ];
 
@@ -830,6 +874,10 @@
     const gn=document.getElementById('gamNote');
     if(raga.gnote){ gn.innerHTML='<b>∿ Gamaka:</b> '+raga.gnote; gn.hidden=false; }
     else { gn.hidden=true; gn.innerHTML=''; }
+    // popular compositions box
+    const cb=document.getElementById('compsBox'), cl=document.getElementById('compsList');
+    if(raga.comps&&raga.comps.length){ cl.innerHTML=raga.comps.map(c=>'<li>'+c+'</li>').join(''); cb.hidden=false; }
+    else { cb.hidden=true; cl.innerHTML=''; }
   }
 
   /* ---------- Arohana / Avarohana helpers (support asymmetric ragas) ---------- */
