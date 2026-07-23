@@ -101,12 +101,25 @@ melakarta selectable as well.
   and it will get the Sarali Varisai player automatically.
 - If the user names only the janya, still add the missing parent — but mention that you did.
 
-## Placement
+## Placement & the dropdown grouping
 
-Insert the new object among like ragas: melakartas are grouped near the top (maya, shankara,
-kharahara, kalyani, todi, charukesi, simhendra, …), janyas next, pentatonics after, and the
-`chromatic` entry stays **last**. Add a comma after the previous entry. A parent melakarta you
-add alongside a janya goes in the melakarta group, not next to its janya.
+The dropdown is **built dynamically**, grouped into `<optgroup>`s by parent melakarta and sorted
+alphabetically within each group (see `buildRagaSelect` in the script). So the raga's **position
+in the `RAGAS` array no longer controls where it shows up** — grouping is derived at build time.
+
+What drives the grouping is the **melakarta number in the `name`**:
+
+- Every entry's group is the first integer found in its `name`. For a melakarta that is its own
+  number (`Shankarabharanam (29 · …)`); for a janya it is the parent number
+  (`Kambhoji (janya of Harikambhoji · 28 · …)`). **The number must be present in the name** —
+  this is load-bearing, so never write a raga name without its melakarta number.
+- An entry is treated as the **melakarta heading** for its group if its `name` does *not* contain
+  the word "janya". Keep melakarta names free of "janya" and janya names containing it.
+- The `chromatic` entry (and anything with no number) falls into a trailing **"Other"** group.
+
+So you don't need to place the object at a particular index. Still, for a readable source file,
+keep melakartas near the top and add a janya among similar ragas; and end each entry with a comma.
+A parent melakarta added alongside a janya just needs the right name — it will group itself.
 
 ## Procedure
 
