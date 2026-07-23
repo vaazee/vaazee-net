@@ -85,22 +85,41 @@ Field rules:
 - **`gnote`** — the prose note. May contain `<b>…</b>`. Match the tone of the existing notes: specific, musical, and honest about what the keyboard can't bend.
 - **`comps`** — 2–4 well-attributed popular compositions, `“Title” — Composer`. Verify the composition is actually in this raga (beware near-namesakes, e.g. Pantuvarali vs Shubhapantuvarali).
 
+## Always include the parent melakarta
+
+If the raga you are adding is a **janya** (derived — including pentatonic/audava ragas like
+Mohanam, Hindolam, Madhyamavati), check whether its **parent melakarta** is already in the
+`RAGAS` array. **If the parent is not present, add it too**, in the same edit, as its own
+sampoorna entry (following the shape above). Every janya on the page should have its janaka
+melakarta selectable as well.
+
+- Identify the parent from the janya's melakarta number (e.g. Kambhoji, Mohanam, Desh and
+  Kedaragowla are all janyas of **Harikambhoji, 28**; Darbari and Hindolam are janyas of
+  **Natabhairavi, 20**).
+- Search the array for that melakarta (by name or number) before assuming it is missing.
+- A parent added this way is a full 7-swara melakarta, so it needs only `map` (no `aro`/`avaro`)
+  and it will get the Sarali Varisai player automatically.
+- If the user names only the janya, still add the missing parent — but mention that you did.
+
 ## Placement
 
 Insert the new object among like ragas: melakartas are grouped near the top (maya, shankara,
 kharahara, kalyani, todi, charukesi, simhendra, …), janyas next, pentatonics after, and the
-`chromatic` entry stays **last**. Add a comma after the previous entry.
+`chromatic` entry stays **last**. Add a comma after the previous entry. A parent melakarta you
+add alongside a janya goes in the melakarta group, not next to its janya.
 
 ## Procedure
 
 1. Research the raga if unsure: its melakarta number (or parent for a janya), exact swaras,
    arohana/avarohana, characteristic gamakas, and 2–4 popular compositions.
 2. Read the `RAGAS` array to see the current entries and pick the insertion point.
-3. Insert one entry following the shape above. Do not touch any other code.
-4. Verify: `node -e` parse-check the `<script>` blocks compile and the new `id` is present
+3. If the raga is a janya, check whether its **parent melakarta** is already in the array; if
+   not, add the parent too (see "Always include the parent melakarta").
+4. Insert the entry (or entries) following the shape above. Do not touch any other code.
+5. Verify: `node -e` parse-check the `<script>` blocks compile and the new `id` is present
    (see the pattern already used in the repo), or open the file in the browser and select the
    raga from the dropdown.
-5. Only commit/push if the user asks.
+6. Only commit/push if the user asks.
 
 ## Verify script still parses
 
