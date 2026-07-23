@@ -24,6 +24,25 @@ key-lighting, arohana/avarohana, the gamaka ∿ markings, the note, and the comp
 **no other edits are needed.** The dropdown is populated by `RAGAS.forEach(...)` and the
 scale is derived by `autoScale()` when no explicit `aro`/`avaro` is supplied.
 
+## Sarali Varisai feature (automatic)
+
+The page also has a **Sarali Varisai** player (a selector + Play button) that runs the seven
+graded beginner exercises *in the currently selected raga*, plus a readout line showing the
+exact swara sequence. This is driven off the raga's `map` — you do **not** write any
+Sarali data per raga. Two things to know when adding a raga:
+
+- **Sampoorna ragas** (whose `map` contains all seven swaras — one each of S, R, G, M, P, D, N)
+  get the Sarali Varisai player automatically. `isSampoorna()` derives this by reading the
+  first letter of each `map` value, so the swaras just need to be present in `map` (a vakra
+  `aro`/`avaro` does not matter).
+- **Ragas missing a swara** — pentatonic (audava) ragas like Mohanam, Hindolam, Madhyamavati,
+  or any raga whose `map` lacks one of the seven letters — automatically **disable** the Sarali
+  controls (greyed out, with an explanatory tooltip/readout). This is expected behaviour, not a
+  bug: the exercises reference all seven swaras and are undefined otherwise. No action needed.
+
+So no extra work is required, but if you're adding a pentatonic or otherwise gapped scale, don't
+be surprised that its Sarali controls are disabled.
+
 ## The 12 swarasthanas → semitone offsets
 
 The `map` uses semitone offset from Sa (0–11) as the key and the displayed swara symbol as the
