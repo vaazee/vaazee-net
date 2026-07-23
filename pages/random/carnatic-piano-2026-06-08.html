@@ -107,16 +107,21 @@
   .piano{position:relative;display:flex;height:200px;min-width:560px;user-select:none}
   .wkey{position:relative;flex:1 1 0;min-width:0;background:linear-gradient(180deg,#fff 0%,#f3efe8 100%);
     border:1px solid var(--line-strong);border-radius:0 0 7px 7px;
-    margin-right:-1px;cursor:pointer;transition:background .08s;display:flex;flex-direction:column;
+    margin-right:-1px;cursor:pointer;transition:background .08s,transform .07s ease,box-shadow .12s ease;display:flex;flex-direction:column;
     justify-content:flex-end;align-items:center;padding-bottom:10px}
   .wkey:hover{background:linear-gradient(180deg,#fff,#ffe9d4)}
-  .wkey.down,.wkey.lit{background:linear-gradient(180deg,#ffe2c2,#ffcf9e)}
+  .wkey.lit{background:linear-gradient(180deg,#ffe2c2,#ffcf9e)}
+  .wkey.down{background:linear-gradient(180deg,#ffb877,#ff9330);transform:translateY(3px) scaleY(.985);transform-origin:top center;
+    box-shadow:0 0 16px 3px rgba(255,150,60,.85),inset 0 -4px 7px rgba(160,80,15,.4);z-index:3}
   .bkey{position:absolute;top:0;height:60%;background:linear-gradient(180deg,#3a322b,#15110d);
     border-radius:0 0 6px 6px;cursor:pointer;z-index:3;transform:translateX(-50%);
+    transition:background .08s,transform .07s ease,box-shadow .12s ease;
     display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-bottom:8px;
     box-shadow:0 3px 6px rgba(0,0,0,.4)}
   .bkey:hover{background:linear-gradient(180deg,#5a4a3a,#241a12)}
-  .bkey.down,.bkey.lit{background:linear-gradient(180deg,#d68a45,#9a5b2e)}
+  .bkey.lit{background:linear-gradient(180deg,#d68a45,#9a5b2e)}
+  .bkey.down{background:linear-gradient(180deg,#ffb15c,#c76e26);transform:translateX(-50%) translateY(3px);transform-origin:top center;
+    box-shadow:0 0 16px 3px rgba(255,150,60,.9);z-index:5}
   .keylab{font-size:10.5px;font-weight:700;color:#9a8f80;pointer-events:none;line-height:1.1;text-align:center}
   .wkey .swlab{font-size:13px;font-weight:800;color:var(--accent-ink);pointer-events:none;min-height:15px}
   .bkey .keylab{color:#cbb89e}
@@ -288,14 +293,19 @@
             </select>
           </div>
           <div class="ctrl">
+            <label for="saraliSel">Sarali Varisai</label>
+            <select id="saraliSel"></select>
+          </div>
+          <div class="ctrl">
             <label>&nbsp;</label>
-            <button class="btn primary" id="saraliBtn">▶ Play Sarali Varisai 1</button>
+            <button class="btn primary" id="saraliBtn">▶ Play Sarali Varisai</button>
           </div>
           <div class="ctrl">
             <label>&nbsp;</label>
             <button class="btn" id="scaleBtn">▶ Play scale (Aro/Avaro)</button>
           </div>
         </div>
+        <p class="hint" id="saraliLine"></p>
 
         <div class="piano-scroll">
           <div class="piano" id="piano"></div>
@@ -882,6 +892,14 @@
     // aro/avaro hint line (honors asymmetric ragas via raga.aro / raga.avaro)
     const aroSeq=aroOf(raga), avaroSeq=avaroOf(raga);
     document.getElementById('aroLine').innerHTML='<strong>Arohana:</strong> '+aroSeq.map(o=>symOf(raga,o)).join(' ')+' &nbsp;·&nbsp; <strong>Avarohana:</strong> '+avaroSeq.map(o=>symOf(raga,o)).join(' ');
+    // Sarali Varisai controls: only sampoorna ragas have all seven swaras
+    const sSel=document.getElementById('saraliSel'), sBtn=document.getElementById('saraliBtn');
+    if(sSel&&sBtn){
+      const ok=isSampoorna(raga);
+      sSel.disabled=!ok; sBtn.disabled=!ok;
+      sBtn.title = ok ? '' : 'Sarali Varisai needs all seven swaras — pick a sampoorna raga such as Mayamalavagowla';
+    }
+    updateSaraliLine();
     // gamaka note line
     const gn=document.getElementById('gamNote');
     if(raga.gnote){ gn.innerHTML='<b>∿ Gamaka:</b> '+raga.gnote; gn.hidden=false; }
@@ -898,8 +916,53 @@
   function avaroOf(raga){ return raga.avaro || aroOf(raga).slice().reverse(); }
   function symOf(raga, off){ return off%12===0 ? (off===0?'S':'Ṡ') : (raga.map[off]||raga.map[off%12]||''); }
 
-  function flash(el){ if(!el)return; el.classList.add('down'); setTimeout(()=>el.classList.remove('down'),160); }
-  function play(m,el){ pluck(m); flash(el||keyEls[m]); }
+  /* ---------- Sarali Varisai (the seven graded beginner exercises) ---------- */
+  // Adi tala, in the currently selected raga. Tokens: S R G M P D N = the raga's seven
+  // swaras; U = upper Sa (Ṡ); '-' = a held/long note (rest). Each exercise is the ascending
+  // line then the descending line. Note sequences from the standard curriculum (Mayamalavagowla).
+  const SARALI=[
+    {n:'1 — Basic (Sa..Sa up & down)', p:'S R G M P D N U  U N D P M G R S'},
+    {n:'2 — Ri & Ni turns',            p:'S R S R S R G M  S R G M P D N U  U N U N U N D P  U N D P M G R S'},
+    {n:'3 — Ga & Dha turns',           p:'S R G S R G S R  S R G M P D N U  U N D U N D U N  U N D P M G R S'},
+    {n:'4 — Ma & Pa turns',            p:'S R G M S R G M  S R G M P D N U  U N D P U N D P  U N D P M G R S'},
+    {n:'5 — held Pa / held Ma',        p:'S R G M P - S R  S R G M P D N U  U N D P M - U N  U N D P M G R S'},
+    {n:'6 — Ga & Dha landing',         p:'S R G M P D S R  S R G M P D N U  U N D P M G U N  U N D P M G R S'},
+    {n:'7 — held Ni / held Ri',        p:'S R G M P D N -  S R G M P D N U  U N D P M G R -  U N D P M G R S'},
+  ];
+  const SARALI_SWARAS=['S','R','G','M','P','D','N'];
+  // Build a solfege-letter -> semitone-offset lookup from the raga's own swaras.
+  function swaraOffsets(raga){
+    const out={};
+    Object.keys(raga.map).forEach(k=>{ const off=+k; const letter=raga.map[off][0]; if(!(letter in out)) out[letter]=off; });
+    out['U']=12; // upper Sa
+    return out;
+  }
+  // Sarali Varisai needs all seven swaras, so it only applies to sampoorna ragas.
+  function isSampoorna(raga){ const o=swaraOffsets(raga); return SARALI_SWARAS.every(x=>x in o); }
+  // Turn a pattern string into playable semitone offsets (null = held/rest).
+  function saraliOffsets(raga, patternStr){
+    const map=swaraOffsets(raga);
+    return patternStr.split(/\s+/).filter(Boolean).map(tok=> tok==='-' ? null : map[tok]);
+  }
+  // Render the selected varisai as the raga's actual swara symbols, ascending · descending.
+  function updateSaraliLine(){
+    const el=document.getElementById('saraliLine'); if(!el) return;
+    const raga=curRaga(), sel=document.getElementById('saraliSel');
+    if(!isSampoorna(raga)){
+      el.innerHTML='<b>Sarali Varisai:</b> unavailable in '+raga.name.split(' (')[0]+' — needs all seven swaras (pick a sampoorna raga such as Mayamalavagowla).';
+      return;
+    }
+    const v=SARALI[sel? +sel.value : 0], off=swaraOffsets(raga);
+    const toks=v.p.split(/\s+/).filter(Boolean);
+    const syms=toks.map(t=> t==='-' ? '–' : symOf(raga, off[t]));
+    const mid=syms.length/2; // split ascending | descending line
+    const asc=syms.slice(0,mid).join(' '), desc=syms.slice(mid).join(' ');
+    el.innerHTML='<b>Sarali Varisai '+v.n+'</b> · in '+raga.name.split(' (')[0]+':&nbsp; '+asc+' &nbsp;·&nbsp; '+desc;
+  }
+
+  function flash(el,dur){ if(!el)return; if(el._flashT)clearTimeout(el._flashT); el.classList.add('down');
+    el._flashT=setTimeout(()=>{el.classList.remove('down'); el._flashT=null;}, dur||160); }
+  function play(m,el,dur){ pluck(m); flash(el||keyEls[m],dur); }
 
   /* ---------- Drone button ---------- */
   let droneOn=false;
@@ -919,8 +982,9 @@
     let i=0;
     function tick(){
       if(i>=offsets.length){ playing=false; if(done)done(); return; }
-      const off=offsets[i]; const m=base+off;
-      play(m, keyEls[m]);
+      const off=offsets[i];
+      // keep the key visibly pressed for most of the beat, lifting just before the next note
+      if(off!==null && off!==undefined){ const m=base+off; play(m, keyEls[m], Math.max(90, step*0.8)); }
       i++; setTimeout(tick, step);
     }
     tick();
@@ -932,9 +996,15 @@
     playSequence(aroAvaroRun(curRaga()));
   });
 
+  // Populate the Sarali Varisai selector
+  const saraliSel=document.getElementById('saraliSel'), saraliBtn=document.getElementById('saraliBtn');
+  SARALI.forEach((v,i)=>{ const o=document.createElement('option'); o.value=i; o.textContent=v.n; saraliSel.appendChild(o); });
+  saraliSel.addEventListener('change', updateSaraliLine);
+
   document.getElementById('saraliBtn').addEventListener('click',()=>{
-    // Sarali Varisai 1: up the arohana, down the avarohana — using the current raga's notes
-    playSequence(aroAvaroRun(curRaga()));
+    const raga=curRaga();
+    if(!isSampoorna(raga)) return; // guarded — controls are disabled for non-sampoorna ragas
+    playSequence(saraliOffsets(raga, SARALI[+saraliSel.value].p));
   });
 
   /* ---------- Semitone map grid ---------- */
