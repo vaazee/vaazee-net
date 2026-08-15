@@ -132,7 +132,11 @@ A parent melakarta added alongside a janya just needs the right name — it will
 5. Verify: `node -e` parse-check the `<script>` blocks compile and the new `id` is present
    (see the pattern already used in the repo), or open the file in the browser and select the
    raga from the dropdown.
-6. Only commit/push if the user asks.
+6. Once the parse-check passes, **always commit and push** — no need to ask. Commit directly to
+   `main` (that is this repo's convention for raga additions; do not open a branch or PR), staging
+   only the page file, with the message `Add <Raga> raga to Carnatic piano page`. If a parent
+   melakarta was added in the same edit, name both: `Add <Janya> and <Parent> ragas to Carnatic
+   piano page`. Then `git push`. Do not commit if the parse-check failed — fix it first.
 
 ## Verify script still parses
 
