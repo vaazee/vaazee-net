@@ -96,6 +96,16 @@
     background:var(--panel);color:var(--ink);padding:9px 13px;cursor:pointer}
   select:hover,.btn:hover{border-color:var(--accent)}
   .btn{font-weight:600;display:inline-flex;align-items:center;gap:7px}
+  .filter{font-family:inherit;font-size:13.5px;border-radius:9px;border:1px solid var(--line-strong);
+    background:var(--panel);color:var(--ink);padding:8px 12px;width:100%;box-sizing:border-box}
+  .filter:hover{border-color:var(--accent)}
+  .filter:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,150,60,.22)}
+  .filter::placeholder{color:var(--ink-faint)}
+  .filter-count{font-size:11px;color:var(--ink-faint);min-height:14px}
+  /* fixed width: the raga list is re-built as you filter, and an auto-sized
+     select would reflow the whole control row on every keystroke */
+  #ragaSel{width:420px;max-width:100%}
+  .filter-count.none{color:var(--accent-ink);font-weight:700}
   .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
   .btn.primary:hover{filter:brightness(1.07)}
   .btn.on{background:var(--accent);color:#fff;border-color:var(--accent)}
@@ -277,8 +287,11 @@
             <select id="saSel"></select>
           </div>
           <div class="ctrl">
-            <label for="ragaSel">Raga / scale</label>
-            <select id="ragaSel"></select>
+            <label for="ragaFilter">Raga / scale</label>
+            <input id="ragaFilter" class="filter" type="search" placeholder="Filter… e.g. kalyani, 22, janya"
+                   autocomplete="off" spellcheck="false" aria-label="Filter the raga list">
+            <select id="ragaSel" aria-label="Raga / scale"></select>
+            <span class="filter-count" id="ragaCount"></span>
           </div>
           <div class="ctrl">
             <label>Drone (Sa–Pa–Sa)</label>
@@ -894,27 +907,54 @@
     const o=document.createElement('option'); o.value=m; o.textContent=midiName(m); if(m===60)o.selected=true; saSel.appendChild(o);
   }
   const ragaSel=document.getElementById('ragaSel');
+  const ragaFilter=document.getElementById('ragaFilter');
+  const ragaCount=document.getElementById('ragaCount');
   /* Group the dropdown by parent melakarta (the number in each raga's name),
      alphabetical within each group. Melakarta entries have no "janya" in the name. */
-  (function buildRagaSelect(){
-    const shortName=r=>r.name.split(' (')[0];
-    const melaNum=r=>{ const m=r.name.match(/\d+/); return m?+m[0]:null; };
-    const isMela=r=>!/janya/i.test(r.name) && r.id!=='chromatic';
-    // melakarta number -> group label ("22 · Kharaharapriya")
-    const melaLabel={};
-    RAGAS.forEach(r=>{ if(isMela(r)){ const n=melaNum(r); if(n!=null) melaLabel[n]=n+' · '+shortName(r); } });
+  const shortName=r=>r.name.split(' (')[0];
+  const melaNum=r=>{ const m=r.name.match(/\d+/); return m?+m[0]:null; };
+  const isMela=r=>!/janya/i.test(r.name) && r.id!=='chromatic';
+  // melakarta number -> group label ("22 · Kharaharapriya")
+  const melaLabel={};
+  RAGAS.forEach(r=>{ if(isMela(r)){ const n=melaNum(r); if(n!=null) melaLabel[n]=n+' · '+shortName(r); } });
+  const groupLabel=r=>{ const n=melaNum(r);
+    return (r.id==='chromatic'||n==null) ? 'Other' : (melaLabel[n]||(n+' · (melakarta not listed)')); };
+
+  /* Rebuild the dropdown, keeping only ragas that match every word of the filter box
+     (matched against the raga's full name, its id and its melakarta group label).
+     The current selection always survives the filter, so typing never changes what
+     the piano is showing — it only narrows what you can pick next. */
+  function buildRagaSelect(q){
+    const terms=(q||'').toLowerCase().split(/\s+/).filter(Boolean);
+    const selected=ragaSel.value||'maya';
+    const hit=r=>{ const hay=(r.name+' '+r.id+' '+groupLabel(r)).toLowerCase();
+                   return terms.every(t=>hay.includes(t)); };
+    const matches=RAGAS.filter(hit);
+    const shown=terms.length ? RAGAS.filter(r=>hit(r)||r.id===selected) : RAGAS.slice();
     // bucket ragas by melakarta; chromatic / numberless go to "Other"
     const groups={}, others=[];
-    RAGAS.forEach(r=>{ const n=melaNum(r); if(r.id==='chromatic'||n==null){ others.push(r); } else { (groups[n]=groups[n]||[]).push(r); } });
-    const addOpt=(parent,r)=>{ const o=document.createElement('option'); o.value=r.id; o.textContent=r.name; parent.appendChild(o); };
+    shown.forEach(r=>{ const n=melaNum(r); if(r.id==='chromatic'||n==null){ others.push(r); } else { (groups[n]=groups[n]||[]).push(r); } });
+    const addOpt=(parent,r)=>{ const o=document.createElement('option'); o.value=r.id; o.textContent=r.name;
+      if(hit(r)) o.dataset.match='1'; parent.appendChild(o); };
+    ragaSel.innerHTML='';
     Object.keys(groups).map(Number).sort((a,b)=>a-b).forEach(n=>{
       const og=document.createElement('optgroup'); og.label=melaLabel[n]||(n+' · (melakarta not listed)');
       groups[n].sort((a,b)=>shortName(a).localeCompare(shortName(b))).forEach(r=>addOpt(og,r));
       ragaSel.appendChild(og);
     });
     if(others.length){ const og=document.createElement('optgroup'); og.label='Other'; others.forEach(r=>addOpt(og,r)); ragaSel.appendChild(og); }
-    ragaSel.value='maya'; // keep Mayamalavagowla as the default selection
-  })();
+    ragaSel.value=selected; // selection is preserved across every filter change
+    // the count line always occupies its row, so the controls never jump as you type
+    if(!terms.length){ ragaCount.textContent=' '; ragaCount.classList.remove('none'); }
+    else{
+      ragaCount.classList.toggle('none',matches.length===0);
+      ragaCount.textContent = matches.length
+        ? matches.length+' of '+RAGAS.length+' ragas'
+        : 'No match — showing current only';
+    }
+  }
+  buildRagaSelect('');
+  ragaSel.value='maya'; // keep Mayamalavagowla as the default selection
 
   function saMidi(){ return parseInt(saSel.value,10); }
   function curRaga(){ return RAGAS.find(r=>r.id===ragaSel.value)||RAGAS[0]; }
@@ -1119,6 +1159,15 @@
   /* ---------- Wire selectors ---------- */
   saSel.addEventListener('change',()=>{ buildPiano(); if(droneOn){ startDrone(saMidi()); } });
   ragaSel.addEventListener('change',refreshLabels);
+  ragaFilter.addEventListener('input',()=>buildRagaSelect(ragaFilter.value));
+  ragaFilter.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){ e.preventDefault(); ragaFilter.value=''; buildRagaSelect(''); }
+    else if(e.key==='Enter'){ // jump straight to the first raga that matched
+      e.preventDefault();
+      const first=ragaSel.querySelector('option[data-match]');
+      if(first && first.value!==ragaSel.value){ ragaSel.value=first.value; refreshLabels(); }
+    }
+  });
 
   buildPiano();
 
