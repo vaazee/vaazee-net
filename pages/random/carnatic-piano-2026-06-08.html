@@ -153,6 +153,14 @@
   .gam-note{color:var(--cool-ink)}
   .gam-note b{color:var(--accent3)}
 
+  /* tradition badge: which of the two Indian classical systems the raga belongs to */
+  .trad-badge{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.09em;
+    text-transform:uppercase;padding:2px 8px;border-radius:999px;border:1px solid;vertical-align:1px}
+  .trad-badge.carnatic{background:var(--warm-bg);border-color:var(--warm-bd);color:var(--warm-ink)}
+  .trad-badge.hindustani{background:var(--cool-bg);border-color:var(--cool-bd);color:var(--cool-ink)}
+  .trad-note{color:var(--ink-soft)}
+  .trad-note b{color:var(--accent-ink)}
+
   /* popular compositions box */
   .comps{margin:14px 2px 0;padding:12px 16px;background:var(--warm-bg);border:1px solid var(--warm-bd);
     border-radius:10px;font-size:13.5px;line-height:1.5}
@@ -328,9 +336,13 @@
           <span><i style="background:#ffcf9e"></i>Note in selected raga</span>
           <span><i style="background:#15110d"></i>Black key / komal-tivra position</span>
           <span class="gam-key"><span class="gam-glyph">∿</span> gamaka swara (oscillated)</span>
-          <span id="ragaName" style="margin-left:auto;font-weight:700;color:var(--accent-ink)"></span>
+          <span style="margin-left:auto;display:inline-flex;align-items:center;gap:8px">
+            <span id="ragaName" style="font-weight:700;color:var(--accent-ink)"></span>
+            <span id="ragaTrad" class="trad-badge" hidden></span>
+          </span>
         </div>
         <p class="hint" id="aroLine"></p>
+        <p class="hint trad-note" id="tradNote" hidden></p>
         <p class="hint gam-note" id="gamNote" hidden></p>
         <div class="comps" id="compsBox" hidden>
           <span class="lab">🎵 Popular compositions in this raga</span>
@@ -751,166 +763,166 @@
 
   /* ---------- Ragas: map semitone offset -> displayed swara symbol ---------- */
   const RAGAS=[
-    {id:'maya', name:'Mayamalavagowla (15th melakarta · the beginner raga)', map:{0:'S',1:'R₁',4:'G₃',5:'M₁',7:'P',8:'D₁',11:'N₃'},
+    {id:'maya', name:'Mayamalavagowla (15th melakarta · the beginner raga)', trad:'Carnatic', tradnote:'Carnatic. Hindustani counterpart: <b>Bhairav</b> (the Bhairav thāt).', map:{0:'S',1:'R₁',4:'G₃',5:'M₁',7:'P',8:'D₁',11:'N₃'},
       gamaka:{1:'R₁ — kampita, swung between S and G₃',8:'D₁ — kampita, swung between P and N₃'},
       gnote:'Even the beginner raga has gamakas: in full renditions R₁ and D₁ take a gentle <b>kampita</b>, swung from their neighbours. Beginners play the exercises straight first — the oscillation comes later, and that’s the intended order.',
       comps:['“Tulasi Dala” — Tyagaraja','“Deva Deva Kalayamite” — Swati Tirunal','“Sri Gananatha” (gitam) — Purandara Dasa']},
-    {id:'shankara', name:'Shankarabharanam (29 · = Western major scale)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',11:'N₃'},
+    {id:'shankara', name:'Shankarabharanam (29 · = Western major scale)', trad:'Carnatic', tradnote:'Carnatic. Hindustani counterpart: <b>Bilaval</b> (the Bilaval thāt).', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',11:'N₃'},
       gamaka:{2:'R₂ — approached by jaru (glide)',4:'G₃ — gentle kampita',11:'N₃ — gentle kampita'},
       gnote:'Same notes as the Western major scale, yet it never sounds "major" in Carnatic hands: R₂ arrives by glide and G₃ and N₃ carry a gentle <b>kampita</b>. The phrasing, not the scale, is the raga.',
       comps:['“Swara Raga Sudha” — Tyagaraja','“Akshaya Linga Vibho” — Muthuswami Dikshitar','“Saroja Dala Netri” — Syama Sastri']},
-    {id:'kharahara', name:'Kharaharapriya (22 · = Dorian mode)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',9:'D₂',10:'N₂'},
+    {id:'kharahara', name:'Kharaharapriya (22 · = Dorian mode)', trad:'Carnatic', tradnote:'Carnatic. Hindustani counterpart: <b>Kafi</b> (the Kafi thāt).', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',9:'D₂',10:'N₂'},
       gamaka:{3:'G₂ — kampita (its signature)',10:'N₂ — kampita'},
       gnote:'Kharaharapriya’s soul is the <b>kampita</b> on G₂ and N₂ — sung as slow, even oscillations that give the raga its meditative depth. Tyagaraja practically owns this raga.',
       comps:['“Chakkani Raja Margamu” — Tyagaraja','“Rama Nee Samanamevaru” — Tyagaraja','“Pakkala Nilabadi” — Tyagaraja']},
-    {id:'hemavathi', name:'Hemavathi (58 · prati-Ma Kharaharapriya · Desisimharavam)', map:{0:'S',2:'R₂',3:'G₂',6:'M₂',7:'P',9:'D₂',10:'N₂'},
+    {id:'hemavathi', name:'Hemavathi (58 · prati-Ma Kharaharapriya · Desisimharavam)', trad:'Carnatic', tradnote:'Carnatic. Hindustani kin: <b>Hemant</b>; <b>Madhuvanti</b> draws on the same swaras.', map:{0:'S',2:'R₂',3:'G₂',6:'M₂',7:'P',9:'D₂',10:'N₂'},
       gamaka:{3:'G₂ — kampita, carrying the raga’s emotional weight',9:'D₂ — leaned on with a gentle oscillation',10:'N₂ — kampita in descent'},
       gnote:'Hemavathi is the 58th melakarta — Kharaharapriya with the fourth raised to prati madhyamam (M₂). That single change is the whole raga: the flat G₂ pulling down against the sharp M₂ gives it a restless, plaintive colour the Dorian parent never has, and the M₂ is held long rather than oscillated. In the West the same scale is Dorian with a raised fourth (the “Ukrainian Dorian” or Romanian minor); the Dikshitar school calls the raga <b>Desisimharavam</b>. G₂ and N₂ carry the usual slow kampita, so the keyboard gives you an unusually faithful frame here — but not those two oscillations.',
       comps:['“Nee Sari Saati” — Tyagaraja','“Sri Kanthimatim” — Muthuswami Dikshitar','“Paripalanai” — Papanasam Sivan']},
-    {id:'kalyani', name:'Kalyani (65 · = Lydian mode)', map:{0:'S',2:'R₂',4:'G₃',6:'M₂',7:'P',9:'D₂',11:'N₃'},
+    {id:'kalyani', name:'Kalyani (65 · = Lydian mode)', trad:'Carnatic', tradnote:'Carnatic. Hindustani counterpart: <b>Yaman</b> (the Kalyan thāt).', map:{0:'S',2:'R₂',4:'G₃',6:'M₂',7:'P',9:'D₂',11:'N₃'},
       gamaka:{2:'R₂ — nokku approach, often elongated',4:'G₃ — kampita',11:'N₃ — kampita'},
       gnote:'Kalyani is majestic and expansive: G₃ and N₃ are oscillated, R₂ is leaned into with a <b>nokku</b>, and the raised M₂ is held long and proud. One of the "big three" concert ragas (with Todi and Shankarabharanam).',
       comps:['“Vanajakshiro” (Ata tala varnam) — Pallavi Gopala Iyer','“Nidhi Chala Sukhama” — Tyagaraja','“Kamalambam Bhajare” — Muthuswami Dikshitar','“Himadri Sute” — Syama Sastri']},
-    {id:'todi', name:'Hanumatodi (8 · = Phrygian mode)', map:{0:'S',1:'R₁',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'},
+    {id:'todi', name:'Hanumatodi (8 · = Phrygian mode)', trad:'Carnatic', tradnote:'Carnatic. Hindustani counterpart: <b>Bhairavi</b> — note that Hindustani <i>Todi</i> is an entirely different raga.', map:{0:'S',1:'R₁',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'},
       gamaka:{1:'R₁ — shaken, hugging S',3:'G₂ — heavy kampita',8:'D₁ — heavy kampita',10:'N₂ — kampita'},
       gnote:'Hanumatodi is perhaps the most gamaka-saturated raga in the repertoire — almost no note is struck plain, and G₂ and D₁ in particular live inside their oscillations. On a fixed-pitch keyboard you get its skeleton; the flesh is all gamaka.',
       comps:['“Era Napai” (Adi tala varnam) — Patnam Subramania Iyer','“Koluvamaregada” — Tyagaraja','“Thaye Yashoda” — Oothukkadu Venkata Kavi']},
-    {id:'charukesi', name:'Charukesi (26 · major below Pa, minor above)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',8:'D₁',10:'N₂'},
+    {id:'charukesi', name:'Charukesi (26 · major below Pa, minor above)', trad:'Carnatic', tradnote:'Carnatic in origin (Muthiah Bhagavatar, 20th c.) and since borrowed into Hindustani under the same name, <b>Charukeshi</b>.', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',8:'D₁',10:'N₂'},
       gamaka:{8:'D₁ — leaned on with gentle kampita (the emotional pivot)',10:'N₂ — kampita in descent'},
       gnote:'Charukesi splits the octave: a bright major lower half (S R₂ G₃ M₁ P) meets a dark minor upper half (D₁ N₂) — that bittersweet turn at Da is its whole mood. A film-composer favourite (Ilaiyaraaja, Rahman); relatively gamaka-light, so it sits well on a keyboard.',
       comps:['“Adamodi Galade” — Tyagaraja','“Kripaya Palaya Saure” — Swati Tirunal']},
-    {id:'simhendra', name:'Simhendramadhyamam (57 · = harmonic minor with prati Ma)', map:{0:'S',2:'R₂',3:'G₂',6:'M₂',7:'P',8:'D₁',11:'N₃'},
+    {id:'simhendra', name:'Simhendramadhyamam (57 · = harmonic minor with prati Ma)', trad:'Carnatic', tradnote:'Carnatic. Occasionally borrowed by Hindustani musicians as <b>Simhendra Madhyam</b>, but it has no thāt of its own there.', map:{0:'S',2:'R₂',3:'G₂',6:'M₂',7:'P',8:'D₁',11:'N₃'},
       gamaka:{3:'G₂ — kampita',8:'D₁ — kampita'},
       gnote:'Take the Western harmonic minor and raise the fourth to M₂ and you get Simhendramadhyamam (the "Hungarian minor"). The two augmented-second leaps — G₂→M₂ and D₁→N₃ — give it its brooding intensity; G₂ and D₁ take a moderate kampita.',
       comps:['“Ninne Nammiti” — Mysore Vasudevachar','“Needu Charanamule” — Tyagaraja','“Rama Rama Guna Seema” — Swati Tirunal']},
-    {id:'keeravani', name:'Keeravani (21 · = Western harmonic minor)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',11:'N₃'},
+    {id:'keeravani', name:'Keeravani (21 · = Western harmonic minor)', trad:'Carnatic', tradnote:'Carnatic in origin and widely borrowed into Hindustani as <b>Kirwani</b>.', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',11:'N₃'},
       gamaka:{3:'G₂ — kampita, swung down from M₁',8:'D₁ — kampita; the leap across it to N₃ is the raga’s signature',11:'N₃ — a keen leading tone, reached by nokku from D₁'},
       gnote:'Keeravani is the 21st melakarta and note-for-note the Western <b>harmonic minor</b> scale. Its character sits in the augmented second between D₁ and N₃ — a wide, yearning step that pulls hard into the upper Sa — with G₂ and D₁ carrying moderate kampita. It is the shuddha-madhyamam twin of Simhendramadhyamam (57), already on this page: raise M₁ to M₂ and you land on that raga. Comparatively gamaka-light for a minor melakarta, so it sits unusually well under fixed-pitch keys, which is part of why film composers and Hindustani musicians (who know it as <b>Kirwani</b>) reach for it so often.',
       comps:['“Kaligiyunte” — Tyagaraja','“Devi Neeye Thunai” — Papanasam Sivan','“Bala Sarasa Murali” — Oothukkadu Venkata Kavi']},
-    {id:'pantuvarali', name:'Pantuvarali (51 · Kasiramakriya · prati-Ma Mayamalavagowla)', map:{0:'S',1:'R₁',4:'G₃',6:'M₂',7:'P',8:'D₁',11:'N₃'},
+    {id:'pantuvarali', name:'Pantuvarali (51 · Kasiramakriya · prati-Ma Mayamalavagowla)', trad:'Carnatic', tradnote:'Carnatic. Hindustani counterpart: <b>Puriya Dhanashri</b>.', map:{0:'S',1:'R₁',4:'G₃',6:'M₂',7:'P',8:'D₁',11:'N₃'},
       gamaka:{1:'R₁ — kampita, hugging S',4:'G₃ — kampita, approached from M₂',8:'D₁ — heavy kampita (its emotional pivot)',11:'N₃ — kampita in Ṡ N₃ D₁ phrases'},
       gnote:'Pantuvarali is Mayamalavagowla with the fourth raised to prati-madhyamam (M₂) — the 51st melakarta, Kasiramakriya. Its two augmented-second leaps (R₁→G₃ and D₁→N₃) and the sharp M₂ give it a plaintive, intensely devotional colour, long tied to Shiva and to evening pathos. Ga, Da and Ni all live inside their oscillations; a fixed-pitch keyboard gives you the frame, the gamaka gives you the raga.',
       comps:['“Raghuvara Nannu Marava” — Tyagaraja','“Ramanatham Bhajeham” — Muthuswami Dikshitar','“Siva Siva Siva Enarada” — Tyagaraja']},
-    {id:'harikambhoji', name:'Harikambhoji (28 · = Mixolydian mode · janaka of Kambhoji, Mohanam, Desh…)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂'},
+    {id:'harikambhoji', name:'Harikambhoji (28 · = Mixolydian mode · janaka of Kambhoji, Mohanam, Desh…)', trad:'Carnatic', tradnote:'Carnatic. Hindustani counterpart: the <b>Khamaj</b> thāt.', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂'},
       gamaka:{4:'G₃ — kampita',9:'D₂ — nokku / gentle oscillation',10:'N₂ — kampita, often jaru into Ṡ'},
       gnote:'Harikambhoji is the 28th melakarta — the major scale with a lowered seventh (N₂), i.e. the Western Mixolydian mode. It is a major janaka raga with one of the largest janya families (Kambhoji, Mohanam, Desh, Kedaragowla, Yadukulakambhoji, Surati…). Its own colour comes from a <b>kampita</b> on G₃ and N₂ and a leaned-on D₂.',
       comps:['“Rama Nannu Brovara” — Tyagaraja','“Dinamani Vamsa” — Tyagaraja','“Enadhu Manam Kavalai” — Papanasam Sivan']},
-    {id:'natabhairavi', name:'Natabhairavi (20 · = natural minor / Aeolian mode · janaka of Hindolam, Darbari)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'},
+    {id:'natabhairavi', name:'Natabhairavi (20 · = natural minor / Aeolian mode · janaka of Hindolam, Darbari)', trad:'Carnatic', tradnote:'Carnatic. Hindustani counterpart: the <b>Asavari</b> thāt (natural minor).', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'},
       gamaka:{3:'G₂ — kampita',8:'D₁ — kampita',10:'N₂ — kampita'},
       gnote:'Natabhairavi is the 20th melakarta and the exact Western natural minor (Aeolian) scale. It is heard more often through its janyas — Bhairavi, Hindolam, Darbari Kānada, Anandabhairavi — than on its own; the flat G₂, D₁ and N₂ each carry a gentle <b>kampita</b> that colours its minor mood.',
       comps:['“Sri Valli Devasena Pate” — Papanasam Sivan','“Parulaseva” — Poochi Srinivasa Iyengar','“Nalina Nayani” — M. Balamuralikrishna']},
-    {id:'suryakantam', name:'Suryakantam (17 · Mayamalavagowla with chatushruti Dha · janaka of Vasanta)', map:{0:'S',1:'R₁',4:'G₃',5:'M₁',7:'P',9:'D₂',11:'N₃'},
+    {id:'suryakantam', name:'Suryakantam (17 · Mayamalavagowla with chatushruti Dha · janaka of Vasanta)', trad:'Carnatic', tradnote:'Carnatic. A melakarta with no established Hindustani counterpart.', map:{0:'S',1:'R₁',4:'G₃',5:'M₁',7:'P',9:'D₂',11:'N₃'},
       gamaka:{1:'R₁ — kampita, hugging S',4:'G₃ — kampita',11:'N₃ — kampita'},
       gnote:'Suryakantam is the 17th melakarta — Mayamalavagowla with the dhaivatam raised to chatushruti (D₂). A bright, sunlit scale (Surya = sun); heard most through its janyas Vasanta, Sowrashtram and Bhairavam. R₁ hugs Sa and G₃, N₃ carry a gentle kampita.',
       comps:['“Muddumomu” — Tyagaraja','“Chayavatim” — Muthuswami Dikshitar','“Sri Sambasivaiah” — Muthiah Bhagavatar']},
-    {id:'kalavati', name:'Dravida Kalavati (31 · = Yagapriya · Dikshitar’s Kalavati)', map:{0:'S',3:'R₃',4:'G₃',5:'M₁',7:'P',8:'D₁',9:'N₁'},
+    {id:'kalavati', name:'Dravida Kalavati (31 · = Yagapriya · Dikshitar’s Kalavati)', trad:'Carnatic', tradnote:'Carnatic. Unrelated to the Hindustani raga <b>Kalavati</b>, which is a pentatonic Khamaj-family raga.', map:{0:'S',3:'R₃',4:'G₃',5:'M₁',7:'P',8:'D₁',9:'N₁'},
       gamaka:{3:'R₃ — leaned on after the wide leap from S',9:'N₁ — gentle kampita'},
       gnote:'Dravida Kalavati is Muthuswami Dikshitar’s name for the 31st melakarta (Yagapriya in the modern scheme) — S R₃ G₃ M₁ P D₁ N₁. Its colour comes from the close-set R₃–G₃ and D₁–N₁ pairs sitting either side of wide leaps from Sa and Pa. A rare raga preserved chiefly through Dikshitar’s signature kriti.',
       comps:['“Kalavati Kamalasana Yuvati” — Muthuswami Dikshitar (the raga’s signature kriti)']},
-    {id:'asaveri', name:'Asaveri (janya of Hanumatodi · 8 · audava–vakra–sampoorna, bhashanga)', map:{0:'S',1:'R₁',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'}, aro:[0,1,5,7,8,12], avaro:[12,10,12,7,8,5,7,2,3,1,0],
+    {id:'asaveri', name:'Asaveri (janya of Hanumatodi · 8 · audava–vakra–sampoorna, bhashanga)', trad:'Carnatic', tradnote:'Carnatic, despite the shared name — Hindustani <b>Asavari</b> corresponds instead to Natabhairavi.', map:{0:'S',1:'R₁',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'}, aro:[0,1,5,7,8,12], avaro:[12,10,12,7,8,5,7,2,3,1,0],
       gamaka:{1:'R₁ — heavy kampita, the raga’s plaintive centre',3:'G₂ — kampita, descent-only, reached through the R₂ turn',8:'D₁ — andolana, leaned on in the P D₁ M₁ turn'},
       gnote:'Asaveri climbs a spare five-note path (S R₁ M₁ P D₁ Ṡ) and comes down a long zig-zag that circles Ṡ N₂ Ṡ, turns around P D₁ M₁ P, and lands through R₂ G₂ R₁ S. That R₂ is an <b>anya swara</b> — foreign to parent Hanumatodi — which is what makes it <b>bhashanga</b>, and the keyboard shows it as a second Ri key lit next to R₁. An ancient raga (it appears in the Sangita Ratnakara), close kin to Hindustani Komal Asavari; the Todi-family kampita on R₁ and D₁ is the part straight keys cannot give you.',
       comps:['“Rara Mayintidaka” — Tyagaraja','“Chandram Bhaja Manasa” — Muthuswami Dikshitar','“Thamasinchuka” (Ata tala varnam) — Patnam Subramania Iyer','“Ramachandrulu Napai” — Bhadrachala Ramadasu']},
-    {id:'sindhubhairavi', name:'Sindhu Bhairavi (janya of Hanumatodi · 8 · bhashanga, both rishabhams · Hindustani Bhairavi kin)', map:{0:'S',1:'R₁',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'}, aro:[0,2,3,5,7,8,10,12], avaro:[12,10,8,7,5,3,1,0],
+    {id:'sindhubhairavi', name:'Sindhu Bhairavi (janya of Hanumatodi · 8 · bhashanga, both rishabhams · Hindustani Bhairavi kin)', trad:'Hindustani', tradnote:'Hindustani in origin — a naturalised form of Hindustani <b>Bhairavi</b>, now a staple Carnatic tukkada raga.', map:{0:'S',1:'R₁',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'}, aro:[0,2,3,5,7,8,10,12], avaro:[12,10,8,7,5,3,1,0],
       gamaka:{1:'R₁ — descent only, hugging S with a plaintive kampita',3:'G₂ — samvadi; heavy kampita, the raga’s emotional centre',8:'D₁ — vadi; leaned on with a slow, weighted kampita',10:'N₂ — kampita, sliding up into Ṡ'},
       gnote:'Sindhu Bhairavi is the Carnatic cousin of Hindustani Bhairavi, and its base notes are Hanumatodi’s. What separates it is the <b>split rishabham</b>: chatushruti R₂ climbing, shuddha R₁ falling — and since R₂ is foreign to parent Todi, that alone makes it <b>bhashanga</b>, shown here as two Ri keys lit side by side. In practice it goes much further: performers admit <b>all twelve swaras</b>, touching prati Ma, chatushruti Da and kakali Ni in the elaboration, so the eight keys lit below are the frame rather than the fence. Da is <b>vadi</b> and Ga <b>samvadi</b>, both sung inside slow kampitas that straight keys cannot bend. Steeped in viraham and karunam — the raga of longing and compassion — it carries a folk and bhajan warmth that has made it the standard closing tukkada of a Carnatic concert.',
       comps:['“Venkatachala Nilayam” — Purandara Dasa','“Visweswar Darshan Kar” — Swati Tirunal','“Kalyana Gopalam” — Narayana Teertha']},
-    {id:'kambhoji', name:'Kambhoji (janya of Harikambhoji · 28 · asymmetric, no Ni in ascent)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,2,4,5,7,9,12], avaro:[12,10,9,7,5,4,2,0],
+    {id:'kambhoji', name:'Kambhoji (janya of Harikambhoji · 28 · asymmetric, no Ni in ascent)', trad:'Carnatic', tradnote:'Carnatic. Hindustani kin: <b>Khamaj</b>.', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,2,4,5,7,9,12], avaro:[12,10,9,7,5,4,2,0],
       gamaka:{4:'G₃ — kampita (oscillation)',9:'D₂ — nokku / kampita',10:'N₂ — jaru, in descent phrases'},
       gnote:'Kambhoji is coloured by a <b>kampita</b> (oscillation) on G₃ and characteristic gamakas on D₂ and N₂ — and a sliding anya N₃ in phrases like D₂ N₃ Ṡ. The keyboard plays them straight.',
       comps:['“O Rangasayee” — Tyagaraja','“Sri Subrahmanyaya Namaste” — Muthuswami Dikshitar','“Evari Mata” — Tyagaraja']},
-    {id:'darbari', name:'Darbari Kānada (janya of Natabhairavi · 20 · vakra avarohana)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'}, aro:[0,2,3,5,7,8,10,12], avaro:[12,8,10,7,5,7,3,5,2,0],
+    {id:'darbari', name:'Darbari Kānada (janya of Natabhairavi · 20 · vakra avarohana)', trad:'Hindustani', tradnote:'Hindustani in origin — <b>Darbari Kānada</b>, attributed to Tansen — and long since adopted into Carnatic practice.', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',10:'N₂'}, aro:[0,2,3,5,7,8,10,12], avaro:[12,8,10,7,5,7,3,5,2,0],
       gamaka:{3:'G₂ — slow heavy andolana (its signature)',8:'D₁ — andolana'},
       gnote:'Darbari’s whole identity is the slow, weighty <b>andolana</b> (oscillation) on G₂ and D₁ — without it the raga collapses into plain Natabhairavi. A fixed-pitch piano can only point at it.',
       comps:['“Yochana Kamala Lochana” — Tyagaraja','A Hindustani import — classics like “O Duniya Ke Rakhwale” (Naushad) live in the same raga']},
-    {id:'reethigowla', name:'Reethigowla (janya of Kharaharapriya · 22 · vakra, gamaka-pradhana)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,3,2,3,5,10,10,12], avaro:[12,10,9,5,3,5,7,5,3,2,0],
+    {id:'reethigowla', name:'Reethigowla (janya of Kharaharapriya · 22 · vakra, gamaka-pradhana)', trad:'Carnatic', tradnote:'Carnatic. No Hindustani counterpart; its identity lives entirely in its gamaka-laden phrases.', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,3,2,3,5,10,10,12], avaro:[12,10,9,5,3,5,7,5,3,2,0],
       gamaka:{3:'G₂ — heavy kampita, the ga-ri-ga-ma turn (its signature)',10:'N₂ — elongated / oscillated'},
       gnote:'Reethigowla shares Kharaharapriya’s seven notes but is a different raga entirely — defined by its <b>vakra</b> (zig-zag) phrasing, Pa &amp; Da dropped in ascent, and a heavy <b>kampita</b> on G₂ (the ga-ri-ga-ma turn). The scale alone will never sound like it.',
       comps:['“Janani Ninnuvina” — Subbaraya Sastri','“Dwaitamu Sukhama” — Tyagaraja','“Chinna Kannan Azhaikkiran” (film) — Ilaiyaraaja']},
-    {id:'kadana', name:'Kadanakutuhalam (janya of Shankarabharanam · 29 · vakra ascent)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',11:'N₃'}, aro:[0,2,5,9,11,4,7,12], avaro:[12,11,9,7,5,4,2,0],
+    {id:'kadana', name:'Kadanakutuhalam (janya of Shankarabharanam · 29 · vakra ascent)', trad:'Carnatic', tradnote:'Carnatic, and recent — devised by Patnam Subramania Iyer in the late 19th century.', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',11:'N₃'}, aro:[0,2,5,9,11,4,7,12], avaro:[12,11,9,7,5,4,2,0],
       gnote:'All seven notes of the major scale, but the ascent leaps around — S R₂ M₁ D₂ N₃ G₃ P Ṡ — which is exactly the <b>kutuhalam</b> ("playful surprise") of the name. Brisk, sparkling and played almost straight, it is one of the most keyboard-friendly ragas there is.',
       comps:['“Raghuvamsa Sudha” — Patnam Subramania Iyer (the raga’s signature showpiece)']},
-    {id:'begada', name:'Begada (janya of Shankarabharanam · 29 · vakra, rakti)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,4,2,4,5,7,9,7,12], avaro:[12,10,9,7,5,4,2,0],
+    {id:'begada', name:'Begada (janya of Shankarabharanam · 29 · vakra, rakti)', trad:'Carnatic', tradnote:'Carnatic. A rakti raga with no Hindustani counterpart.', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,4,2,4,5,7,9,7,12], avaro:[12,10,9,7,5,4,2,0],
       gamaka:{4:'G₃ — kampita in the opening S G₃ R₂ G₃ turn',5:'M₁ — pulled sharp by jaru (the famous "Begada ma")',10:'N₂ — deflected downward, never plain'},
       gnote:'Begada is a <b>rakti</b> raga — its identity lives in phrasing and gamaka, not the scale. The ascent curls S G₃ R₂ G₃ M₁ P D₂ P Ṡ, the Ma is pulled slightly sharp (the "Begada ma"), and the descending N₂ is always deflected. Straight keys give you the skeleton only.',
       comps:['“Vallabha Nayakasya” — Muthuswami Dikshitar','“Nadopasana” — Tyagaraja','“Sankari Neeve” — Subbaraya Sastri']},
-    {id:'athana', name:'Athana (janya of Shankarabharanam · 29 · vakra descent, ghana)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',11:'N₃'}, aro:[0,2,5,7,11,12], avaro:[12,11,9,7,5,7,4,2,0],
+    {id:'athana', name:'Athana (janya of Shankarabharanam · 29 · vakra descent, ghana)', trad:'Carnatic', tradnote:'Carnatic. Distantly kin to the Hindustani <b>Adana</b> of the Kanada family, but a distinct raga.', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',11:'N₃'}, aro:[0,2,5,7,11,12], avaro:[12,11,9,7,5,7,4,2,0],
       gamaka:{4:'G₃ — heavy kampita, approached from M₁',9:'D₂ — oscillated',11:'N₃ — weighty kampita in Ṡ N₃ P phrases'},
       gnote:'Athana is majestic and martial — Ga and Ni are never struck plain but swung wide from their neighbours, and some phrases borrow anya touches of G₂ and N₂. The zig-zag descent (Ṡ N₃ D₂ P M₁ P G₃ R₂ S) is part of its signature.',
       comps:['“Ela Nee Dayaradu” — Tyagaraja','“Anupama Gunambudhi” — Tyagaraja']},
-    {id:'behag', name:'Behag (janya of Shankarabharanam · 29 · bhashanga, both madhyamams · Hindustani import)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',6:'M₂',7:'P',9:'D₂',11:'N₃'}, aro:[0,4,5,7,11,9,11,12], avaro:[12,11,9,7,6,4,5,4,2,0],
+    {id:'behag', name:'Behag (janya of Shankarabharanam · 29 · bhashanga, both madhyamams · Hindustani import)', trad:'Hindustani', tradnote:'Hindustani in origin — the Carnatic adaptation of <b>Bihag</b>, now fully at home in Carnatic concerts.', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',6:'M₂',7:'P',9:'D₂',11:'N₃'}, aro:[0,4,5,7,11,9,11,12], avaro:[12,11,9,7,6,4,5,4,2,0],
       gamaka:{6:'M₂ — anya prati madhyamam, reached by jaru in the descent (its signature)',4:'G₃ — kampita, curling through the M₁ G₃ R₂ S landing turn',11:'N₃ — leaned on and elongated, the ascent’s resting note'},
       gnote:'Behag came south from the Hindustani Bihag and kept its two madhyamams: plain M₁ climbing (S G₃ M₁ P N₃ D₂ N₃ Ṡ), and a sliding <b>anya</b> M₂ on the way down (Ṡ N₃ D₂ P M₂ G₃ M₁ G₃ R₂ S) — that foreign prati Ma is what makes it <b>bhashanga</b>, and the keyboard shows it as a second Ma key lit beside M₁. Ri and Ga are skipped in ascent, and the descent’s M₁ G₃ R₂ S turn is the phrase everyone recognises. Serene, romantic and late-evening in mood; the Trinity left it alone, so it lives mostly in later kritis, thillanas and light music.',
       comps:['“Idhu Dhano Thillai Sthalam” — Gopalakrishna Bharathi','“Aadum Chidambaramo” — Gopalakrishna Bharathi','Thillana in Behag — Lalgudi Jayaraman (the raga’s best-known showpiece)','“Narayana Te Namo Namo” — Annamacharya']},
-    {id:'bihag', name:'Bihag (Hindustani original of Behag · janya of Shankarabharanam · 29 · Bilaval thāt · audava–sampoorna)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',6:'M₂',7:'P',9:'D₂',11:'N₃'}, aro:[0,4,5,7,11,12], avaro:[12,11,9,7,6,7,4,5,4,2,0],
+    {id:'bihag', name:'Bihag (Hindustani original of Behag · janya of Shankarabharanam · 29 · Bilaval thāt · audava–sampoorna)', trad:'Hindustani', tradnote:'Hindustani — <b>Bihag</b> of the Bilaval thāt, the parent of the Carnatic Behag.', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',6:'M₂',7:'P',9:'D₂',11:'N₃'}, aro:[0,4,5,7,11,12], avaro:[12,11,9,7,6,7,4,5,4,2,0],
       gamaka:{4:'G₃ — vadi; arrived at by a long meend from the Ni below Sa, and the note the raga keeps resting on',6:'M₂ — teevra Ma, admitted only inside the P M₂ P G₃ turn and never approached from below',11:'N₃ — samvadi; phrases launch from the Ni under Sa up into Ga'},
       gnote:'The north-Indian parent of Carnatic Behag, from <b>Bilaval thāt</b> (the same seven notes as Shankarabharanam). It lights up exactly the same keys as Behag — the two ragas are separated entirely by phrasing, which is the honest lesson of putting them side by side. Bihag climbs straight (S G₃ M₁ P N₃ Ṡ, Ri and Dha omitted) where Behag’s ascent turns back on itself at the top; the ascent properly begins on the <b>N̦ below Sa</b>, which the keyboard range here can’t show. Ga is <b>vadi</b> and Ni <b>samvadi</b>, and teevra Ma (M₂) is far more restricted than in Behag — it appears only in the phrase <b>P M₂ P G₃ M₁ G₃</b>, always leaning on Pa. Where Carnatic Behag oscillates, Bihag glides: long <b>meend</b> between Ni–Ga and Pa–Ga carry the raga, and no fixed-pitch key can bend through them. A late-night raga, joyful and romantic.',
       comps:['“Pyari Pyari Akhiyan Radhe Ki” — traditional drut khayal in Teentaal','“Dekho Sakhi Kanhaiya Roke” — bandish ki thumri, Gwalior gharana','“Tere Sur Aur Mere Geet” (Goonj Uthi Shehnai, 1959) — Vasant Desai — the raga’s best-known film setting']},
-    {id:'kedaram', name:'Kedaram (janya of Shankarabharanam · 29 · vakra audava–shadava, no Dha)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',11:'N₃'}, aro:[0,5,4,5,7,11,12], avaro:[12,11,7,5,4,2,0],
+    {id:'kedaram', name:'Kedaram (janya of Shankarabharanam · 29 · vakra audava–shadava, no Dha)', trad:'Carnatic', tradnote:'Carnatic. Distinct from Hindustani <b>Kedar</b>, which shares the name but not the shape.', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',11:'N₃'}, aro:[0,5,4,5,7,11,12], avaro:[12,11,7,5,4,2,0],
       gamaka:{4:'G₃ — kampita, only ever reached from M₁ (the S M₁ G₃ M₁ turn)',5:'M₁ — jiva svara, held long and pivoted around',11:'N₃ — nyasa, leaned on and oscillated in P N₃ Ṡ'},
       gnote:'Kedaram drops Dhaivatam entirely and admits Ri only in descent, climbing the <b>vakra</b> path S M₁ G₃ M₁ P N₃ Ṡ and falling straight Ṡ N₃ P M₁ G₃ R₂ S. That doubled Ma at the start is the raga — Ga is never struck on its own but swung out of M₁ and back, and Ma itself is the jiva svara everything settles on. Regal, commanding and full of <b>veera rasa</b>, it is a morning raga. Not to be confused with Kedaragowla (a Harikambhoji janya, also on this page) or the Hindustani Kedar. Straight keys give you the notes; the M₁–G₃–M₁ curl and the oscillated N₃ are what a fixed-pitch keyboard cannot bend into.',
       comps:['“Ananda Natana Prakasam” — Muthuswami Dikshitar (the raga’s signature kriti)','“Rama Nee Pai Tanaku” — Tyagaraja','“Valachi Vachi” (navaragamalika varnam, opening section) — Patnam Subramania Iyer']},
-    {id:'kedaragowla', name:'Kedaragowla (janya of Harikambhoji · 28 · audava–sampoorna)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,2,5,7,10,12], avaro:[12,10,9,7,5,4,2,0],
+    {id:'kedaragowla', name:'Kedaragowla (janya of Harikambhoji · 28 · audava–sampoorna)', trad:'Carnatic', tradnote:'Carnatic. No Hindustani counterpart.', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,2,5,7,10,12], avaro:[12,10,9,7,5,4,2,0],
       gamaka:{10:'N₂ — jaru slides from Ṡ',4:'G₃ — descent-only, softly oscillated'},
       gnote:'Kedaragowla climbs a spare pentatonic path (S R₂ M₁ P N₂ Ṡ) and descends through all seven notes — G₃ and D₂ appear only on the way down. A flowing <b>rakti</b> raga whose N₂ arrives by slide; keep the ascent airy and the descent smooth.',
       comps:['“Saraguna Palimpa” — Poochi Srinivasa Iyengar','“Tulasi Bilva” — Tyagaraja','“Venugana Loluni” — Tyagaraja']},
-    {id:'narayanagoula', name:'Narayanagoula (janya of Harikambhoji · 28 · vakra both ways, rakti)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,2,5,7,10,9,10,12], avaro:[12,10,9,7,5,4,2,4,2,0],
+    {id:'narayanagoula', name:'Narayanagoula (janya of Harikambhoji · 28 · vakra both ways, rakti)', trad:'Carnatic', tradnote:'Carnatic. An old rakti raga with no Hindustani counterpart.', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,2,5,7,10,9,10,12], avaro:[12,10,9,7,5,4,2,4,2,0],
       gamaka:{2:'R₂ — jiva svara, leaned on and oscillated in the M G R G R S turn',4:'G₃ — kampita, always curling back to R₂',10:'N₂ — nyasa svara, elongated in P N₂ Ṡ and the N₂ D₂ N₂ turn'},
       gnote:'Narayanagoula is an old <b>rakti</b> raga built from Kedaragowla’s notes but bent differently: the ascent turns back on itself (S R₂ M₁ P N₂ D₂ N₂ Ṡ) and the descent lands through the signature <b>M₁ G₃ R₂ G₃ R₂ S</b>. Ri is its jiva svara and Ni its nyasa; the whole raga lives in those two zig-zag turns, so straight keys will sound like Kedaragowla unless you phrase it.',
       comps:['“Sri Ramam Ravikulabdhi Somam” — Muthuswami Dikshitar','“Kadalevadu” — Tyagaraja','“Innallu Daya Rakunna” — Tyagaraja','“Maguva Ninne” (Ata tala varnam) — Veenai Kuppayyar']},
-    {id:'desh', name:'Desh (janya of Harikambhoji · 28 · both Ni-s · Hindustani import)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂',11:'N₃'}, aro:[0,2,5,7,11,12], avaro:[12,10,9,7,5,4,2,0],
+    {id:'desh', name:'Desh (janya of Harikambhoji · 28 · both Ni-s · Hindustani import)', trad:'Hindustani', tradnote:'Hindustani in origin — <b>Des</b> of the Khamaj thāt — adopted into Carnatic, where it is a favourite tukkada raga.', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',10:'N₂',11:'N₃'}, aro:[0,2,5,7,11,12], avaro:[12,10,9,7,5,4,2,0],
       gamaka:{10:'N₂ — jaru slide in the Ṡ N₂ D₂ P descent',4:'G₃ — descent-only, gentle kampita',2:'R₂ — long, leaned-on resting note'},
       gnote:'Desh came south from Hindustani music and kept its two nishadams: bright N₃ climbing (S R₂ M₁ P N₃ Ṡ), softer N₂ sliding down (Ṡ N₂ D₂ P). R₂ is the resting note the melody keeps returning to. Lyrical and romantic-patriotic in mood — a light-music and thillana favourite.',
       comps:['“Thunbam Nergayil” (Bharathidasan) — the classic Tamil song in Desh','“Vande Mataram” — the well-known All India Radio rendition','Thillana in Desh — Lalgudi Jayaraman']},
-    {id:'kuntalavarali', name:'Kuntalavarali (janya of Harikambhoji · 28 · audava, vakra ascent, no Ri no Ga)', map:{0:'S',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,5,7,9,10,9,12], avaro:[12,10,9,7,5,0],
+    {id:'kuntalavarali', name:'Kuntalavarali (janya of Harikambhoji · 28 · audava, vakra ascent, no Ri no Ga)', trad:'Carnatic', tradnote:'Carnatic. No Hindustani counterpart.', map:{0:'S',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,5,7,9,10,9,12], avaro:[12,10,9,7,5,0],
       gamaka:{9:'D₂ — the vakra pivot (N₂ dips back to D₂ before Ṡ)',10:'N₂ — gentle kampita'},
       gnote:'Kuntalavarali skips Ri and Ga entirely, climbing S M₁ P D₂ N₂ D₂ Ṡ — the little <b>vakra</b> zig-zag at N₂ D₂ before the top Sa is its signature — and descending straight Ṡ N₂ D₂ P M₁ S. Bright, breezy and rakti in mood, it is a favourite for thillanas and lighter concert pieces.',
       comps:['“Bhogeendra Sayinam” — Swati Tirunal (the raga’s signature kriti)','Thillana in Kuntalavarali — the raga is a favourite for lively concert-closers']},
-    {id:'anandabhairavi', name:'Anandabhairavi (janya of Natabhairavi · 20 · vakra, bhashanga)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,3,2,3,5,7,9,7,12], avaro:[12,10,9,7,5,3,2,0],
+    {id:'anandabhairavi', name:'Anandabhairavi (janya of Natabhairavi · 20 · vakra, bhashanga)', trad:'Carnatic', tradnote:'Carnatic. No Hindustani counterpart, despite the Bhairavi in its name.', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,3,2,3,5,7,9,7,12], avaro:[12,10,9,7,5,3,2,0],
       gamaka:{3:'G₂ — heavy kampita (the ga-ri-ga turn)',9:'D₂ — anya chatushruti Dha, leaned on',10:'N₂ — kampita'},
       gnote:'Anandabhairavi is a sweet, compassionate <b>bhashanga</b> janya of Natabhairavi — it borrows chatushruti dhaivatam (D₂) and touches of antara Ga and kakali Ni as foreign (anya) swaras. Its ascent is vakra (S G₂ R₂ G₂ M₁ P D₂ P Ṡ, Ga before Ri); the mood is maternal and auspicious, a Syama Sastri favourite. The keyboard gives the frame; the anya swaras and heavy G₂ kampita are the raga.',
       comps:['“Marivere Gati” — Syama Sastri','“O Jagadamba” — Syama Sastri','“Paluke Bangaramayena” — Bhadrachala Ramadasu']},
-    {id:'bageshri', name:'Bageshri (janya of Kharaharapriya · 22 · vakra · Hindustani import)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,3,5,9,10,12], avaro:[12,10,9,5,7,3,5,2,0],
+    {id:'bageshri', name:'Bageshri (janya of Kharaharapriya · 22 · vakra · Hindustani import)', trad:'Hindustani', tradnote:'Hindustani in origin — <b>Bageshree</b> of the Kafi thāt — borrowed into Carnatic.', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',9:'D₂',10:'N₂'}, aro:[0,3,5,9,10,12], avaro:[12,10,9,5,7,3,5,2,0],
       gamaka:{3:'G₂ — kampita',9:'D₂ — leaned on, gentle oscillation',10:'N₂ — soft kampita'},
       gnote:'Bageshri came south from Hindustani music (Kafi thāt = Kharaharapriya). It skips Ri and Pa in ascent (S G₂ M₁ D₂ N₂ Ṡ) and winds back through a vakra descent that dips to Pa and repeats Ma (Ṡ N₂ D₂ M₁ P G₂ M₁ R₂ S). A romantic, late-night raga, used in Carnatic mostly for lighter pieces, thillanas and ragamalikas.',
       comps:['Thillana in Bageshri — Madurai Krishnan','Bageshri is also a favourite raga slot in ragamalikas and light music']},
-    {id:'huseni', name:'Huseni (janya of Kharaharapriya · 22 · vakra, bhashanga)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',9:'D₂',10:'N₂'}, aro:[0,2,3,5,7,10,9,10,12], avaro:[12,10,8,7,5,3,2,0],
+    {id:'huseni', name:'Huseni (janya of Kharaharapriya · 22 · vakra, bhashanga)', trad:'Carnatic', tradnote:'Carnatic. The name echoes the Persian <i>Husseini</i>, but the raga is a Kharaharapriya-family rakti raga.', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',9:'D₂',10:'N₂'}, aro:[0,2,3,5,7,10,9,10,12], avaro:[12,10,8,7,5,3,2,0],
       gamaka:{10:'N₂ — the vakra pivot (P N₂ D₂ N₂ Ṡ)',3:'G₂ — kampita',8:'D₁ — anya shuddha Dha, in descent'},
       gnote:'Huseni is a tender <b>rakti</b> raga — a bhashanga janya of Kharaharapriya whose signature is the vakra climb P N₂ D₂ N₂ Ṡ and a descent that leans on shuddha dhaivatam (D₁, its anya swara) before returning through Ga and Ri. Warm and plaintive; the oscillated N₂ and the D₁ colour are its soul.',
       comps:['“Raghuvira Ranadhira” — Tyagaraja','“Rama Ninne Namminanu” — Tyagaraja']},
-    {id:'mukhari', name:'Mukhari (janya of Kharaharapriya · 22 · vakra, bhashanga, ghana)', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',9:'D₂',10:'N₂'}, aro:[0,2,5,7,10,9,12], avaro:[12,10,8,7,5,3,2,0],
+    {id:'mukhari', name:'Mukhari (janya of Kharaharapriya · 22 · vakra, bhashanga, ghana)', trad:'Carnatic', tradnote:'Carnatic. An ancient ghana raga with no Hindustani counterpart.', map:{0:'S',2:'R₂',3:'G₂',5:'M₁',7:'P',8:'D₁',9:'D₂',10:'N₂'}, aro:[0,2,5,7,10,9,12], avaro:[12,10,8,7,5,3,2,0],
       gamaka:{3:'G₂ — heavy kampita in descent',8:'D₁ — anya shuddha Dha (its signature)',10:'N₂ — kampita'},
       gnote:'Mukhari is the raga of grief and deep pathos — a <b>bhashanga</b> janya of Kharaharapriya. Its ascent skips Ga and is vakra (S R₂ M₁ P N₂ D₂ Ṡ); the full descent leans heavily on shuddha dhaivatam (D₁), the foreign swara that gives Mukhari its keening, sorrowful colour. A ghana-rakti raga sung slow and weighty.',
       comps:['“Entani Ne Varnintune” — Tyagaraja','“Sivakama Sundari” — Papanasam Sivan','“Ksheenamai” — Tyagaraja']},
-    {id:'vasanta', name:'Vasanta (janya of Suryakantam · 17 · audava–shadava, no Pa)', map:{0:'S',1:'R₁',4:'G₃',5:'M₁',9:'D₂',11:'N₃'}, aro:[0,4,5,9,11,12], avaro:[12,11,9,5,4,1,0],
+    {id:'vasanta', name:'Vasanta (janya of Suryakantam · 17 · audava–shadava, no Pa)', trad:'Carnatic', tradnote:'Carnatic. Distinct from Hindustani <b>Basant</b>, which shares the name and the season but not the scale.', map:{0:'S',1:'R₁',4:'G₃',5:'M₁',9:'D₂',11:'N₃'}, aro:[0,4,5,9,11,12], avaro:[12,11,9,5,4,1,0],
       gamaka:{4:'G₃ — kampita',11:'N₃ — kampita',1:'R₁ — descent only, hugging S'},
       gnote:'Vasanta (“spring”) drops Panchamam altogether and uses Ri only in descent — climbing S G₃ M₁ D₂ N₃ Ṡ and falling Ṡ N₃ D₂ M₁ G₃ R₁ S. The absent Pa and the wide G₃–D₂ leap give it a bright, blossoming, slightly wistful character; G₃ and N₃ carry gentle kampita.',
       comps:['“Seethamma Mayamma” — Tyagaraja','“Ramachandram Bhavayami” — Muthuswami Dikshitar']},
-    {id:'paras', name:'Paras (janya of Mayamalavagowla · 15 · shadava–sampoorna, no Ri in ascent)', map:{0:'S',1:'R₁',4:'G₃',5:'M₁',7:'P',8:'D₁',11:'N₃'}, aro:[0,4,5,7,8,11,12], avaro:[12,11,8,7,5,4,1,0],
+    {id:'paras', name:'Paras (janya of Mayamalavagowla · 15 · shadava–sampoorna, no Ri in ascent)', trad:'Carnatic', tradnote:'Carnatic. Distinct from Hindustani <b>Paraj</b>.', map:{0:'S',1:'R₁',4:'G₃',5:'M₁',7:'P',8:'D₁',11:'N₃'}, aro:[0,4,5,7,8,11,12], avaro:[12,11,8,7,5,4,1,0],
       gamaka:{4:'G₃ — kampita; in ascent it is reached straight from S, never through Ri',8:'D₁ — heavy kampita, the raga’s emotional pivot',11:'N₃ — kampita, leaned on in the Ṡ N₃ D₁ P turn',1:'R₁ — descent only, hugging S with a plaintive shake'},
       gnote:'Paras (also spelt <b>Paraju</b>) is Mayamalavagowla with the rishabham dropped from the ascent — it climbs S G₃ M₁ P D₁ N₃ Ṡ and comes down the full parent scale, so R₁ is heard only on the way down. That one omission changes everything: the opening leap straight from Sa to Ga sets the raga’s wide, declamatory character, and the descending R₁ arrives as a plaintive afterthought. It is a <b>gamaka-pradhana</b> raga — Ga, Da and Ni are never struck plain but swung out of their neighbours — so straight keys give you an unusually thin version of it. Sung in shringara and bhakti, at any hour, and usually placed in the latter half of a concert; over a hundred kritis exist in it, though only a handful are heard regularly.',
       comps:['“Nilayatakshi Ninne” — Syama Sastri','“Chintaye Mahalinga Murtim” — Muthuswami Dikshitar','“Vande Sada Padmanabham” — Swati Tirunal','“Pannaga Shayana” — Swati Tirunal','“Smara Sundaranguni” (javali) — Dharmapuri Subbarayar']},
-    {id:'mohanam', name:'Mohanam (janya of Harikambhoji · 28 · pentatonic, no Ma no Ni)', map:{0:'S',2:'R₂',4:'G₃',7:'P',9:'D₂'},
+    {id:'mohanam', name:'Mohanam (janya of Harikambhoji · 28 · pentatonic, no Ma no Ni)', trad:'Carnatic', tradnote:'Carnatic. Hindustani counterpart: <b>Bhoopali</b> (Bhoop).', map:{0:'S',2:'R₂',4:'G₃',7:'P',9:'D₂'},
       gamaka:{4:'G₃ — kampita in G₃ R₂ turns',9:'D₂ — nokku / gentle oscillation'},
       gnote:'Mohanam is bright and open — the major pentatonic — with light gamakas: a <b>kampita</b> on G₃ and a leaned-on D₂. One of the friendliest ragas for a keyboard player.',
       comps:['“Ninnu Kori” (Adi tala varnam) — Ramnad Srinivasa Iyengar','“Nannu Palimpa” — Tyagaraja','“Mohana Rama” — Tyagaraja']},
-    {id:'hindolam', name:'Hindolam (janya of Natabhairavi · 20 · pentatonic, no Ri no Pa)', map:{0:'S',3:'G₂',5:'M₁',8:'D₁',10:'N₂'},
+    {id:'hindolam', name:'Hindolam (janya of Natabhairavi · 20 · pentatonic, no Ri no Pa)', trad:'Carnatic', tradnote:'Carnatic. Hindustani counterpart: <b>Malkauns</b> — Hindustani <i>Hindol</i> is a different raga entirely.', map:{0:'S',3:'G₂',5:'M₁',8:'D₁',10:'N₂'},
       gamaka:{3:'G₂ — andolana (its signature)',8:'D₁ — andolana',10:'N₂ — jaru slide'},
       gnote:'Hindolam (Hindustani Malkauns) floats without Ri or Pa; its character comes from the swinging <b>andolana</b> on G₂ and D₁ and the slide into N₂.',
       comps:['“Samajavaragamana” — Tyagaraja','“Neerajakshi Kamakshi” — Muthuswami Dikshitar','“Ma Ramanan” — Papanasam Sivan']},
-    {id:'madhyamavati', name:'Madhyamavati (janya of Kharaharapriya · 22 · pentatonic, no Ga no Da)', map:{0:'S',2:'R₂',5:'M₁',7:'P',10:'N₂'},
+    {id:'madhyamavati', name:'Madhyamavati (janya of Kharaharapriya · 22 · pentatonic, no Ga no Da)', trad:'Carnatic', tradnote:'Carnatic. Hindustani counterpart: <b>Madhumad Sarang</b> (close kin to Megh).', map:{0:'S',2:'R₂',5:'M₁',7:'P',10:'N₂'},
       gamaka:{2:'R₂ — leaned on, gentle kampita',10:'N₂ — kampita (its signature)'},
       gnote:'Madhyamavati is the tradition’s most auspicious raga — concerts close with a Madhyamavati <b>mangalam</b>. A pentatonic (audava) janya of Kharaharapriya, it drops both Ga and Da (S R₂ M₁ P N₂) and rests on M₁, the madhyama it is named for. Its identity lives in the <b>kampita</b> on N₂ and the leaned-on R₂ — the same five notes as Hindustani Madhmad Sarang, but the oscillations make it unmistakably Carnatic.',
       comps:['“Rama Katha Sudha” — Tyagaraja','“Palinchu Kamakshi” — Syama Sastri','“Alakalalla” — Tyagaraja']},
-    {id:'hamsadhwani', name:'Hamsadhwani (janya of Shankarabharanam · 29 · pentatonic, no Ma no Dha)', map:{0:'S',2:'R₂',4:'G₃',7:'P',11:'N₃'},
+    {id:'hamsadhwani', name:'Hamsadhwani (janya of Shankarabharanam · 29 · pentatonic, no Ma no Dha)', trad:'Carnatic', tradnote:'Carnatic in origin (Ramaswami Dikshitar) and since borrowed into Hindustani as <b>Hansadhwani</b>.', map:{0:'S',2:'R₂',4:'G₃',7:'P',11:'N₃'},
       gamaka:{4:'G₃ — kampita, swung down from P in the P G₃ R₂ turn',11:'N₃ — leaned on and oscillated, pressing up into Ṡ',2:'R₂ — jiva svara, held and gently shaken'},
       gnote:'Hamsadhwani (“the cry of the swan”) drops both Madhyamam and Dhaivatam, leaving five notes that climb straight S R₂ G₃ P N₃ Ṡ and fall back the same way. The wide G₃–P and P–N₃ leaps and the keen N₃ leading straight into the upper Sa make it bright, auspicious and forward-leaning — which is why concerts so often open with it. Devised by Ramaswami Dikshitar and carried north by Ravi Shankar, it is now sung in Hindustani music too. Comparatively gamaka-light, so straight keys serve it unusually well; what they miss is the <b>kampita</b> curling out of Ga and the pressure on Ni.',
       comps:['“Vatapi Ganapatim” — Muthuswami Dikshitar (the raga’s signature kriti)','“Raghunayaka” — Tyagaraja','“Vara Narada” — Tyagaraja','“Gam Ganapathe” — Muthiah Bhagavatar']},
-    {id:'bilahari', name:'Bilahari (janya of Shankarabharanam · 29 · audava–sampoorna, straight ascent)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',11:'N₃'}, aro:[0,2,4,7,9,12], avaro:[12,11,9,7,5,4,2,0],
+    {id:'bilahari', name:'Bilahari (janya of Shankarabharanam · 29 · audava–sampoorna, straight ascent)', trad:'Carnatic', tradnote:'Carnatic. Shares its root with the Hindustani Bilaval family but is a distinct raga.', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',9:'D₂',11:'N₃'}, aro:[0,2,4,7,9,12], avaro:[12,11,9,7,5,4,2,0],
       gamaka:{4:'G₃ — kampita in descent, slid into from M₁ (M₁ G₃ R₂ S)',9:'D₂ — nokku, struck from above in Ṡ N₃ D₂ P',2:'R₂ — jiva svara, held with a gentle shake'},
       gnote:'Bilahari climbs on five notes — <b>S R₂ G₃ P D₂ Ṡ</b>, skipping Ma and Ni — then comes down the full Shankarabharanam scale, and that asymmetry is the whole raga: the ascent is open and skipping, the descent rounded and cadential. It is bright, festive and childlike, the raga of morning and of auspicious beginnings, and it takes brisk tempi far better than long alapana. On fixed keys the notes are exactly right, but the descent is where the loss shows — the <b>jaru</b> gliding M₁ down into a shaken G₃, and the <b>nokku</b> that hits D₂ from above, are what tell Bilahari apart from a plain major scale.',
       comps:['“Paridanamichite” — Patnam Subramania Iyer (the raga’s best-known piece)','“Nā Jīvādhāra” — Tyagaraja','“Doraku Nā Ituvanti” — Tyagaraja','“Sri Balasubrahmanya” — Muthiah Bhagavatar']},
-    {id:'nalinakanthi', name:'Nalinakanthi (janya of Shankarabharanam · 29 · shadava, vakra ascent, no Dha)', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',11:'N₃'}, aro:[0,4,2,5,7,11,12], avaro:[12,11,7,5,4,2,0],
+    {id:'nalinakanthi', name:'Nalinakanthi (janya of Shankarabharanam · 29 · shadava, vakra ascent, no Dha)', trad:'Carnatic', tradnote:'Carnatic. A relatively modern janya with no Hindustani counterpart.', map:{0:'S',2:'R₂',4:'G₃',5:'M₁',7:'P',11:'N₃'}, aro:[0,4,2,5,7,11,12], avaro:[12,11,7,5,4,2,0],
       gamaka:{4:'G₃ — kampita, and the pivot of the vakra S G₃ R₂ turn',11:'N₃ — leaned on and gently oscillated, pressing into Ṡ'},
       gnote:'Nalinakanthi (“the lustre of the lotus”) drops Dhaivatam and climbs crooked — <b>S G₃ R₂ M₁ P N₃ Ṡ</b>, with Ga reached before Ri — then falls straight back down. That single <b>vakra</b> jump to Ga is the raga: phrases keep circling back through it, and without it the notes are just Shankarabharanam minus a Dha. Bright, brisk and unfailingly cheerful, it sits in the middle of a concert as a short, fast piece rather than a long alapana raga. It is comparatively gamaka-light, so fixed keys carry it well; what they miss is the <b>kampita</b> curling out of Ga and the pressure on Ni. Note that with no Dhaivatam the Sarali Varisai player is disabled here — those exercises need all seven swaras.',
       comps:['“Manavyalakincharadate” — Tyagaraja (the raga’s signature kriti)','Tillana in Nalinakanthi — M. Balamuralikrishna']},
@@ -943,7 +955,7 @@
   function buildRagaSelect(q){
     const terms=(q||'').toLowerCase().split(/\s+/).filter(Boolean);
     const selected=ragaSel.value||'maya';
-    const hit=r=>{ const hay=(r.name+' '+r.id+' '+groupLabel(r)).toLowerCase();
+    const hit=r=>{ const hay=(r.name+' '+r.id+' '+groupLabel(r)+' '+(r.trad||'')).toLowerCase();
                    return terms.every(t=>hay.includes(t)); };
     const matches=RAGAS.filter(hit);
     const shown=terms.length ? RAGAS.filter(r=>hit(r)||r.id===selected) : RAGAS.slice();
@@ -1048,6 +1060,12 @@
       sBtn.title = ok ? '' : 'Sarali Varisai needs all seven swaras — pick a sampoorna raga such as Mayamalavagowla';
     }
     updateSaraliLine();
+    // tradition badge + note (Carnatic or Hindustani in origin)
+    const tb=document.getElementById('ragaTrad'), tn=document.getElementById('tradNote');
+    if(raga.trad){ tb.textContent=raga.trad; tb.className='trad-badge '+raga.trad.toLowerCase(); tb.hidden=false; }
+    else { tb.hidden=true; tb.textContent=''; }
+    if(raga.tradnote){ tn.innerHTML='<strong>Tradition:</strong> '+raga.tradnote; tn.hidden=false; }
+    else { tn.hidden=true; tn.innerHTML=''; }
     // gamaka note line
     const gn=document.getElementById('gamNote');
     if(raga.gnote){ gn.innerHTML='<b>∿ Gamaka:</b> '+raga.gnote; gn.hidden=false; }
