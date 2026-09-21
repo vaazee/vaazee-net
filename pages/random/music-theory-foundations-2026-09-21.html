@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Music Theory — Foundations</title>
+<style>
+  :root{
+    --bg:#faf8f4; --panel:#ffffff; --ink:#1c1a17; --ink-soft:#55504a; --ink-faint:#8a8279;
+    --line:#e8e2d8; --line-strong:#d8cfc0; --accent:#9a5b2e; --accent-soft:#f3e6d8; --accent-ink:#7a4220;
+    --accent2:#b8893b; --accent3:#2f6b6b; --code-bg:#2b2722;
+    --header-grad:linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%);
+  }
+  /* derived tints — auto-track the active palette, no per-doc tuning needed */
+  :root{
+    --th-bg:color-mix(in srgb, var(--accent) 9%, var(--panel));
+    --row-hover:color-mix(in srgb, var(--accent) 6%, var(--panel));
+    --warm-bg:color-mix(in srgb, var(--accent2) 15%, var(--panel));
+    --warm-bd:color-mix(in srgb, var(--accent2) 38%, var(--panel));
+    --warm-ink:color-mix(in srgb, var(--accent2) 72%, var(--ink));
+    --cool-bg:color-mix(in srgb, var(--accent3) 13%, var(--panel));
+    --cool-bd:color-mix(in srgb, var(--accent3) 36%, var(--panel));
+    --cool-ink:color-mix(in srgb, var(--accent3) 72%, var(--ink));
+    --epi-ink:var(--accent-ink);
+    --green:#2f7d4f; --amber:#b07d18; --red:#a8392f;
+  }
+  :root[data-mode="dark"]{ --green:#5cba82; --amber:#d6a542; --red:#e07a6f; }
+
+  body,.card,table,.tldr,.callout,.mustlisten,nav.toc a,.svgcard,
+  .pp-panel,.pp-toggle,.pp-sw,section,header.top,th,td{
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease;
+  }
+  @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+
+  svg .sv-axis{stroke:var(--line-strong)}
+  svg .sv-grid{stroke:var(--line)}
+  svg .sv-curve{stroke:var(--accent)}
+  svg .sv-area{fill:var(--accent);opacity:.13}
+  svg .sv-gold-line{stroke:var(--accent2)}
+  svg .sv-gold,svg .sv-gold-dot{fill:var(--accent2)}
+  svg .sv-accent,svg .sv-accent-dot{fill:var(--accent)}
+  svg .sv-lbl{fill:var(--ink-soft)}
+  svg .sv-faint{fill:var(--ink-faint)}
+  svg .sv-ink{fill:var(--ink)}
+  svg .sv-panel{fill:var(--panel)}
+  svg .sv-stroke-ink{stroke:var(--ink)}
+
+  .palette-picker{position:fixed;top:14px;right:14px;z-index:60;font-size:13px;
+    font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif}
+  .pp-toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    background:rgba(255,255,255,.92);color:#1c1a17;border:1px solid rgba(0,0,0,.12);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    padding:8px 13px;border-radius:30px;font-weight:600;font-size:13px;
+    box-shadow:0 2px 10px rgba(0,0,0,.16)}
+  .pp-toggle svg{display:block}
+  .pp-toggle .chev{transition:transform .2s ease}
+  .palette-picker.open .pp-toggle .chev{transform:rotate(180deg)}
+  .pp-panel{position:absolute;top:46px;right:0;width:248px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.22);padding:14px;
+    opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);
+    transform-origin:top right;transition:opacity .16s ease,transform .16s ease,visibility .16s}
+  .palette-picker.open .pp-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+  .pp-group{margin-bottom:12px}
+  .pp-group:last-child{margin-bottom:0}
+  .pp-label{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 2px 8px}
+  .pp-label .ico{width:13px;height:13px;opacity:.7}
+  .pp-swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pp-sw{cursor:pointer;border:1.5px solid var(--line);background:var(--panel);
+    border-radius:10px;padding:7px;display:flex;flex-direction:column;gap:6px;text-align:left;
+    transition:border-color .15s,transform .1s}
+  .pp-sw:hover{transform:translateY(-1px)}
+  .pp-sw .bars{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .pp-sw .bars span{flex:1}
+  .pp-sw .nm{font-size:11.5px;font-weight:600;color:var(--ink-soft);display:flex;
+    align-items:center;justify-content:space-between;gap:4px}
+  .pp-sw.active{border-color:var(--accent)}
+  .pp-sw.active .nm{color:var(--ink)}
+  .pp-sw .tick{width:13px;height:13px;color:var(--accent);opacity:0}
+  .pp-sw.active .tick{opacity:1}
+
+  /* ============ document ============ */
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Inter,system-ui,sans-serif;
+    line-height:1.65;-webkit-font-smoothing:antialiased;font-size:16px}
+  code,.mono{font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace}
+
+  header.top{background:var(--header-grad);color:#f5efe6;padding:54px 30px 46px}
+  header.top .in{max-width:1180px;margin:0 auto}
+  header.top .ey{font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:rgba(245,239,230,.58);font-weight:700;margin-bottom:12px}
+  header.top h1{margin:0 0 12px;font-size:38px;font-weight:700;letter-spacing:-.025em;color:#fff;line-height:1.15}
+  header.top .sub{margin:0 0 20px;font-size:16.5px;color:rgba(245,239,230,.8);max-width:660px}
+  header.top .meta{display:flex;flex-wrap:wrap;gap:8px}
+  header.top .meta span{font-size:11.5px;letter-spacing:.04em;background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.16);color:rgba(245,239,230,.88);padding:4px 11px;border-radius:20px}
+
+  .shell{max-width:1180px;margin:0 auto;padding:0 30px 90px;
+    display:grid;grid-template-columns:225px minmax(0,1fr);gap:44px;align-items:start}
+  nav.toc{position:sticky;top:20px;padding-top:34px;font-size:13.5px;max-height:calc(100vh - 40px);overflow-y:auto}
+  nav.toc .tt{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);
+    font-weight:700;margin:0 0 10px 10px}
+  nav.toc a{display:block;padding:5px 10px;color:var(--ink-soft);text-decoration:none;
+    border-left:2px solid var(--line);border-radius:0 6px 6px 0;line-height:1.35}
+  nav.toc a:hover{color:var(--accent-ink);background:var(--accent-soft);border-left-color:var(--accent)}
+  nav.toc a.sub{padding-left:22px;font-size:12.5px;color:var(--ink-faint)}
+  nav.toc a.part{font-weight:700;color:var(--ink);margin-top:12px}
+  nav.toc a.active{color:var(--accent-ink);border-left-color:var(--accent);background:var(--accent-soft)}
+
+  main{padding-top:34px;min-width:0}
+  section{scroll-margin-top:20px;margin-bottom:46px}
+  h2{font-size:27px;font-weight:700;letter-spacing:-.02em;margin:0 0 6px;line-height:1.2}
+  h2 .num{color:var(--accent);font-weight:700;margin-right:10px;font-size:.72em;
+    vertical-align:2px;letter-spacing:.05em}
+  h3{font-size:18.5px;font-weight:650;margin:32px 0 10px;letter-spacing:-.01em}
+  h4{font-size:14.5px;font-weight:700;margin:22px 0 8px;letter-spacing:.02em;color:var(--ink-soft)}
+  p{margin:0 0 14px}
+  .lede{font-size:16.5px;color:var(--ink-soft);margin-bottom:22px}
+  .rule{height:1px;background:var(--line);border:0;margin:0 0 24px}
+  strong{font-weight:650}
+  a{color:var(--accent-ink)}
+  em.term{font-style:normal;font-weight:700;color:var(--accent-ink)}
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin-bottom:6px}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:0 0 18px}
+  .card > :last-child{margin-bottom:0}
+  .card .ct{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;
+    color:var(--ink-faint);margin:0 0 12px}
+  .tldr{background:var(--accent-soft);border:1px solid var(--line-strong);border-left:3px solid var(--accent);
+    border-radius:10px;padding:18px 22px;margin:0 0 26px;color:var(--ink)}
+  .tldr > :last-child{margin-bottom:0}
+  .callout{border-radius:10px;padding:15px 18px;margin:18px 0;font-size:14.8px}
+  .callout > :last-child{margin-bottom:0}
+  .callout .cl{display:block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    font-weight:700;margin-bottom:7px}
+  .callout.warm{background:var(--warm-bg);border:1px solid var(--warm-bd)}
+  .callout.warm .cl{color:var(--warm-ink)}
+  .callout.cool{background:var(--cool-bg);border:1px solid var(--cool-bd)}
+  .callout.cool .cl{color:var(--cool-ink)}
+
+  table{width:100%;border-collapse:collapse;font-size:14.5px;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:0 0 18px}
+  th{background:var(--th-bg);text-align:left;font-weight:700;font-size:12px;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);padding:10px 13px;
+    border-bottom:1px solid var(--line)}
+  td{padding:9px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:var(--row-hover)}
+  td.mono,th.mono{font-family:"SF Mono",Menlo,monospace;font-size:13.5px}
+  .tbl-scroll{overflow-x:auto;margin-bottom:18px}
+  .tbl-scroll table{margin-bottom:0;min-width:520px}
+
+  .pill{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:20px;
+    background:var(--accent-soft);color:var(--accent-ink);letter-spacing:.02em}
+  .pill.g{background:color-mix(in srgb,var(--green) 16%,var(--panel));color:var(--green)}
+  .pill.a{background:color-mix(in srgb,var(--amber) 18%,var(--panel));color:var(--amber)}
+  .pill.r{background:color-mix(in srgb,var(--red) 15%,var(--panel));color:var(--red)}
+  .pill.c{background:var(--cool-bg);color:var(--cool-ink)}
+  code.k{background:var(--accent-soft);color:var(--accent-ink);padding:1.5px 6px;border-radius:5px;font-size:.88em}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+
+  .svgcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:18px;margin:0 0 18px;overflow-x:auto}
+  .svgcard .cap{font-size:12.5px;color:var(--ink-faint);margin-top:10px;text-align:center}
+  .svgcard svg{display:block;margin:0 auto;max-width:100%;height:auto}
+
+  button.btn{font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;
+    background:var(--panel);color:var(--ink-soft);border:1px solid var(--line-strong);
+    border-radius:8px;padding:6px 13px;transition:all .13s}
+  button.btn:hover{border-color:var(--accent);color:var(--accent-ink);background:var(--accent-soft)}
+  button.btn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  button.btn.play{padding:5px 11px;display:inline-flex;align-items:center;gap:6px}
+  button.btn.play::before{content:"";width:0;height:0;border-style:solid;
+    border-width:5px 0 5px 8px;border-color:transparent transparent transparent currentColor}
+  button.btn.sm{font-size:12px;padding:4px 10px}
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;align-items:center}
+  .btnrow .lb{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+    color:var(--ink-faint);margin-right:4px}
+
+  .kbd{display:flex;position:relative;height:120px;user-select:none;margin:0 auto;width:max-content}
+  .wk{width:40px;height:120px;background:#fbfaf8;border:1px solid var(--line-strong);
+    border-radius:0 0 5px 5px;margin-right:-1px;cursor:pointer;position:relative;
+    display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;
+    font-size:10.5px;font-weight:700;color:#9b968e;transition:background .1s}
+  .bk{width:26px;height:74px;background:#332e28;border:1px solid #1a1613;border-radius:0 0 4px 4px;
+    position:absolute;top:0;z-index:2;cursor:pointer;
+    display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;
+    font-size:9px;font-weight:700;color:#6f675e;transition:background .1s}
+  .wk.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .bk.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .wk.root,.bk.root{background:var(--accent-ink);color:#fff;border-color:var(--accent-ink)}
+  .wk.lit,.bk.lit{background:var(--accent2)!important;color:#fff!important}
+
+  .noteset{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+  .nt{font-family:"SF Mono",Menlo,monospace;font-size:15px;font-weight:700;
+    background:var(--accent-soft);color:var(--accent-ink);border:1px solid var(--line-strong);
+    border-radius:8px;padding:6px 12px;min-width:44px;text-align:center;position:relative}
+  .nt .dg{display:block;font-size:9.5px;font-weight:700;color:var(--ink-faint);letter-spacing:.06em;
+    font-family:-apple-system,system-ui,sans-serif;margin-top:1px}
+  .nt.tonic{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .nt.tonic .dg{color:rgba(255,255,255,.75)}
+
+  select.sel{font-family:inherit;font-size:13.5px;font-weight:600;padding:6px 11px;
+    border:1px solid var(--line-strong);border-radius:8px;background:var(--panel);color:var(--ink);cursor:pointer}
+  select.sel:focus{outline:none;border-color:var(--accent)}
+
+  .stub{border:1px dashed var(--line-strong);background:transparent;border-radius:10px;
+    padding:14px 18px;margin-bottom:12px}
+  .stub h4{margin:0 0 5px;color:var(--ink)}
+  .stub p{margin:0;font-size:14px;color:var(--ink-faint)}
+
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:12px 18px;margin-bottom:12px}
+  details[open]{padding-bottom:16px}
+  summary{cursor:pointer;font-weight:650;font-size:15px;list-style:none;display:flex;
+    align-items:center;gap:9px}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"";width:0;height:0;border-style:solid;border-width:4.5px 0 4.5px 7px;
+    border-color:transparent transparent transparent var(--accent);transition:transform .15s;flex-shrink:0}
+  details[open] summary::before{transform:rotate(90deg)}
+  details > :not(summary){margin-top:14px}
+
+  footer.doc{max-width:1180px;margin:0 auto;padding:26px 30px 60px;font-size:13px;
+    color:var(--ink-faint);border-top:1px solid var(--line)}
+  footer.doc a{color:var(--accent-ink)}
+
+  @media (max-width:900px){
+    .shell{grid-template-columns:1fr;gap:0;padding:0 20px 70px}
+    nav.toc{position:static;max-height:none;padding-top:26px;
+      display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:2px}
+    nav.toc .tt{grid-column:1/-1}
+    nav.toc a.sub{display:none}
+  }
+  @media (max-width:720px){
+    body{font-size:15.5px}
+    header.top{padding:38px 20px 32px}
+    header.top h1{font-size:28px}
+    .grid2,.grid3,.grid4{grid-template-columns:1fr}
+    h2{font-size:23px}
+    .card,.tldr{padding:16px 17px}
+    footer.doc{padding:22px 20px 50px}
+    .wk{width:32px;height:100px}
+    .bk{width:21px;height:62px}
+    .kbd{height:100px}
+  }
+</style>
+</head>
+<body>
+<div class="palette-picker" id="picker">
+  <button class="pp-toggle" id="ppToggle" aria-expanded="false" aria-label="Change color theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+    <span class="pp-txt">Theme</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="pp-panel" role="menu" aria-label="Color palettes">
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>Light</span>
+      <div class="pp-swatches" id="pp-light"></div>
+    </div>
+    <div class="pp-group">
+      <span class="pp-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark</span>
+      <div class="pp-swatches" id="pp-dark"></div>
+    </div>
+  </div>
+</div>
+
+<header class="top"><div class="in">
+  <div class="ey">Working reference · built to grow</div>
+  <h1>Music Theory — Foundations</h1>
+  <p class="sub">Everything you need to get started in tonal harmony, plus the scaffolding to hang
+     later material on. Interactive: click any keyboard, any circle-of-fifths wedge, any ▶ button.</p>
+  <div class="meta">
+    <span id="genstamp">Generated —</span>
+    <span>Source: <em>Tonal Harmony</em> (Kostka/Payne) vault notes</span>
+    <span>Self-contained · no network</span>
+  </div>
+</div></header>
+
+<div class="shell">
+<nav class="toc" id="toc">
+  <p class="tt">Contents</p>
+  <a href="#howto">How to use this</a>
+  <a href="#part1" class="part">I · What tonal harmony is</a>
+  <a href="#part2" class="part">II · Pitch</a>
+  <a href="#keyboard" class="sub">The keyboard &amp; pitch class</a>
+  <a href="#major" class="sub">The major scale</a>
+  <a href="#keysig" class="sub">Key signatures</a>
+  <a href="#circle" class="sub">Circle of fifths</a>
+  <a href="#minor" class="sub">The minor scales</a>
+  <a href="#degrees" class="sub">Scale-degree names</a>
+  <a href="#intervals" class="sub">Intervals</a>
+  <a href="#part3" class="part">III · Rhythm</a>
+  <a href="#durations" class="sub">Durations, ties, dots</a>
+  <a href="#meter" class="sub">Beat, meter, time signatures</a>
+  <a href="#part4" class="part">IV · Chords</a>
+  <a href="#triads" class="sub">Triads</a>
+  <a href="#sevenths" class="sub">Seventh chords</a>
+  <a href="#inversions" class="sub">Inversions &amp; figured bass</a>
+  <a href="#explorer" class="sub">Key explorer ★</a>
+  <a href="#part5" class="part">V · Harmony in motion</a>
+  <a href="#function" class="sub">Harmonic function</a>
+  <a href="#cadences" class="sub">Cadences</a>
+  <a href="#voice" class="sub">Voice-leading basics</a>
+  <a href="#roadmap" class="part">Roadmap — what's next</a>
+  <a href="#glossary" class="part">Glossary</a>
+</nav>
+
+<main>
+
+<section id="howto">
+  <div class="tldr">
+    <p><strong>This page is a spine, not a finished book.</strong> Parts I–V cover the fundamentals
+    you need before anything else makes sense: pitch, rhythm, chords, and what chords <em>do</em>.
+    The <a href="#roadmap">Roadmap</a> at the bottom lists the sections we haven't written yet —
+    each is a placeholder with a stable anchor, so new material drops in without reshuffling
+    anything above it.</p>
+    <p style="margin-bottom:0"><strong>Sound is on.</strong> Every ▶ plays through the Web Audio API —
+    a plain synth tone, no samples, nothing downloaded. Click a note name, a chord row,
+    or a key on the keyboard to hear it. Nothing plays until you ask it to.</p>
+  </div>
+</section>
+
+<section id="part1">
+  <h2><span class="num">I</span>What tonal harmony is</h2>
+  <hr class="rule">
+  <p class="lede">The one paragraph that defines the whole subject, and the four properties
+     that make Bach and a pop song members of the same family.</p>
+
+  <p><em class="term">Harmony</em> is the sound that results when two or more pitches are performed
+  simultaneously. It is the <strong>vertical</strong> aspect of music, produced by combining the
+  components of the <strong>horizontal</strong> aspect (melody and rhythm).</p>
+
+  <p>Much of today's popular music is based on tonal harmony, just as Bach's music was — which means
+  the two have a good deal in common. Four properties do the work:</p>
+
+  <div class="grid2">
+    <div class="card">
+      <p class="ct">Property 1</p>
+      <h4 style="margin-top:0">A tonal center</h4>
+      <p style="margin-bottom:0">A pitch class that provides a <strong>center of gravity</strong> —
+      the note the music leans toward and comes to rest on. Everything else is heard in relation to it.</p>
+    </div>
+    <div class="card">
+      <p class="ct">Property 2</p>
+      <h4 style="margin-top:0">Major and minor scales</h4>
+      <p style="margin-bottom:0">Both bodies of music use these two scale families almost exclusively.
+      Seven notes, a fixed pattern of whole and half steps.</p>
+    </div>
+    <div class="card">
+      <p class="ct">Property 3</p>
+      <h4 style="margin-top:0">Tertian chords</h4>
+      <p style="margin-bottom:0"><strong>Tertian</strong> means "built of thirds." C–E–G is tertian;
+      C–F–B is not. Stacking thirds is the default chord-building move of the entire system.</p>
+    </div>
+    <div class="card">
+      <p class="ct">Property 4</p>
+      <h4 style="margin-top:0">Function</h4>
+      <p style="margin-bottom:0">Chords built on the various scale degrees relate to each other and to
+      the tonal center in fairly complex ways. Each chord has a more or less standard <strong>role</strong>
+      within a key — hence <em>functional harmony</em>.</p>
+    </div>
+  </div>
+
+  <div class="callout warm">
+    <span class="cl">The definition</span>
+    <p><strong>Tonal harmony</strong> refers to music with a tonal center, based on major and/or minor
+    scales, and using tertian chords that are related to one another and to the tonal center in
+    various ways.</p>
+  </div>
+
+  <p>A <em class="term">pitch class</em> is a note name regardless of octave: every C on the piano —
+  low, middle, high — belongs to pitch class C. There are twelve pitch classes, which is why the
+  keyboard repeats every twelve keys.</p>
+</section>
+
+<section id="part2">
+  <h2><span class="num">II</span>Pitch</h2>
+  <hr class="rule">
+  <p class="lede">Scales, key signatures, and intervals — the raw material. If you only ever
+     internalize one thing here, make it the major scale's step pattern.</p>
+</section>
+
+<section id="keyboard">
+  <h3>The keyboard &amp; pitch class</h3>
+  <p>The smallest distance between two adjacent keys — black or white — is a <em class="term">half step</em>
+  (semitone). Two half steps make a <em class="term">whole step</em>. The white keys are the letters
+  A–G; the black keys are named relative to their neighbours, so the same black key is
+  <strong>C♯</strong> (C raised) or <strong>D♭</strong> (D lowered). Those two names sound identical on
+  the piano — they are <em class="term">enharmonic equivalents</em>.</p>
+
+  <div class="svgcard">
+    <div class="btnrow" style="justify-content:center">
+      <span class="lb">Label</span>
+      <button class="btn sm on" id="lblSharp">Sharps</button>
+      <button class="btn sm" id="lblFlat">Flats</button>
+      <span style="flex:1"></span>
+      <span style="font-size:12.5px;color:var(--ink-faint)">Click a key to hear it</span>
+    </div>
+    <div class="kbd" id="freeKbd"></div>
+    <p class="cap">Two octaves from C4 (middle C). Notice the black-key groups of two and three —
+       that pattern is how you find any note by eye: C sits immediately left of a group of two.</p>
+  </div>
+
+  <div class="callout cool">
+    <span class="cl">Why half steps sit where they do</span>
+    <p>There is no black key between E–F or between B–C. Those two pairs are half steps on the white
+    keys, and that single fact generates every key signature in the system.</p>
+  </div>
+</section>
+
+<section id="major">
+  <h3>The major scale</h3>
+  <p>The major scale is a fixed pattern of whole (W) and half (H) steps:</p>
+
+  <div class="svgcard" id="majorScaleSvg"></div>
+
+  <p>Half steps in the major scale occur <strong>only</strong> between scale degrees 3̂ and 4̂, and
+  between 7̂ and 1̂. Everything else is a whole step. Because the pattern is fixed, transposing it to
+  a different starting note forces you to add sharps or flats — which is exactly what a key signature is.</p>
+
+  <h4>Tetrachords</h4>
+  <p>The major scale can be thought of as <strong>two identical four-note patterns separated by a whole
+  step</strong>. Those four-note patterns are called <em class="term">tetrachords</em>: each is W–W–H.</p>
+
+  <div class="svgcard" id="tetraSvg"></div>
+
+  <div class="callout warm">
+    <span class="cl">Why this matters</span>
+    <p>The upper tetrachord of one major scale is the lower tetrachord of the scale a fifth above it.
+    Start on G, reuse C major's upper tetrachord (G–A–B–C), continue the pattern, and you need
+    F♯. That is the circle of fifths in one sentence.</p>
+  </div>
+
+  <div class="btnrow">
+    <span class="lb">Hear it</span>
+    <button class="btn play" onclick="playScaleDemo('C',0)">C major, ascending</button>
+    <button class="btn play" onclick="playScaleDemo('G',0)">G major</button>
+    <button class="btn play" onclick="playScaleDemo('F',0)">F major</button>
+  </div>
+</section>
+
+<section id="keysig">
+  <h3>Key signatures</h3>
+  <p>A <em class="term">key signature</em> is a pattern of sharps or flats at the beginning of a staff
+  indicating that certain notes are consistently raised or lowered. There are seven sharp signatures
+  and seven flat signatures.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <p class="ct">Naming rule — sharps</p>
+      <p>The name of the major key is found by going <strong>up a half step from the last sharp</strong>
+      in the signature.</p>
+      <p style="margin-bottom:0;font-size:14px;color:var(--ink-faint)">Last sharp F♯ → G major.
+      Last sharp C♯ → D major.</p>
+    </div>
+    <div class="card">
+      <p class="ct">Naming rule — flats</p>
+      <p>The name of the major key is the same as the <strong>next-to-last flat</strong> in the
+      signature. The exception is F major, which has one flat.</p>
+      <p style="margin-bottom:0;font-size:14px;color:var(--ink-faint)">Flats B♭ E♭ A♭ → next-to-last
+      is E♭ → E♭ major.</p>
+    </div>
+  </div>
+
+  <div class="callout cool">
+    <span class="cl">Memorize these two strings</span>
+    <p>Order of sharps: <code class="k">F C G D A E B</code> &nbsp;·&nbsp;
+       Order of flats: <code class="k">B E A D G C F</code> — the same letters backwards.
+       Say them aloud until they are automatic; nearly every key-signature question reduces to them.</p>
+  </div>
+
+  <div class="svgcard">
+    <div class="btnrow" style="justify-content:center">
+      <span class="lb">Key</span>
+      <span id="ksBtns"></span>
+    </div>
+    <div id="staffBox"></div>
+    <p class="cap">Accidentals in standard treble-clef placement. Note the pattern shifts at the fifth
+       sharp — that is conventional, not arbitrary; it keeps the signs on the staff.</p>
+  </div>
+
+  <h4>Enharmonic key pairs</h4>
+  <p>Three pairs of major keys sound exactly the same — the very same keys of the piano:</p>
+  <div class="grid3">
+    <div class="card" style="text-align:center"><p style="margin:0;font-size:18px;font-weight:650">B major = C♭ major</p><p style="margin:4px 0 0;font-size:13px;color:var(--ink-faint)">5 sharps / 7 flats</p></div>
+    <div class="card" style="text-align:center"><p style="margin:0;font-size:18px;font-weight:650">F♯ major = G♭ major</p><p style="margin:4px 0 0;font-size:13px;color:var(--ink-faint)">6 sharps / 6 flats</p></div>
+    <div class="card" style="text-align:center"><p style="margin:0;font-size:18px;font-weight:650">C♯ major = D♭ major</p><p style="margin:4px 0 0;font-size:13px;color:var(--ink-faint)">7 sharps / 5 flats</p></div>
+  </div>
+</section>
+
+<section id="circle">
+  <h3>The circle of fifths</h3>
+  <p>A diagram shaped like a clock face. Reading <strong>clockwise</strong>, each new key begins on 5̂
+  (the fifth scale degree) of the previous key and adds a sharp. Reading
+  <strong>counterclockwise</strong>, each new key begins on 4̂ of the previous one and adds a flat.
+  The inner ring gives the <strong>relative minor</strong> of each major key — they share a key signature.</p>
+
+  <div class="svgcard">
+    <div id="circleBox"></div>
+    <p class="cap">Click any wedge to load that key into the <a href="#explorer">Key Explorer</a> below.</p>
+  </div>
+</section>
+
+<section id="minor">
+  <h3>The minor scales</h3>
+  <p>Minor comes in three forms. All three share the same first five notes — the
+  <em class="term">minor pentachord</em>, W–H–W–W. Only 6̂ and 7̂ vary.</p>
+
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Form</th><th>Built from major by…</th><th>Built from natural minor by…</th><th>Degrees</th><th></th></tr></thead>
+    <tbody>
+      <tr><td><strong>Natural minor</strong></td><td>lowering 3̂, 6̂, 7̂</td><td>—</td>
+          <td class="mono">1 2 ♭3 4 5 ♭6 ♭7</td>
+          <td><button class="btn play sm" onclick="playScaleDemo('A',1)">A</button></td></tr>
+      <tr><td><strong>Harmonic minor</strong></td><td>lowering 3̂ and 6̂</td><td>raising 7̂</td>
+          <td class="mono">1 2 ♭3 4 5 ♭6 7</td>
+          <td><button class="btn play sm" onclick="playScaleDemo('A',2)">A</button></td></tr>
+      <tr><td><strong>Melodic minor</strong> (ascending)</td><td>lowering 3̂</td><td>raising 6̂ and 7̂</td>
+          <td class="mono">1 2 ♭3 4 5 6 7</td>
+          <td><button class="btn play sm" onclick="playScaleDemo('A',3)">A</button></td></tr>
+      <tr><td><strong>Melodic minor</strong> (descending)</td><td colspan="2">identical to natural minor</td>
+          <td class="mono">1 2 ♭3 4 5 ♭6 ♭7</td>
+          <td><button class="btn play sm" onclick="playScaleDemo('A',1)">A</button></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="svgcard" id="minorCompareSvg"></div>
+
+  <h4>Relative and parallel keys</h4>
+  <p>Minor key signatures conform to the <strong>natural</strong> minor scale, no matter which minor form
+  is actually in use — the raised 6̂ and 7̂ appear as written accidentals in the music.</p>
+  <div class="grid2">
+    <div class="card">
+      <p class="ct">Relative keys</p>
+      <p>Share the same key signature. The <strong>relative major</strong> of any minor key starts on
+      <strong>3̂</strong> of the minor scale; the <strong>relative minor</strong> of any major key begins on
+      <strong>6̂</strong> of the major scale.</p>
+      <p style="margin-bottom:0;font-size:14px;color:var(--ink-faint)">c minor ↔ E♭ major (3 flats).</p>
+    </div>
+    <div class="card">
+      <p class="ct">Parallel keys</p>
+      <p>Share the same <strong>1̂</strong>. C major and c minor are parallel keys; C major is the
+      <em>parallel major</em> of c minor.</p>
+      <p style="margin-bottom:0;font-size:14px;color:var(--ink-faint)">Same tonic, different signature.</p>
+    </div>
+  </div>
+
+  <div class="callout warm">
+    <span class="cl">Shortcut</span>
+    <p>To find any minor key signature other than g♯, d♯, or a♯: start with the key signature of the
+    <strong>parallel major</strong> and add three flats and/or subtract three sharps.
+    C major has 0 → c minor has 3 flats. D major has 2 sharps → d minor has 1 flat.</p>
+  </div>
+
+  <p style="font-size:14px;color:var(--ink-faint)">Convention used on this page: uppercase letters for
+  major keys (E♭ major), lowercase for minor (c minor).</p>
+</section>
+
+<section id="degrees">
+  <h3>Scale-degree names</h3>
+  <p>Every degree has a traditional name. These names are the vocabulary of harmonic analysis —
+  "dominant" and "subdominant" will appear constantly from Part V onward.</p>
+
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Degree</th><th>Name</th><th>What it means</th><th>In C major</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">1̂</td><td><strong>Tonic</strong></td><td>The tonal center. Home.</td><td class="mono">C</td></tr>
+      <tr><td class="mono">2̂</td><td><strong>Supertonic</strong></td><td>"Above the tonic."</td><td class="mono">D</td></tr>
+      <tr><td class="mono">3̂</td><td><strong>Mediant</strong></td><td>Halfway between tonic and dominant.</td><td class="mono">E</td></tr>
+      <tr><td class="mono">4̂</td><td><strong>Subdominant</strong></td><td>A fifth <em>below</em> the tonic, mirroring the dominant.</td><td class="mono">F</td></tr>
+      <tr><td class="mono">5̂</td><td><strong>Dominant</strong></td><td>The strongest pull back to tonic.</td><td class="mono">G</td></tr>
+      <tr><td class="mono">6̂</td><td><strong>Submediant</strong></td><td>Halfway between tonic and subdominant.</td><td class="mono">A</td></tr>
+      <tr><td class="mono">7̂</td><td><strong>Leading tone</strong></td><td>A half step below tonic; leads to it.</td><td class="mono">B</td></tr>
+      <tr><td class="mono">♭7̂</td><td><strong>Subtonic</strong></td><td>In minor, when 7̂ is <em>not</em> raised — a whole step below tonic.</td><td class="mono">B♭ (in c minor)</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout cool">
+    <span class="cl">The symmetry worth seeing</span>
+    <p>The mediant lies halfway between tonic and dominant; the sub-mediant lies halfway between tonic
+    and sub-dominant. The "sub-" names are not "one below" — they are the mirror image, measured
+    downward from the tonic. That is why 4̂ is called the <em>sub</em>dominant even though it sits
+    just below 5̂.</p>
+  </div>
+</section>
+
+<section id="intervals">
+  <h3>Intervals</h3>
+  <p>An <em class="term">interval</em> is the measurement of distance in pitch between two notes.
+  A <strong>harmonic</strong> interval sounds both notes at once; a <strong>melodic</strong> interval
+  sounds them one after the other.</p>
+
+  <p>Every interval name has two parts: a <strong>numerical name</strong> and a <strong>modifier</strong>
+  preceding it. Count letter names inclusively — C up to E spans C, D, E, so it is a 3rd, whatever the
+  accidentals. We say <em>unison</em> instead of 1 and <em>octave</em> (8ve) instead of 8. Intervals
+  smaller than an octave are <strong>simple</strong>; those an octave or larger are
+  <strong>compound</strong> (a 9th, an 11th).</p>
+
+  <h4>Perfect, major, minor</h4>
+  <p>The easiest way to learn the modifiers is to relate them to the major scale — specifically the
+  intervals from 1̂ up to each other scale degree. Once learned, apply it in any context, whether or
+  not a major scale is in play.</p>
+  <ul>
+    <li><em class="term">Perfect</em> (P) is used only for unisons, 4ths, 5ths, octaves, and their
+        compounds. P1, P4, P5 and P8 all appear using 1̂ of the major scale as the <strong>bottom</strong> note.</li>
+    <li><em class="term">Major</em> (M) and <em class="term">minor</em> (m) are used only for 2nds,
+        3rds, 6ths, 7ths, and their compounds. The intervals 1̂–2̂, 1̂–3̂, 1̂–6̂, 1̂–7̂ in the major scale
+        are all <strong>major</strong> intervals.</li>
+    <li>Make a major interval a half step smaller without changing its numerical name and it becomes
+        <strong>minor</strong>. You can shrink an interval either by lowering the top note or raising the bottom.</li>
+  </ul>
+
+  <h4>Augmented and diminished</h4>
+  <ul>
+    <li>A perfect or major interval made a half step <strong>larger</strong> (same numerical name)
+        becomes <em class="term">augmented</em> (+ or A).</li>
+    <li>A perfect or minor interval made a half step <strong>smaller</strong> (same numerical name)
+        becomes <em class="term">diminished</em> (° or d).</li>
+    <li>There is no such thing as a diminished unison. Doubly augmented and doubly diminished
+        intervals exist but are rare.</li>
+    <li><em class="term">Tritone</em> is the term for the +4 or its enharmonic equivalent, the °5 —
+        three whole steps, the interval that splits the octave exactly in half.</li>
+  </ul>
+
+  <div class="svgcard" id="intervalQualSvg"></div>
+
+  <h4>The interval table</h4>
+  <p>Every simple interval, measured in half steps from the lower note. Click ▶ to hear it melodically
+  then harmonically, from C4.</p>
+  <div class="tbl-scroll"><table id="ivTable">
+    <thead><tr><th>Interval</th><th>Abbrev.</th><th>Half steps</th><th>From C4</th><th>Consonant?</th><th>Hear</th></tr></thead>
+    <tbody id="ivBody"></tbody>
+  </table></div>
+
+  <h4>Inversion of intervals</h4>
+  <p>Descending intervals, especially large ones, are often easier to spell and identify through
+  <em class="term">inversion</em>: put the bottom pitch above the top one, or the reverse. D up to A
+  inverts to A up to D.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <p class="ct">The rule of 9</p>
+      <p>The new numerical name is always <strong>9 minus the old one</strong>.</p>
+      <p class="mono" style="margin-bottom:0;font-size:14.5px">2↔7 · 3↔6 · 4↔5 · 1↔8</p>
+    </div>
+    <div class="card">
+      <p class="ct">The modifier flips too</p>
+      <p style="margin-bottom:0">M↔m · +↔° · <strong>P stays P</strong>. A M3 inverts to a m6;
+      a P5 inverts to a P4.</p>
+    </div>
+  </div>
+
+  <div class="callout warm">
+    <span class="cl">Worked example</span>
+    <p>What note lies a m6 <em>below</em> G3? Invert the m6 down into a M3 up: G3 up a M3 is B3.
+    Transpose B3 down an octave and the answer is <strong>B2</strong>.</p>
+  </div>
+
+  <h4>Consonance and dissonance</h4>
+  <p>Roughly, <em class="term">consonant</em> means pleasing to the ear and
+  <em class="term">dissonant</em> means not — but these are heavily dependent on context. Some of the
+  most exciting moments in tonal music <em>are</em> dissonances, which are hardly displeasing there;
+  they resolve eventually to the consonances that give them meaning.</p>
+  <div class="grid2">
+    <div class="card">
+      <p class="ct"><span class="pill g">Consonant</span></p>
+      <p style="margin-bottom:0">Major and minor 3rds and 6ths; perfect 5ths and octaves (and the
+      unison).</p>
+    </div>
+    <div class="card">
+      <p class="ct"><span class="pill r">Dissonant</span></p>
+      <p style="margin-bottom:0">All other harmonic intervals, including every augmented and
+      diminished interval. <strong>Exception:</strong> the P4 is dissonant in tonal music only when it
+      occurs <em>above the lowest voice</em> (the <strong>bass</strong>).</p>
+    </div>
+  </div>
+</section>
+<section id="part3">
+  <h2><span class="num">III</span>Rhythm</h2>
+  <hr class="rule">
+  <p class="lede"><em class="term">Rhythm</em> is the general term for the time aspect of music,
+     as contrasted with the pitch aspect.</p>
+</section>
+
+<section id="durations">
+  <h3>Durational symbols</h3>
+  <p>Durations are notated with symbols organised so that <strong>each symbol is twice the duration of
+  the next shorter one</strong> and half the duration of the next longer one. That is the entire
+  system — a binary tree.</p>
+
+  <div class="svgcard" id="durTree"></div>
+
+  <div class="grid2">
+    <div class="card">
+      <p class="ct">Ties</p>
+      <p>A <em class="term">tie</em> is a curved line connecting two notes of the <strong>same
+      pitch</strong>, creating a new duration equal to their sum. It is how you write a duration the
+      symbols alone can't express — and how you carry a note across a bar line.</p>
+      <p style="margin-bottom:0;font-size:14px;color:var(--ink-faint)">A tie joins identical pitches;
+      a slur connects different ones and means "play smoothly." Different things.</p>
+    </div>
+    <div class="card">
+      <p class="ct">Dots</p>
+      <p>A <em class="term">dot</em> following a symbol always adds <strong>one-half the value of the
+      note, rest, or dot that precedes it</strong>. So a dotted half = half + quarter. A
+      double-dotted half = half + quarter + eighth.</p>
+      <p style="margin-bottom:0;font-size:14px;color:var(--ink-faint)">Notation detail: a dot is never
+      placed on a staff line. If the notehead is on a line, the dot goes to the right of the note but
+      in the space <em>above</em> it.</p>
+    </div>
+  </div>
+</section>
+
+<section id="meter">
+  <h3>Beat, tempo, meter, time signatures</h3>
+  <div class="grid3">
+    <div class="card">
+      <p class="ct">Beat</p>
+      <p style="margin-bottom:0">The basic pulse of a passage. To find it, tap your foot, or imagine
+      the conductor's arm movement.</p>
+    </div>
+    <div class="card">
+      <p class="ct">Tempo</p>
+      <p style="margin-bottom:0">The <strong>rate</strong> at which the beats occur.</p>
+    </div>
+    <div class="card">
+      <p class="ct">Meter</p>
+      <p style="margin-bottom:0">Beats group into patterns consistent throughout a passage. The
+      pattern of beats is the <strong>meter</strong>; the groups are <strong>measures</strong>
+      (m. / mm.), separated by <strong>bar lines</strong>.</p>
+    </div>
+  </div>
+
+  <h4>The two questions a meter answers</h4>
+  <p>Meter is classified along two axes, and a time signature encodes both:</p>
+  <ol>
+    <li><strong>How many beats per measure?</strong> Two = <em>duple</em>, three = <em>triple</em>,
+        four = <em>quadruple</em>.</li>
+    <li><strong>How does the beat divide?</strong> Into two = <em>simple</em>, into three =
+        <em>compound</em>.</li>
+  </ol>
+
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Type</th><th>Beat divides into</th><th>Duple</th><th>Triple</th><th>Quadruple</th><th>Beat note</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Simple</strong></td><td>2</td><td class="mono">2/4 · 2/2 · 2/8</td><td class="mono">3/4 · 3/2 · 3/8</td><td class="mono">4/4 · 4/2 · 4/8</td><td>The lower number names it: 4 = quarter</td></tr>
+      <tr><td><strong>Compound</strong></td><td>3</td><td class="mono">6/8 · 6/4 · 6/16</td><td class="mono">9/8 · 9/4 · 9/16</td><td class="mono">12/8 · 12/4 · 12/16</td><td>A <em>dotted</em> note: 6/8 → dotted quarter</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout warm">
+    <span class="cl">Reading a compound signature</span>
+    <p>In compound meter the top number counts <em>divisions</em>, not beats. 6/8 is not six beats —
+    it is <strong>two</strong> dotted-quarter beats, each dividing into three eighths. Divide the top
+    number by 3 to get the real beat count.</p>
+  </div>
+
+  <h4>Notating rhythm clearly</h4>
+  <p>When rhythms are notated, it is customary to use rests, beams, ties, and dots so that the
+  <strong>metric accents and the individual beats are emphasised rather than obscured</strong>. If a
+  reader has to decode where beat 3 falls, the notation has failed.</p>
+
+  <p><em class="term">Syncopations</em> — rhythmic figures that stress normally weak beats or
+  divisions — are frequently notated that way deliberately, with ties and rests that make the
+  displacement visible rather than hiding it inside a longer symbol.</p>
+
+  <div class="svgcard" id="meterSvg"></div>
+</section>
+
+<section id="part4">
+  <h2><span class="num">IV</span>Triads and seventh chords</h2>
+  <hr class="rule">
+  <p class="lede">Stack thirds. Everything in tonal harmony is stacked thirds, and the whole
+     vocabulary of chord types falls out of how you stack them.</p>
+</section>
+
+<section id="triads">
+  <h3>Triads</h3>
+  <p>The fundamental tertian sonority is the <em class="term">triad</em>: a three-note chord consisting
+  of a 5th divided into two superimposed 3rds. There are exactly <strong>four</strong> ways to combine
+  major and minor 3rds, and therefore exactly four triad types.</p>
+
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Triad</th><th>Symbol</th><th>Lower 3rd</th><th>Upper 3rd</th><th>Outer 5th</th><th>Half steps</th><th>On C</th><th>Hear</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Major</strong></td><td class="mono">C</td><td>major</td><td>minor</td><td>P5</td><td class="mono">0–4–7</td><td class="mono">C E G</td><td><button class="btn play sm" onclick="playChord([60,64,67])">▸</button></td></tr>
+      <tr><td><strong>Minor</strong></td><td class="mono">Cm</td><td>minor</td><td>major</td><td>P5</td><td class="mono">0–3–7</td><td class="mono">C E♭ G</td><td><button class="btn play sm" onclick="playChord([60,63,67])">▸</button></td></tr>
+      <tr><td><strong>Diminished</strong></td><td class="mono">C°</td><td>minor</td><td>minor</td><td>°5</td><td class="mono">0–3–6</td><td class="mono">C E♭ G♭</td><td><button class="btn play sm" onclick="playChord([60,63,66])">▸</button></td></tr>
+      <tr><td><strong>Augmented</strong></td><td class="mono">C+</td><td>major</td><td>major</td><td>+5</td><td class="mono">0–4–8</td><td class="mono">C E G♯</td><td><button class="btn play sm" onclick="playChord([60,64,68])">▸</button></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="svgcard" id="triadStackSvg"></div>
+
+  <div class="callout cool">
+    <span class="cl">Naming the parts</span>
+    <p>The bottom note of the stack is the <strong>root</strong>; the others are the
+    <strong>third</strong> and the <strong>fifth</strong>, named for their interval above the root.
+    These names stay attached to the notes no matter how the chord is rearranged.</p>
+  </div>
+
+  <h4>Diatonic triads: the same pattern in every major key</h4>
+  <p>Build a triad on each degree of a major scale using only notes of that scale, and the qualities
+  always come out in the same order. This is why Roman numerals are portable across keys:</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Degree</th><th class="mono">1̂</th><th class="mono">2̂</th><th class="mono">3̂</th><th class="mono">4̂</th><th class="mono">5̂</th><th class="mono">6̂</th><th class="mono">7̂</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Major key</strong></td><td class="mono">I</td><td class="mono">ii</td><td class="mono">iii</td><td class="mono">IV</td><td class="mono">V</td><td class="mono">vi</td><td class="mono">vii°</td></tr>
+      <tr><td>Quality</td><td>major</td><td>minor</td><td>minor</td><td>major</td><td>major</td><td>minor</td><td>dim.</td></tr>
+      <tr><td><strong>Natural minor</strong></td><td class="mono">i</td><td class="mono">ii°</td><td class="mono">III</td><td class="mono">iv</td><td class="mono">v</td><td class="mono">VI</td><td class="mono">VII</td></tr>
+      <tr><td><strong>Harmonic minor</strong></td><td class="mono">i</td><td class="mono">ii°</td><td class="mono">III+</td><td class="mono">iv</td><td class="mono">V</td><td class="mono">VI</td><td class="mono">vii°</td></tr>
+    </tbody>
+  </table></div>
+  <p style="font-size:14.5px;color:var(--ink-soft)">Uppercase numeral = major, lowercase = minor,
+  <span class="mono">°</span> = diminished, <span class="mono">+</span> = augmented. In minor, the
+  raised 7̂ of harmonic minor is what turns v into <strong>V</strong> and VII into
+  <strong>vii°</strong> — and that is almost always what composers actually use, because only a major
+  V has a leading tone.</p>
+</section>
+
+<section id="sevenths">
+  <h3>Seventh chords</h3>
+  <p>Extend a tertian triad by adding another 3rd on top of the 5th and you get a four-note chord.
+  The interval between the added note and the root is some kind of 7th — hence
+  <em class="term">seventh chords</em>. Tonal harmony commonly uses only <strong>five</strong> types.</p>
+
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Seventh chord</th><th>Symbol</th><th>Triad + 7th</th><th>Half steps</th><th>On C</th><th>Typical home</th><th>Hear</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Major seventh</strong></td><td class="mono">Cmaj7 / CM7</td><td>major + M7</td><td class="mono">0–4–7–11</td><td class="mono">C E G B</td><td class="mono">I, IV</td><td><button class="btn play sm" onclick="playChord([60,64,67,71])">▸</button></td></tr>
+      <tr><td><strong>Dominant seventh</strong> (major–minor)</td><td class="mono">C7</td><td>major + m7</td><td class="mono">0–4–7–10</td><td class="mono">C E G B♭</td><td class="mono">V</td><td><button class="btn play sm" onclick="playChord([60,64,67,70])">▸</button></td></tr>
+      <tr><td><strong>Minor seventh</strong></td><td class="mono">Cm7</td><td>minor + m7</td><td class="mono">0–3–7–10</td><td class="mono">C E♭ G B♭</td><td class="mono">ii, iii, vi</td><td><button class="btn play sm" onclick="playChord([60,63,67,70])">▸</button></td></tr>
+      <tr><td><strong>Half-diminished seventh</strong></td><td class="mono">Cø7 / Cm7♭5</td><td>diminished + m7</td><td class="mono">0–3–6–10</td><td class="mono">C E♭ G♭ B♭</td><td class="mono">viiø7 in major, iiø7 in minor</td><td><button class="btn play sm" onclick="playChord([60,63,66,70])">▸</button></td></tr>
+      <tr><td><strong>Fully diminished seventh</strong></td><td class="mono">C°7</td><td>diminished + °7</td><td class="mono">0–3–6–9</td><td class="mono">C E♭ G♭ B𝄫</td><td class="mono">vii°7 in minor</td><td><button class="btn play sm" onclick="playChord([60,63,66,69])">▸</button></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout warm">
+    <span class="cl">From the vault — the diatonic 7th pattern in major</span>
+    <p>Stack four notes (1–3–5–7) on each degree of any major scale and the qualities are always:
+    <span class="mono"><strong>Imaj7 · ii7 · iii7 · IVmaj7 · V7 · vi7 · viiø7</strong></span>.
+    The V7 is the only dominant-seventh chord that occurs naturally in the key — which is precisely
+    why it points home so hard. Use the <a href="#explorer">Key Explorer</a> to see this in all 15 keys.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <p class="ct">Quality reference</p>
+      <ul style="margin-bottom:0">
+        <li><strong>maj7</strong> — major triad + major 7th. Bright, jazzy, at rest.</li>
+        <li><strong>m7</strong> — minor triad + minor 7th. Smooth, mellow.</li>
+        <li><strong>7</strong> — major triad + minor 7th. Bluesy, strong tendency to resolve.</li>
+        <li><strong>ø7 / m7♭5</strong> — diminished triad + minor 7th. Tense, unstable.</li>
+        <li><strong>°7</strong> — diminished triad + diminished 7th. Maximum instability; symmetrical.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <p class="ct">Why V7 resolves</p>
+      <p style="margin-bottom:0">A dominant seventh contains a tritone between 7̂ (the leading tone)
+      and 4̂. The leading tone wants to rise a half step to 1̂; 4̂ wants to fall a half step to 3̂.
+      Both resolve into the tonic triad at once. That single tritone is the engine of tonal
+      harmony's forward motion.</p>
+    </div>
+  </div>
+  <div class="btnrow">
+    <span class="lb">Hear the pull</span>
+    <button class="btn play" onclick="playSeq([[67,71,74,77],[60,64,67,72]],900)">G7 → C</button>
+    <button class="btn play" onclick="playSeq([[67,71,74],[60,64,67,72]],900)">G → C</button>
+  </div>
+</section>
+
+<section id="inversions">
+  <h3>Inversions and figured bass</h3>
+  <p>The <em class="term">inversion</em> of a triad or seventh chord is determined <strong>only by
+  which chord member is in the bass</strong>. Any chord member may appear in the soprano or in the
+  other voices without changing the inversion.</p>
+
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Chord</th><th>Bass note</th><th>Name</th><th>Figured bass</th><th>Roman numeral</th><th>C major example</th><th>Hear</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="3"><strong>Triad</strong></td><td>root</td><td>root position</td><td class="mono">(5/3)</td><td class="mono">I</td><td class="mono">C E G</td><td><button class="btn play sm" onclick="playChord([60,64,67])">▸</button></td></tr>
+      <tr><td>third</td><td>first inversion</td><td class="mono">6</td><td class="mono">I6</td><td class="mono">E G C</td><td><button class="btn play sm" onclick="playChord([64,67,72])">▸</button></td></tr>
+      <tr><td>fifth</td><td>second inversion</td><td class="mono">6/4</td><td class="mono">I6/4</td><td class="mono">G C E</td><td><button class="btn play sm" onclick="playChord([67,72,76])">▸</button></td></tr>
+      <tr><td rowspan="4"><strong>Seventh chord</strong></td><td>root</td><td>root position</td><td class="mono">7</td><td class="mono">V7</td><td class="mono">G B D F</td><td><button class="btn play sm" onclick="playChord([67,71,74,77])">▸</button></td></tr>
+      <tr><td>third</td><td>first inversion</td><td class="mono">6/5</td><td class="mono">V6/5</td><td class="mono">B D F G</td><td><button class="btn play sm" onclick="playChord([71,74,77,79])">▸</button></td></tr>
+      <tr><td>fifth</td><td>second inversion</td><td class="mono">4/3</td><td class="mono">V4/3</td><td class="mono">D F G B</td><td><button class="btn play sm" onclick="playChord([74,77,79,83])">▸</button></td></tr>
+      <tr><td>seventh</td><td>third inversion</td><td class="mono">4/2 (or 2)</td><td class="mono">V4/2</td><td class="mono">F G B D</td><td><button class="btn play sm" onclick="playChord([77,79,83,86])">▸</button></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout cool">
+    <span class="cl">Where the numbers come from</span>
+    <p>Figured-bass numerals are <strong>intervals above the bass note</strong>, reduced to their
+    simplest useful form. A first-inversion triad (E G C) has a 3rd and a 6th above the bass — the
+    3rd is assumed, so only the <strong>6</strong> is written. A second-inversion triad (G C E) has a
+    4th and a 6th, neither assumed, so both are written: <strong>6/4</strong>. Learn the derivation
+    once and you never have to memorise the table.</p>
+  </div>
+
+  <p>A triad has two inversions (three bass positions). A seventh chord works the same way except that
+  <strong>three</strong> inversions — four bass positions — are possible.</p>
+</section>
+
+<section id="explorer">
+  <h3>Key Explorer</h3>
+  <p class="lede">Everything above, computed live for any key. Pick a tonic and a mode; the page
+     spells the scale, draws the key signature, lights up the keyboard, and builds the diatonic
+     triads and sevenths.</p>
+
+  <div class="card">
+    <div class="btnrow">
+      <span class="lb">Tonic</span>
+      <select class="sel" id="exTonic"></select>
+      <span class="lb" style="margin-left:8px">Mode</span>
+      <select class="sel" id="exMode">
+        <option value="0">Major (Ionian)</option>
+        <option value="1">Natural minor</option>
+        <option value="2">Harmonic minor</option>
+        <option value="3">Melodic minor (asc.)</option>
+      </select>
+      <span style="flex:1"></span>
+      <button class="btn play" id="exPlayScale">Scale</button>
+      <button class="btn play" id="exPlayChords">All triads</button>
+    </div>
+
+    <div id="exSummary" style="font-size:14.5px;color:var(--ink-soft);margin-bottom:14px"></div>
+    <div id="exStaff" style="margin-bottom:16px"></div>
+    <div class="noteset" id="exNotes"></div>
+    <div class="kbd" id="exKbd" style="margin-bottom:20px"></div>
+
+    <div class="tbl-scroll"><table>
+      <thead><tr><th>Degree</th><th>Name</th><th>Numeral</th><th>Triad</th><th>Notes</th><th>7th chord</th><th>Notes</th><th>Hear</th></tr></thead>
+      <tbody id="exChords"></tbody>
+    </table></div>
+    <p style="font-size:13px;color:var(--ink-faint);margin-bottom:0">Spellings are generated by letter,
+    not by enharmonic shortcut — so you'll see genuine double sharps and double flats in the remote
+    keys, exactly as they'd appear on the page.</p>
+  </div>
+</section>
+
+<section id="part5">
+  <h2><span class="num">V</span>Harmony in motion</h2>
+  <hr class="rule">
+  <p class="lede">The bridge from "here are the chords" to "here is why they go in that order."
+     This part is deliberately brief — it is the seam where most of the later material will attach.</p>
+</section>
+
+<section id="function">
+  <h3>Harmonic function</h3>
+  <p>Chords in a key sort into three functional families. Most tonal phrases are a trip through them
+  in one direction, with the return to tonic as the point of arrival.</p>
+
+  <div class="svgcard" id="functionSvg"></div>
+
+  <div class="grid3">
+    <div class="card">
+      <p class="ct"><span class="pill g">Tonic</span></p>
+      <p style="margin-bottom:6px"><strong class="mono">I · vi · iii</strong></p>
+      <p style="margin-bottom:0">Repose. The place the music is heard as leaving from and returning
+      to. vi and iii share notes with I and can stand in for it.</p>
+    </div>
+    <div class="card">
+      <p class="ct"><span class="pill a">Predominant</span></p>
+      <p style="margin-bottom:6px"><strong class="mono">IV · ii · ii7</strong></p>
+      <p style="margin-bottom:0">Departure. Prepares the dominant — it contains 4̂ or 6̂ and moves
+      naturally into V.</p>
+    </div>
+    <div class="card">
+      <p class="ct"><span class="pill r">Dominant</span></p>
+      <p style="margin-bottom:6px"><strong class="mono">V · V7 · vii°</strong></p>
+      <p style="margin-bottom:0">Tension. Contains the leading tone, and in V7 the tritone.
+      Wants tonic, strongly.</p>
+    </div>
+  </div>
+
+  <div class="callout warm">
+    <span class="cl">The default direction</span>
+    <p><span class="mono">T → PD → D → T</span>. Moving forward along that chain sounds normal;
+    skipping ahead sounds normal; moving <em>backward</em> (V → IV) sounds like a deliberate
+    effect, which is exactly why blues and rock use it so much.</p>
+  </div>
+
+  <h4>Progressions to have in your hands</h4>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Progression</th><th>In C</th><th>Function path</th><th>Where you hear it</th><th>Hear</th></tr></thead>
+    <tbody id="progBody"></tbody>
+  </table></div>
+</section>
+
+<section id="cadences">
+  <h3>Cadences</h3>
+  <p>A <em class="term">cadence</em> is the harmonic punctuation at the end of a phrase. What the
+  phrase means structurally depends almost entirely on which cadence closes it.</p>
+
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Cadence</th><th>Motion</th><th>Conditions</th><th>Effect</th><th>Hear (C major)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Perfect authentic</strong> (PAC)</td><td class="mono">V → I</td><td>Both in root position, 1̂ in the soprano</td><td>Full stop. The strongest close available.</td><td><button class="btn play sm" onclick="playSeq([[55,67,71,74],[48,64,67,72]],800)">▸</button></td></tr>
+      <tr><td><strong>Imperfect authentic</strong> (IAC)</td><td class="mono">V → I</td><td>Anything weaker — inversion, or 3̂/5̂ on top</td><td>Closes, but keeps moving.</td><td><button class="btn play sm" onclick="playSeq([[55,67,71,74],[48,64,67,76]],800)">▸</button></td></tr>
+      <tr><td><strong>Half</strong> (HC)</td><td class="mono">… → V</td><td>Ends <em>on</em> the dominant</td><td>A comma. Demands continuation.</td><td><button class="btn play sm" onclick="playSeq([[48,64,67,72],[55,62,67,71]],800)">▸</button></td></tr>
+      <tr><td><strong>Deceptive</strong> (DC)</td><td class="mono">V → vi</td><td>Dominant resolves anywhere but I</td><td>The rug pulled. Extends the phrase.</td><td><button class="btn play sm" onclick="playSeq([[55,67,71,74],[57,64,69,72]],800)">▸</button></td></tr>
+      <tr><td><strong>Plagal</strong> (PC)</td><td class="mono">IV → I</td><td>Usually <em>after</em> an authentic cadence</td><td>The "Amen." A gentle confirmation.</td><td><button class="btn play sm" onclick="playSeq([[53,65,69,72],[48,64,67,72]],800)">▸</button></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="voice">
+  <h3>Voice-leading basics</h3>
+  <p>Tonal harmony is written as independent melodic lines that happen to make chords — not as a stack
+  of chords that happen to have a top note. Four rules of thumb cover most of it:</p>
+  <ol>
+    <li><strong>Move as little as possible.</strong> Keep common tones in the same voice; move the
+        others by step where you can.</li>
+    <li><strong>Resolve tendency tones.</strong> The leading tone (7̂) rises to 1̂. The seventh of a
+        seventh chord falls by step. These are near-absolute.</li>
+    <li><strong>No parallel fifths or octaves.</strong> Two voices a P5 or P8 apart moving to another
+        P5 or P8 collapses their independence — the ear hears one voice, not two.</li>
+    <li><strong>Watch the outer voices.</strong> Soprano and bass are what listeners actually track.
+        Contrary motion between them is the safest default.</li>
+  </ol>
+  <div class="callout cool">
+    <span class="cl">Standard spacing</span>
+    <p>In four-part writing, keep adjacent upper voices (soprano–alto, alto–tenor) within an octave
+    of each other. The bass may sit further away — wide spacing at the bottom of a chord sounds
+    normal, because that is how the overtone series is arranged.</p>
+  </div>
+</section>
+
+<section id="roadmap">
+  <h2><span class="num">→</span>Roadmap — what goes here next</h2>
+  <hr class="rule">
+  <p class="lede">Placeholders with stable anchors. Each becomes a full section with the same
+     structure as the ones above — prose, a table, a diagram, and something playable.</p>
+
+  <h3>Near-term (direct continuations of Part V)</h3>
+  <div class="stub" id="todo-nct"><h4>Non-chord tones</h4><p>Passing tones, neighbours, suspensions, appoggiaturas, retardations, anticipations, pedal point — how dissonance actually appears in real textures.</p></div>
+  <div class="stub" id="todo-phrase"><h4>Phrase structure &amp; period forms</h4><p>Antecedent/consequent, parallel and contrasting periods, sentence structure, phrase extension.</p></div>
+  <div class="stub" id="todo-partwriting"><h4>Part writing in detail</h4><p>Doubling rules, root-position and inverted triads in four parts, the cadential 6/4, common part-writing errors.</p></div>
+
+  <h3>Chromatic harmony</h3>
+  <div class="stub" id="todo-secondary"><h4>Secondary functions</h4><p>V/V, V7/IV, vii°/V — tonicising a chord that is not the tonic. The single most useful chromatic device.</p></div>
+  <div class="stub" id="todo-modulation"><h4>Modulation</h4><p>Common-chord (pivot) modulation, chromatic modulation, sequential modulation; closely related keys.</p></div>
+  <div class="stub" id="todo-mixture"><h4>Mode mixture &amp; the Neapolitan</h4><p>Borrowed chords from the parallel key, ♭VI, ♭III, the Picardy third, and the N6.</p></div>
+  <div class="stub" id="todo-aug6"><h4>Augmented sixth chords</h4><p>Italian, French, German — where they come from and where they go.</p></div>
+
+  <h3>Beyond common practice</h3>
+  <div class="stub" id="todo-modes"><h4>The modes</h4><p>Dorian, Phrygian, Lydian, Mixolydian, Aeolian, Locrian — and why modal harmony behaves differently from functional harmony.</p></div>
+  <div class="stub" id="todo-jazz"><h4>Jazz harmony</h4><p>Extensions (9ths, 11ths, 13ths), tritone substitution, ii–V–I in all keys, voicings and rootless shells.</p></div>
+  <div class="stub" id="todo-20c"><h4>Twentieth-century harmony</h4><p>Quartal harmony, pandiatonicism, set theory basics, planing — the companion vault note already exists for this.</p></div>
+  <div class="stub" id="todo-carnatic"><h4>Cross-reference: Carnatic theory</h4><p>Swaras against scale degrees, the 72 melakarta as a systematic scale generator, gamaka — and where the two systems genuinely map onto each other and where they don't.</p></div>
+
+  <h3>Practice tools to build into this page</h3>
+  <div class="stub" id="todo-eartrain"><h4>Ear-training drills</h4><p>Interval identification, chord-quality identification, cadence identification — the audio engine is already here.</p></div>
+  <div class="stub" id="todo-quiz"><h4>Key-signature and spelling quiz</h4><p>Random prompts, scored, with a "copy my weak spots" export.</p></div>
+  <div class="stub" id="todo-progbuilder"><h4>Progression builder</h4><p>Click Roman numerals into a sequence, hear it in any key, export as chord symbols.</p></div>
+</section>
+
+<section id="glossary">
+  <h2><span class="num">§</span>Glossary</h2>
+  <hr class="rule">
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Bar line</strong></td><td>Vertical line through the staff marking the end of a measure.</td></tr>
+      <tr><td><strong>Beat</strong></td><td>The basic pulse of a passage.</td></tr>
+      <tr><td><strong>Compound interval</strong></td><td>An interval of an octave or larger.</td></tr>
+      <tr><td><strong>Consonance</strong></td><td>M/m 3rds and 6ths, P5, P8. Heard as stable.</td></tr>
+      <tr><td><strong>Diatonic</strong></td><td>Belonging to the notes of the prevailing key, without added accidentals.</td></tr>
+      <tr><td><strong>Dissonance</strong></td><td>Everything else, including all + and ° intervals; the P4 above the bass.</td></tr>
+      <tr><td><strong>Enharmonic</strong></td><td>Different spellings of the same sounding pitch (C♯ / D♭).</td></tr>
+      <tr><td><strong>Figured bass</strong></td><td>Numerals showing intervals above the bass note; encodes inversion.</td></tr>
+      <tr><td><strong>Functional harmony</strong></td><td>Harmony in which each chord has a standard role relative to the tonic.</td></tr>
+      <tr><td><strong>Harmony</strong></td><td>The sound of two or more pitches performed simultaneously; the vertical aspect.</td></tr>
+      <tr><td><strong>Interval</strong></td><td>The distance in pitch between two notes.</td></tr>
+      <tr><td><strong>Inversion (chord)</strong></td><td>Determined solely by which chord member is in the bass.</td></tr>
+      <tr><td><strong>Inversion (interval)</strong></td><td>Moving the lower note above the upper; numerical names sum to 9.</td></tr>
+      <tr><td><strong>Key signature</strong></td><td>Sharps or flats at the start of a staff, applied consistently.</td></tr>
+      <tr><td><strong>Meter</strong></td><td>The consistent pattern into which beats group.</td></tr>
+      <tr><td><strong>Minor pentachord</strong></td><td>Degrees 1̂–5̂ of any minor scale: W–H–W–W. Identical in all three forms.</td></tr>
+      <tr><td><strong>Parallel keys</strong></td><td>Major and minor sharing the same tonic (C major / c minor).</td></tr>
+      <tr><td><strong>Pitch class</strong></td><td>A note name irrespective of octave. There are twelve.</td></tr>
+      <tr><td><strong>Relative keys</strong></td><td>Major and minor sharing the same key signature (E♭ major / c minor).</td></tr>
+      <tr><td><strong>Rhythm</strong></td><td>The time aspect of music, as opposed to the pitch aspect.</td></tr>
+      <tr><td><strong>Simple interval</strong></td><td>An interval smaller than an octave.</td></tr>
+      <tr><td><strong>Syncopation</strong></td><td>A rhythmic figure stressing normally weak beats or divisions.</td></tr>
+      <tr><td><strong>Tempo</strong></td><td>The rate at which beats occur.</td></tr>
+      <tr><td><strong>Tertian</strong></td><td>Built of thirds. C–E–G is tertian; C–F–B is not.</td></tr>
+      <tr><td><strong>Tetrachord</strong></td><td>A four-note pattern; the major scale is two identical ones (W–W–H) a whole step apart.</td></tr>
+      <tr><td><strong>Tie</strong></td><td>Curved line joining two notes of the same pitch into one duration.</td></tr>
+      <tr><td><strong>Tonal center</strong></td><td>The pitch class acting as the music's center of gravity.</td></tr>
+      <tr><td><strong>Triad</strong></td><td>A three-note tertian chord: a 5th divided into two superimposed 3rds.</td></tr>
+      <tr><td><strong>Tritone</strong></td><td>The +4 or its enharmonic equivalent the °5; three whole steps.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+</main>
+</div>
+
+<footer class="doc">
+  <p><strong>Sources.</strong> Part I and most of Parts II–IV follow the vault note
+  <em>Tonal Harmony — notes</em> (Kostka &amp; Payne, <em>Tonal Harmony</em>), at
+  <code>Music &amp; Piano Journey/Music Books/Notes from books/</code>. The diatonic seventh-chord
+  material draws on <em>Diatonic Chords for all Keys</em> in the same vault. Part V (function,
+  cadences, voice leading) and the glossary are standard common-practice theory added here to
+  complete the framework — the vault note stops at figured bass.</p>
+  <p style="margin-bottom:0">Self-contained single file. All audio is synthesised in the browser;
+  nothing is fetched over the network.</p>
+</footer>
+<script>
+/* ============================================================================
+   1 · AUDIO — tiny Web Audio synth. Nothing loads, nothing plays unasked.
+   ========================================================================= */
+let AC=null;
+function ac(){ if(!AC){ try{AC=new (window.AudioContext||window.webkitAudioContext)();}catch(e){} }
+  if(AC && AC.state==='suspended') AC.resume(); return AC; }
+function mtof(m){ return 440*Math.pow(2,(m-69)/12); }
+function tone(midi,at,dur,gain){
+  const c=ac(); if(!c) return;
+  const t0=c.currentTime+at, f=mtof(midi);
+  const o=c.createOscillator(), o2=c.createOscillator(), g=c.createGain(), lp=c.createBiquadFilter();
+  o.type='triangle'; o.frequency.value=f;
+  o2.type='sine'; o2.frequency.value=f*2; 
+  const g2=c.createGain(); g2.gain.value=.16;
+  lp.type='lowpass'; lp.frequency.value=Math.max(1400,f*6); lp.Q.value=.4;
+  const peak=(gain||.22);
+  g.gain.setValueAtTime(0.0001,t0);
+  g.gain.exponentialRampToValueAtTime(peak,t0+.012);
+  g.gain.exponentialRampToValueAtTime(peak*.55,t0+.09);
+  g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+  o.connect(lp); o2.connect(g2); g2.connect(lp); lp.connect(g); g.connect(c.destination);
+  o.start(t0); o2.start(t0); o.stop(t0+dur+.05); o2.stop(t0+dur+.05);
+}
+function playNote(m){ tone(m,0,.85,.24); }
+function playChord(ms,at,dur){ const n=ms.length;
+  ms.forEach(m=>tone(m,at||0,dur||1.5,.2/Math.sqrt(n)*1.5)); }
+function playMelody(ms,step,dur){ ms.forEach((m,i)=>tone(m,i*(step||.26),dur||.5,.24)); }
+function playSeq(chords,ms){ const s=(ms||800)/1000; chords.forEach((c,i)=>playChord(c,i*s,s*1.6)); }
+function playScaleThenChord(ms){ playMelody(ms,.22,.45); playChord(ms,ms.length*.22+.12,1.8); }
+
+/* ============================================================================
+   2 · THEORY CORE — letter-accurate spelling, no enharmonic shortcuts
+   ========================================================================= */
+const LET=['C','D','E','F','G','A','B'], LETPC=[0,2,4,5,7,9,11];
+function accStr(n){ if(n===0)return''; if(n===1)return'♯'; if(n===-1)return'♭';
+  if(n===2)return'𝄪'; if(n===-2)return'𝄫'; return n>0?'♯'.repeat(n):'♭'.repeat(-n); }
+function nname(n){ return LET[n.li]+accStr(n.acc); }
+function npc(n){ return ((LETPC[n.li]+n.acc)%12+12)%12; }
+function parseNote(s){ const li=LET.indexOf(s[0]); let acc=0;
+  for(const ch of s.slice(1)){ if(ch==='♯'||ch==='#')acc++; else if(ch==='♭'||ch==='b')acc--;
+    else if(ch==='𝄪')acc+=2; else if(ch==='𝄫')acc-=2; }
+  return {li,acc}; }
+
+const MODES=[
+  {name:'Major',  offs:[0,2,4,5,7,9,11], minor:false},
+  {name:'Natural minor',  offs:[0,2,3,5,7,8,10], minor:true},
+  {name:'Harmonic minor', offs:[0,2,3,5,7,8,11], minor:true},
+  {name:'Melodic minor (asc.)', offs:[0,2,3,5,7,9,11], minor:true}
+];
+function buildScale(tonic,offs){
+  const out=[];
+  for(let i=0;i<7;i++){
+    const li=(tonic.li+i)%7, oct=Math.floor((tonic.li+i)/7);
+    const nat=LETPC[li]+12*oct-LETPC[tonic.li];
+    out.push({li, acc:offs[i]-nat+tonic.acc, off:offs[i]});
+  }
+  return out;
+}
+function keySig(tonic,isMinor){
+  const sc=buildScale(tonic,isMinor?MODES[1].offs:MODES[0].offs);
+  let s=0,f=0; sc.forEach(n=>{ if(n.acc>0)s+=n.acc; else if(n.acc<0)f-=n.acc; });
+  return {sharps:s,flats:f};
+}
+const TRIADQ={'4,7':'M','3,7':'m','3,6':'d','4,8':'A'};
+function triadQual(o){ const a=((o[1]-o[0])%12+12)%12, b=((o[2]-o[0])%12+12)%12;
+  return TRIADQ[a+','+b]||'?'; }
+const SUF={M:'',m:'m',d:'°',A:'+','?':'?'};
+function seventhQual(tq,sev){ const s=((sev)%12+12)%12;
+  if(tq==='M'&&s===11)return{sym:'maj7',rn:'M7'}; if(tq==='M'&&s===10)return{sym:'7',rn:'7'};
+  if(tq==='m'&&s===10)return{sym:'m7',rn:'7'};    if(tq==='m'&&s===11)return{sym:'mMaj7',rn:'M7'};
+  if(tq==='d'&&s===10)return{sym:'ø7',rn:'ø7'};   if(tq==='d'&&s===9)return{sym:'°7',rn:'°7'};
+  if(tq==='A'&&s===11)return{sym:'maj7♯5',rn:'+M7'}; if(tq==='A'&&s===10)return{sym:'7♯5',rn:'+7'};
+  return{sym:'7',rn:'7'};
+}
+const ROM=['I','II','III','IV','V','VI','VII'];
+function roman(i,q){ let r=(q==='m'||q==='d')?ROM[i].toLowerCase():ROM[i];
+  return r+(q==='d'?'°':q==='A'?'+':''); }
+const DEGNAMES=['Tonic','Supertonic','Mediant','Subdominant','Dominant','Submediant','Leading tone'];
+
+function chordAt(scale,deg,size){
+  const notes=[],offs=[];
+  for(let k=0;k<size;k++){ const j=deg+2*k, n=scale[j%7], o=Math.floor(j/7)*12;
+    notes.push(n); offs.push(n.off+o); }
+  return {notes,offs};
+}
+
+/* ============================================================================
+   3 · KEYBOARD
+   ========================================================================= */
+const SH=['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
+const FL=['C','D♭','D','E♭','E','F','G♭','G','A♭','A','B♭','B'];
+const WHITE=[0,2,4,5,7,9,11], BLACKAFTER=[0,1,3,4,5];
+function kbdDims(){ return window.innerWidth<=720?{w:32,bw:21}:{w:40,bw:26}; }
+function renderKbd(el,octaves,startMidi,opts){
+  opts=opts||{}; const D=kbdDims(), step=D.w-1;
+  let html='', wi=0;
+  for(let o=0;o<octaves;o++){
+    for(let k=0;k<7;k++){
+      const midi=startMidi+o*12+WHITE[k], pc=midi%12;
+      const on=opts.pcs&&opts.pcs.indexOf(pc)>=0, root=opts.root!=null&&pc===opts.root;
+      const lbl=opts.labels===false?'':(opts.flat?FL[pc]:SH[pc]);
+      html+='<div class="wk'+(root?' root':on?' on':'')+'" data-m="'+midi+'">'+lbl+'</div>';
+      wi++;
+    }
+  }
+  for(let o=0;o<octaves;o++){
+    for(const b of BLACKAFTER){
+      const idxWhite=o*7+b, midi=startMidi+o*12+WHITE[b]+1, pc=midi%12;
+      const on=opts.pcs&&opts.pcs.indexOf(pc)>=0, root=opts.root!=null&&pc===opts.root;
+      const lbl=opts.labels===false?'':(opts.flat?FL[pc]:SH[pc]);
+      const left=(idxWhite+1)*step-D.bw/2;
+      html+='<div class="bk'+(root?' root':on?' on':'')+'" style="left:'+left+'px;width:'+D.bw+'px" data-m="'+midi+'">'+lbl+'</div>';
+    }
+  }
+  el.style.width=(octaves*7*step+1)+'px';
+  el.innerHTML=html;
+  el.querySelectorAll('[data-m]').forEach(k=>{
+    k.addEventListener('click',()=>{ const m=+k.dataset.m; playNote(m);
+      k.classList.add('lit'); setTimeout(()=>k.classList.remove('lit'),260); });
+  });
+}
+let useFlat=false;
+function drawFreeKbd(){ renderKbd(document.getElementById('freeKbd'),2,60,{flat:useFlat}); }
+document.getElementById('lblSharp').addEventListener('click',function(){
+  useFlat=false; this.classList.add('on'); document.getElementById('lblFlat').classList.remove('on'); drawFreeKbd(); });
+document.getElementById('lblFlat').addEventListener('click',function(){
+  useFlat=true; this.classList.add('on'); document.getElementById('lblSharp').classList.remove('on'); drawFreeKbd(); });
+
+/* ============================================================================
+   4 · STAFF (treble clef key signatures)
+   ========================================================================= */
+const SHARP_Y=[30,45,25,40,55,35,50], FLAT_Y=[50,35,55,40,60,45,65];
+function staffSVG(sharps,flats,caption){
+  const n=sharps||flats, glyph=sharps?'♯':'♭', ys=sharps?SHARP_Y:FLAT_Y;
+  const w=Math.max(150,72+n*15);
+  let s='<svg viewBox="0 0 '+w+' 108" width="'+w+'" height="108" role="img" aria-label="key signature">';
+  for(let i=0;i<5;i++) s+='<line class="sv-axis" x1="8" y1="'+(30+i*10)+'" x2="'+(w-8)+'" y2="'+(30+i*10)+'" stroke-width="1"/>';
+  s+='<text class="sv-ink" x="12" y="76" font-size="52" font-family="Bravura,\'Noto Music\',\'Segoe UI Symbol\',serif">&#x1D11E;</text>';
+  for(let i=0;i<n;i++)
+    s+='<text class="sv-accent" x="'+(56+i*15)+'" y="'+(ys[i]+6)+'" font-size="21" text-anchor="middle" font-family="Bravura,\'Noto Music\',serif">'+glyph+'</text>';
+  if(caption) s+='<text class="sv-faint" x="'+(w/2)+'" y="100" font-size="12" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif">'+caption+'</text>';
+  return s+'</svg>';
+}
+const KS=[['C',0,0],['G',1,0],['D',2,0],['A',3,0],['E',4,0],['B',5,0],['F♯',6,0],['C♯',7,0],
+          ['F',0,1],['B♭',0,2],['E♭',0,3],['A♭',0,4],['D♭',0,5],['G♭',0,6],['C♭',0,7]];
+(function(){
+  const box=document.getElementById('ksBtns'), out=document.getElementById('staffBox');
+  KS.forEach((k,i)=>{
+    const b=document.createElement('button');
+    b.className='btn sm'+(i===0?' on':''); b.textContent=k[0];
+    b.addEventListener('click',()=>{
+      box.querySelectorAll('button').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+      const rel=relMinorName(k[0]);
+      out.innerHTML=staffSVG(k[1],k[2], k[0]+' major  ·  '+rel+' minor  ·  '+
+        (k[1]?k[1]+' sharp'+(k[1]>1?'s':''):k[2]?k[2]+' flat'+(k[2]>1?'s':''):'no sharps or flats'));
+    });
+    box.appendChild(b);
+  });
+  out.innerHTML=staffSVG(0,0,'C major  ·  a minor  ·  no sharps or flats');
+})();
+function relMinorName(maj){ const t=parseNote(maj), sc=buildScale(t,MODES[0].offs);
+  return nname(sc[5]).toLowerCase(); }
+
+/* ============================================================================
+   5 · CIRCLE OF FIFTHS
+   ========================================================================= */
+const CIRCLE=[['C','a','—'],['G','e','1♯'],['D','b','2♯'],['A','f♯','3♯'],['E','c♯','4♯'],
+ ['B','g♯','5♯'],['G♭','e♭','6♭'],['D♭','b♭','5♭'],['A♭','f','4♭'],['E♭','c','3♭'],
+ ['B♭','g','2♭'],['F','d','1♭']];
+function pol(cx,cy,r,deg){ const a=(deg-90)*Math.PI/180; return [cx+r*Math.cos(a),cy+r*Math.sin(a)]; }
+function ring(cx,cy,r1,r2,a1,a2){
+  const [x1,y1]=pol(cx,cy,r2,a1),[x2,y2]=pol(cx,cy,r2,a2),
+        [x3,y3]=pol(cx,cy,r1,a2),[x4,y4]=pol(cx,cy,r1,a1);
+  return 'M'+x1+' '+y1+'A'+r2+' '+r2+' 0 0 1 '+x2+' '+y2+'L'+x3+' '+y3+
+         'A'+r1+' '+r1+' 0 0 0 '+x4+' '+y4+'Z';
+}
+(function(){
+  const C=210, S=420; let s='<svg viewBox="0 0 '+S+' '+S+'" width="'+S+'" height="'+S+'" role="img" aria-label="circle of fifths">';
+  s+='<style>.wdg{fill:var(--panel);stroke:var(--line);stroke-width:1;cursor:pointer}'+
+     '.wdg:hover{fill:var(--accent-soft)}.wdgm{fill:var(--bg);stroke:var(--line);stroke-width:1;cursor:pointer}'+
+     '.wdgm:hover{fill:var(--accent-soft)}</style>';
+  CIRCLE.forEach((k,i)=>{
+    const a1=i*30-15, a2=i*30+15;
+    s+='<path class="wdg" d="'+ring(C,C,136,200,a1,a2)+'" data-maj="'+k[0]+'"><title>'+k[0]+' major</title></path>';
+    s+='<path class="wdgm" d="'+ring(C,C,80,136,a1,a2)+'" data-min="'+k[1]+'"><title>'+k[1]+' minor</title></path>';
+    const [mx,my]=pol(C,C,180,i*30), [sx,sy]=pol(C,C,152,i*30), [nx,ny]=pol(C,C,109,i*30);
+    s+='<text class="sv-ink" x="'+mx+'" y="'+(my+6)+'" text-anchor="middle" font-size="19" font-weight="700" font-family="-apple-system,system-ui,sans-serif" pointer-events="none">'+k[0]+'</text>';
+    s+='<text class="sv-faint" x="'+sx+'" y="'+(sy+4)+'" text-anchor="middle" font-size="11" font-weight="700" font-family="-apple-system,system-ui,sans-serif" pointer-events="none">'+k[2]+'</text>';
+    s+='<text class="sv-accent" x="'+nx+'" y="'+(ny+5)+'" text-anchor="middle" font-size="15" font-weight="700" font-family="-apple-system,system-ui,sans-serif" pointer-events="none">'+k[1]+'</text>';
+  });
+  s+='<circle cx="'+C+'" cy="'+C+'" r="80" fill="var(--panel)" stroke="var(--line-strong)"/>';
+  s+='<text class="sv-lbl" x="'+C+'" y="'+(C-22)+'" text-anchor="middle" font-size="11.5" font-weight="700" letter-spacing="1.2" font-family="-apple-system,system-ui,sans-serif">CIRCLE OF</text>';
+  s+='<text class="sv-lbl" x="'+C+'" y="'+(C-6)+'" text-anchor="middle" font-size="11.5" font-weight="700" letter-spacing="1.2" font-family="-apple-system,system-ui,sans-serif">FIFTHS</text>';
+  s+='<text class="sv-accent" x="'+C+'" y="'+(C+16)+'" text-anchor="middle" font-size="11" font-weight="700" font-family="-apple-system,system-ui,sans-serif">↻ sharps  ·  ↺ flats</text>';
+  s+='<text class="sv-faint" x="'+C+'" y="'+(C+34)+'" text-anchor="middle" font-size="10.5" font-family="-apple-system,system-ui,sans-serif">outer: major · inner: relative minor</text>';
+  s+='<path d="M '+(C+30)+' '+(C+46)+' a 34 34 0 0 1 -60 0" fill="none" class="sv-grid" stroke-width="1.5" stroke-dasharray="3 3"/>';
+  s+='</svg>';
+  document.getElementById('circleBox').innerHTML=s;
+  document.querySelectorAll('[data-maj]').forEach(p=>p.addEventListener('click',()=>loadKey(p.dataset.maj,0)));
+  document.querySelectorAll('[data-min]').forEach(p=>p.addEventListener('click',()=>loadKey(p.dataset.min.toUpperCase().replace('♯','♯'),1)));
+})();
+
+/* ============================================================================
+   6 · STATIC DIAGRAMS
+   ========================================================================= */
+function svgOpen(w,h,label){ return '<svg viewBox="0 0 '+w+' '+h+'" width="'+w+'" height="'+h+
+  '" role="img" aria-label="'+label+'" font-family="-apple-system,system-ui,sans-serif">'; }
+
+/* major scale staircase */
+(function(){
+  const deg=['1̂','2̂','3̂','4̂','5̂','6̂','7̂','1̂'], nn=['C','D','E','F','G','A','B','C'],
+        offs=[0,2,4,5,7,9,11,12], gap=['W','W','H','W','W','W','H'];
+  const W=740,H=230,bw=72,x0=22;
+  let s=svgOpen(W,H,'major scale step pattern');
+  s+='<line class="sv-grid" x1="14" y1="196" x2="'+(W-14)+'" y2="196" stroke-width="1"/>';
+  for(let i=0;i<8;i++){
+    const x=x0+i*bw, y=186-offs[i]*11, h=196-y;
+    const acc=(i===2||i===3||i===6||i===7);
+    s+='<rect x="'+x+'" y="'+y+'" width="58" height="'+h+'" rx="5" fill="var(--accent)" opacity="'+(acc?'.9':'.55')+'"/>';
+    s+='<text x="'+(x+29)+'" y="'+(y-8)+'" text-anchor="middle" font-size="14" font-weight="700" class="sv-ink">'+nn[i]+'</text>';
+    s+='<text x="'+(x+29)+'" y="212" text-anchor="middle" font-size="12.5" font-weight="700" class="sv-lbl">'+deg[i]+'</text>';
+    if(i<7){
+      const half=gap[i]==='H';
+      s+='<text x="'+(x+29+bw/2)+'" y="'+(160-offs[i]*11+(half?0:6))+'" text-anchor="middle" font-size="13" font-weight="800" '+
+         (half?'class="sv-gold"':'class="sv-faint"')+'>'+gap[i]+'</text>';
+    }
+  }
+  s+='<text x="'+(W-16)+'" y="26" text-anchor="end" font-size="12.5" class="sv-faint">bar height = semitones above the tonic</text>';
+  s+='<text x="16" y="26" font-size="12.5" font-weight="700" class="sv-gold">H = half step (the only two: 3̂–4̂ and 7̂–1̂)</text>';
+  s+='</svg>';
+  document.getElementById('majorScaleSvg').innerHTML=s+
+    '<p class="cap">W–W–H–W–W–W–H. Transposing this fixed shape to a new starting note is what forces sharps or flats into a key signature.</p>';
+})();
+
+/* tetrachords */
+(function(){
+  const nn=['C','D','E','F','G','A','B','C'];
+  const W=740,H=150,bw=76,x0=40;
+  let s=svgOpen(W,H,'tetrachords');
+  s+='<rect x="'+(x0-14)+'" y="44" width="'+(4*bw-8)+'" height="56" rx="9" fill="var(--accent)" opacity=".1" stroke="var(--accent)" stroke-width="1.2"/>';
+  s+='<rect x="'+(x0-14+4*bw)+'" y="44" width="'+(4*bw-8)+'" height="56" rx="9" fill="var(--accent3)" opacity=".13" stroke="var(--accent3)" stroke-width="1.2"/>';
+  s+='<text x="'+(x0-14+(4*bw-8)/2)+'" y="32" text-anchor="middle" font-size="12.5" font-weight="700" class="sv-accent">LOWER TETRACHORD · W–W–H</text>';
+  s+='<text x="'+(x0-14+4*bw+(4*bw-8)/2)+'" y="32" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--accent3)">UPPER TETRACHORD · W–W–H</text>';
+  for(let i=0;i<8;i++){
+    const x=x0+i*bw;
+    s+='<circle cx="'+(x+24)+'" cy="72" r="17" class="sv-panel" stroke="var(--line-strong)" stroke-width="1.3"/>';
+    s+='<text x="'+(x+24)+'" y="77" text-anchor="middle" font-size="14" font-weight="700" class="sv-ink">'+nn[i]+'</text>';
+    if(i<7 && i!==3){
+      const half=(i===2||i===6);
+      s+='<text x="'+(x+24+bw/2)+'" y="77" text-anchor="middle" font-size="12" font-weight="800" '+(half?'class="sv-gold"':'class="sv-faint"')+'>'+(half?'H':'W')+'</text>';
+    }
+  }
+  s+='<text x="'+(x0+3*bw+24+bw/2)+'" y="77" text-anchor="middle" font-size="12" font-weight="800" class="sv-faint">W</text>';
+  s+='<text x="'+(x0+3*bw+24+bw/2)+'" y="118" text-anchor="middle" font-size="11.5" font-weight="700" class="sv-lbl">separated by a whole step</text>';
+  s+='</svg>';
+  document.getElementById('tetraSvg').innerHTML=s+
+    '<p class="cap">Two identical W–W–H cells a whole step apart. G–A–B–C is C major\'s upper tetrachord <em>and</em> G major\'s lower one — the hinge of the circle of fifths.</p>';
+})();
+
+/* minor forms comparison */
+(function(){
+  const rows=[
+    ['Major',        ['C','D','E','F','G','A','B'], []],
+    ['Natural minor',['C','D','E♭','F','G','A♭','B♭'],[2,5,6]],
+    ['Harmonic minor',['C','D','E♭','F','G','A♭','B'],[2,5,6]],
+    ['Melodic minor ↑',['C','D','E♭','F','G','A','B'],[2]]
+  ];
+  const W=740,bw=72,x0=176,H=44+rows.length*46;
+  let s=svgOpen(W,H,'minor scale forms');
+  for(let d=0;d<7;d++)
+    s+='<text x="'+(x0+d*bw+26)+'" y="24" text-anchor="middle" font-size="12" font-weight="700" class="sv-faint">'+(d+1)+'̂</text>';
+  s+='<rect x="'+(x0-8)+'" y="34" width="'+(5*bw)+'" height="'+(rows.length*46-6)+'" rx="8" fill="var(--accent3)" opacity=".07"/>';
+  s+='<text x="'+(x0-8+5*bw/2)+'" y="'+(H-4)+'" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--accent3)">minor pentachord — identical in all three forms (W–H–W–W)</text>';
+  rows.forEach((r,ri)=>{
+    const y=44+ri*46;
+    s+='<text x="160" y="'+(y+22)+'" text-anchor="end" font-size="13" font-weight="650" class="sv-lbl">'+r[0]+'</text>';
+    r[1].forEach((n,d)=>{
+      const x=x0+d*bw, ch=r[2].indexOf(d)>=0, hm=(ri===2&&d===6)||(ri===3&&(d===5||d===6));
+      s+='<rect x="'+x+'" y="'+y+'" width="52" height="32" rx="6" fill="'+(ch?'var(--accent)':hm?'var(--accent2)':'var(--panel)')+'" '+
+         (ch||hm?'':'stroke="var(--line-strong)" stroke-width="1"')+' opacity="'+(ch||hm?'.92':'1')+'"/>';
+      s+='<text x="'+(x+26)+'" y="'+(y+21)+'" text-anchor="middle" font-size="13.5" font-weight="700" '+
+         (ch||hm?'fill="#fff"':'class="sv-ink"')+'>'+n+'</text>';
+    });
+  });
+  s+='</svg>';
+  document.getElementById('minorCompareSvg').innerHTML=s+
+    '<p class="cap">All four scales on C. <span style="color:var(--accent);font-weight:700">Filled</span> = lowered from major; '+
+    '<span style="color:var(--accent2);font-weight:700">gold</span> = raised back up relative to natural minor.</p>';
+})();
+
+/* interval quality ladder */
+(function(){
+  const W=740,H=210;
+  let s=svgOpen(W,H,'interval quality ladder');
+  const rows=[
+    {y:56,lbl:'4ths · 5ths · unisons · octaves',cells:[['dim','°'],['Perfect','P'],['Aug','+']]},
+    {y:140,lbl:'2nds · 3rds · 6ths · 7ths',cells:[['dim','°'],['minor','m'],['Major','M'],['Aug','+']]}
+  ];
+  rows.forEach(r=>{
+    s+='<text x="20" y="'+(r.y-16)+'" font-size="12" font-weight="700" letter-spacing=".08em" class="sv-faint">'+r.lbl.toUpperCase()+'</text>';
+    const n=r.cells.length, bw=120, x0=20;
+    r.cells.forEach((c,i)=>{
+      const x=x0+i*(bw+44), mid=(r.cells.length===3&&i===1)||(r.cells.length===4&&(i===1||i===2));
+      s+='<rect x="'+x+'" y="'+r.y+'" width="'+bw+'" height="46" rx="8" fill="'+(mid?'var(--accent-soft)':'var(--panel)')+'" stroke="'+(mid?'var(--accent)':'var(--line-strong)')+'" stroke-width="1.3"/>';
+      s+='<text x="'+(x+bw/2)+'" y="'+(r.y+21)+'" text-anchor="middle" font-size="14" font-weight="700" class="sv-ink">'+c[0]+'</text>';
+      s+='<text x="'+(x+bw/2)+'" y="'+(r.y+38)+'" text-anchor="middle" font-size="12" font-weight="700" class="sv-accent">'+c[1]+'</text>';
+      if(i<n-1){
+        const ax=x+bw+6, ax2=x+bw+38;
+        s+='<line class="sv-axis" x1="'+ax+'" y1="'+(r.y+16)+'" x2="'+(ax2-5)+'" y2="'+(r.y+16)+'" stroke-width="1.4" marker-end="url(#ar)"/>';
+        s+='<line class="sv-axis" x1="'+(ax2-1)+'" y1="'+(r.y+34)+'" x2="'+(ax+4)+'" y2="'+(r.y+34)+'" stroke-width="1.4" marker-end="url(#ar)"/>';
+        s+='<text x="'+((ax+ax2)/2)+'" y="'+(r.y+11)+'" text-anchor="middle" font-size="10" font-weight="700" class="sv-faint">+½</text>';
+        s+='<text x="'+((ax+ax2)/2)+'" y="'+(r.y+46)+'" text-anchor="middle" font-size="10" font-weight="700" class="sv-faint">−½</text>';
+      }
+    });
+  });
+  s+='<defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">'+
+     '<path d="M0 0 L8 4 L0 8 z" fill="var(--line-strong)"/></marker></defs>';
+  s+='<text x="'+(W-20)+'" y="'+(H-8)+'" text-anchor="end" font-size="12" class="sv-faint">Perfect intervals never become major or minor.</text>';
+  s+='</svg>';
+  document.getElementById('intervalQualSvg').innerHTML=s+
+    '<p class="cap">One half step in either direction moves you one rung, without changing the numerical name.</p>';
+})();
+
+/* duration tree */
+(function(){
+  function head(x,y,filled,stem,flags){
+    let g='<g><ellipse cx="'+x+'" cy="'+y+'" rx="7.4" ry="5.4" transform="rotate(-20 '+x+' '+y+')" '+
+      (filled?'fill="var(--ink)"':'fill="none" stroke="var(--ink)" stroke-width="2"')+'/>';
+    if(stem) g+='<line x1="'+(x+7)+'" y1="'+(y-1.2)+'" x2="'+(x+7)+'" y2="'+(y-31)+'" stroke="var(--ink)" stroke-width="1.7"/>';
+    for(let f=0;f<flags;f++)
+      g+='<path d="M'+(x+7)+' '+(y-31+f*8)+' q 11 4 10 15 q -3 -8 -10 -9 z" fill="var(--ink)"/>';
+    return g+'</g>';
+  }
+  const rows=[['Whole note',1,0,false,false,0],['Half note',2,1,false,true,0],
+    ['Quarter note',4,2,true,true,0],['Eighth note',8,3,true,true,1],['Sixteenth note',16,4,true,true,2]];
+  const W=740,H=40+rows.length*54;
+  let s=svgOpen(W,H,'note durations');
+  s+='<text x="20" y="22" font-size="12" font-weight="700" letter-spacing=".08em" class="sv-faint">SYMBOL</text>';
+  s+='<text x="160" y="22" font-size="12" font-weight="700" letter-spacing=".08em" class="sv-faint">NAME</text>';
+  s+='<text x="330" y="22" font-size="12" font-weight="700" letter-spacing=".08em" class="sv-faint">RELATIVE LENGTH</text>';
+  rows.forEach((r,i)=>{
+    const y=56+i*54;
+    s+=head(44,y,r[3],r[4],r[5]);
+    s+='<text x="160" y="'+(y+5)+'" font-size="14" font-weight="650" class="sv-ink">'+r[0]+'</text>';
+    s+='<text x="286" y="'+(y+5)+'" font-size="12.5" text-anchor="end" class="sv-faint">1/'+r[1]+'</text>';
+    const total=420, seg=total/r[1];
+    for(let k=0;k<r[1];k++)
+      s+='<rect x="'+(300+k*seg)+'" y="'+(y-11)+'" width="'+(seg-3)+'" height="22" rx="4" fill="var(--accent)" opacity="'+(0.28+0.1*i)+'"/>';
+    if(i<rows.length-1)
+      s+='<line class="sv-grid" x1="20" y1="'+(y+27)+'" x2="'+(W-20)+'" y2="'+(y+27)+'" stroke-width="1"/>';
+  });
+  s+='</svg>';
+  document.getElementById('durTree').innerHTML=s+
+    '<p class="cap">Each symbol is exactly twice the next shorter one. Rests follow the same halving series. Anything else needs a tie or a dot.</p>';
+})();
+
+/* simple vs compound meter */
+(function(){
+  const W=740,H=220;
+  let s=svgOpen(W,H,'simple and compound meter');
+  function group(x0,y0,title,sig,beats,div,col){
+    let g='<text x="'+x0+'" y="'+(y0-30)+'" font-size="13.5" font-weight="700" class="sv-ink">'+title+'</text>';
+    g+='<text x="'+x0+'" y="'+(y0-12)+'" font-size="12.5" class="sv-faint">'+sig+'</text>';
+    const bw=300/beats;
+    for(let b=0;b<beats;b++){
+      const x=x0+b*bw;
+      g+='<rect x="'+x+'" y="'+y0+'" width="'+(bw-8)+'" height="30" rx="6" fill="'+col+'" opacity=".85"/>';
+      g+='<text x="'+(x+(bw-8)/2)+'" y="'+(y0+20)+'" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">'+(b+1)+'</text>';
+      const dw=(bw-8)/div;
+      for(let d=0;d<div;d++)
+        g+='<rect x="'+(x+d*dw)+'" y="'+(y0+36)+'" width="'+(dw-4)+'" height="16" rx="4" fill="'+col+'" opacity=".3"/>';
+    }
+    g+='<text x="'+(x0+304)+'" y="'+(y0+20)+'" font-size="12" class="sv-faint">beats</text>';
+    g+='<text x="'+(x0+304)+'" y="'+(y0+49)+'" font-size="12" class="sv-faint">divisions</text>';
+    return g;
+  }
+  s+=group(30,56,'Simple meter — the beat divides into 2','2/4 · 3/4 · 4/4',4,2,'var(--accent)');
+  s+=group(30,160,'Compound meter — the beat divides into 3','6/8 · 9/8 · 12/8',2,3,'var(--accent3)');
+  s+='</svg>';
+  document.getElementById('meterSvg').innerHTML=s+
+    '<p class="cap">4/4 shown above, 6/8 below. In 6/8 the "6" counts the small boxes, not the big ones.</p>';
+})();
+
+/* triad stacks */
+(function(){
+  const kinds=[['Major','C E G',['M3','m3'],'var(--accent)'],['Minor','C E♭ G',['m3','M3'],'var(--accent3)'],
+               ['Diminished','C E♭ G♭',['m3','m3'],'var(--red)'],['Augmented','C E G♯',['M3','M3'],'var(--accent2)']];
+  const notes=[['C','E','G'],['C','E♭','G'],['C','E♭','G♭'],['C','E','G♯']];
+  const midis=[[60,64,67],[60,63,67],[60,63,66],[60,64,68]];
+  const W=740,H=210,cw=178;
+  let s=svgOpen(W,H,'four triad types');
+  kinds.forEach((k,i)=>{
+    const x=16+i*cw;
+    s+='<rect x="'+x+'" y="14" width="'+(cw-16)+'" height="182" rx="10" fill="var(--panel)" stroke="var(--line)" stroke-width="1"/>';
+    s+='<text x="'+(x+(cw-16)/2)+'" y="36" text-anchor="middle" font-size="14" font-weight="700" fill="'+k[3]+'">'+k[0]+'</text>';
+    for(let n=0;n<3;n++){
+      const cy=164-n*44, cx=x+(cw-16)/2;
+      s+='<ellipse cx="'+cx+'" cy="'+cy+'" rx="21" ry="15" fill="'+k[3]+'" opacity="'+(0.25+n*0.25)+'"/>';
+      s+='<text x="'+cx+'" y="'+(cy+5)+'" text-anchor="middle" font-size="13.5" font-weight="700" class="sv-ink">'+notes[i][n]+'</text>';
+      if(n<2){
+        s+='<line x1="'+(cx+30)+'" y1="'+(cy-4)+'" x2="'+(cx+30)+'" y2="'+(cy-38)+'" stroke="'+k[3]+'" stroke-width="1.4"/>';
+        s+='<text x="'+(cx+38)+'" y="'+(cy-17)+'" font-size="11.5" font-weight="700" fill="'+k[3]+'">'+k[2][n]+'</text>';
+      }
+    }
+    s+='<text x="'+(x+(cw-16)/2)+'" y="52" text-anchor="middle" font-size="11.5" class="sv-faint">read bottom to top</text>';
+  });
+  s+='</svg>';
+  document.getElementById('triadStackSvg').innerHTML=s+
+    '<p class="cap">Four ways to stack two thirds — and therefore exactly four triad qualities. Nothing else is possible.</p>';
+})();
+
+/* harmonic function flow */
+(function(){
+  const W=740,H=190;
+  let s=svgOpen(W,H,'harmonic function');
+  const boxes=[['TONIC','I · vi · iii','var(--green)',30],['PREDOMINANT','IV · ii','var(--amber)',235],
+               ['DOMINANT','V · V7 · vii°','var(--red)',440],['TONIC','I','var(--green)',645]];
+  boxes.forEach((b,i)=>{
+    const w=i===3?66:150;
+    s+='<rect x="'+b[3]+'" y="56" width="'+w+'" height="66" rx="10" fill="'+b[2]+'" opacity=".14" stroke="'+b[2]+'" stroke-width="1.5"/>';
+    s+='<text x="'+(b[3]+w/2)+'" y="82" text-anchor="middle" font-size="12" font-weight="800" letter-spacing=".07em" fill="'+b[2]+'">'+b[0]+'</text>';
+    s+='<text x="'+(b[3]+w/2)+'" y="103" text-anchor="middle" font-size="13" font-weight="700" class="sv-ink">'+b[1]+'</text>';
+    if(i<3){
+      const x1=b[3]+w+8, x2=boxes[i+1][3]-8;
+      s+='<line class="sv-axis" x1="'+x1+'" y1="89" x2="'+(x2-4)+'" y2="89" stroke-width="2" marker-end="url(#ar2)"/>';
+    }
+  });
+  s+='<path d="M 590 130 C 590 164, 310 164, 310 130" fill="none" class="sv-grid" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ar2)"/>';
+  s+='<text x="450" y="176" text-anchor="middle" font-size="11.5" font-weight="700" class="sv-faint">V → IV runs the chain backwards — a deliberate effect (blues, rock)</text>';
+  s+='<path d="M 105 50 C 105 20, 515 20, 515 50" fill="none" class="sv-grid" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ar2)"/>';
+  s+='<text x="310" y="18" text-anchor="middle" font-size="11.5" font-weight="700" class="sv-faint">skipping ahead (I → V) is always fine</text>';
+  s+='<defs><marker id="ar2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">'+
+     '<path d="M0 0 L8 4 L0 8 z" fill="var(--line-strong)"/></marker></defs>';
+  s+='</svg>';
+  document.getElementById('functionSvg').innerHTML=s+
+    '<p class="cap">The default current of tonal harmony. Almost every phrase you know is one lap around this.</p>';
+})();
+
+/* ============================================================================
+   7 · INTERVAL TABLE
+   ========================================================================= */
+(function(){
+  const IV=[['Perfect unison','P1',0,'C–C','yes'],['Minor 2nd','m2',1,'C–D♭','no'],
+    ['Major 2nd','M2',2,'C–D','no'],['Minor 3rd','m3',3,'C–E♭','yes'],
+    ['Major 3rd','M3',4,'C–E','yes'],['Perfect 4th','P4',5,'C–F','conditional'],
+    ['Aug 4th / dim 5th','+4 / °5',6,'C–F♯ / C–G♭','no'],['Perfect 5th','P5',7,'C–G','yes'],
+    ['Minor 6th','m6',8,'C–A♭','yes'],['Major 6th','M6',9,'C–A','yes'],
+    ['Minor 7th','m7',10,'C–B♭','no'],['Major 7th','M7',11,'C–B','no'],
+    ['Perfect octave','P8',12,'C–C','yes']];
+  const tb=document.getElementById('ivBody');
+  IV.forEach(r=>{
+    const pill=r[4]==='yes'?'<span class="pill g">consonant</span>':
+               r[4]==='no'?'<span class="pill r">dissonant</span>':
+               '<span class="pill a">P4 — see note</span>';
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td><strong>'+r[0]+'</strong></td><td class="mono">'+r[1]+'</td><td class="mono">'+r[2]+
+      '</td><td class="mono">'+r[3]+'</td><td>'+pill+'</td>'+
+      '<td><button class="btn play sm" data-iv="'+r[2]+'">▸</button></td>';
+    tb.appendChild(tr);
+  });
+  tb.querySelectorAll('[data-iv]').forEach(b=>b.addEventListener('click',()=>{
+    const n=+b.dataset.iv; playMelody([60,60+n],.34,.5); playChord([60,60+n],.82,1.5);
+  }));
+})();
+
+/* ============================================================================
+   8 · PROGRESSIONS
+   ========================================================================= */
+(function(){
+  const P=[
+    ['I – IV – V – I','C – F – G – C','T → PD → D → T','The bedrock cadential phrase; folk, hymn, blues',
+      [[48,60,64,67],[53,60,65,69],[55,62,67,71],[48,60,64,67]]],
+    ['I – vi – IV – V','C – Am – F – G','T → T → PD → D','1950s doo-wop; endlessly loopable',
+      [[48,60,64,67],[45,60,64,69],[53,60,65,69],[55,59,62,67]]],
+    ['ii7 – V7 – Imaj7','Dm7 – G7 – Cmaj7','PD → D → T','The jazz turnaround; the single most practised cell',
+      [[50,60,65,69,72],[43,59,65,67,74],[48,59,64,67,71]]],
+    ['I – V – vi – IV','C – G – Am – F','T → D → T → PD','The "four-chord song"; most modern pop',
+      [[48,60,64,67],[55,59,62,67],[45,60,64,69],[53,60,65,69]]],
+    ['i – ♭VII – ♭VI – V','Am – G – F – E','minor descent to the dominant','Andalusian cadence; flamenco, rock',
+      [[45,60,64,69],[43,59,62,67],[41,57,60,65],[40,56,59,68]]],
+    ['I – vi – ii – V','C – Am – Dm – G','T → T → PD → D','Rhythm changes; the standard 8-bar opener',
+      [[48,60,64,67],[45,60,64,69],[50,57,62,65],[55,59,62,67]]]
+  ];
+  const tb=document.getElementById('progBody');
+  P.forEach((p,i)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td class="mono"><strong>'+p[0]+'</strong></td><td class="mono">'+p[1]+'</td><td>'+p[2]+
+      '</td><td style="color:var(--ink-faint)">'+p[3]+'</td><td><button class="btn play sm" data-p="'+i+'">▸</button></td>';
+    tb.appendChild(tr);
+  });
+  tb.querySelectorAll('[data-p]').forEach(b=>b.addEventListener('click',()=>playSeq(P[+b.dataset.p][4],760)));
+})();
+
+/* ============================================================================
+   9 · KEY EXPLORER
+   ========================================================================= */
+const MAJ_TONICS=['C','G','D','A','E','B','F♯','C♯','F','B♭','E♭','A♭','D♭','G♭','C♭'];
+const MIN_TONICS=['A','E','B','F♯','C♯','G♯','D♯','A♯','D','G','C','F','B♭','E♭','A♭'];
+const selT=document.getElementById('exTonic'), selM=document.getElementById('exMode');
+let exState={tonic:'C',mode:0};
+function fillTonics(){
+  const list=(+selM.value===0)?MAJ_TONICS:MIN_TONICS, cur=exState.tonic;
+  selT.innerHTML=list.map(t=>'<option value="'+t+'">'+t+'</option>').join('');
+  selT.value=list.indexOf(cur)>=0?cur:list[0];
+  exState.tonic=selT.value;
+}
+function loadKey(t,mode){
+  exState.mode=mode; selM.value=String(mode);
+  const list=(mode===0)?MAJ_TONICS:MIN_TONICS;
+  exState.tonic=list.indexOf(t)>=0?t:list[0];
+  fillTonics(); selT.value=exState.tonic; renderExplorer();
+  document.getElementById('explorer').scrollIntoView({behavior:'smooth',block:'start'});
+}
+let exCache=null;
+function renderExplorer(){
+  const tonic=parseNote(exState.tonic), M=MODES[exState.mode];
+  const scale=buildScale(tonic,M.offs);
+  const tMidi=60+npc(tonic);
+  const sig=keySig(tonic,M.minor);
+  const sigTxt=sig.sharps?sig.sharps+' sharp'+(sig.sharps>1?'s':''):
+               sig.flats?sig.flats+' flat'+(sig.flats>1?'s':''):'no sharps or flats';
+  const kname=nname(tonic)+(M.minor?' minor':' major');
+  const rel=M.minor?nname(buildScale(tonic,MODES[1].offs)[2])+' major'
+                   :nname(scale[5]).toLowerCase()+' minor';
+  document.getElementById('exSummary').innerHTML=
+    '<strong>'+kname+'</strong> · '+M.name.toLowerCase()+' · key signature: <strong>'+sigTxt+'</strong>'+
+    ' · relative '+(M.minor?'major':'minor')+': <strong>'+rel+'</strong>'+
+    (M.minor&&exState.mode>1?' · <span class="pill a">6̂/7̂ raised — written as accidentals, not in the signature</span>':'');
+  document.getElementById('exStaff').innerHTML=staffSVG(sig.sharps,sig.flats,'key signature of '+kname);
+
+  document.getElementById('exNotes').innerHTML=scale.map((n,i)=>
+    '<span class="nt'+(i===0?' tonic':'')+'" data-m="'+(tMidi+n.off)+'">'+nname(n)+
+    '<span class="dg">'+(i+1)+'̂</span></span>').join('')+
+    '<span class="nt tonic" data-m="'+(tMidi+12)+'">'+nname(scale[0])+'<span class="dg">8̂</span></span>';
+  document.querySelectorAll('#exNotes .nt').forEach(el=>el.addEventListener('click',()=>playNote(+el.dataset.m)));
+
+  const pcs=scale.map(n=>((tMidi+n.off)%12));
+  renderKbd(document.getElementById('exKbd'),2,60,{pcs,root:tMidi%12,flat:sig.flats>0,labels:false});
+
+  const tb=document.getElementById('exChords'); tb.innerHTML='';
+  const allTriads=[];
+  for(let d=0;d<7;d++){
+    const t3=chordAt(scale,d,3), t4=chordAt(scale,d,4);
+    const q=triadQual(t3.offs), sq=seventhQual(q,t4.offs[3]-t4.offs[0]);
+    const root=nname(t3.notes[0]);
+    const triName=root+SUF[q], sevName=root+sq.sym;
+    const m3=t3.offs.map(o=>tMidi+o-12), m4=t4.offs.map(o=>tMidi+o-12);
+    allTriads.push(m3);
+    const dn=(M.minor&&d===6&&M.offs[6]===10)?'Subtonic':DEGNAMES[d];
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td class="mono">'+(d+1)+'̂</td><td>'+dn+'</td>'+
+      '<td class="mono"><strong>'+roman(d,q)+'</strong></td>'+
+      '<td><strong>'+triName+'</strong></td><td class="mono">'+t3.notes.map(nname).join(' ')+'</td>'+
+      '<td><strong>'+sevName+'</strong></td><td class="mono">'+t4.notes.map(nname).join(' ')+'</td>'+
+      '<td><button class="btn play sm" data-c3="'+m3.join(',')+'" data-c4="'+m4.join(',')+'">▸</button></td>';
+    tb.appendChild(tr);
+  }
+  tb.querySelectorAll('[data-c3]').forEach(b=>b.addEventListener('click',()=>{
+    playChord(b.dataset.c3.split(',').map(Number),0,1.2);
+    playChord(b.dataset.c4.split(',').map(Number),.95,1.6);
+  }));
+  exCache={scaleMidis:scale.map(n=>tMidi+n.off).concat([tMidi+12]),triads:allTriads};
+}
+selT.addEventListener('change',()=>{ exState.tonic=selT.value; renderExplorer(); });
+selM.addEventListener('change',()=>{ exState.mode=+selM.value; fillTonics(); renderExplorer(); });
+document.getElementById('exPlayScale').addEventListener('click',()=>playMelody(exCache.scaleMidis,.24,.46));
+document.getElementById('exPlayChords').addEventListener('click',()=>playSeq(exCache.triads,560));
+function playScaleDemo(t,mode){
+  const tonic=parseNote(t), M=MODES[mode], sc=buildScale(tonic,M.offs), tm=60+npc(tonic);
+  playMelody(sc.map(n=>tm+n.off).concat([tm+12]),.24,.46);
+}
+fillTonics(); renderExplorer(); drawFreeKbd();
+
+let rzT=null;
+window.addEventListener('resize',()=>{ clearTimeout(rzT); rzT=setTimeout(()=>{ drawFreeKbd(); renderExplorer(); },180); });
+
+/* ============================================================================
+   10 · TOC SCROLLSPY + TIMESTAMP
+   ========================================================================= */
+(function(){
+  const links=[...document.querySelectorAll('nav.toc a')];
+  const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){
+      links.forEach(a=>a.classList.remove('active'));
+      const a=map.get(e.target.id); if(a)a.classList.add('active');
+    }});
+  },{rootMargin:'-8% 0px -80% 0px',threshold:0});
+  document.querySelectorAll('main section[id]').forEach(s=>obs.observe(s));
+  const d=new Date();
+  document.getElementById('genstamp').textContent='Generated '+
+    d.toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
+})();
+</script>
+
+<script>
+(function(){
+  const PALETTES = {
+    afternoon:{mode:'light',label:'Afternoon',v:{
+      '--bg':'#faf8f4','--panel':'#ffffff','--ink':'#1c1a17','--ink-soft':'#55504a','--ink-faint':'#8a8279',
+      '--line':'#e8e2d8','--line-strong':'#d8cfc0','--accent':'#9a5b2e','--accent-soft':'#f3e6d8','--accent-ink':'#7a4220',
+      '--accent2':'#b8893b','--accent3':'#2f6b6b','--code-bg':'#2b2722',
+      '--header-grad':'linear-gradient(160deg,#241c14 0%,#3a2a1a 55%,#5a3c22 100%)'}},
+    sage:{mode:'light',label:'Sage',v:{
+      '--bg':'#f5f7f2','--panel':'#ffffff','--ink':'#1c211a','--ink-soft':'#4e544a','--ink-faint':'#828a7c',
+      '--line':'#e3e8dc','--line-strong':'#d3dac8','--accent':'#5c7a52','--accent-soft':'#e6ede0','--accent-ink':'#3f592f',
+      '--accent2':'#a98f3c','--accent3':'#3a7a6b','--code-bg':'#1f2620',
+      '--header-grad':'linear-gradient(160deg,#1a231a 0%,#283a26 55%,#3a5232 100%)'}},
+    harbor:{mode:'light',label:'Harbor',v:{
+      '--bg':'#f4f6f9','--panel':'#ffffff','--ink':'#1a2026','--ink-soft':'#4b5560','--ink-faint':'#7d8794',
+      '--line':'#e1e7ec','--line-strong':'#cfd8e1','--accent':'#2f6690','--accent-soft':'#e0ebf2','--accent-ink':'#234e6b',
+      '--accent2':'#b5862f','--accent3':'#2f8682','--code-bg':'#192129',
+      '--header-grad':'linear-gradient(160deg,#121b24 0%,#1d2e3f 55%,#274a63 100%)'}},
+    plum:{mode:'light',label:'Plum',v:{
+      '--bg':'#f8f5f8','--panel':'#ffffff','--ink':'#221c21','--ink-soft':'#564b54','--ink-faint':'#897e87',
+      '--line':'#e9e0e7','--line-strong':'#dccdd8','--accent':'#7d4a6b','--accent-soft':'#efe2ec','--accent-ink':'#5d3550',
+      '--accent2':'#b07d3b','--accent3':'#3a7a72','--code-bg':'#241c23',
+      '--header-grad':'linear-gradient(160deg,#201823 0%,#332338 55%,#4e2f53 100%)'}},
+    midnight:{mode:'dark',label:'Midnight',v:{
+      '--bg':'#0f1620','--panel':'#18212e','--ink':'#e8edf3','--ink-soft':'#a9b5c4','--ink-faint':'#6f7d8d',
+      '--line':'#25303f','--line-strong':'#34414f','--accent':'#5b9bd5','--accent-soft':'#1b2a3b','--accent-ink':'#9cc4e8',
+      '--accent2':'#d2a85f','--accent3':'#4db1a8','--code-bg':'#0b121b',
+      '--header-grad':'linear-gradient(160deg,#0b1220 0%,#13243a 55%,#1d3a5c 100%)'}},
+    charcoal:{mode:'dark',label:'Charcoal',v:{
+      '--bg':'#161514','--panel':'#201e1c','--ink':'#ece8e2','--ink-soft':'#b0a99f','--ink-faint':'#766f65',
+      '--line':'#2c2926','--line-strong':'#3a3631','--accent':'#c8895a','--accent-soft':'#2c2420','--accent-ink':'#e3a878',
+      '--accent2':'#cda35e','--accent3':'#5aada3','--code-bg':'#100f0e',
+      '--header-grad':'linear-gradient(160deg,#141210 0%,#241e18 55%,#3a2c20 100%)'}},
+    forest:{mode:'dark',label:'Forest',v:{
+      '--bg':'#101713','--panel':'#18211b','--ink':'#e6ece6','--ink-soft':'#a6b3a6','--ink-faint':'#6e7c6e',
+      '--line':'#243029','--line-strong':'#324133','--accent':'#6fae7e','--accent-soft':'#1a2a20','--accent-ink':'#9fd3aa',
+      '--accent2':'#cda35e','--accent3':'#4fb0a0','--code-bg':'#0b110d',
+      '--header-grad':'linear-gradient(160deg,#0c1410 0%,#142a1d 55%,#1d4230 100%)'}},
+    wine:{mode:'dark',label:'Wine',v:{
+      '--bg':'#1a1012','--panel':'#241619','--ink':'#f0e4e6','--ink-soft':'#c2a9af','--ink-faint':'#8c6f76',
+      '--line':'#321f24','--line-strong':'#43292f','--accent':'#c46b7e','--accent-soft':'#2e1a1f','--accent-ink':'#e49aa8',
+      '--accent2':'#cda35e','--accent3':'#5aa8a0','--code-bg':'#140c0e',
+      '--header-grad':'linear-gradient(160deg,#160c0e 0%,#2a141a 55%,#4a2230 100%)'}}
+  };
+  const root = document.documentElement;
+  function applyPalette(key){
+    const p = PALETTES[key]; if(!p) return;
+    for(const k in p.v) root.style.setProperty(k, p.v[k]);
+    root.setAttribute('data-mode', p.mode);
+    document.querySelectorAll('.pp-sw').forEach(b=>b.classList.toggle('active', b.dataset.pal===key));
+    try{ localStorage.setItem('html-output-palette', key); }catch(e){}
+  }
+  const tick='<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  for(const key in PALETTES){
+    const p=PALETTES[key];
+    const btn=document.createElement('button');
+    btn.className='pp-sw'; btn.dataset.pal=key; btn.type='button'; btn.title=p.label;
+    btn.innerHTML='<div class="bars">'+
+        '<span style="background:'+p.v['--bg']+'"></span>'+
+        '<span style="background:'+p.v['--accent']+'"></span>'+
+        '<span style="background:'+p.v['--accent-ink']+'"></span>'+
+        '<span style="background:'+p.v['--accent2']+'"></span>'+
+      '</div><span class="nm">'+p.label+tick+'</span>';
+    btn.addEventListener('click',()=>applyPalette(key));
+    document.getElementById(p.mode==='light'?'pp-light':'pp-dark').appendChild(btn);
+  }
+  const picker=document.getElementById('picker');
+  const ppToggle=document.getElementById('ppToggle');
+  ppToggle.addEventListener('click',e=>{e.stopPropagation();
+    const open=picker.classList.toggle('open');
+    ppToggle.setAttribute('aria-expanded', open?'true':'false');});
+  document.addEventListener('click',e=>{ if(!picker.contains(e.target)) picker.classList.remove('open'); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') picker.classList.remove('open'); });
+  let saved=null; try{ saved=localStorage.getItem('html-output-palette'); }catch(e){}
+  if(saved && PALETTES[saved]) applyPalette(saved);
+  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyPalette('midnight');
+  else applyPalette('afternoon');
+})();
+</script>
+</body>
+</html>

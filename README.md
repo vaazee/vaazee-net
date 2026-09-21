@@ -18,6 +18,9 @@ pages/                "web by vaazee" — static pages sorted by topic
   music/ movies/ tv/ books/ chess/ coding/ tech/ piano-guitar/ random/
 ```
 
+- `pages/random/` is displayed as **Music Theory** on the site. The folder name is kept
+  as `random/` so existing URLs (and the `add-raga` skill) keep working.
+
 - The root page links to the **Games** page and to the **Pages** section
   (`pages/`, formerly the separate `web-by-vaazee` repo).
 - Drop an HTML file into a `pages/<category>/` folder and it's live at
