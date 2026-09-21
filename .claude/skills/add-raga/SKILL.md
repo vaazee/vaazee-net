@@ -16,7 +16,7 @@ The argument is the raga name (e.g. `Pantuvarali`). If none is given, ask which 
 
 ## Target file
 
-`pages/random/carnatic-piano-2026-06-08.html`
+`pages/music-theory/carnatic-piano-2026-06-08.html`
 
 Everything is driven by a single JavaScript array, `const RAGAS=[ … ]` (search for
 `/* ---------- Ragas:`). Adding one object to that array wires up the dropdown, the
@@ -143,7 +143,7 @@ A parent melakarta added alongside a janya just needs the right name — it will
 ```sh
 node -e '
 const fs=require("fs");
-const html=fs.readFileSync("pages/random/carnatic-piano-2026-06-08.html","utf8");
+const html=fs.readFileSync("pages/music-theory/carnatic-piano-2026-06-08.html","utf8");
 const scripts=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]);
 let ok=true;
 scripts.forEach((s,i)=>{try{new Function(s);}catch(e){ok=false;console.log("block "+i+":",e.message);}});

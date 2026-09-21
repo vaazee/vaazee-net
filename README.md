@@ -15,11 +15,11 @@ games/
     styles.css
 pages/                "web by vaazee" — static pages sorted by topic
   index.html          Category listing
-  music/ movies/ tv/ books/ chess/ coding/ tech/ piano-guitar/ random/
+  music/ movies/ tv/ books/ chess/ coding/ tech/ piano-guitar/ music-theory/
 ```
 
-- `pages/random/` is displayed as **Music Theory** on the site. The folder name is kept
-  as `random/` so existing URLs (and the `add-raga` skill) keep working.
+- `pages/random/` was renamed to `pages/music-theory/`; `pages/random/` now holds
+  redirect stubs so previously shared links keep resolving.
 
 - The root page links to the **Games** page and to the **Pages** section
   (`pages/`, formerly the separate `web-by-vaazee` repo).
