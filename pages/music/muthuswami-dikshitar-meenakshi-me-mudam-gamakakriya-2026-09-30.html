@@ -280,6 +280,26 @@
   .kbd .lit-min{fill:var(--cool-bg);stroke:var(--cool-ink);stroke-width:2}
   .kbd .lit-maj{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2}
   .kbd .klbl{fill:var(--ink-faint);font-family:monospace;font-size:11px}
+  /* ---- swaras by word ---- */
+  .swsec{margin:0 0 8px}
+  .swsec h3{font-family:Georgia,serif;margin:22px 0 10px}
+  .swline{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:14px 18px;margin:0 0 12px;box-shadow:var(--shadow)}
+  .swmeta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-bottom:10px}
+  .swlbl{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+  .swmeta .mvkey{font-family:"SF Mono",Menlo,monospace;font-size:11.5px;color:var(--cool-ink);
+    background:var(--cool-bg);border:1px solid var(--cool-bd);padding:1px 8px;border-radius:20px}
+  .swmeta .mvkey.approx{color:var(--warm-ink);background:var(--warm-bg);border-color:var(--warm-bd)}
+  .swwords{display:flex;flex-wrap:wrap;gap:10px}
+  .sww{display:flex;flex-direction:column;gap:5px;background:var(--th-bg);border:1px solid var(--line);
+    border-radius:10px;padding:8px 11px;max-width:100%}
+  .sww.cont{background:transparent;border-style:dashed}
+  .sww .wd{font-family:Georgia,serif;font-style:italic;font-weight:600;color:var(--accent-ink);font-size:15px}
+  .sww .syls{display:flex;flex-wrap:wrap;gap:4px 12px}
+  .sww .syl{display:flex;flex-direction:column;align-items:flex-start}
+  .sww .sy{font-size:13px;color:var(--ink-soft)}
+  .sww .sn{font-family:"SF Mono",Menlo,monospace;font-size:13.5px;font-weight:650;color:var(--ink);white-space:nowrap}
+  .sww .gl{font-size:11.5px;color:var(--ink-faint)}
 </style>
 </head>
 <body>
@@ -320,7 +340,7 @@
 
   <nav class="toc" id="toc">
     <p class="title">Contents</p>
-    <a href="#tldr">In brief</a><a href="#identity">1 · Identity &amp; Context</a><a href="#form">2 · Structure</a><a href="#raga">3 · Raga Purvikalyani</a><a href="#tonality">4 · Drone &amp; Tonality</a><a href="#rhythm">5 · Tala &amp; Tempo</a><a href="#texture">6 · Ensemble</a><a href="#meaning">7 · Lyrics &amp; Meaning</a><a href="#significance">8 · Significance</a><a href="#performance">9 · Recordings</a><a href="#guide">10 · Listening Guide</a><a href="#mustlisten">11 · Must-Listen</a><a href="#glossary">Glossary</a>
+    <a href="#tldr">In brief</a><a href="#identity">1 · Identity &amp; Context</a><a href="#form">2 · Structure</a><a href="#raga">3 · Raga Purvikalyani</a><a href="#tonality">4 · Drone &amp; Tonality</a><a href="#rhythm">5 · Tala &amp; Tempo</a><a href="#texture">6 · Ensemble</a><a href="#meaning">7 · Lyrics &amp; Meaning</a><a href="#swaras">8 · Swaras by Word</a><a href="#significance">9 · Significance</a><a href="#performance">10 · Recordings</a><a href="#guide">11 · Listening Guide</a><a href="#mustlisten">12 · Must-Listen</a><a href="#glossary">Glossary</a>
   </nav>
 
   <main>
@@ -498,7 +518,79 @@
   </div><figcaption>The emotional peak comes early, at the anupallavi's double-speed release, and the death legend gives it extra weight. The piece ends in quiet devotion, not fireworks.</figcaption></figure>
 </section>
 
-<section id="significance"><h2><span class="secn">8</span>Significance</h2>
+<section id="swaras"><h2><span class="secn">8</span>Swaras, Word by Word</h2>
+  <p class="lead">Every syllable of the kriti paired with the Gamakakriya / Purvikalyani swaras it is sung on.</p>
+  <p>Each line below is the <strong>first, plainest sangati</strong> from Ram Kaushik's version as notated on shivkumar.org. Each word sits in its own box: the syllables are on top and the swaras they are sung on are underneath. This is a slow 2-kalai Adi kriti, so a single vowel often carries a whole phrase. <em>mī-</em> alone takes a full beat-group. The two <em>madhyama kāla</em> passages switch to about one note per syllable.</p>
+  <div class="callout teal"><span class="lbl">Reading the notation</span> <b>S R G M P D N</b> = Sa Ri Ga Ma Pa Dha Ni (here R₁ G₃ M₂ D₂ N₃: Gamakakriya / Purvikalyani). A <b>capital</b> letter is a long note and a <b>lowercase</b> letter is half as long. <b>;</b> holds the previous note for one long note's length and <b>,</b> for a short one. The source doesn't mark octaves. Phrases like <em>Srd</em> and <em>grsd</em> dip from Sa to the lower Dha.</div>
+  <div class="swlines">
+    <div class="swsec"><h3>Pallavi</h3>
+      <div class="swline"><div class="swmeta"><span class="swlbl">Line 1</span><span class="mvkey">madhya · 2 kalai</span></div><div class="swwords">
+        <div class="sww"><span class="wd">mīnākṣi</span><span class="syls"><span class="syl"><span class="sy">mī</span><span class="sn">S ; ; ; Srs Srd</span></span><span class="syl"><span class="sy">nā</span><span class="sn">S , r G ;</span></span><span class="syl"><span class="sy">kṣi</span><span class="sn">pmR G M</span></span></span><span class="gl">fish-eyed one</span></div>
+        <div class="sww"><span class="wd">mē</span><span class="syls"><span class="syl"><span class="sy">mē</span><span class="sn">P ; ; ;</span></span></span><span class="gl">me</span></div>
+        <div class="sww"><span class="wd">mudaṃ</span><span class="syls"><span class="syl"><span class="sy">mu</span><span class="sn">M ;</span></span><span class="syl"><span class="sy">daṃ</span><span class="sn">D M G R</span></span></span><span class="gl">bliss</span></div>
+        <div class="sww"><span class="wd">dēhi</span><span class="syls"><span class="syl"><span class="sy">dē</span><span class="sn">G ; gmpm</span></span><span class="syl"><span class="sy">hi</span><span class="sn">g R ,</span></span></span><span class="gl">give</span></div>
+      </div></div>
+      <div class="swline"><div class="swmeta"><span class="swlbl">Line 2</span><span class="mvkey">madhya</span></div><div class="swwords">
+        <div class="sww"><span class="wd">mēcakāṅgi</span><span class="syls"><span class="syl"><span class="sy">mē</span><span class="sn">S ; ; ; ;</span></span><span class="syl"><span class="sy">ca</span><span class="sn">rg rs</span></span><span class="syl"><span class="sy">kā</span><span class="sn">S Srs</span></span><span class="syl"><span class="sy">ṅgi</span><span class="sn">DN PD P ;</span></span></span><span class="gl">dark-blue-bodied</span></div>
+        <div class="sww"><span class="wd">rāja mātaṅgi</span><span class="syls"><span class="syl"><span class="sy">rā</span><span class="sn">S,r G ;</span></span><span class="syl"><span class="sy">ja</span><span class="sn">G , r</span></span><span class="syl"><span class="sy">mā</span><span class="sn">G ; ; ;</span></span><span class="syl"><span class="sy">taṅ</span><span class="sn">gmpm</span></span><span class="syl"><span class="sy">gi</span><span class="sn">g R , S ;</span></span></span><span class="gl">royal Matangi</span></div>
+      </div></div>
+    </div>
+    <div class="swsec"><h3>Anupallavi</h3>
+      <div class="swline"><div class="swmeta"><span class="swlbl">Line 1</span><span class="mvkey">madhya</span></div><div class="swwords">
+        <div class="sww"><span class="wd">māna mātṛ mēyē</span><span class="syls"><span class="syl"><span class="sy">mā</span><span class="sn">P ; ; ;</span></span><span class="syl"><span class="sy">na</span><span class="sn">P,m</span></span><span class="syl"><span class="sy">mā</span><span class="sn">DM G R</span></span><span class="syl"><span class="sy">tṛ</span><span class="sn">G ,r G ;</span></span><span class="syl"><span class="sy">mē</span><span class="sn">G ; gmpm</span></span><span class="syl"><span class="sy">yē</span><span class="sn">gR , S ;</span></span></span><span class="gl">measure, measurer, measured</span></div>
+        <div class="sww"><span class="wd">māyē</span><span class="syls"><span class="syl"><span class="sy">mā</span><span class="sn">Srd S, r</span></span><span class="syl"><span class="sy">yē</span><span class="sn">G M P ; ; ;</span></span></span><span class="gl">O Maya</span></div>
+      </div></div>
+      <div class="swline"><div class="swmeta"><span class="swlbl">Line 2</span><span class="mvkey">madhya</span></div><div class="swwords">
+        <div class="sww"><span class="wd">marakata-chāyē</span><span class="syls"><span class="syl"><span class="sy">ma</span><span class="sn">G ,</span></span><span class="syl"><span class="sy">ra</span><span class="sn">m ;</span></span><span class="syl"><span class="sy">ka</span><span class="sn">P</span></span><span class="syl"><span class="sy">ta</span><span class="sn">MP mpD ; ;</span></span><span class="syl"><span class="sy">chā</span><span class="sn">D ; D sn</span></span><span class="syl"><span class="sy">yē</span><span class="sn">PD P ; ;</span></span></span><span class="gl">emerald-hued</span></div>
+        <div class="sww"><span class="wd">śiva jāyē</span><span class="syls"><span class="syl"><span class="sy">śi</span><span class="sn">D</span></span><span class="syl"><span class="sy">va</span><span class="sn">dpP ;</span></span><span class="syl"><span class="sy">jā</span><span class="sn">S ; dsR rs</span></span><span class="syl"><span class="sy">yē</span><span class="sn">S ; ;</span></span></span><span class="gl">wife of Shiva</span></div>
+      </div></div>
+      <div class="swline"><div class="swmeta"><span class="swlbl">Line 3</span><span class="mvkey">madhyama kāla</span><span class="mvkey approx">split approximate</span></div><div class="swwords">
+        <div class="sww"><span class="wd">mīna lōcani</span><span class="syls"><span class="syl"><span class="sy">mī</span><span class="sn">D</span></span><span class="syl"><span class="sy">na</span><span class="sn">S</span></span><span class="syl"><span class="sy">lō</span><span class="sn">R</span></span><span class="syl"><span class="sy">ca</span><span class="sn">S ;</span></span><span class="syl"><span class="sy">ni</span><span class="sn">R</span></span></span><span class="gl">fish-eyed</span></div>
+        <div class="sww"><span class="wd">pāśa mōcani</span><span class="syls"><span class="syl"><span class="sy">pā</span><span class="sn">S ;</span></span><span class="syl"><span class="sy">śa</span><span class="sn">snD</span></span><span class="syl"><span class="sy">mō</span><span class="sn">N</span></span><span class="syl"><span class="sy">ca</span><span class="sn">P D</span></span><span class="syl"><span class="sy">ni</span><span class="sn">P P ;</span></span></span><span class="gl">releaser from bondage</span></div>
+        <div class="sww"><span class="wd">mānini</span><span class="syls"><span class="syl"><span class="sy">mā</span><span class="sn">G M</span></span><span class="syl"><span class="sy">ni</span><span class="sn">R</span></span><span class="syl"><span class="sy">ni</span><span class="sn">G ;</span></span></span><span class="gl">honoured one</span></div>
+        <div class="sww"><span class="wd">kadamba vana vāsini</span><span class="syls"><span class="syl"><span class="sy">ka</span><span class="sn">G</span></span><span class="syl"><span class="sy">dam</span><span class="sn">N D</span></span><span class="syl"><span class="sy">ba</span><span class="sn">M</span></span><span class="syl"><span class="sy">va</span><span class="sn">G</span></span><span class="syl"><span class="sy">na</span><span class="sn">G md</span></span><span class="syl"><span class="sy">vā</span><span class="sn">m</span></span><span class="syl"><span class="sy">si</span><span class="sn">gR</span></span><span class="syl"><span class="sy">ni</span><span class="sn">S S</span></span></span><span class="gl">dweller in the Kadamba forest</span></div>
+      </div></div>
+    </div>
+    <div class="swsec"><h3>Charanam</h3>
+      <div class="swline"><div class="swmeta"><span class="swlbl">Line 1</span><span class="mvkey">madhya</span></div><div class="swwords">
+        <div class="sww"><span class="wd">madhurā puri nilayē</span><span class="syls"><span class="syl"><span class="sy">ma</span><span class="sn">gd</span></span><span class="syl"><span class="sy">dhu</span><span class="sn">pm R ;</span></span><span class="syl"><span class="sy">rā</span><span class="sn">S ; ; ;</span></span><span class="syl"><span class="sy">pu</span><span class="sn">rg</span></span><span class="syl"><span class="sy">ri</span><span class="sn">rsnd ;</span></span><span class="syl"><span class="sy">ni</span><span class="sn">S ,</span></span><span class="syl"><span class="sy">la</span><span class="sn">R ,</span></span><span class="syl"><span class="sy">yē</span><span class="sn">G ; ; ; ; ; ;</span></span></span><span class="gl">abiding in Madurai</span></div>
+        <div class="sww"><span class="wd">maṇi valayē</span><span class="syls"><span class="syl"><span class="sy">ma</span><span class="sn">M</span></span><span class="syl"><span class="sy">ṇi</span><span class="sn">P ; ; ; ;</span></span><span class="syl"><span class="sy">va</span><span class="sn">G M</span></span><span class="syl"><span class="sy">la</span><span class="sn">R</span></span><span class="syl"><span class="sy">yē</span><span class="sn">GM</span></span></span><span class="gl">wearing jewelled bangles</span></div>
+      </div></div>
+      <div class="swline"><div class="swmeta"><span class="swlbl">Line 2</span><span class="mvkey">madhya</span></div><div class="swwords">
+        <div class="sww"><span class="wd">malaya dhvaja</span><span class="syls"><span class="syl"><span class="sy">ma</span><span class="sn">P</span></span><span class="syl"><span class="sy">la</span><span class="sn">P</span></span><span class="syl"><span class="sy">ya</span><span class="sn">P ; ; ,m</span></span><span class="syl"><span class="sy">dhva</span><span class="sn">N</span></span><span class="syl"><span class="sy">ja</span><span class="sn">D</span></span></span><span class="gl">Malayadhvaja</span></div>
+        <div class="sww"><span class="wd">pāṇḍya rāja</span><span class="syls"><span class="syl"><span class="sy">pā</span><span class="sn">D P</span></span><span class="syl"><span class="sy">ṇḍya</span><span class="sn">P ; ; ;</span></span><span class="syl"><span class="sy">rā</span><span class="sn">P,m</span></span><span class="syl"><span class="sy">ja</span><span class="sn">DM G R</span></span></span><span class="gl">the Pandya king</span></div>
+        <div class="sww"><span class="wd">tanayē</span><span class="syls"><span class="syl"><span class="sy">ta</span><span class="sn">G R G ;</span></span><span class="syl"><span class="sy">na</span><span class="sn">G ; gmpm</span></span><span class="syl"><span class="sy">yē</span><span class="sn">R ;</span></span></span><span class="gl">daughter of</span></div>
+      </div></div>
+      <div class="swline"><div class="swmeta"><span class="swlbl">Line 3</span><span class="mvkey">madhya</span><span class="mvkey approx">split approximate</span></div><div class="swwords">
+        <div class="sww"><span class="wd">vidhu viḍambana</span><span class="syls"><span class="syl"><span class="sy">vi</span><span class="sn">G ,</span></span><span class="syl"><span class="sy">dhu</span><span class="sn">m ;</span></span><span class="syl"><span class="sy">vi</span><span class="sn">D</span></span><span class="syl"><span class="sy">ḍam</span><span class="sn">mdS ; ; ;</span></span><span class="syl"><span class="sy">ba</span><span class="sn">R S</span></span><span class="syl"><span class="sy">na</span><span class="sn">R R Srg rsnd ;</span></span></span><span class="gl">whose face mocks the moon</span></div>
+        <div class="sww"><span class="wd">vadanē</span><span class="syls"><span class="syl"><span class="sy">va</span><span class="sn">, s</span></span><span class="syl"><span class="sy">da</span><span class="sn">S</span></span><span class="syl"><span class="sy">nē</span><span class="sn">S ; Srd ; ;</span></span></span><span class="gl">face</span></div>
+        <div class="sww"><span class="wd">vijayē</span><span class="syls"><span class="syl"><span class="sy">vi</span><span class="sn">S ,</span></span><span class="syl"><span class="sy">ja</span><span class="sn">r ;</span></span><span class="syl"><span class="sy">yē</span><span class="sn">G ; ;</span></span></span><span class="gl">victorious one</span></div>
+      </div></div>
+      <div class="swline"><div class="swmeta"><span class="swlbl">Line 4</span><span class="mvkey">madhya · raga mudra</span></div><div class="swwords">
+        <div class="sww"><span class="wd">vīṇā gāna</span><span class="syls"><span class="syl"><span class="sy">vī</span><span class="sn">gR , ; ;</span></span><span class="syl"><span class="sy">ṇā</span><span class="sn">S ; ; ;</span></span><span class="syl"><span class="sy">gā</span><span class="sn">snD N D</span></span><span class="syl"><span class="sy">na</span><span class="sn">P ; ; ;</span></span></span><span class="gl">in veena music</span></div>
+        <div class="sww"><span class="wd">daśa gamaka kriyē</span><span class="syls"><span class="syl"><span class="sy">da</span><span class="sn">G M</span></span><span class="syl"><span class="sy">śa</span><span class="sn">R G</span></span><span class="syl"><span class="sy">ga</span><span class="sn">G N</span></span><span class="syl"><span class="sy">ma</span><span class="sn">D M</span></span><span class="syl"><span class="sy">ka</span><span class="sn">g R , ;</span></span><span class="syl"><span class="sy">kri</span><span class="sn">pm gR ,</span></span><span class="syl"><span class="sy">yē</span><span class="sn">S ;</span></span></span><span class="gl">creator of the ten gamakas</span></div>
+      </div></div>
+      <div class="swline"><div class="swmeta"><span class="swlbl">Line 5</span><span class="mvkey">madhyama kāla</span></div><div class="swwords">
+        <div class="sww"><span class="wd">madhu mada mōdita</span><span class="syls"><span class="syl"><span class="sy">ma</span><span class="sn">gd</span></span><span class="syl"><span class="sy">dhu</span><span class="sn">pm</span></span><span class="syl"><span class="sy">ma</span><span class="sn">G</span></span><span class="syl"><span class="sy">da</span><span class="sn">R</span></span><span class="syl"><span class="sy">mō</span><span class="sn">S ;</span></span><span class="syl"><span class="sy">di</span><span class="sn">S</span></span><span class="syl"><span class="sy">ta</span><span class="sn">D</span></span></span><span class="gl">delighting in the intoxication of mead</span></div>
+        <div class="sww"><span class="wd">hṛdayē</span><span class="syls"><span class="syl"><span class="sy">hṛ</span><span class="sn">S</span></span><span class="syl"><span class="sy">da</span><span class="sn">R</span></span><span class="syl"><span class="sy">yē</span><span class="sn">G ;</span></span></span><span class="gl">whose heart</span></div>
+        <div class="sww"><span class="wd">sadayē</span><span class="syls"><span class="syl"><span class="sy">sa</span><span class="sn">pm</span></span><span class="syl"><span class="sy">da</span><span class="sn">gr</span></span><span class="syl"><span class="sy">yē</span><span class="sn">G ;</span></span></span><span class="gl">compassionate</span></div>
+        <div class="sww"><span class="wd">mahā dēva</span><span class="syls"><span class="syl"><span class="sy">ma</span><span class="sn">P</span></span><span class="syl"><span class="sy">hā</span><span class="sn">P ;</span></span><span class="syl"><span class="sy">dē</span><span class="sn">P D</span></span><span class="syl"><span class="sy">va</span><span class="sn">P</span></span></span><span class="gl">Mahadeva</span></div>
+        <div class="sww"><span class="wd">sundarēśa priyē</span><span class="syls"><span class="syl"><span class="sy">sun</span><span class="sn">S ;</span></span><span class="syl"><span class="sy">da</span><span class="sn">R</span></span><span class="syl"><span class="sy">rē</span><span class="sn">S ;</span></span><span class="syl"><span class="sy">śa</span><span class="sn">sn D</span></span><span class="syl"><span class="sy">pri</span><span class="sn">R</span></span><span class="syl"><span class="sy">yē</span><span class="sn">S ;</span></span></span><span class="gl">beloved of Sundaresha</span></div>
+      </div></div>
+      <div class="swline"><div class="swmeta"><span class="swlbl">Line 6</span><span class="mvkey">madhyama kāla · composer mudra</span></div><div class="swwords">
+        <div class="sww"><span class="wd">madhu mura ripu</span><span class="syls"><span class="syl"><span class="sy">ma</span><span class="sn">S</span></span><span class="syl"><span class="sy">dhu</span><span class="sn">R</span></span><span class="syl"><span class="sy">mu</span><span class="sn">G</span></span><span class="syl"><span class="sy">ra</span><span class="sn">R</span></span><span class="syl"><span class="sy">ri</span><span class="sn">S</span></span><span class="syl"><span class="sy">pu</span><span class="sn">S</span></span></span><span class="gl">of Vishnu, foe of Madhu and Mura</span></div>
+        <div class="sww"><span class="wd">sōdari</span><span class="syls"><span class="syl"><span class="sy">sō</span><span class="sn">S ;</span></span><span class="syl"><span class="sy">da</span><span class="sn">S</span></span><span class="syl"><span class="sy">ri</span><span class="sn">R</span></span></span><span class="gl">sister</span></div>
+        <div class="sww"><span class="wd">śātōdari</span><span class="syls"><span class="syl"><span class="sy">śā</span><span class="sn">sn D</span></span><span class="syl"><span class="sy">tō</span><span class="sn">dSn</span></span><span class="syl"><span class="sy">da</span><span class="sn">M</span></span><span class="syl"><span class="sy">ri</span><span class="sn">D</span></span></span><span class="gl">slender-waisted</span></div>
+        <div class="sww"><span class="wd">vidhi guru guha</span><span class="syls"><span class="syl"><span class="sy">vi</span><span class="sn">G</span></span><span class="syl"><span class="sy">dhi</span><span class="sn">R</span></span><span class="syl"><span class="sy">gu</span><span class="sn">S</span></span><span class="syl"><span class="sy">ru</span><span class="sn">sn</span></span><span class="syl"><span class="sy">gu</span><span class="sn">N</span></span><span class="syl"><span class="sy">ha</span><span class="sn">D</span></span></span><span class="gl">Brahma and Guruguha</span></div>
+        <div class="sww"><span class="wd">vaśaṅkari</span><span class="syls"><span class="syl"><span class="sy">va</span><span class="sn">P</span></span><span class="syl"><span class="sy">śaṅ</span><span class="sn">P ,m</span></span><span class="syl"><span class="sy">ka</span><span class="sn">gr</span></span><span class="syl"><span class="sy">ri</span><span class="sn">G ;</span></span></span><span class="gl">who holds in her sway</span></div>
+        <div class="sww"><span class="wd">śaṅkari</span><span class="syls"><span class="syl"><span class="sy">śaṅ</span><span class="sn">gmdm</span></span><span class="syl"><span class="sy">ka</span><span class="sn">G</span></span><span class="syl"><span class="sy">ri</span><span class="sn">R</span></span></span><span class="gl">consort of Shankara</span></div>
+      </div></div>
+    </div>
+  </div>
+  <div class="callout gold"><span class="lbl">What the mapping shows</span> The mapping shows how slowly this kriti unfolds. The first syllable <em>mī</em> spends a full beat-group circling Sa before <em>nā</em> rises, and <em>mudaṃ dēhi</em> ("give bliss") falls through D M G R and settles on R₁, the raga's darkest note. The legend's line, <em>mīna lōcani pāśa mōcani</em>, is the first place the song breaks into madhyama kāla: after long melismas, the syllables suddenly arrive one note at a time. The raga mudra <em>daśa gamaka kriyē</em> sits on moving pairs (G M · R G · G N · D M) that call for exactly the gamakas it names. At the end, the composer mudra <em>guru guha</em> races down S sn N D, back toward the pallavi.</div>
+  <p class="tnote">Notation: <a class="inline" href="https://www.shivkumar.org/music/meenakshi-memudam.htm">shivkumar.org: Meenakshi Memudam Dehi</a> (Ram Kaushik version). Syllable boundaries follow the source's spacing and dashes. Lines marked <em>split approximate</em> are long melismas where the boundary between two syllables is a best fit.</p>
+</section>
+<section id="significance"><h2><span class="secn">9</span>Significance</h2>
   <ul>
     <li><strong>The concert benchmark for Purvikalyani</strong>, sung as a main or sub-main piece.</li>
     <li><strong>A defining legend</strong>: the composer's death during the song makes it one of the most emotionally charged works in the repertoire.</li>
@@ -506,7 +598,7 @@
   </ul>
 </section>
 
-<section id="performance"><h2><span class="secn">9</span>Performance Practice &amp; Recordings</h2>
+<section id="performance"><h2><span class="secn">10</span>Performance Practice &amp; Recordings</h2>
   <p>The main interpretive choices are the tempo of the 2-kalai cycle, how much room to give the madhyama kāla passages, and where to place neraval.</p>
   <table>
     <tr><th>Artist</th><th>Why seek it out</th></tr>
@@ -517,7 +609,7 @@
   </table>
 </section>
 
-<section id="guide"><h2><span class="secn">10</span>Listening Guide</h2>
+<section id="guide"><h2><span class="secn">11</span>Listening Guide</h2>
   <p class="lead">A typical ~20-minute concert rendition. Times are approximate.</p>
   <div class="tabs" data-filter="glist">
     <button class="tab active" data-mv="all">Whole piece</button>
@@ -539,7 +631,7 @@
   <div class="callout teal"><span class="lbl">First listen vs re-listen</span> On a first listen, feel the contrast between the slow lines and the double-speed madhyama kāla. On a re-listen, follow R₁ and M₂, the two aching notes, and catch the moment the raga's name is sung.</div>
 </section>
 
-<section id="mustlisten"><h2><span class="secn">11</span>Must-Listen</h2>
+<section id="mustlisten"><h2><span class="secn">12</span>Must-Listen</h2>
   <div class="mustlisten"><h3>Anupallavi → “mīna lōcani pāśa mōcani”</h3><p class="span">≈ 3 min</p>
     <p><strong>Why this one.</strong> The raga's most characteristic phrases, the kriti's most striking change of pace, and the line tradition ties to Dikshitar's last breath.</p>
     <p><strong>Recommended.</strong> <span class="rec"><span class="who">M.S. Subbulakshmi</span></span>, then <span class="rec"><span class="who">D.K. Pattammal</span></span> for the austere Dikshitar-school reading.</p></div>

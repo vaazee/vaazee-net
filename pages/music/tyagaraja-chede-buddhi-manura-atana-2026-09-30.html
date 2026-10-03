@@ -280,6 +280,26 @@
   .kbd .lit-min{fill:var(--cool-bg);stroke:var(--cool-ink);stroke-width:2}
   .kbd .lit-maj{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2}
   .kbd .klbl{fill:var(--ink-faint);font-family:monospace;font-size:11px}
+  /* ---- swaras by word ---- */
+  .swsec{margin:0 0 8px}
+  .swsec h3{font-family:Georgia,serif;margin:22px 0 10px}
+  .swline{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);padding:14px 18px;margin:0 0 12px;box-shadow:var(--shadow)}
+  .swmeta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-bottom:10px}
+  .swlbl{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+  .swmeta .mvkey{font-family:"SF Mono",Menlo,monospace;font-size:11.5px;color:var(--cool-ink);
+    background:var(--cool-bg);border:1px solid var(--cool-bd);padding:1px 8px;border-radius:20px}
+  .swmeta .mvkey.approx{color:var(--warm-ink);background:var(--warm-bg);border-color:var(--warm-bd)}
+  .swwords{display:flex;flex-wrap:wrap;gap:10px}
+  .sww{display:flex;flex-direction:column;gap:5px;background:var(--th-bg);border:1px solid var(--line);
+    border-radius:10px;padding:8px 11px;max-width:100%}
+  .sww.cont{background:transparent;border-style:dashed}
+  .sww .wd{font-family:Georgia,serif;font-style:italic;font-weight:600;color:var(--accent-ink);font-size:15px}
+  .sww .syls{display:flex;flex-wrap:wrap;gap:4px 12px}
+  .sww .syl{display:flex;flex-direction:column;align-items:flex-start}
+  .sww .sy{font-size:13px;color:var(--ink-soft)}
+  .sww .sn{font-family:"SF Mono",Menlo,monospace;font-size:13.5px;font-weight:650;color:var(--ink);white-space:nowrap}
+  .sww .gl{font-size:11.5px;color:var(--ink-faint)}
 </style>
 </head>
 <body>
@@ -320,7 +340,7 @@
 
   <nav class="toc" id="toc">
     <p class="title">Contents</p>
-    <a href="#tldr">In brief</a><a href="#identity">1 · Identity &amp; Context</a><a href="#form">2 · Structure</a><a href="#raga">3 · Raga Atana</a><a href="#tonality">4 · Drone &amp; Tonality</a><a href="#rhythm">5 · Tala &amp; Tempo</a><a href="#texture">6 · Ensemble</a><a href="#meaning">7 · Lyrics &amp; Meaning</a><a href="#significance">8 · Significance</a><a href="#performance">9 · Recordings</a><a href="#guide">10 · Listening Guide</a><a href="#mustlisten">11 · Must-Listen</a><a href="#glossary">Glossary</a>
+    <a href="#tldr">In brief</a><a href="#identity">1 · Identity &amp; Context</a><a href="#form">2 · Structure</a><a href="#raga">3 · Raga Atana</a><a href="#tonality">4 · Drone &amp; Tonality</a><a href="#rhythm">5 · Tala &amp; Tempo</a><a href="#texture">6 · Ensemble</a><a href="#meaning">7 · Lyrics &amp; Meaning</a><a href="#swaras">8 · Swaras by Word</a><a href="#significance">9 · Significance</a><a href="#performance">10 · Recordings</a><a href="#guide">11 · Listening Guide</a><a href="#mustlisten">12 · Must-Listen</a><a href="#glossary">Glossary</a>
   </nav>
 
   <main>
@@ -504,7 +524,48 @@
   </div><figcaption>Unlike a gentle kriti, this one starts high. Atana opens at full voltage, eases for the reasoning in the charanam, then surges again in the swaras.</figcaption></figure>
 </section>
 
-<section id="significance"><h2><span class="secn">8</span>Significance</h2>
+<section id="swaras"><h2><span class="secn">8</span>Swaras, Word by Word</h2>
+  <p class="lead">Every syllable of the kriti paired with the Atana swaras it is sung on.</p>
+  <p>Each line below is the <strong>first, plainest sangati</strong> from Ram Kaushik's version as notated on shivkumar.org. The anupallavi uses the first sangati that reaches <em>jūḍarā</em>. Each word sits in its own box: the syllables are on top and the swaras they are sung on are underneath. The pallavi and anupallavi are in slow first speed, with several notes per syllable. The charanam switches to <em>madhyama kāla</em>, roughly one note per syllable.</p>
+  <div class="callout teal"><span class="lbl">Reading the notation</span> <b>S R G M P D N</b> = Sa Ri Ga Ma Pa Dha Ni (here R₂ G₃ M₁ D₂ N₃). A <b>capital</b> letter is a long note and a <b>lowercase</b> letter is half as long. <b>;</b> holds the previous note for one long note's length and <b>,</b> for a short one. The song starts <em>before</em> the beat (atīta eduppu), so the first syllable of each line sits on a pick-up note. The source doesn't mark octaves. In the anupallavi, the S after P is the upper Ṡ.</div>
+  <div class="swlines">
+    <div class="swsec"><h3>Pallavi</h3>
+      <div class="swline"><div class="swmeta"><span class="swlbl">Line 1</span><span class="mvkey">madhya · atīta eduppu</span></div><div class="swwords">
+        <div class="sww"><span class="wd">cheḍē</span><span class="syls"><span class="syl"><span class="sy">che</span><span class="sn">r</span></span><span class="syl"><span class="sy">ḍē</span><span class="sn">sn P</span></span></span><span class="gl">that ruins</span></div>
+        <div class="sww"><span class="wd">buddhi</span><span class="syls"><span class="syl"><span class="sy">bud</span><span class="sn">pdN</span></span><span class="syl"><span class="sy">dhi</span><span class="sn">P</span></span></span><span class="gl">mind-set</span></div>
+        <div class="sww"><span class="wd">mānurā</span><span class="syls"><span class="syl"><span class="sy">mā</span><span class="sn">pp mg</span></span><span class="syl"><span class="sy">nu</span><span class="sn">M</span></span><span class="syl"><span class="sy">rā</span><span class="sn">P ; ; ; ; ; ; ,</span></span></span><span class="gl">give up!</span></div>
+      </div></div>
+    </div>
+    <div class="swsec"><h3>Anupallavi</h3>
+      <div class="swline"><div class="swmeta"><span class="swlbl">Line 1</span><span class="mvkey">toward tara Ṡ</span></div><div class="swwords">
+        <div class="sww"><span class="wd">iḍē</span><span class="syls"><span class="syl"><span class="sy">i</span><span class="sn">p</span></span><span class="syl"><span class="sy">ḍē</span><span class="sn">dpM P</span></span></span><span class="gl">here</span></div>
+        <div class="sww"><span class="wd">pātram(e)varō</span><span class="syls"><span class="syl"><span class="sy">pā</span><span class="sn">S</span></span><span class="syl"><span class="sy">tram(e)</span><span class="sn">S</span></span><span class="syl"><span class="sy">va</span><span class="sn">D ,</span></span><span class="syl"><span class="sy">rō</span><span class="sn">N , S ; ;</span></span></span><span class="gl">who the master is</span></div>
+        <div class="sww"><span class="wd">jūḍarā</span><span class="syls"><span class="syl"><span class="sy">jū</span><span class="sn">sn rs</span></span><span class="syl"><span class="sy">ḍa</span><span class="sn">ns</span></span><span class="syl"><span class="sy">rā</span><span class="sn">D ,</span></span></span><span class="gl">look!</span></div>
+      </div></div>
+    </div>
+    <div class="swsec"><h3>Charanam</h3>
+      <div class="swline"><div class="swmeta"><span class="swlbl">Line 1–2</span><span class="mvkey">madhyama kāla</span></div><div class="swwords">
+        <div class="sww"><span class="wd">bhū-vāsiki</span><span class="syls"><span class="syl"><span class="sy">bhū</span><span class="sn">d</span></span><span class="syl"><span class="sy">vā</span><span class="sn">n</span></span><span class="syl"><span class="sy">si</span><span class="sn">p</span></span><span class="syl"><span class="sy">ki</span><span class="sn">m</span></span></span><span class="gl">to each earth-dweller</span></div>
+        <div class="sww"><span class="wd">tagu</span><span class="syls"><span class="syl"><span class="sy">ta</span><span class="sn">p</span></span><span class="syl"><span class="sy">gu</span><span class="sn">d</span></span></span><span class="gl">deserved</span></div>
+        <div class="sww"><span class="wd">phalamu</span><span class="syls"><span class="syl"><span class="sy">pha</span><span class="sn">m</span></span><span class="syl"><span class="sy">la</span><span class="sn">p</span></span><span class="syl"><span class="sy">mu</span><span class="sn">r</span></span></span><span class="gl">result</span></div>
+        <div class="sww"><span class="wd">kalgunani</span><span class="syls"><span class="syl"><span class="sy">ka</span><span class="sn">m</span></span><span class="syl"><span class="sy">lu</span><span class="sn">r</span></span><span class="syl"><span class="sy">gu</span><span class="sn">s</span></span><span class="syl"><span class="sy">na</span><span class="sn">n</span></span><span class="syl"><span class="sy">ni</span><span class="sn">s</span></span></span><span class="gl">will accrue, that…</span></div>
+        <div class="sww"><span class="wd">budhulu</span><span class="syls"><span class="syl"><span class="sy">bu</span><span class="sn">r</span></span><span class="syl"><span class="sy">dhu</span><span class="sn">m</span></span><span class="syl"><span class="sy">lu</span><span class="sn">r</span></span></span><span class="gl">the wise</span></div>
+        <div class="sww"><span class="wd">palka</span><span class="syls"><span class="syl"><span class="sy">pal</span><span class="sn">m p</span></span><span class="syl"><span class="sy">ka</span><span class="sn">n</span></span></span><span class="gl">saying</span></div>
+        <div class="sww"><span class="wd">vina lēdā</span><span class="syls"><span class="syl"><span class="sy">vi</span><span class="sn">n</span></span><span class="syl"><span class="sy">na</span><span class="sn">p</span></span><span class="syl"><span class="sy">lē</span><span class="sn">m p S ;</span></span><span class="syl"><span class="sy">dā</span><span class="sn">D ;</span></span></span><span class="gl">haven't you heard?</span></div>
+      </div></div>
+      <div class="swline"><div class="swmeta"><span class="swlbl">Line 3–4</span><span class="mvkey">madhyama kāla · up to tara</span></div><div class="swwords">
+        <div class="sww"><span class="wd">śrī</span><span class="syls"><span class="syl"><span class="sy">śrī</span><span class="sn">m p</span></span></span></div>
+        <div class="sww"><span class="wd">vāsudēvudē</span><span class="syls"><span class="syl"><span class="sy">vā</span><span class="sn">S</span></span><span class="syl"><span class="sy">su</span><span class="sn">s</span></span><span class="syl"><span class="sy">dē</span><span class="sn">s d</span></span><span class="syl"><span class="sy">vu</span><span class="sn">s</span></span><span class="syl"><span class="sy">dē</span><span class="sn">r s</span></span></span><span class="gl">Vāsudēva alone</span></div>
+        <div class="sww"><span class="wd">sarvam(a)nucu</span><span class="syls"><span class="syl"><span class="sy">sar</span><span class="sn">n s</span></span><span class="syl"><span class="sy">vam</span><span class="sn">r</span></span><span class="syl"><span class="sy">a</span><span class="sn">s</span></span><span class="syl"><span class="sy">nu</span><span class="sn">r</span></span><span class="syl"><span class="sy">cu</span><span class="sn">s</span></span></span><span class="gl">is everything, saying</span></div>
+        <div class="sww"><span class="wd">cintiñcarā</span><span class="syls"><span class="syl"><span class="sy">cin</span><span class="sn">d</span></span><span class="syl"><span class="sy">tiñ</span><span class="sn">r</span></span><span class="syl"><span class="sy">ca</span><span class="sn">S</span></span><span class="syl"><span class="sy">rā</span><span class="sn">s</span></span></span><span class="gl">meditate!</span></div>
+        <div class="sww"><span class="wd">tyāgarāja vinutuni</span><span class="syls"><span class="syl"><span class="sy">tyā</span><span class="sn">n</span></span><span class="syl"><span class="sy">ga</span><span class="sn">P</span></span><span class="syl"><span class="sy">rā</span><span class="sn">m</span></span><span class="syl"><span class="sy">ja</span><span class="sn">ps</span></span><span class="syl"><span class="sy">vi</span><span class="sn">s</span></span><span class="syl"><span class="sy">nu</span><span class="sn">r</span></span><span class="syl"><span class="sy">tu</span><span class="sn">s</span></span><span class="syl"><span class="sy">ni</span><span class="sn">sr</span></span></span><span class="gl">on the One praised by Tyagaraja</span></div>
+      </div></div>
+    </div>
+  </div>
+  <div class="callout gold"><span class="lbl">What the mapping shows</span> The pallavi's <em>buddhi mānurā</em> (pdN P · pp mg M · P) carries Atana's crooked signature: a jump up to Ni, then P-M-G-M and back up to P. That is the raga's vakra <em>M P G</em> twist, and it sits on the very words that tell the mind to give up its ruinous thinking. The anupallavi's <em>pātram(e)varō</em> leaps from P straight to the upper Ṡ, so the question "who is the master here?" is asked at the top of the range. In the charanam the melody runs one note per syllable, like plain speech, and that is where the argument is made. Two small differences from the printed text: this version sings <em>vāsudēvudē</em> instead of <em>vāsudēvas</em>, and <em>manasā</em> isn't in the charanam notation. Its later pallavi sangatis add <em>manasā</em> after <em>mānurā</em> instead.</div>
+  <p class="tnote">Notation: <a class="inline" href="https://www.shivkumar.org/music/cedebuddhi-atana.htm">shivkumar.org: Cede Buddhi MAnurA</a> (Ram Kaushik version). Syllable boundaries follow the source's spacing and dashes.</p>
+</section>
+<section id="significance"><h2><span class="secn">9</span>Significance</h2>
   <ul>
     <li><strong>A concert energiser.</strong> Short, fiery and swara-friendly, it is often placed in the first half or straight after the main piece.</li>
     <li><strong>A model of Atana's grammar.</strong> The pallavi alone teaches the leap-and-hammer upper register and the vakra descent.</li>
@@ -512,7 +573,7 @@
   </ul>
 </section>
 
-<section id="performance"><h2><span class="secn">9</span>Performance Practice &amp; Recordings</h2>
+<section id="performance"><h2><span class="secn">10</span>Performance Practice &amp; Recordings</h2>
   <ul>
     <li><strong>Alapana</strong> is optional and usually short; Atana's character comes across fast.</li>
     <li><strong>Neraval</strong>, where used, suits <em>śrī vāsudēvas-sarvamanucunu</em>, the line that answers the question.</li>
@@ -528,7 +589,7 @@
   </table>
 </section>
 
-<section id="guide"><h2><span class="secn">10</span>Listening Guide</h2>
+<section id="guide"><h2><span class="secn">11</span>Listening Guide</h2>
   <p class="lead">A typical ~7-minute rendition. Times are approximate.</p>
   <div class="tabs" data-filter="glist">
     <button class="tab active" data-mv="all">Whole piece</button>
@@ -550,7 +611,7 @@
   <div class="callout teal"><span class="lbl">First listen vs re-listen</span> On a first listen, track the four-word pallavi each time it returns. On a re-listen, notice where Ga and Dha are <em>skipped</em> going up and where they come back going down.</div>
 </section>
 
-<section id="mustlisten"><h2><span class="secn">11</span>Must-Listen</h2>
+<section id="mustlisten"><h2><span class="secn">12</span>Must-Listen</h2>
   <div class="mustlisten"><h3>Pallavi + sangatis + kalpanaswaras</h3><p class="span">≈ 3–4 min</p>
     <p><strong>Why this one.</strong> Everything that makes Atana what it is gets packed into four words: leap, hammer, curl, land.</p>
     <p><strong>Recommended.</strong> <span class="rec"><span class="who">D.K. Jayaraman</span></span> for the classic brisk reading, then <span class="rec"><span class="who">M.D. Ramanathan</span></span> to hear how much changes when the same notes slow down.</p></div>
