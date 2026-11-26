@@ -1,0 +1,1324 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The 007 Dossier</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: a long-form essay in a single 680px reading column, with charts and the film register breaking out to 1120px. Gun-metal ink ground, gunbarrel red and Goldfinger gold. */
+:root{
+  --bg:#f0f1f3; --bg2:#e4e6ea; --panel:#ffffff; --fg:#15171c; --muted:#5b6170; --rule:#c9ccd3;
+  --blood:#a3111a; --gold:#93700f; --steel:#4a5566;
+  --connery:#9a6d10; --lazenby:#2a8576; --moore:#b8426a; --dalton:#3c62ad; --brosnan:#7350c0; --craig:#c0381f; --pattinson:#6b7480;
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --body:"Newsreader","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --col:680px; --wide:1120px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0c0e12; --bg2:#14171d; --panel:#171a21; --fg:#ebe6dc; --muted:#9a9ca5; --rule:#2a2f39;
+  --blood:#d9262f; --gold:#d6ad4b; --steel:#8b97a8;
+  --connery:#d9a641; --lazenby:#5cc4b2; --moore:#e6809f; --dalton:#7fa3ea; --brosnan:#ab92ee; --craig:#ec6247; --pattinson:#a3abb5;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0c0e12; --bg2:#14171d; --panel:#171a21; --fg:#ebe6dc; --muted:#9a9ca5; --rule:#2a2f39;
+  --blood:#d9262f; --gold:#d6ad4b; --steel:#8b97a8;
+  --connery:#d9a641; --lazenby:#5cc4b2; --moore:#e6809f; --dalton:#7fa3ea; --brosnan:#ab92ee; --craig:#ec6247; --pattinson:#a3abb5;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important;transition:none!important} }
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:19px;line-height:1.62;font-optical-sizing:auto;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+a{color:inherit;text-decoration-color:var(--blood);text-decoration-thickness:1.5px;text-underline-offset:3px}
+a:hover{color:var(--blood)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.gutter{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.col{max-width:var(--col);margin-inline:auto}
+.wide{max-width:var(--wide);margin-inline:auto}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.08;text-wrap:balance;margin:0}
+h2{font-size:clamp(2.1rem,5vw,3.4rem);letter-spacing:-.01em}
+h3{font-size:1.55rem;font-weight:600}
+h4{font-size:1.2rem}
+p{margin:0}
+.prose{display:flex;flex-direction:column;gap:1.05em}
+.prose em{font-style:italic}
+.label{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+.dropcap::first-letter{font-family:var(--display);float:left;font-size:4.4em;line-height:.82;padding:.06em .1em 0 0;color:var(--blood);font-weight:700}
+
+/* nav */
+.topnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.topnav .in{display:flex;align-items:center;gap:22px;overflow-x:auto;scrollbar-width:none;padding-block:10px}
+.topnav .in::-webkit-scrollbar{display:none}
+.topnav .mark{font-family:var(--display);font-weight:800;font-size:1.05rem;white-space:nowrap;color:var(--fg);text-decoration:none}
+.topnav .mark b{color:var(--blood)}
+.topnav a.nl{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--muted);white-space:nowrap}
+.topnav a.nl:hover,.topnav a.nl.on{color:var(--fg)}
+.topnav a.nl.on{box-shadow:0 2px 0 var(--blood)}
+
+/* hero */
+.hero{padding-block:56px 40px}
+.hero .wide{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:40px;align-items:center}
+.hero h1{font-size:clamp(3rem,8.6vw,6.6rem);font-weight:800;letter-spacing:-.025em;line-height:.92}
+.hero h1 i{font-weight:500;color:var(--gold)}
+.hero h1 .r{color:var(--blood)}
+.hero .dek{font-size:1.28rem;line-height:1.45;color:var(--muted);margin-top:22px;max-width:34em}
+.hero .dek strong{color:var(--fg);font-weight:500}
+.barrelbox{position:relative;justify-self:center;width:min(440px,82vw);aspect-ratio:1;max-width:100%}
+#barrel{width:100%;height:100%;display:block;border-radius:50%}
+.replay{position:absolute;right:0;bottom:0;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;background:var(--panel);color:var(--fg);border:1px solid var(--rule);border-radius:999px;padding:6px 12px;cursor:pointer}
+.replay:hover{border-color:var(--blood);color:var(--blood)}
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin-top:44px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.stat{padding:16px 14px;border-left:1px solid var(--rule)}
+.stat:first-child{border-left:0;padding-left:0}
+.stat .v{font-family:var(--display);font-size:clamp(1.5rem,2.6vw,2.3rem);white-space:nowrap;font-weight:700;line-height:1;font-variant-numeric:lining-nums tabular-nums}
+.stat .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:8px;line-height:1.35}
+
+/* sections */
+section{padding-block:72px 24px}
+.sechead{display:flex;flex-direction:column;gap:12px;margin-bottom:30px}
+.sechead .label b{color:var(--blood);font-weight:600}
+.kicker{font-size:1.2rem;color:var(--muted);line-height:1.5;font-style:italic}
+.pull{font-family:var(--display);font-style:italic;font-size:1.65rem;line-height:1.3;border-left:3px solid var(--blood);padding-left:22px;margin-block:10px;color:var(--fg)}
+.fig{margin-block:36px}
+.figcap{font-family:var(--mono);font-size:.72rem;line-height:1.5;color:var(--muted);margin-top:10px;letter-spacing:.02em}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--rule);border-radius:999px;padding:5px 11px;background:transparent;color:var(--fg);cursor:pointer;white-space:nowrap}
+.chip .sw{width:9px;height:9px;border-radius:50%}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--mono);font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+svg text{font-family:var(--mono)}
+
+/* timeline */
+#tl svg{display:block;min-width:900px;width:100%;height:auto}
+
+/* films */
+.filmtools{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:18px}
+.films{display:flex;flex-direction:column}
+.film{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:34px;padding-block:30px;border-top:1px solid var(--rule)}
+.film .no{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;color:var(--muted);display:flex;align-items:center;gap:10px}
+.film .no i{width:22px;height:3px;border-radius:2px;display:inline-block}
+.film h3{font-size:2rem;margin-top:8px}
+.film .yr{font-family:var(--mono);font-size:.82rem;color:var(--muted);margin-top:6px}
+.film dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 12px;margin:16px 0 0;font-size:.86rem;line-height:1.4}
+.film dt{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.film dd{margin:0}
+.film .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}
+.metric{display:flex;flex-direction:column;gap:5px}
+.metric .mv{font-family:var(--mono);font-weight:600;font-size:.95rem;font-variant-numeric:tabular-nums}
+.metric .mk{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.metric .bar{height:3px;background:var(--rule);border-radius:2px;overflow:hidden}
+.metric .bar b{display:block;height:100%;background:var(--fg)}
+.film .text{display:flex;flex-direction:column;gap:12px;min-width:0}
+.film .text p{font-size:1.02rem}
+.film .song{font-family:var(--mono);font-size:.74rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 16px}
+.film .song b{color:var(--fg);font-weight:500}
+.film .verdict{font-family:var(--display);font-style:italic;font-size:1.12rem;color:var(--fg)}
+.film[hidden]{display:none}
+
+/* bonds */
+.bonds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.bond{background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.bond .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.bond h3{font-size:1.7rem}
+.bond .yrs{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:4px}
+.bond .ord{font-family:var(--display);font-weight:800;font-size:2.6rem;line-height:.8}
+.bond .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;border-block:1px solid var(--rule);padding-block:10px}
+.bond .facts div{display:flex;flex-direction:column;gap:2px}
+.bond .facts b{font-family:var(--display);font-size:1.5rem;line-height:1}
+.bond .facts span{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.bond p{font-size:.95rem;line-height:1.55}
+.bond .radar{width:100%;max-width:290px;align-self:center}
+.bond .bw{font-family:var(--mono);font-size:.7rem;color:var(--muted);line-height:1.6}
+.bond .bw b{color:var(--fg);font-weight:500}
+
+/* themes */
+.theme{padding-block:24px}
+.theme h3{font-size:clamp(1.6rem,3.2vw,2.15rem);margin-bottom:16px}
+.theme .tno{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;color:var(--blood);margin-bottom:8px;display:block}
+.swim{display:grid;grid-template-columns:110px repeat(25,minmax(26px,1fr));gap:3px;min-width:860px;font-family:var(--mono);font-size:.62rem}
+.swim .rl{display:flex;align-items:center;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.swim .seg{border-radius:2px;padding:6px 5px;line-height:1.15;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:#fff;min-height:28px;display:flex;align-items:center}
+.swim .seg.none{background:transparent;border:1px dashed var(--rule);color:var(--muted)}
+.swim .hd{text-align:center;color:var(--muted);font-size:.58rem;padding-bottom:2px}
+.anatomy{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+.beat{padding:16px 14px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:6px;background:var(--panel);position:relative}
+.beat .bt{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;color:var(--blood)}
+.beat h4{font-size:1.08rem}
+.beat p{font-size:.84rem;line-height:1.45;color:var(--muted)}
+
+/* music */
+.player{display:flex;flex-wrap:wrap;gap:16px;align-items:center;background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:18px 20px}
+.player .btn{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;background:var(--fg);color:var(--bg);border:0;border-radius:999px;padding:10px 16px;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.player .btn.alt{background:transparent;color:var(--fg);border:1px solid var(--rule)}
+.player .btn:hover{background:var(--blood);color:#fff;border-color:var(--blood)}
+.keys{display:flex;gap:3px;align-items:flex-end;height:54px}
+.keys i{display:block;width:16px;height:100%;border:1px solid #9a968c;border-radius:0 0 3px 3px;background:#f4f2ec;transition:background .08s}
+.keys i.blk{height:60%;width:11px;background:#16171b;border-color:#16171b;margin-inline:-7px;position:relative;z-index:1}
+.keys i.lit{background:var(--blood)!important;border-color:var(--blood)}
+.player .info{font-size:.9rem;color:var(--muted);flex:1 1 220px;line-height:1.45}
+.songtable{width:100%;border-collapse:collapse;font-size:.86rem;min-width:760px}
+.songtable th{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:1px solid var(--fg);font-weight:500}
+.songtable td{padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+.songtable td.c{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right}
+.songtable tr:hover td{background:var(--bg2)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:1px}
+.aw{font-family:var(--mono);font-size:.68rem;color:var(--gold)}
+.composers{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+.composer{background:var(--panel);padding:14px;display:flex;flex-direction:column;gap:6px}
+.composer b{font-family:var(--display);font-size:1.15rem}
+.composer .cn{font-family:var(--mono);font-size:.66rem;color:var(--muted);letter-spacing:.06em}
+.composer .pips{display:flex;gap:3px;flex-wrap:wrap}
+.composer .pips i{width:12px;height:12px;border-radius:2px;display:block}
+.composer p{font-size:.82rem;color:var(--muted);line-height:1.4}
+
+/* money */
+.bo{position:relative}
+.bo-bars{display:flex;align-items:flex-end;gap:4px;height:320px;border-bottom:1px solid var(--fg);padding-top:24px}
+.bo-bar{flex:1 1 0;min-width:0;position:relative;display:flex;flex-direction:column;justify-content:flex-end;height:100%;cursor:pointer}
+.bo-bar b{display:block;width:100%;border-radius:2px 2px 0 0;transition:height .9s cubic-bezier(.2,.7,.2,1);height:0}
+.bo-bar .bv{position:absolute;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.6rem;white-space:nowrap;color:var(--fg);transition:bottom .9s cubic-bezier(.2,.7,.2,1)}
+.bo-x{display:flex;gap:4px;margin-top:6px}
+.bo-x span{flex:1 1 0;min-width:0;text-align:center;font-family:var(--mono);font-size:.58rem;color:var(--muted)}
+.bo-grid{position:absolute;left:0;right:0;border-top:1px dashed var(--rule);font-family:var(--mono);font-size:.6rem;color:var(--muted);pointer-events:none}
+.bo-grid span{position:absolute;top:-16px;left:0}
+
+/* ratings */
+.rtable{width:100%;border-collapse:collapse;font-size:.88rem;min-width:820px}
+.rtable th{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:9px 10px;border-bottom:1px solid var(--fg);font-weight:500;cursor:pointer;user-select:none;white-space:nowrap}
+.rtable th:hover{color:var(--fg)}
+.rtable th[aria-sort]::after{content:" ↓";color:var(--blood)}
+.rtable th[aria-sort="ascending"]::after{content:" ↑"}
+.rtable td{padding:7px 10px;border-bottom:1px solid var(--rule)}
+.rtable td.c{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.cell{display:flex;align-items:center;gap:8px}
+.cell .mini{flex:0 0 60px;height:5px;background:var(--rule);border-radius:3px;overflow:hidden}
+.cell .mini b{display:block;height:100%}
+
+/* critic / community */
+.notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.note{border-top:2px solid var(--fg);padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.note .who{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.note p{font-size:1rem}
+.list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.list > div{display:grid;grid-template-columns:140px minmax(0,1fr);gap:18px;padding:12px 0;border-bottom:1px solid var(--rule);font-size:.98rem}
+.list .lk{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+.callout{background:var(--bg2);border-radius:4px;padding:16px 18px;font-size:.92rem;line-height:1.55;color:var(--muted)}
+.callout b{color:var(--fg)}
+.paths{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.path{border:1px solid var(--rule);border-radius:4px;padding:16px;display:flex;flex-direction:column;gap:8px;background:var(--panel)}
+.path h4{font-size:1.15rem}
+.path ol{margin:0;padding-left:1.2em;font-size:.9rem;line-height:1.6}
+.path .pl{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase}
+.next{background:var(--bg2)}
+.next .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
+.facts7{display:flex;flex-direction:column;border-top:1px solid var(--rule)}
+.facts7 div{display:grid;grid-template-columns:130px minmax(0,1fr);gap:14px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:.95rem}
+.facts7 span:first-child{font-family:var(--mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding-top:3px}
+footer{padding-block:60px 80px;border-top:1px solid var(--rule);margin-top:60px}
+footer ul{margin:0;padding-left:1.1em;font-size:.88rem;line-height:1.7;color:var(--muted);columns:2;column-gap:40px}
+footer li{break-inside:avoid}
+
+/* tooltip */
+#tip{position:fixed;z-index:50;pointer-events:none;background:var(--fg);color:var(--bg);font-family:var(--mono);font-size:.72rem;line-height:1.45;padding:8px 10px;border-radius:3px;max-width:260px;opacity:0;transition:opacity .12s}
+#tip b{font-family:var(--display);font-size:.98rem;font-weight:600;display:block}
+
+/* draw-in animations (only applied by JS when a figure scrolls into view; resting state is fully drawn) */
+.draw path.ln{transition:stroke-dashoffset 2.2s ease}
+.pop{animation:pop .5s cubic-bezier(.2,.8,.2,1.2) both}
+@keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.radar path.shape{transition:d .6s ease}
+
+@media (max-width: 900px){
+  .hero .wide{grid-template-columns:1fr}
+  .barrelbox{width:min(360px,80vw)}
+  .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .stat:nth-child(4){border-left:0;padding-left:0}
+  .stat:nth-child(n+4){border-top:1px solid var(--rule)}
+  .film{grid-template-columns:1fr;gap:16px}
+  .bonds{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .paths{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .next .grid{grid-template-columns:1fr}
+}
+@media (max-width: 600px){
+  body{font-size:17.5px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat:nth-child(n){border-left:0;padding-left:0;border-top:1px solid var(--rule)}
+  .stat:nth-child(1),.stat:nth-child(2){border-top:0}
+  .stat:nth-child(even){border-left:1px solid var(--rule);padding-left:14px}
+  .bonds,.notes,.paths{grid-template-columns:1fr}
+  .list > div{grid-template-columns:1fr;gap:4px}
+  .facts7 div{grid-template-columns:1fr;gap:2px}
+  .film .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  footer ul{columns:1}
+  .bo-bars{height:240px}
+  .bo-bar .bv{display:none}
+}
+</style>
+
+<nav class="topnav" aria-label="Sections"><div class="in wide gutter">
+  <a class="mark" href="#top">0<b>0</b>7 Dossier</a>
+  <a class="nl" href="#prologue">Prologue</a>
+  <a class="nl" href="#timeline">Timeline</a>
+  <a class="nl" href="#films">The 25 films</a>
+  <a class="nl" href="#bonds">The Bonds</a>
+  <a class="nl" href="#themes">Themes</a>
+  <a class="nl" href="#music">Music</a>
+  <a class="nl" href="#money">Box office</a>
+  <a class="nl" href="#ratings">Ratings</a>
+  <a class="nl" href="#critics">Critics</a>
+  <a class="nl" href="#community">Fans</a>
+  <a class="nl" href="#seventh">Bond 26</a>
+  <a class="nl" href="#verdict">Verdict</a>
+</div></nav>
+
+<header class="hero gutter" id="top">
+  <div class="wide">
+    <div>
+      <div class="label" style="margin-bottom:18px">An essay in twenty-five films · 1962 – 2026</div>
+      <h1>Nobody does it <i>better</i>, <span class="r">nobody</span> does it longer.</h1>
+      <p class="dek"><strong>Sixty-four years, twenty-five official films, six actors and, as of 16 November 2026, a seventh.</strong> How a snobbish Cold War fantasy written in a Jamaican beach house became cinema's longest-running franchise, and what each era of James Bond tells us about the decade that made it.</p>
+    </div>
+    <div class="barrelbox">
+      <canvas id="barrel" aria-label="Animated gun-barrel opening: white dots slide across, open into a rifled barrel, a figure turns and fires, and red runs down the screen." role="img"></canvas>
+      <button class="replay" id="replay" type="button">↻ Replay</button>
+    </div>
+  </div>
+  <div class="wide">
+    <div class="stats">
+      <div class="stat"><div class="v num">25</div><div class="k">Official Eon films<br>Dr. No → No Time to Die</div></div>
+      <div class="stat"><div class="v num">7</div><div class="k">Actors in the role<br>incl. Robert Pattinson</div></div>
+      <div class="stat"><div class="v num">$7.7B</div><div class="k">Worldwide gross<br>Eon films, nominal</div></div>
+      <div class="stat"><div class="v num">11</div><div class="k">Scores by<br>John Barry</div></div>
+      <div class="stat"><div class="v num">3</div><div class="k">Oscar-winning songs<br>in a row, 2012–2021</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- PROLOGUE -->
+<section id="prologue" class="gutter">
+  <div class="col">
+    <div class="sechead"><span class="label"><b>I.</b> Prologue</span><h2>A thriller written at the end of an empire</h2></div>
+    <div class="prose">
+      <p class="dropcap">In January 1952, a 43-year-old newspaper executive and former naval intelligence officer named Ian Fleming sat down at his house on Jamaica's north coast, a place he had named Goldeneye after one of his wartime operations, and began typing a thriller to distract himself from his impending marriage. He borrowed the hero's name from the author of <em>Birds of the West Indies</em>, an American ornithologist called James Bond, because he wanted the dullest name he could find. <em>Casino Royale</em> was published in April 1953. Fleming wrote a Bond book a year until his death in August 1964, a month before <em>Goldfinger</em> opened in London.</p>
+      <p>The books were snobbish, violent, brand-obsessed and full of sex, and they sold steadily rather than spectacularly until President John F. Kennedy listed <em>From Russia, with Love</em> among his ten favourite books in 1961. That same year two producers who had each failed to make a Bond film alone, the Canadian showman Harry Saltzman and the American Albert R. "Cubby" Broccoli, joined forces, formed Eon Productions, and persuaded United Artists to put up about a million dollars for <em>Dr. No</em>. They cast a 31-year-old Scottish former milkman and bodybuilder whom Fleming reportedly dismissed as an overgrown stuntman. Fleming later gave the literary Bond a Scottish father.</p>
+      <p>Sixty-four years later, the official series has produced twenty-five films and grossed roughly <span class="num">$7.7 billion</span> worldwide. It has survived the death of its author, the end of the Cold War, a six-year legal limbo, a reboot, a pandemic, the death of its hero, and the departure of the Broccoli family, which handed creative control to Amazon MGM Studios in 2025. What follows is an attempt to see the whole thing at once: every film, every Bond, the ideas that run under all of them, and the music that made them sound like nothing else.</p>
+      <p class="pull">Bond survives because each generation remakes him in its own anxieties, then sends him somewhere sunny to defeat them.</p>
+      <p>A note on scope. "All the Bond films" here means the twenty-five made by Eon Productions. Two rogue productions sit outside the canon: the 1967 psychedelic spoof <em>Casino Royale</em>, with David Niven and five other "James Bonds" (Rotten Tomatoes 28%), and <em>Never Say Never Again</em> (1983), a remake of <em>Thunderball</em> that brought a 52-year-old Sean Connery back as a rival to Roger Moore (Rotten Tomatoes 70%). There was also a 1954 American TV play of <em>Casino Royale</em>, with Barry Nelson as an American agent called "Jimmy Bond". They appear in the story where they matter.</p>
+      <p class="callout"><b>Spoilers.</b> The film register and the essays discuss plots in full, including the endings of <i>On Her Majesty's Secret Service</i>, <i>Casino Royale</i>, <i>Skyfall</i> and <i>No Time to Die</i>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline" class="gutter">
+  <div class="wide">
+    <div class="sechead col" style="margin-inline:0;max-width:var(--col)"><span class="label"><b>II.</b> Timeline</span><h2>Sixty-four years at a glance</h2><p class="kicker">Each dot is a film, coloured by its Bond. The gaps tell stories too: lawsuits, a studio sale, a pandemic, a change of owner.</p></div>
+    <div class="scrollx" id="tl"></div>
+    <div class="legend" id="tl-legend" style="margin-top:12px"></div>
+  </div>
+</section>
+
+<!-- FILMS -->
+<section id="films" class="gutter">
+  <div class="wide">
+    <div class="sechead" style="max-width:var(--col)"><span class="label"><b>III.</b> The register</span><h2>All twenty-five films</h2><p class="kicker">Credits, numbers and a short critical reading for each. Filter by Bond, or sort to see how the series ranks itself.</p></div>
+    <div class="filmtools">
+      <div class="chips" id="film-filter" role="group" aria-label="Filter films by actor"></div>
+      <div class="chips" id="film-sort" role="group" aria-label="Sort films">
+        <button class="chip" type="button" data-sort="n" aria-pressed="true">Release order</button>
+        <button class="chip" type="button" data-sort="rt" aria-pressed="false">Critics</button>
+        <button class="chip" type="button" data-sort="lb" aria-pressed="false">Letterboxd</button>
+        <button class="chip" type="button" data-sort="ww" aria-pressed="false">Box office</button>
+      </div>
+    </div>
+    <div class="label" style="margin-bottom:8px">RT = Rotten Tomatoes Tomatometer · LB = Letterboxd average (of 5) · IMDb (of 10, ≈) · Gross = worldwide, US$ nominal</div>
+    <div class="films" id="filmlist"></div>
+  </div>
+</section>
+
+<!-- BONDS -->
+<section id="bonds" class="gutter">
+  <div class="wide">
+    <div class="sechead" style="max-width:var(--col)"><span class="label"><b>IV.</b> The men</span><h2>Six Bonds, six different men</h2><p class="kicker">Each actor answered the same question differently: is Bond a gentleman who kills, or a killer who passes as a gentleman?</p></div>
+    <div class="col prose" style="margin-inline:0 auto;margin-bottom:30px">
+      <p>Fleming's Bond is a blunt instrument with good taste: a man in his late thirties, cold, melancholy, a heavy smoker and drinker, with a scar down his right cheek and a comma of black hair. No actor has played all of that at once. Connery took the menace and the ease; Lazenby the vulnerability; Moore the irony; Dalton the anger and the fidelity to Fleming; Brosnan the gloss; Craig the damage. The radar charts below are an editorial reading, not data: six qualities, scored out of ten, to show the shape of each performance.</p>
+    </div>
+    <div class="bonds" id="bondgrid"></div>
+    <div class="fig">
+      <div class="label" style="margin-bottom:10px">Age of each Bond at each film's release</div>
+      <div class="scrollx" id="agechart"></div>
+      <p class="figcap">Moore was the oldest at both ends: 45 at his debut and 57 when A View to a Kill opened. Lazenby was the youngest at 30. Craig's tenure, 2006–2021, is the longest by calendar years; Moore's seven films are the most. Pattinson is plotted at his age when cast.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THEMES -->
+<section id="themes" class="gutter">
+  <div class="col">
+    <div class="sechead"><span class="label"><b>V.</b> Themes</span><h2>What the films are really about</h2><p class="kicker">Eight ideas that run underneath all twenty-five films, and change shape from one era to the next.</p></div>
+
+    <div class="theme prose">
+      <span class="tno">THEME 1</span><h3>The last gentleman of a shrinking empire</h3>
+      <p>Fleming created Bond in 1952, four years before Suez showed how little power Britain had left. Bond is a fantasy written into that gap: a lone Englishman who still decides the fate of the world, while the Americans supply the money and the hardware. Felix Leiter of the CIA, played by seven different actors, is a helpful junior partner. The films sell the fantasy with travel-brochure confidence. Bond is at ease in Istanbul, Tokyo and Rio; he knows the vintage and the local customs, and wins at baccarat.</p>
+      <p>The later films turn that fantasy into a question. In <i>GoldenEye</i> (1995) the new M calls him a relic of the Cold War. <i>Skyfall</i> (2012) builds its entire plot around obsolescence: an MI6 headquarters blown up from within, a parliamentary inquiry, a minister who calls the double-0 section antiquated, M reciting Tennyson's "Ulysses" ("that which we are, we are"), and a finale in which Bond defends a crumbling Scottish manor with antique shotguns and a 1964 Aston Martin. The Union Jack keeps appearing at moments of maximum bravado (the parachute in <i>The Spy Who Loved Me</i>, Bond on a rooftop above Whitehall), but by the Craig era the films know the flag is partly a costume.</p>
+    </div>
+
+    <div class="theme prose">
+      <span class="tno">THEME 2</span><h3>Villains as a seismograph of fear</h3>
+      <p>In the novels Bond's enemy is SMERSH, the real Soviet counter-intelligence agency. The films replaced it with SPECTRE, a stateless crime syndicate, which let them sell tickets on both sides of the Iron Curtain and survive détente. Freed from geopolitics, the villains became a record of what audiences feared at the time: nuclear blackmail and the space race in the 1960s; oil, energy and market manipulation in the 1970s and 80s; drug cartels at the end of the Cold War; media empires, post-Soviet arms and pipelines in the 1990s; terror financing, resource grabs, cyber-attacks and mass surveillance after 2001; and engineered biology in the film released in the middle of a pandemic.</p>
+    </div>
+  </div>
+  <div class="wide fig">
+    <div class="scrollx" id="seismo"></div>
+    <div class="legend" style="margin-top:10px"><span><i style="background:var(--fg)"></i>Villain's scheme, by film</span><span><i style="background:transparent;border:2px solid var(--blood)"></i>Ringed = the threat is personal: revenge on Bond, M or MI6</span></div>
+    <p class="figcap">Each film placed by the main category of its villain's plan. From GoldenEye onward, the plots increasingly turn inward: the enemy is a former agent, a friend, a family member or a victim of MI6's own past.</p>
+  </div>
+  <div class="col">
+    <div class="theme prose">
+      <span class="tno">THEME 3</span><h3>Women, desire and the shifting gaze</h3>
+      <p>The series' founding image is Ursula Andress walking out of the Caribbean in a white bikini, and for decades the women around Bond were defined by that gaze, often with names built as jokes: Pussy Galore, Plenty O'Toole, Holly Goodhead, Christmas Jones. Some scenes have aged badly. The hayloft scene in <i>Goldfinger</i>, in which Bond overpowers Pussy Galore, now plays as coercion; No Time to Die director Cary Joji Fukunaga said as much in 2021.</p>
+      <p>Yet the series kept trying to write Bond an equal and kept returning to the idea that love is the one thing that could end him. Diana Rigg's Tracy (1969), Barbara Bach's Soviet agent XXX (1977), Michelle Yeoh's Wai Lin (1997) and Eva Green's Vesper Lynd (2006) are all his match. The two women Bond truly loves, Tracy and Vesper, both die, and those deaths drive the films that follow. The biggest structural change came off-screen in 1995, when Judi Dench became M, a role reportedly inspired by Stella Rimington, the first woman to run MI5. <i>Casino Royale</i> then reversed the founding image outright by having Craig rise from the sea in blue swimming trunks. By <i>No Time to Die</i> Bond is a father, and his 007 number has been given to a Black woman, Lashana Lynch's Nomi.</p>
+    </div>
+
+    <div class="theme prose">
+      <span class="tno">THEME 4</span><h3>Licence and conscience: the revenge engine</h3>
+      <p>The licence to kill is meant to be impersonal duty, and the films that stay with people are almost always about Bond breaking that impersonality. <i>On Her Majesty's Secret Service</i> ends with his wife's murder; <i>Diamonds Are Forever</i> and <i>For Your Eyes Only</i> open with Bond settling scores over it. In <i>Licence to Kill</i> he resigns from the service to avenge Felix Leiter. In <i>GoldenEye</i> the villain is his friend 006, in <i>The World Is Not Enough</i> a woman M once failed, and in <i>Skyfall</i> an agent M abandoned.</p>
+      <p>The Craig films make the pattern the subject. <i>Casino Royale</i> shows the betrayal that made him cold; <i>Quantum of Solace</i> ends with him choosing not to kill the man who used Vesper; <i>Spectre</i> retroactively makes Blofeld the hidden author of all of it. Across sixty years the arc runs from Connery shrugging off a dead woman with a one-liner to Craig sitting fully dressed in a shower with a shaking Vesper. The series learned, slowly, that the most dangerous thing about Bond is what he feels.</p>
+    </div>
+
+    <div class="theme prose">
+      <span class="tno">THEME 5</span><h3>Gadgets, machines and the body</h3>
+      <p>Q-Branch turned espionage into a consumer fantasy: the trick attaché case in <i>From Russia with Love</i>, the ejector-seat Aston Martin DB5 in <i>Goldfinger</i>, the autogyro Little Nellie, the Lotus Esprit that turns into a submarine, the remote-controlled BMW. The cars, watches and champagne became product placement worth millions; Omega has been on Bond's wrist since 1995. The gadgets peaked, and broke the spell, with the invisible Aston Martin of <i>Die Another Day</i>.</p>
+      <p>The reboot answered with the body. In <i>Skyfall</i>, Ben Whishaw's young Q hands Bond only a gun and a radio and tells him the exploding-pen days are over. Bond fails his physical and psychological tests. Craig's battered torso is the special effect. The DB5 comes back, but as a memory rather than a toy, and it is wrecked in the Highlands.</p>
+    </div>
+
+    <div class="theme prose">
+      <span class="tno">THEME 6</span><h3>Mortality: you only live twice</h3>
+      <p>Read the titles in a row: <i>Live and Let Die</i>, <i>You Only Live Twice</i>, <i>A View to a Kill</i>, <i>Licence to Kill</i>, <i>Tomorrow Never Dies</i>, <i>Die Another Day</i>, <i>No Time to Die</i>. A franchise built on an unkillable hero kept naming itself after death. Bond fakes his own funeral in <i>You Only Live Twice</i>; M writes his obituary in <i>Skyfall</i>; in <i>No Time to Die</i> he dies, standing on an island as missiles fall.</p>
+      <p>The cleverest piece of long-form design in the series is a song. In 1969 Louis Armstrong sang John Barry and Hal David's "We Have All the Time in the World" over Bond's honeymoon, and Bond says the title line over Tracy's body. Fifty-two years later, Bond says the same line to Madeleine on a mountain road in southern Italy, Hans Zimmer quotes the melody under his final scene, and Armstrong's recording plays over the end credits. The first Bond who ever really grieved and the last one who ever lived are joined by a single song.</p>
+    </div>
+
+    <div class="theme prose">
+      <span class="tno">THEME 7</span><h3>The pendulum: spectacle and gravity</h3>
+      <p>The franchise's survival mechanism is a pendulum. When the films float off into fantasy, the next one drags Bond back to earth. The Japanese volcano of <i>You Only Live Twice</i> is followed by the grief of <i>On Her Majesty's Secret Service</i>. The space station of <i>Moonraker</i> is followed by the rock-climbing restraint of <i>For Your Eyes Only</i>. Roger Moore's tired farewell is followed by Timothy Dalton's anger. The invisible car of <i>Die Another Day</i> is followed by <i>Casino Royale</i>. The chart below is a reading of tone, not a measurement.</p>
+    </div>
+  </div>
+  <div class="wide fig">
+    <div class="scrollx" id="pendulum"></div>
+    <p class="figcap">Editorial reading, scored from −5 (camp, gadget-driven spectacle) to +5 (grounded, violent, emotionally serious). The four red markers show the hard corrections after the series' most outlandish films.</p>
+  </div>
+  <div class="col">
+    <div class="theme prose">
+      <span class="tno">THEME 8</span><h3>The formula as ritual</h3>
+      <p>Bond films are watched the way people attend a service: the pleasure is in the order of the rituals and in the small changes to them. Most films follow some version of the same running order, devised in 1962–64 and adjusted ever since. The Craig films took it apart (no gun-barrel at the start of <i>Casino Royale</i>, no Q or Moneypenny for two films) and then rebuilt it piece by piece, ending <i>Skyfall</i> in an office that looks exactly like 1962.</p>
+    </div>
+  </div>
+  <div class="wide fig">
+    <div class="anatomy" id="anatomy"></div>
+  </div>
+  <div class="col">
+    <div class="theme prose">
+      <span class="tno">THE FAMILY</span><h3>Who sat behind the desks</h3>
+      <p>Part of the ritual is the office: M's briefing, Moneypenny's flirtation, Q's exasperation, the American cousin. Bernard Lee played M eleven times, Lois Maxwell was Moneypenny fourteen times, and Desmond Llewelyn's Q appeared in seventeen films over 36 years. Their gaps say a lot: Bernard Lee died during pre-production on <i>For Your Eyes Only</i>, so M is simply "on leave," and the reboot removed Q and Moneypenny until <i>Skyfall</i> reintroduced both.</p>
+    </div>
+  </div>
+  <div class="wide fig">
+    <div class="scrollx"><div class="swim" id="swim"></div></div>
+    <p class="figcap">Who played the recurring roles in each film, 1–25. Dashed cells: the character does not appear. Felix Leiter has been recast more than any other character.</p>
+  </div>
+</section>
+
+<!-- MUSIC -->
+<section id="music" class="gutter">
+  <div class="col">
+    <div class="sechead"><span class="label"><b>VI.</b> Music</span><h2>The sound of 007</h2><p class="kicker">A twanging guitar, a chromatic vamp, a brass section and one unresolved chord. Then sixty years of title songs as cultural events.</p></div>
+    <div class="prose">
+      <p class="dropcap">The "James Bond Theme" was written by Monty Norman, who adapted it from "Good Sign, Bad Sign," a song for an unproduced musical of V. S. Naipaul's <em>A House for Mr Biswas</em>. Eon was unhappy with Norman's arrangement and brought in a 28-year-old jazz-pop bandleader, John Barry, to rework it for <i>Dr. No</i>. Barry added the big-band brass, and session guitarist Vic Flick played the famous low-string riff. Barry spent much of his life implying it was really his; Norman sued <i>The Sunday Times</i> for libel over a 1997 article saying so, and won in 2001. Both men are right in their own way. Norman wrote the tune; Barry gave it its sound.</p>
+      <p>The sound rests on two simple devices. Under the melody is a chromatic vamp: the notes B, C, C sharp, C rocking back and forth over a low E, a slow fuse that always seems about to go off. At the end comes the "James Bond chord," an E minor triad with a major seventh and a ninth on top (E–G–B–D♯–F♯). It is dissonant, glamorous and unresolved, which is a fair description of Bond himself. Try them below.</p>
+    </div>
+  </div>
+  <div class="col fig">
+    <div class="player">
+      <button class="btn" id="play-vamp" type="button">▶ Play the vamp</button>
+      <button class="btn alt" id="play-chord" type="button">▶ The chord</button>
+      <div class="keys" id="keys" aria-hidden="true"></div>
+      <div class="info" id="play-info">A simple synthesised illustration, not a recording. The vamp is played twice over a low E, then the Em(maj9) chord rings out.</div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="prose">
+      <p>Barry went on to score eleven Bond films between 1963 and 1987, and his style became the series' musical grammar: low brass stabs, lush minor-key strings, jazz harmony and long, sensual melodies. He also turned the title song into an event. Shirley Bassey's "Goldfinger" (1964), with Barry's brass mimicking a car horn and Bassey holding the final note for a long time, set the template: a big-voiced star, a lyric built around the film's title, and an arrangement that sounds expensive. Bassey is the only singer to have done three (<i>Goldfinger</i>, <i>Diamonds Are Forever</i>, <i>Moonraker</i>).</p>
+      <p>The songs then track pop history. Paul McCartney & Wings brought rock into it with "Live and Let Die" (1973), produced by George Martin, who also scored that film. Carly Simon's "Nobody Does It Better" (1977) was the first title song not to use the film's title. Sheena Easton is the only singer to appear in a title sequence (<i>For Your Eyes Only</i>, 1981). Duran Duran's "A View to a Kill" (1985) is still the only Bond theme to reach number one on the US Billboard Hot 100. a-ha, Gladys Knight, Tina Turner singing a song written by Bono and the Edge, Sheryl Crow, Garbage, Madonna's glitchy electro and Chris Cornell's hard rock followed. Then came a run of retro torch songs: Adele's "Skyfall" won the series' first Oscar for Best Original Song in 2013, Sam Smith's "Writing's on the Wall" became the first Bond theme to reach number one in Britain, and Billie Eilish, eighteen when she recorded "No Time to Die," made it three Oscars in a row.</p>
+      <p>After Barry retired from Bond, the scores became more experimental, with mixed results. Éric Serra's percussive, synthesised <i>GoldenEye</i> was so disliked that the tank chase was re-scored by John Altman. David Arnold, whose 1997 album of Bond covers, <i>Shaken and Stirred</i>, impressed Barry, became his true heir across five films, fusing the brass with breakbeats. Thomas Newman brought marimbas and pulsing minimalism to <i>Skyfall</i> and <i>Spectre</i>, and Hans Zimmer's <i>No Time to Die</i> featured Johnny Marr's guitar and closed with Barry's own melody.</p>
+    </div>
+  </div>
+  <div class="wide fig">
+    <div class="label" style="margin-bottom:10px">Where each title song peaked: UK singles chart and US Billboard Hot 100</div>
+    <div class="scrollx" id="ladder"></div>
+    <div class="legend" style="margin-top:10px"><span><i style="background:var(--gold)"></i>UK peak</span><span><i style="background:transparent;border:2px solid var(--fg)"></i>US Hot 100 peak</span><span>Bottom band = did not chart</span></div>
+    <p class="figcap">Log scale, so the top ten gets room. Sources: Official Charts Company (UK); Billboard (US). OHMSS is represented by "We Have All the Time in the World," which reached UK #3 only on its 1994 reissue after a Guinness advert. Dr. No's entry is the John Barry Orchestra's 1962 single of the theme.</p>
+  </div>
+  <div class="wide fig">
+    <div class="label" style="margin-bottom:10px">The composers. Each square is one Bond score.</div>
+    <div class="composers" id="composers"></div>
+  </div>
+  <div class="wide fig">
+    <div class="scrollx"><table class="songtable" id="songtable"></table></div>
+  </div>
+  <div class="col">
+    <div class="prose">
+      <h3 style="margin-top:12px">The songs that didn't make it</h3>
+      <p>Rejected Bond themes are a genre of their own. Johnny Cash recorded a "Thunderball" that was never used, and Dionne Warwick's "Mr. Kiss Kiss Bang Bang" was dropped from the same film because the producers wanted a song with the title in it. Alice Cooper wrote "The Man with the Golden Gun" and released it on his 1973 album <i>Muscle of Love</i> after Lulu got the job. Blondie wrote a "For Your Eyes Only" that lost out to Sheena Easton. Pulp's "Tomorrow Never Dies" became "Tomorrow Never Lies," a B-side, while k.d. lang's "Surrender," David Arnold's first choice for the main title, ended up over the end credits of the same film. Radiohead wrote "Spectre" for the 2015 film; when Sam Smith's song was chosen instead, they released it free on Christmas Day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MONEY -->
+<section id="money" class="gutter">
+  <div class="wide">
+    <div class="sechead" style="max-width:var(--col)"><span class="label"><b>VII.</b> Box office</span><h2>The money</h2><p class="kicker">Skyfall made the most dollars. Thunderball sold the most tickets. Both are true.</p></div>
+    <div class="chips" id="bo-mode" role="group" aria-label="Box office measure" style="margin-bottom:14px">
+      <button class="chip" type="button" data-mode="ww" aria-pressed="true">Worldwide, nominal</button>
+      <button class="chip" type="button" data-mode="wwa" aria-pressed="false">Worldwide, inflation-adjusted</button>
+      <button class="chip" type="button" data-mode="doma" aria-pressed="false">US + Canada, inflation-adjusted</button>
+      <button class="chip" type="button" data-mode="bud" aria-pressed="false">Budget, nominal</button>
+    </div>
+    <div class="bo" id="bo"></div>
+    <div class="legend" id="bo-legend" style="margin-top:12px"></div>
+    <p class="figcap">Grosses and budgets: The Numbers (Casino Royale's budget shown at the widely reported $150M; The Numbers lists $102M). Adjusted figures multiply by the US consumer price index for the release year, expressed in approximate 2025 dollars. That is a crude method for worldwide grosses, which mix currencies, but it shows the shape.</p>
+  </div>
+  <div class="col prose" style="margin-top:24px">
+    <p>In raw dollars the curve looks like simple growth, peaking at <i>Skyfall</i>'s $1.11 billion, the first Bond film to pass a billion. Adjust for inflation and a different story appears. In North America, <i>Thunderball</i> (1965) and <i>Goldfinger</i> (1964) are still the two biggest Bond films ever, worth roughly $650 million and $530 million in today's money, against about $430 million for <i>Skyfall</i>. Bondmania in the mid-1960s was a phenomenon on the scale of the Beatles. The low points are telling as well: <i>The Man with the Golden Gun</i> and <i>Licence to Kill</i> both preceded long breaks, and <i>Licence to Kill</i>'s weak US gross in the summer of <i>Batman</i> and <i>Indiana Jones and the Last Crusade</i> is a large part of why Timothy Dalton never made a third film.</p>
+    <p>Budgets tell their own story. <i>Dr. No</i> cost about $1 million; <i>No Time to Die</i> about $250 million before pandemic costs. The biggest jump came with <i>Moonraker</i> (1979), which cost more than double <i>The Spy Who Loved Me</i> as Eon chased <i>Star Wars</i>.</p>
+  </div>
+</section>
+
+<!-- RATINGS -->
+<section id="ratings" class="gutter">
+  <div class="wide">
+    <div class="sechead" style="max-width:var(--col)"><span class="label"><b>VIII.</b> Ratings</span><h2>What critics and audiences think</h2><p class="kicker">Critics and Letterboxd users agree on the top: Goldfinger, From Russia with Love, Casino Royale, Skyfall. They disagree most about the Dalton films and On Her Majesty's Secret Service, which audiences like more than critics did at the time.</p></div>
+    <div class="fig" style="margin-top:0">
+      <div class="scrollx" id="scatter"></div>
+      <p class="figcap">Rotten Tomatoes Tomatometer (critics, vertical) against Letterboxd average rating (audiences, horizontal). Hover or tap a dot.</p>
+    </div>
+    <div class="label" style="margin:30px 0 10px">The full scoreboard · click a column to sort</div>
+    <div class="scrollx"><table class="rtable" id="rtable"></table></div>
+    <p class="figcap">Rotten Tomatoes Tomatometer and Popcornmeter: RT editorial franchise ranking (2025–26). Letterboxd: averages and rating counts read from each film's Letterboxd page, 26 Nov 2026. IMDb: IMDb refuses automated reading, so these are approximate values (±0.1) compiled from IMDb list snapshots and long-run averages.</p>
+  </div>
+  <div class="col prose" style="margin-top:24px">
+    <h3>Consensus in one line</h3>
+    <p>The 1960s Connery films and the first and third Craig films are treated as the classics; the Moore and Brosnan eras each have one widely loved peak (<i>The Spy Who Loved Me</i>, <i>GoldenEye</i>) and a long tail of entertaining but formulaic entries; <i>A View to a Kill</i> and <i>Die Another Day</i> are near-universal low points.</p>
+    <p>The most striking gap is <i>Quantum of Solace</i>: 573,000 Letterboxd ratings, among the most of any Bond film, but an average of only 2.89, tied for fourth-lowest. People keep watching it because it sits between two great films, and they keep not liking it.</p>
+  </div>
+</section>
+
+<!-- CRITICS -->
+<section id="critics" class="gutter">
+  <div class="col">
+    <div class="sechead"><span class="label"><b>IX.</b> Critics</span><h2>Notes from the critics' table</h2><p class="kicker">Six decades of reviews, paraphrased, plus the awards and the arguments.</p></div>
+  </div>
+  <div class="wide">
+    <div class="notes" id="critnotes"></div>
+  </div>
+  <div class="col prose" style="margin-top:40px">
+    <h3>Awards</h3>
+  </div>
+  <div class="col">
+    <div class="list" id="awards" style="margin-top:14px"></div>
+  </div>
+  <div class="col prose" style="margin-top:40px">
+    <h3>Controversies and debates</h3>
+  </div>
+  <div class="col">
+    <div class="list" id="contro" style="margin-top:14px"></div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community" class="gutter">
+  <div class="col">
+    <div class="sechead"><span class="label"><b>X.</b> Community</span><h2>What fans argue about</h2><p class="kicker">From Reddit's r/JamesBond to the long-running fan forums, the same debates come round every few years.</p></div>
+    <div class="prose">
+      <p><b>Where fans land.</b> Community rankings broadly follow the critics at the top, with <i>Casino Royale</i>, <i>From Russia with Love</i>, <i>Goldfinger</i>, <i>Skyfall</i>, <i>On Her Majesty's Secret Service</i> and <i>GoldenEye</i> fighting for first place. When r/JamesBond pooled its members' rankings of all 24 films then released in 2016, <i>Die Another Day</i> was placed last by more voters than any film was placed anywhere, and <i>Diamonds Are Forever</i>, <i>Moonraker</i> and <i>The Man with the Golden Gun</i> were the only three films that nobody put in their top five.</p>
+      <p><b>What fans love.</b> The craft of the 1960s films; the series' ability to reinvent itself; the music; Lazenby's single film, which has gone from punchline to cult favourite; and Daniel Craig's willingness to make Bond hurt. Practical stunts get special affection: the <i>Spy Who Loved Me</i> ski jump, the <i>GoldenEye</i> dam bungee, the <i>Casino Royale</i> crane chase.</p>
+      <p><b>What fans dislike.</b> The Craig era's serialisation and the <i>Spectre</i> twist that makes Blofeld Bond's foster brother; the decision to kill Bond at the end of <i>No Time to Die</i>, which still divides the subreddit; CGI excess (the <i>Die Another Day</i> kite-surf); and Moore staying two films too long.</p>
+      <p><b>The perennial debates.</b> Is Connery or Craig the definitive Bond (polls of fans usually say Connery, with Craig second)? Was Dalton ahead of his time? Is Brosnan a great Bond trapped in weaker films? Should Bond continuity exist at all? And, since 16 November 2026, whether Robert Pattinson is a bold choice or, as one widely shared reaction put it, simply Batman in a tuxedo.</p>
+    </div>
+  </div>
+  <div class="col fig">
+    <div class="label" style="margin-bottom:10px">Threads and forums</div>
+    <div class="list" id="threads"></div>
+    <p class="figcap">Reddit and IMDb refuse automated reading, so threads could not be opened directly. The two Reddit threads above were confirmed through mirrors and search indexes; the other Reddit links open live subreddit searches rather than specific threads.</p>
+  </div>
+  <div class="col">
+    <div class="prose">
+      <h3>Tidbits and theories that keep resurfacing</h3>
+    </div>
+    <div class="list" id="tidbits" style="margin-top:14px"></div>
+  </div>
+</section>
+
+<!-- SEVENTH -->
+<section id="seventh" class="gutter next" style="margin-top:60px;padding-block:72px">
+  <div class="wide">
+    <div class="sechead" style="max-width:var(--col)"><span class="label"><b>XI.</b> Bond 26</span><h2>The seventh 007</h2><p class="kicker">Announced ten days ago: Robert Pattinson, directed by Denis Villeneuve, for Amazon MGM Studios.</p></div>
+    <div class="grid">
+      <div class="prose">
+        <p>For sixty years the Broccoli family decided who Bond was. In February 2025, Barbara Broccoli and her half-brother Michael G. Wilson agreed to hand creative control to Amazon MGM Studios, which had bought MGM in 2022 for about $8.45 billion. Amazon formally took over in March 2025 and moved quickly: producers Amy Pascal (the Spider-Man films) and David Heyman (all eight Harry Potter films) in March, Denis Villeneuve (<i>Arrival</i>, <i>Dune</i>) as director in June, and Peaky Blinders creator Steven Knight as writer that summer.</p>
+        <p>On 16 November 2026, after screen tests with a shortlist reported to include Callum Turner, Josh O'Connor, Nicholas Hoult and Jack Lowden, Amazon announced that Robert Pattinson, 40, would be the seventh actor to play Bond. Villeneuve reportedly said he needed to believe the actor was a killer, because Bond is less a spy than an assassin. Pattinson is the first Bond cast after already playing another franchise icon, Batman, and his career since <i>Twilight</i> (<i>Good Time</i>, <i>The Lighthouse</i>, <i>The Batman</i>) has favoured unpredictable, physically strange characters. That suggests a Bond closer to Dalton and Craig than to Moore.</p>
+        <p>Reaction split along familiar lines: excitement at a filmmaker of Villeneuve's seriousness, and purist objections that a movie star with another iconic role should not be Bond. Every new Bond has faced some version of the same backlash, from "an overgrown stuntman" in 1962 to "James Blond" in 2005.</p>
+      </div>
+      <div class="facts7" id="facts7"></div>
+    </div>
+  </div>
+</section>
+
+<!-- VERDICT -->
+<section id="verdict" class="gutter">
+  <div class="col">
+    <div class="sechead"><span class="label"><b>XII.</b> Verdict</span><h2>The overall takeaway</h2></div>
+    <div class="prose">
+      <p><b>What the series does well.</b> No other franchise has renewed itself so often without losing its identity. The best Bond films (<i>From Russia with Love</i>, <i>Goldfinger</i>, <i>On Her Majesty's Secret Service</i>, <i>The Spy Who Loved Me</i>, <i>GoldenEye</i>, <i>Casino Royale</i>, <i>Skyfall</i>) are superb popular cinema: designed by Ken Adam and Dennis Gassner, shot by Ted Moore and Roger Deakins, scored by John Barry and David Arnold, and built around stunts performed for real. The music alone is a sixty-year history of popular song. As a record of how Britain imagined itself and how audiences imagined danger, the series is unmatched.</p>
+      <p><b>Where it falls short.</b> Its weaknesses are mostly the weaknesses of a formula: the long middle stretches of the Moore and Brosnan eras, where set pieces replace stories, and the cultural blind spots of the early films, especially their treatment of women and of Asian and Caribbean characters. Its villains are often more memorable than its plots. The Craig era's late attempt at serial storytelling made Bond's world smaller in places, even as it made him deeper.</p>
+      <p><b>Who it is for.</b> Almost everyone, at different times. Fans of tight Cold War thrillers should start with the 1960s and the Dalton films; lovers of spectacle and self-mocking wit should take the Moore era in their stride; anyone who thinks Bond is shallow should watch <i>On Her Majesty's Secret Service</i> and <i>Casino Royale</i> together. Bond invented the modern action blockbuster, and it shaped Mission: Impossible, Bourne, Kingsman and Austin Powers.</p>
+      <p class="pull">The secret of Bond's longevity is that he was never really a character. He's a ritual, and each generation decides what it means.</p>
+    </div>
+  </div>
+  <div class="wide fig">
+    <div class="label" style="margin-bottom:12px">Four ways in</div>
+    <div class="paths">
+      <div class="path"><span class="pl" style="color:var(--blood)">The essentials</span><h4>Start here</h4><ol><li>Goldfinger (1964)</li><li>From Russia with Love (1963)</li><li>Casino Royale (2006)</li><li>Skyfall (2012)</li><li>The Spy Who Loved Me (1977)</li></ol></div>
+      <div class="path"><span class="pl" style="color:var(--gold)">Underrated</span><h4>Better than you heard</h4><ol><li>On Her Majesty's Secret Service (1969)</li><li>The Living Daylights (1987)</li><li>Licence to Kill (1989)</li><li>For Your Eyes Only (1981)</li><li>Quantum of Solace, as Casino Royale part 2</li></ol></div>
+      <div class="path"><span class="pl" style="color:var(--moore)">Guilty pleasures</span><h4>Switch off and enjoy</h4><ol><li>Live and Let Die (1973)</li><li>Moonraker (1979)</li><li>Octopussy (1983)</li><li>Tomorrow Never Dies (1997)</li><li>Diamonds Are Forever (1971)</li></ol></div>
+      <div class="path"><span class="pl" style="color:var(--muted)">The emotional arc</span><h4>Watch as one story</h4><ol><li>OHMSS → Diamonds (cold open)</li><li>Casino Royale</li><li>Quantum of Solace</li><li>Skyfall → Spectre</li><li>No Time to Die</li></ol></div>
+    </div>
+  </div>
+</section>
+
+<footer class="gutter" id="sources">
+  <div class="wide">
+    <div class="label" style="margin-bottom:14px">Sources</div>
+    <ul>
+      <li><a href="https://www.the-numbers.com/movies/franchise/James-Bond" target="_blank" rel="noopener">The Numbers: James Bond franchise box office and budgets</a></li>
+      <li><a href="https://editorial.rottentomatoes.com/franchise/3" target="_blank" rel="noopener">Rotten Tomatoes: All 27 James Bond movies ranked by Tomatometer</a></li>
+      <li><a href="https://letterboxd.com/film/goldfinger/" target="_blank" rel="noopener">Letterboxd film pages (25 films, read 26 Nov 2026)</a></li>
+      <li><a href="https://officialcharts.com/chart-news/every-james-bond-theme-ever-and-where-they-charted__10670" target="_blank" rel="noopener">Official Charts: Every James Bond theme and where it charted</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Music_of_the_James_Bond_series" target="_blank" rel="noopener">Wikipedia: Music of the James Bond series</a></li>
+      <li><a href="https://www.cnbc.com/2026/11/16/robert-pattinson-james-bond.html" target="_blank" rel="noopener">CNBC: Robert Pattinson cast as next James Bond (16 Nov 2026)</a></li>
+      <li><a href="https://www.thejamesbonddossier.com/films/bond-26.htm" target="_blank" rel="noopener">The James Bond Dossier: Bond 26</a></li>
+      <li><a href="https://www.goldderby.com/film/2026/robert-pattinson-new-james-bond-denis-villeneuve-bond-26/" target="_blank" rel="noopener">Gold Derby: Pattinson in Villeneuve's Bond 26</a></li>
+      <li><a href="https://www.thewrap.com/creative-content/movies/robert-pattinson-james-bond-casting-reactions/" target="_blank" rel="noopener">TheWrap: Pattinson casting reactions</a></li>
+      <li><a href="https://www.rogerebert.com/reviews/great-movie-goldfinger-1964" target="_blank" rel="noopener">Roger Ebert: Great Movies, Goldfinger</a></li>
+      <li><a href="https://www.rogerebert.com/reviews/casino-royale-2007" target="_blank" rel="noopener">RogerEbert.com: Casino Royale</a></li>
+      <li><a href="https://time.com/archive/6814238/cinema-knocking-off-fort-knox" target="_blank" rel="noopener">Time (1964): Knocking off Fort Knox</a></li>
+      <li><a href="https://theweek.com/arts-life/culture/film/954281/no-time-to-die-film-reviews-daniel-craig-james-bond" target="_blank" rel="noopener">The Week: No Time to Die review round-up</a></li>
+      <li><a href="https://dev.avclub.com/no-time-to-die-is-a-sentimental-unsatisfying-end-to-th-1847765251" target="_blank" rel="noopener">The A.V. Club: No Time to Die review</a></li>
+      <li><a href="https://thewrap.com/skyfall-reviews-best-james-bond-yet-64231" target="_blank" rel="noopener">TheWrap: Skyfall review round-up</a></li>
+      <li><a href="https://www.npr.org/2012/10/05/162175114/picking-the-best-bond-connery-and-craig-rise-to-the-top" target="_blank" rel="noopener">NPR: Picking the best Bond</a></li>
+      <li><a href="https://filmstories.co.uk/features/james-bond-spectre-and-the-trouble-with-a-retcon/" target="_blank" rel="noopener">Film Stories: Spectre and the trouble with a retcon</a></li>
+      <li><a href="https://www.slashfilm.com/1042098/timothy-dalton-has-a-theory-on-why-his-james-bond-went-underappreciated" target="_blank" rel="noopener">/Film: Dalton on why his Bond was underappreciated</a></li>
+      <li><a href="https://www.denofgeek.com/movies/james-bond-actors-ranked-worst-to-best/" target="_blank" rel="noopener">Den of Geek: James Bond actors ranked</a></li>
+      <li><a href="https://www.guinnessworldrecords.com/world-records/625321-highest-grossing-spy-movie-series" target="_blank" rel="noopener">Guinness World Records: Highest-grossing spy series</a></li>
+    </ul>
+    <p class="figcap" style="margin-top:24px">Compiled 26 November 2026. Critics' views are paraphrased. Radar charts and the tone pendulum are editorial readings, not data.</p>
+  </div>
+</footer>
+
+<div id="tip" role="tooltip"></div>
+
+<script>
+(function(){
+"use strict";
+const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const $ = s => document.querySelector(s);
+const el = (tag, attrs, html) => { const e = document.createElement(tag); if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]); if (html != null) e.innerHTML = html; return e; };
+const NS = 'http://www.w3.org/2000/svg';
+const sv = (tag, attrs, text) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; };
+
+/* ---------------- DATA ---------------- */
+const ACT = {
+  connery:{name:"Sean Connery", short:"Connery", born:"1930-08-25", v:"--connery"},
+  lazenby:{name:"George Lazenby", short:"Lazenby", born:"1939-09-05", v:"--lazenby"},
+  moore:{name:"Roger Moore", short:"Moore", born:"1927-10-14", v:"--moore"},
+  dalton:{name:"Timothy Dalton", short:"Dalton", born:"1944-03-21", v:"--dalton"},
+  brosnan:{name:"Pierce Brosnan", short:"Brosnan", born:"1953-05-16", v:"--brosnan"},
+  craig:{name:"Daniel Craig", short:"Craig", born:"1968-03-02", v:"--craig"},
+  pattinson:{name:"Robert Pattinson", short:"Pattinson", born:"1986-05-13", v:"--pattinson"}
+};
+const col = a => `var(${ACT[a].v})`;
+
+// bud/ww/dom in $M. rt/pop = Rotten Tomatoes; imdb approx; lb = Letterboxd avg; lbn = Letterboxd rating count
+const F = [
+ {n:1,t:"Dr. No",y:1962,rel:"1962-10-05",a:"connery",dir:"Terence Young",vil:"Dr. Julius No (Joseph Wiseman)",ally:"Honey Ryder (Ursula Andress)",loc:"Jamaica",song:"James Bond Theme",perf:"John Barry & Orchestra",uk:13,us:null,score:"Monty Norman (arr. John Barry)",bud:1,ww:59.6,dom:16.1,rt:95,pop:82,imdb:7.2,lb:3.40,lbn:265313,tone:3,threat:"space",
+  p:"A modest, sweaty, surprisingly patient detective story. Bond investigates a colleague's murder in Jamaica and finds a reclusive scientist toppling American rockets from his island, Crab Key. Made for about a million dollars, it introduces nearly everything: the gun-barrel, the theme, the casino introduction (\"Bond. James Bond.\"), Bond coolly shooting an unarmed man, and Ken Adam's first great set, a lair with an aquarium wall, built on a shoestring. Ursula Andress rising from the sea became the series' founding image and its most debated one.",
+  v:"The prototype. Lean, a little stiff, already confident."},
+ {n:2,t:"From Russia with Love",y:1963,rel:"1963-10-10",a:"connery",dir:"Terence Young",vil:"Rosa Klebb (Lotte Lenya), Red Grant (Robert Shaw)",ally:"Tatiana Romanova (Daniela Bianchi)",loc:"Istanbul · Orient Express · Venice",song:"From Russia with Love",perf:"Matt Monro",uk:20,us:null,score:"John Barry",bud:2,ww:78.9,dom:24.8,rt:97,pop:84,imdb:7.3,lb:3.58,lbn:208623,tone:4,threat:"coldwar",
+  p:"The purist's choice. SPECTRE baits a trap with a Soviet cipher clerk and a decoding machine, intending to kill Bond in revenge for Dr. No. It plays as a real Cold War thriller, with a helicopter attack that nods to Hitchcock's North by Northwest, and peaks in the brutal, unscored fight in an Orient Express compartment between Connery and Robert Shaw's blond assassin. The first pre-title sequence, the first Q-Branch gadget (a trick attaché case) and the first stroked white cat all start here. Pedro Armendáriz, dying of cancer during filming, is warm as Bond's Istanbul ally Kerim Bey.",
+  v:"The best pure spy film in the series."},
+ {n:3,t:"Goldfinger",y:1964,rel:"1964-09-17",a:"connery",dir:"Guy Hamilton",vil:"Auric Goldfinger (Gert Fröbe), Oddjob (Harold Sakata)",ally:"Pussy Galore (Honor Blackman)",loc:"Miami · Switzerland · Fort Knox",song:"Goldfinger",perf:"Shirley Bassey",uk:21,us:8,score:"John Barry",bud:3,ww:124.9,dom:51.1,rt:99,pop:89,imdb:7.7,lb:3.76,lbn:263301,tone:0,threat:"markets",
+  p:"The blueprint. Guy Hamilton tilted the series toward wit and spectacle, and everything that became \"Bond\" crystallised: the Aston Martin DB5 with ejector seat, the laser table (\"No, Mr. Bond, I expect you to die!\"), the bowler-hatted henchman, the gold-painted corpse, Ken Adam's cathedral-like Fort Knox, Bassey's brass-blasting song. Goldfinger's plan, irradiating America's gold reserve to multiply the value of his own, is gloriously daft economics. It won the series' first Oscar, for sound effects, and turned Bond into a global craze. Fleming died a month before it opened.",
+  v:"The template every later film copies or rebels against."},
+ {n:4,t:"Thunderball",y:1965,rel:"1965-12-09",a:"connery",dir:"Terence Young",vil:"Emilio Largo (Adolfo Celi), Fiona Volpe (Luciana Paluzzi)",ally:"Domino (Claudine Auger)",loc:"France · Nassau, Bahamas",song:"Thunderball",perf:"Tom Jones",uk:35,us:25,score:"John Barry",bud:9,ww:141.2,dom:63.6,rt:83,pop:73,imdb:7.0,lb:3.20,lbn:141061,tone:-1,threat:"nuclear",
+  p:"Bondmania at full flood. SPECTRE hijacks two atomic bombs from a NATO bomber and demands £100 million; Bond follows the trail to Nassau. Shot in widescreen and lavish to a fault, it opens with a jetpack escape, and its underwater sequences won an Oscar for visual effects while slowing the climax to a swim. In North American tickets sold it is still the biggest Bond ever. The story's tangled authorship, developed by Fleming with Kevin McClory and Jack Whittingham, led to a lawsuit that haunted the series for fifty years and spawned the rival remake Never Say Never Again.",
+  v:"Glorious to look at, slow in the water."},
+ {n:5,t:"You Only Live Twice",y:1967,rel:"1967-06-12",a:"connery",dir:"Lewis Gilbert",vil:"Ernst Stavro Blofeld (Donald Pleasence)",ally:"Kissy Suzuki (Mie Hama), Aki (Akiko Wakabayashi)",loc:"Hong Kong · Japan",song:"You Only Live Twice",perf:"Nancy Sinatra",uk:11,us:44,score:"John Barry",bud:9.5,ww:111.6,dom:43.1,rt:74,pop:68,imdb:6.8,lb:3.18,lbn:128295,tone:-3,threat:"space",
+  p:"Roald Dahl discarded most of Fleming's novel and wrote a space-age fairy tale: a SPECTRE spacecraft swallowing American and Soviet capsules to start a third world war. Blofeld finally shows his face, and Donald Pleasence's scar defined every parody since, down to Dr. Evil. Ken Adam's hollow-volcano rocket base, a working set that cost about as much as all of Dr. No, is the series' most famous interior. The film also contains one of its worst choices: Connery \"disguised\" as a Japanese fisherman. Worn down by fame and press intrusion, Connery announced it would be his last Bond.",
+  v:"Peak spectacle; the story is an afterthought."},
+ {n:6,t:"On Her Majesty's Secret Service",y:1969,rel:"1969-12-18",a:"lazenby",dir:"Peter Hunt",vil:"Blofeld (Telly Savalas), Irma Bunt (Ilse Steppat)",ally:"Tracy di Vicenzo (Diana Rigg)",loc:"Portugal · Swiss Alps (Piz Gloria)",song:"We Have All the Time in the World",perf:"Louis Armstrong",uk:3,us:null,score:"John Barry",bud:8,ww:82,dom:22.8,rt:80,pop:64,imdb:6.7,lb:3.44,lbn:119164,tone:4,threat:"bio",
+  p:"Long dismissed as the one with \"the other fellow,\" now widely ranked among the best. Peter Hunt, who had edited the early films, directs a faithful Fleming adaptation: Bond falls in love with Diana Rigg's reckless Tracy while hunting Blofeld in an Alpine allergy clinic that is really a germ-warfare laboratory. The ski chases and bobsleigh fight are among the series' best action, and Barry's driving instrumental theme may be his finest. Then the ending: married at last, Bond cradles his murdered wife. Lazenby, told by his manager that Bond was finished in the age of Easy Rider, quit before the film opened.",
+  v:"The heart of the whole series."},
+ {n:7,t:"Diamonds Are Forever",y:1971,rel:"1971-12-14",a:"connery",dir:"Guy Hamilton",vil:"Blofeld (Charles Gray), Mr. Wint & Mr. Kidd",ally:"Tiffany Case (Jill St. John)",loc:"Amsterdam · Las Vegas",song:"Diamonds Are Forever",perf:"Shirley Bassey",uk:38,us:57,score:"John Barry",bud:7.2,ww:116,dom:43.8,rt:63,pop:57,imdb:6.5,lb:2.85,lbn:113563,tone:-3,threat:"space",
+  p:"United Artists lured Connery back for a then-record $1.25 million, which he gave to a Scottish educational charity, and Guy Hamilton returned to lighten the mood after OHMSS's grief. The result is a Las Vegas lark: diamond smuggling, a Howard Hughes stand-in, a moon-buggy chase, the arch double act of Mr. Wint and Mr. Kidd, and a laser satellite built from diamonds. It is fun and sloppy, and beyond the vengeful cold open it never mentions Tracy. This is where Bond turns from thriller to comedy.",
+  v:"Connery's victory lap, played for laughs."},
+ {n:8,t:"Live and Let Die",y:1973,rel:"1973-06-27",a:"moore",dir:"Guy Hamilton",vil:"Kananga / Mr. Big (Yaphet Kotto), Baron Samedi (Geoffrey Holder)",ally:"Solitaire (Jane Seymour)",loc:"New York · New Orleans · Caribbean",song:"Live and Let Die",perf:"Paul McCartney & Wings",uk:9,us:2,score:"George Martin",bud:7,ww:161.8,dom:35.4,rt:65,pop:64,imdb:6.7,lb:3.17,lbn:119161,tone:-2,threat:"crime",
+  p:"Roger Moore arrives, and the film pointedly refuses to imitate Connery: a bourbon instead of a martini, cigars instead of cigarettes, and no Q. Bond takes on a Caribbean dictator who plans to flood America with free heroin, in a story borrowing the look of the blaxploitation boom. That makes it lively and also badly dated, with its voodoo cult and caricatures. Its gifts: Jane Seymour's tarot-reading Solitaire, a record-breaking speedboat leap across a Louisiana bayou, a run across crocodiles performed by the reptile farm's owner, and the first great rock theme.",
+  v:"Fun, fresh and of its time, for better and worse."},
+ {n:9,t:"The Man with the Golden Gun",y:1974,rel:"1974-12-19",a:"moore",dir:"Guy Hamilton",vil:"Francisco Scaramanga (Christopher Lee), Nick Nack (Hervé Villechaize)",ally:"Mary Goodnight (Britt Ekland), Andrea Anders (Maud Adams)",loc:"Hong Kong · Macau · Thailand",song:"The Man with the Golden Gun",perf:"Lulu",uk:null,us:null,score:"John Barry",bud:7,ww:97.6,dom:21,rt:43,pop:55,imdb:6.7,lb:3.12,lbn:111950,tone:-3,threat:"markets",
+  p:"A promising duel squandered. Christopher Lee, Fleming's step-cousin, is superb as Scaramanga, a million-dollar-a-shot assassin who sees Bond as his only equal, and the funhouse showdown has real charge. Around him: an energy-crisis MacGuffin (the \"Solex agitator\"), a clumsy Mary Goodnight, and the return of Sheriff J.W. Pepper. The car's 360-degree corkscrew jump over a river, plotted by computer and done in one take, is spoiled by a slide-whistle sound effect. The weakest box office of the series to that point; Harry Saltzman sold his half of the franchise soon after.",
+  v:"A great villain in search of a better film."},
+ {n:10,t:"The Spy Who Loved Me",y:1977,rel:"1977-07-07",a:"moore",dir:"Lewis Gilbert",vil:"Karl Stromberg (Curd Jürgens), Jaws (Richard Kiel)",ally:"Maj. Anya Amasova, XXX (Barbara Bach)",loc:"Austria · Egypt · Sardinia",song:"Nobody Does It Better",perf:"Carly Simon",uk:7,us:2,score:"Marvin Hamlisch",bud:14,ww:185.4,dom:46.8,rt:83,pop:77,imdb:7.0,lb:3.49,lbn:112072,tone:-2,threat:"nuclear",
+  p:"Cubby Broccoli's first film as sole producer, and the peak of the Moore era. Everything is bigger: a shipping magnate capturing nuclear submarines to destroy civilisation and rebuild it under the sea; a supertanker interior so vast that Ken Adam built the 007 Stage at Pinewood to house it; Jaws, the steel-toothed giant. The cold open ends with stuntman Rick Sylvester skiing off Asgard Peak on Baffin Island and opening a Union Jack parachute, perhaps the most cheered stunt in British cinema. Barbara Bach's Soviet agent is Bond's rival and his equal, a détente romance.",
+  v:"Moore's definitive film, and the series' most confident blockbuster."},
+ {n:11,t:"Moonraker",y:1979,rel:"1979-06-26",a:"moore",dir:"Lewis Gilbert",vil:"Hugo Drax (Michael Lonsdale), Jaws (Richard Kiel)",ally:"Dr. Holly Goodhead (Lois Chiles)",loc:"California · Venice · Rio · orbit",song:"Moonraker",perf:"Shirley Bassey",uk:null,us:null,score:"John Barry",bud:31,ww:210.3,dom:70.3,rt:60,pop:43,imdb:6.2,lb:2.87,lbn:111557,tone:-5,threat:"space",
+  p:"The credits of The Spy Who Loved Me promised For Your Eyes Only. Then Star Wars happened, and Bond went to space. Hugo Drax plans to gas humanity from an orbiting station and repopulate Earth with a hand-picked master race. It is lavish and silly: a gondola turns into a hovercraft, a pigeon does a double take, Jaws finds love. Yet Michael Lonsdale's languid villainy, Ken Adam's last Bond sets and Barry's lush score have real charm, and it was the biggest Bond hit until GoldenEye. It is also the reason the next film came back to earth.",
+  v:"The pendulum at its furthest swing."},
+ {n:12,t:"For Your Eyes Only",y:1981,rel:"1981-06-24",a:"moore",dir:"John Glen",vil:"Aris Kristatos (Julian Glover)",ally:"Melina Havelock (Carole Bouquet)",loc:"Spain · Cortina · Corfu · Meteora",song:"For Your Eyes Only",perf:"Sheena Easton",uk:8,us:4,score:"Bill Conti",bud:28,ww:195.3,dom:54.8,rt:67,pop:64,imdb:6.7,lb:3.10,lbn:92154,tone:2,threat:"coldwar",
+  p:"A deliberate correction. Bond visits Tracy's grave, drops an unnamed bald man in a wheelchair down a factory chimney, and is sent on a grounded Cold War hunt for a lost submarine-targeting device. John Glen, promoted from editor and second-unit director, starts a five-film run with clean, physical action: a yellow Citroën 2CV fleeing through olive groves, a bobsleigh chase, a climb up a Meteora monastery. Moore gets his hardest moment, kicking a pleading killer's car off a cliff. Carole Bouquet's Melina is on her own revenge mission.",
+  v:"Moore's most grounded and most underrated film."},
+ {n:13,t:"Octopussy",y:1983,rel:"1983-06-06",a:"moore",dir:"John Glen",vil:"Kamal Khan (Louis Jourdan), Gen. Orlov (Steven Berkoff)",ally:"Octopussy (Maud Adams)",loc:"Udaipur · East & West Germany",song:"All Time High",perf:"Rita Coolidge",uk:75,us:36,score:"John Barry",bud:27.5,ww:187.5,dom:67.9,rt:41,pop:47,imdb:6.5,lb:2.91,lbn:null,tone:-3,threat:"nuclear",
+  p:"The year of the Battle of the Bonds: Moore's Octopussy against Connery's comeback in Never Say Never Again, and Octopussy won at the box office. Beneath the Udaipur palaces, the tuk-tuk chase, the Tarzan yell and an all-female circus army lies a genuinely tense Cold War plot: a rogue Soviet general plans to detonate a nuclear bomb at a US air base so that Europe will demand disarmament. The sight of a 55-year-old Bond in clown make-up defusing that bomb captures the film perfectly. It is absurd and suspenseful at once.",
+  v:"Ridiculous, and more gripping than its reputation."},
+ {n:14,t:"A View to a Kill",y:1985,rel:"1985-05-22",a:"moore",dir:"John Glen",vil:"Max Zorin (Christopher Walken), May Day (Grace Jones)",ally:"Stacey Sutton (Tanya Roberts)",loc:"Siberia · Paris · San Francisco",song:"A View to a Kill",perf:"Duran Duran",uk:2,us:1,score:"John Barry",bud:30,ww:152.6,dom:50.3,rt:38,pop:40,imdb:6.3,lb:2.89,lbn:95718,tone:-3,threat:"markets",
+  p:"Moore's farewell at 57, and he later admitted it was one film too many; he said he was horrified to learn he was older than his co-star's mother. Christopher Walken's Max Zorin, the product of Nazi genetic experiments, plans to flood Silicon Valley to corner the microchip market. Grace Jones's May Day is the most striking henchwoman in the series, and the Eiffel Tower parachute leap and Golden Gate Bridge finale are spectacular. But the energy is gone. The consolation prize is Duran Duran's song, still the only Bond theme to top the US Billboard Hot 100.",
+  v:"Great villains, great song, tired hero."},
+ {n:15,t:"The Living Daylights",y:1987,rel:"1987-06-29",a:"dalton",dir:"John Glen",vil:"Gen. Georgi Koskov (Jeroen Krabbé), Brad Whitaker (Joe Don Baker)",ally:"Kara Milovy (Maryam d'Abo)",loc:"Gibraltar · Bratislava · Vienna · Tangier · Afghanistan",song:"The Living Daylights",perf:"a-ha",uk:5,us:null,score:"John Barry",bud:40,ww:191.2,dom:51.2,rt:77,pop:66,imdb:6.7,lb:3.36,lbn:96145,tone:2,threat:"coldwar",
+  p:"Timothy Dalton, a classical stage actor who reread all the Fleming novels, takes over for the 25th anniversary and plays a Bond who would rather be fired than shoot the wrong target. A fake KGB defector, an arms dealer obsessed with military history and a cellist caught in the middle drive a twisty plot; the opening sniper scene in Bratislava comes straight from a Fleming short story. Old-school fun (sledging down a Czech hill in a cello case) sits beside a new seriousness, and AIDS-era caution shows: this Bond mostly sticks to one woman. John Barry's last Bond score includes a cameo by Barry himself, conducting in Vienna.",
+  v:"The bridge between Moore's charm and Craig's grit."},
+ {n:16,t:"Licence to Kill",y:1989,rel:"1989-06-13",a:"dalton",dir:"John Glen",vil:"Franz Sanchez (Robert Davi), Dario (Benicio del Toro)",ally:"Pam Bouvier (Carey Lowell)",loc:"Florida Keys · Mexico",song:"Licence to Kill",perf:"Gladys Knight",uk:6,us:null,score:"Michael Kamen",bud:42,ww:156.2,dom:34.7,rt:79,pop:62,imdb:6.6,lb:3.38,lbn:101036,tone:5,threat:"crime",
+  p:"The most violent Bond until Craig, and the first to earn a PG-13 in America. When a drug lord feeds Felix Leiter to a shark on his wedding night, Bond resigns from MI6 and goes after him alone, dismantling Sanchez's empire from the inside. Robert Davi plays Sanchez with a crime boss's obsession with loyalty, a young Benicio del Toro is his knife man, and the tanker-truck finale is superb. Released in the summer of Batman and Indiana Jones, it struggled in America, and legal battles over MGM's sale kept Bond off screens for six years. Dalton never made his third film.",
+  v:"A Bond film that plays like a revenge thriller, decades early."},
+ {n:17,t:"GoldenEye",y:1995,rel:"1995-11-17",a:"brosnan",dir:"Martin Campbell",vil:"Alec Trevelyan, 006 (Sean Bean), Xenia Onatopp (Famke Janssen)",ally:"Natalya Simonova (Izabella Scorupco)",loc:"Arkhangelsk · Monaco · St. Petersburg · Cuba",song:"GoldenEye",perf:"Tina Turner",uk:10,us:null,score:"Éric Serra",bud:60,ww:356.4,dom:106.4,rt:80,pop:83,imdb:7.2,lb:3.58,lbn:244711,tone:0,threat:"space",
+  p:"Six years on, the Berlin Wall is gone and everyone asks whether Bond still matters. Martin Campbell's answer is ferociously entertaining. Bond's opponent is his former friend 006, whose grudge against Britain is personal. Judi Dench's new M calls Bond a sexist, misogynist dinosaur to his face, and the action, from the bungee jump off the Verzasca Dam to a tank smashing through St. Petersburg, is huge and clear. Pierce Brosnan, who had lost the role in 1986 when NBC renewed Remington Steele, finally gets it, and the film, along with a much-loved Nintendo 64 game, won Bond a new generation.",
+  v:"The series' best relaunch, until the next one."},
+ {n:18,t:"Tomorrow Never Dies",y:1997,rel:"1997-12-12",a:"brosnan",dir:"Roger Spottiswoode",vil:"Elliot Carver (Jonathan Pryce)",ally:"Wai Lin (Michelle Yeoh)",loc:"Hamburg · South China Sea · Saigon",song:"Tomorrow Never Dies",perf:"Sheryl Crow",uk:12,us:null,score:"David Arnold",bud:110,ww:339.5,dom:125.3,rt:57,pop:53,imdb:6.5,lb:3.12,lbn:155817,tone:-1,threat:"info",
+  p:"A media baron, played by a clearly delighted Jonathan Pryce, engineers a war between Britain and China to sell newspapers and secure Chinese broadcasting rights. In 1997 it played as a Murdoch joke; today its idea of manufactured news looks prophetic. The film is a brisk action machine, shot while the script was still being rewritten. Its stars are Michelle Yeoh's Wai Lin, who does her own stunts and needs no rescuing, a remote-controlled BMW in a Hamburg car park, and a handcuffed motorbike chase through Saigon. David Arnold's first score marries Barry's brass to electronic beats.",
+  v:"Slick, forgettable and ahead of its time."},
+ {n:19,t:"The World Is Not Enough",y:1999,rel:"1999-11-19",a:"brosnan",dir:"Michael Apted",vil:"Elektra King (Sophie Marceau), Renard (Robert Carlyle)",ally:"Dr. Christmas Jones (Denise Richards)",loc:"Bilbao · London · Baku · Istanbul",song:"The World Is Not Enough",perf:"Garbage",uk:11,us:null,score:"David Arnold",bud:135,ww:361.7,dom:126.9,rt:50,pop:49,imdb:6.4,lb:2.95,lbn:null,tone:-1,threat:"markets",
+  p:"The Brosnan era's most ambitious script, undercut by some of its weakest casting. Sophie Marceau's Elektra King, an oil heiress who turns out to be the mastermind, is the series' first main female villain and a twisted reflection of Bond's own damage; M is implicated in her kidnapping years before, which anticipates Skyfall. But the plot sags, Robert Carlyle's anarchist who feels no pain is underused, and Denise Richards as a nuclear physicist became a punchline. The Thames boat chase is terrific. This was Desmond Llewelyn's final appearance as Q; he died in a car crash a month after release, having handed over to John Cleese.",
+  v:"Interesting ideas, clumsy execution, a touching farewell."},
+ {n:20,t:"Die Another Day",y:2002,rel:"2002-11-20",a:"brosnan",dir:"Lee Tamahori",vil:"Gustav Graves (Toby Stephens), Miranda Frost (Rosamund Pike)",ally:"Jinx (Halle Berry)",loc:"North Korea · Hong Kong · Cuba · Iceland",song:"Die Another Day",perf:"Madonna",uk:3,us:8,score:"David Arnold",bud:142,ww:431.9,dom:160.9,rt:56,pop:41,imdb:6.1,lb:2.59,lbn:162037,tone:-5,threat:"space",
+  p:"The 40th-anniversary film opens boldly: Bond is captured in North Korea and tortured for fourteen months over the title sequence. Then it goes into overdrive, with gene-therapy face swaps, an ice palace, an orbital sun-weapon, an invisible Aston Martin, and a computer-generated kitesurf on a tidal wave that fans still name as the franchise's lowest moment. It is crammed with references to the previous nineteen films. Halle Berry and Rosamund Pike help; Madonna's electro song divided everyone. It was the biggest Bond hit yet, and it convinced Eon, in the year The Bourne Identity redefined spy action, to start again.",
+  v:"Lowest Letterboxd score in the series. A necessary disaster."},
+ {n:21,t:"Casino Royale",y:2006,rel:"2006-11-16",a:"craig",dir:"Martin Campbell",vil:"Le Chiffre (Mads Mikkelsen), Mr. White (Jesper Christensen)",ally:"Vesper Lynd (Eva Green)",loc:"Prague · Madagascar · Bahamas · Montenegro · Venice",song:"You Know My Name",perf:"Chris Cornell",uk:7,us:79,score:"David Arnold",bud:150,ww:594.4,dom:167.4,rt:94,pop:90,imdb:8.0,lb:4.04,lbn:null,tone:5,threat:"crime",
+  p:"The reboot that saved Bond. Eon finally had the rights to Fleming's first novel, obtained from Sony in a 1999 settlement, and Martin Campbell, who had relaunched the series once already, did it again from zero. Bond earns his double-0 status in grainy black and white, chases a free-running bomb-maker up a crane in Madagascar, then sits down to a high-stakes poker game in Montenegro against Mads Mikkelsen's banker to terrorists, who weeps blood. Daniel Craig, mocked by tabloids as \"James Blond\" before release, is bruising and wounded. Vesper's betrayal and death in Venice explain the man he becomes. Only in the final shot does he say the line.",
+  v:"The best-reviewed modern Bond and the highest-rated on Letterboxd."},
+ {n:22,t:"Quantum of Solace",y:2008,rel:"2008-10-31",a:"craig",dir:"Marc Forster",vil:"Dominic Greene (Mathieu Amalric), Gen. Medrano (Joaquín Cosío)",ally:"Camille Montes (Olga Kurylenko)",loc:"Siena · Bregenz · Haiti · Bolivia",song:"Another Way to Die",perf:"Jack White & Alicia Keys",uk:9,us:81,score:"David Arnold",bud:230,ww:591.7,dom:169.4,rt:63,pop:58,imdb:6.5,lb:2.89,lbn:573560,tone:5,threat:"markets",
+  p:"The first direct sequel, picking up an hour after Casino Royale, and at 106 minutes the shortest Bond. Shot during the 2007–08 writers' strike, with Craig and Forster reportedly rewriting scenes themselves, it is a grief-stricken blur of fast cutting. Its ideas are sharper than its reputation: an environmental philanthropist cornering Bolivia's water with CIA connivance, a secret society exposed during a performance of Tosca on a lake stage, and an ending in which Bond turns away from revenge. Gemma Arterton's oil-drowned Strawberry Fields is a pointed rewrite of Goldfinger's gold-painted woman.",
+  v:"An epilogue mistaken for a film. Better on rewatch."},
+ {n:23,t:"Skyfall",y:2012,rel:"2012-10-26",a:"craig",dir:"Sam Mendes",vil:"Raoul Silva (Javier Bardem)",ally:"Sévérine (Bérénice Marlohe), Eve Moneypenny (Naomie Harris)",loc:"Istanbul · Shanghai · Macau · London · Scotland",song:"Skyfall",perf:"Adele",uk:2,us:8,score:"Thomas Newman",bud:200,ww:1110.5,dom:304.4,rt:92,pop:86,imdb:7.8,lb:3.97,lbn:1131694,tone:3,threat:"info",
+  p:"Fifty years in, Bond looks inward. Sam Mendes and cinematographer Roger Deakins make the most beautiful film in the series: a silhouetted fight against neon in a Shanghai tower, a lantern-lit Macau casino, a Scottish house burning at dusk. Javier Bardem's Silva, a former agent abandoned by M, attacks MI6 itself, and the film becomes a meditation on obsolescence. M quotes Tennyson to a hostile inquiry, Q is a young man in a cardigan, and Bond retreats to his childhood home to fight with shotguns and a DB5. M dies in his arms. The first Bond to pass a billion dollars, it won Oscars for Adele's song and for sound editing.",
+  v:"The series' most beautiful film and its biggest hit."},
+ {n:24,t:"Spectre",y:2015,rel:"2015-10-26",a:"craig",dir:"Sam Mendes",vil:"Blofeld (Christoph Waltz), Mr. Hinx (Dave Bautista)",ally:"Dr. Madeleine Swann (Léa Seydoux)",loc:"Mexico City · Rome · Austria · Morocco · London",song:"Writing's on the Wall",perf:"Sam Smith",uk:1,us:71,score:"Thomas Newman",bud:245,ww:879.1,dom:200.1,rt:63,pop:62,imdb:6.8,lb:3.27,lbn:null,tone:0,threat:"info",
+  p:"Eon had regained the rights to SPECTRE and Blofeld in a 2013 settlement with the McClory estate, and Mendes's second film tries to tie Craig's run into a single story. It opens with a bravura Day of the Dead tracking shot in Mexico City and holds a Guinness record for the largest film stunt explosion. Then the twist: Christoph Waltz's Blofeld is Bond's foster brother, claiming to have engineered every loss Bond has suffered. Most critics found the retcon made the world smaller rather than bigger. A surveillance subplot about merging MI5 and MI6 into a global data network is timely but thin.",
+  v:"Classic Bond furniture, rearranged into a family drama."},
+ {n:25,t:"No Time to Die",y:2021,rel:"2021-09-30",a:"craig",dir:"Cary Joji Fukunaga",vil:"Lyutsifer Safin (Rami Malek)",ally:"Madeleine Swann (Léa Seydoux), Paloma (Ana de Armas), Nomi (Lashana Lynch)",loc:"Matera · Norway · Jamaica · Cuba · Faroe Islands",song:"No Time to Die",perf:"Billie Eilish",uk:1,us:16,score:"Hans Zimmer",bud:250,ww:758.9,dom:160.9,rt:83,pop:80,imdb:7.3,lb:3.56,lbn:947320,tone:2,threat:"bio",
+  p:"Delayed eighteen months by the pandemic (it was the first blockbuster to retreat, in March 2020), Craig's last film is the longest Bond at 163 minutes and the most emotionally committed. Retired in Jamaica, Bond is pulled back by a DNA-targeted nanobot weapon. Rami Malek's Safin is a weak villain, but the film's real subject is Bond himself: a new 007, a scene-stealing Ana de Armas in Cuba, a daughter, and a final choice no Bond film had ever risked. It ends with Louis Armstrong's song from OHMSS, closing a 52-year loop. Billie Eilish's song won the series' third consecutive Oscar.",
+  v:"An ending, in a series that never had one."}
+];
+
+const SHORT = {1:"Dr. No",2:"From Russia",3:"Goldfinger",4:"Thunderball",5:"Live Twice",6:"OHMSS",7:"Diamonds",8:"Live and Let Die",9:"Golden Gun",10:"Spy Who Loved Me",11:"Moonraker",12:"Your Eyes Only",13:"Octopussy",14:"View to a Kill",15:"Living Daylights",16:"Licence to Kill",17:"GoldenEye",18:"Tomorrow",19:"World Not Enough",20:"Die Another Day",21:"Casino Royale",22:"Quantum",23:"Skyfall",24:"Spectre",25:"No Time to Die"};
+F.forEach(f=>f.s=SHORT[f.n]);
+
+/* ---------------- GUNBARREL ---------------- */
+(function barrel(){
+  const cv = $('#barrel'); const ctx = cv.getContext('2d');
+  let W = 0, start = 0, raf = 0;
+  function size(){ const r = cv.getBoundingClientRect(); const d = Math.min(window.devicePixelRatio || 1, 2); W = Math.max(200, Math.round(r.width * d)); cv.width = W; cv.height = W; }
+  const ease = x => x<0?0:x>1?1:1-Math.pow(1-x,3);
+  function figure(cx, cy, h, walk, arm){
+    // minimalist silhouette: h = height in px
+    ctx.save(); ctx.translate(cx, cy); ctx.scale(h, h); ctx.fillStyle = '#0c0d10';
+    ctx.beginPath(); ctx.arc(0, -0.43, 0.065, 0, Math.PI*2); ctx.fill();          // head
+    ctx.beginPath(); ctx.moveTo(-0.11,-0.34); ctx.lineTo(0.11,-0.34); ctx.lineTo(0.08,0.03); ctx.lineTo(-0.08,0.03); ctx.closePath(); ctx.fill(); // torso
+    const s = Math.sin(walk) * 0.07;
+    ctx.beginPath(); ctx.moveTo(-0.075,0.02); ctx.lineTo(-0.005,0.02); ctx.lineTo(-0.04+s,0.5); ctx.lineTo(-0.1+s,0.5); ctx.closePath(); ctx.fill(); // leg L
+    ctx.beginPath(); ctx.moveTo(0.005,0.02); ctx.lineTo(0.075,0.02); ctx.lineTo(0.1-s,0.5); ctx.lineTo(0.04-s,0.5); ctx.closePath(); ctx.fill();  // leg R
+    // arm (rotates from hanging to pointing)
+    ctx.save(); ctx.translate(0.085,-0.3); ctx.rotate((1-arm)*Math.PI*0.42);
+    ctx.fillRect(0,-0.025,0.33,0.05); ctx.fillRect(0.29,-0.06,0.05,0.07);
+    ctx.restore();
+    ctx.beginPath(); ctx.moveTo(-0.11,-0.32); ctx.lineTo(-0.15,0.0); ctx.lineTo(-0.1,0.0); ctx.lineTo(-0.07,-0.28); ctx.closePath(); ctx.fill(); // other arm
+    ctx.restore();
+  }
+  function draw(t){
+    const c = W/2, R = W*0.5, Ro = W*0.205;
+    ctx.clearRect(0,0,W,W);
+    ctx.save(); ctx.beginPath(); ctx.arc(c,c,R,0,Math.PI*2); ctx.clip();
+    ctx.fillStyle = '#060708'; ctx.fillRect(0,0,W,W);
+    // Phase A: dots
+    if (t < 1.5){
+      const dotR = W*0.045, gap = W*0.32;
+      for (let i=0;i<4;i++){
+        const x = -dotR + (t/1.5)*(c + 3*gap + dotR) - i*gap;
+        if (i===3 && t>1.2){ /* last dot slows into centre */ }
+        ctx.fillStyle = '#f3f1ea'; ctx.beginPath(); ctx.arc(Math.min(x, i===3?c:x), c, dotR, 0, Math.PI*2); ctx.fill();
+      }
+      ctx.restore(); return;
+    }
+    // Phase B onward: barrel
+    const open = ease((t-1.5)/0.6);
+    const wob = t>4.6 ? Math.sin((t-4.6)*5)*W*0.012*Math.max(0,1-(t-4.6)/1.6) : 0;
+    const bx = c + wob, by = c + wob*0.5;
+    const rot = (t-1.5)*0.9*(t<4.6?1:Math.max(0,1-(t-4.6)/1.4)) + (t>6?0:0);
+    // rifling walls
+    const g = ctx.createRadialGradient(bx,by,Ro*0.9,bx,by,R*1.05);
+    g.addColorStop(0,'#cfcac0'); g.addColorStop(0.18,'#7b7870'); g.addColorStop(0.55,'#2a2a2a'); g.addColorStop(1,'#060708');
+    ctx.globalAlpha = open; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(bx,by,R*1.05,0,Math.PI*2); ctx.fill();
+    // grooves: log spirals
+    ctx.lineWidth = W*0.012; ctx.lineCap='round';
+    for (let k=0;k<8;k++){
+      ctx.beginPath();
+      for (let j=0;j<=40;j++){
+        const r = Ro + (R*1.05 - Ro)*(j/40);
+        const th = rot + k*Math.PI/4 + 0.9*Math.log(r/Ro);
+        const x = bx + r*Math.cos(th), y = by + r*Math.sin(th);
+        j? ctx.lineTo(x,y) : ctx.moveTo(x,y);
+      }
+      ctx.strokeStyle = 'rgba(0,0,0,0.42)'; ctx.stroke();
+    }
+    for (let k=0;k<4;k++){ ctx.beginPath(); ctx.arc(bx,by,Ro*(1.35+k*0.55),0,Math.PI*2); ctx.strokeStyle='rgba(255,255,255,0.05)'; ctx.lineWidth=W*0.004; ctx.stroke(); }
+    // opening
+    const ro = Ro*(0.2+0.8*open);
+    const og = ctx.createRadialGradient(bx,by,0,bx,by,ro); og.addColorStop(0,'#ffffff'); og.addColorStop(0.8,'#ece8de'); og.addColorStop(1,'#bdb8ad');
+    ctx.fillStyle = og; ctx.beginPath(); ctx.arc(bx,by,ro,0,Math.PI*2); ctx.fill();
+    ctx.globalAlpha = 1;
+    // figure inside opening
+    if (t > 2.0){
+      ctx.save(); ctx.beginPath(); ctx.arc(bx,by,ro,0,Math.PI*2); ctx.clip();
+      const wk = Math.min(1,(t-2.0)/1.0);
+      const fx = bx - ro*1.2 + ro*1.2*ease(wk);
+      const arm = ease((t-3.05)/0.25);
+      figure(fx, by+ro*0.1, ro*1.45, wk<1 ? (t-2)*11 : 0, arm);
+      if (t>3.35 && t<3.5){ ctx.fillStyle='rgba(255,255,255,0.85)'; ctx.fillRect(bx-ro,by-ro,ro*2,ro*2); }
+      ctx.restore();
+    }
+    // blood
+    if (t > 3.45){
+      const b = ease((t-3.45)/1.3);
+      const yb = -W*0.1 + b*(W*1.25);
+      ctx.save(); ctx.beginPath(); ctx.arc(bx,by,R*1.05,0,Math.PI*2); ctx.clip();
+      ctx.globalCompositeOperation = 'multiply';
+      ctx.fillStyle = '#b0101a';
+      ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(W,0);
+      for (let x=W;x>=0;x-=W/60){ const drip = (Math.sin(x*0.031)+Math.sin(x*0.013+1.3))*W*0.035 + Math.max(0,Math.sin(x*0.07))*W*0.05*b; ctx.lineTo(x, yb + drip); }
+      ctx.closePath(); ctx.fill();
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+  function frame(now){ const t = (now - start)/1000; draw(t); if (t < 6.4) raf = requestAnimationFrame(frame); }
+  function play(){ cancelAnimationFrame(raf); size(); if (reduce){ draw(7); return; } start = performance.now(); raf = requestAnimationFrame(frame); }
+  $('#replay').addEventListener('click', play);
+  let rt; window.addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(()=>{ const r = cv.getBoundingClientRect(); const d=Math.min(window.devicePixelRatio||1,2); if (Math.abs(r.width*d - W) > 4){ size(); draw(7); } }, 150); });
+  play();
+})();
+
+/* ---------------- TOOLTIP ---------------- */
+const tip = $('#tip');
+function showTip(html, ev){ tip.innerHTML = html; tip.style.opacity = 1; moveTip(ev); }
+function moveTip(ev){ const x = ev.clientX, y = ev.clientY; const w = tip.offsetWidth, h = tip.offsetHeight; let left = x + 14, top = y + 14; if (left + w > innerWidth - 8) left = x - w - 14; if (top + h > innerHeight - 8) top = y - h - 14; tip.style.left = Math.max(8,left)+'px'; tip.style.top = Math.max(8,top)+'px'; }
+function hideTip(){ tip.style.opacity = 0; }
+function bindTip(node, fn){ node.addEventListener('pointerenter', e=>showTip(fn(), e)); node.addEventListener('pointermove', moveTip); node.addEventListener('pointerleave', hideTip); node.addEventListener('click', e=>{ showTip(fn(), e); }); }
+const fmtM = v => v>=1000 ? '$'+(v/1000).toFixed(2)+'B' : '$'+(v>=100?Math.round(v):v.toFixed(1))+'M';
+
+/* ---------------- REVEAL OBSERVER (resting state is complete; animation replays on first view) ---------------- */
+function onView(node, fn){ if (reduce || !('IntersectionObserver' in window)) return; const io = new IntersectionObserver(es=>{ es.forEach(e=>{ if (e.isIntersecting){ io.disconnect(); fn(); } }); }, {threshold:.25}); io.observe(node); }
+function drawIn(path){ const L = path.getTotalLength(); path.style.strokeDasharray = L; path.style.strokeDashoffset = L; path.getBoundingClientRect(); path.style.transition = 'stroke-dashoffset 2.2s ease'; path.style.strokeDashoffset = 0; }
+
+/* ---------------- TIMELINE ---------------- */
+(function timeline(){
+  const W = 1120, H = 300, x0 = 30, x1 = W-50, y = 190;
+  const yr = Y => x0 + (Y-1960)/(2030-1960)*(x1-x0);
+  const s = sv('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':'Timeline of all 25 Bond films from 1962 to 2021, with the 2026 casting of Robert Pattinson'});
+  const eras = [["connery",1962,1967.6],["lazenby",1969,1970],["connery",1971,1972],["moore",1973,1985.5],["dalton",1987,1989.6],["brosnan",1995,2002.9],["craig",2006,2021.8],["pattinson",2026,2028]];
+  eras.forEach(([a,s1,s2])=>{ s.appendChild(sv('rect',{x:yr(s1),y:y-4,width:Math.max(6,yr(s2)-yr(s1)),height:8,rx:4,fill:col(a),opacity:a==='pattinson'?0.45:0.9})); });
+  const gaps = [[1989.6,1995,"Six-year gap: MGM sale & lawsuits"],[2015.8,2021.7,"Craig's last film, delayed by COVID"],[2021.8,2026.9,"Amazon takes over (2025)"]];
+  gaps.forEach(([a,b,l],i)=>{ s.appendChild(sv('line',{x1:yr(a),x2:yr(b),y1:y+44,y2:y+44,stroke:'var(--muted)', 'stroke-dasharray':'3 3'})); s.appendChild(sv('text',{x:(yr(a)+yr(b))/2,y:y+60+(i===2?16:0),'text-anchor':'middle','font-size':11,fill:'var(--muted)'},l)); });
+  for (let Y=1960; Y<=2030; Y+=10){ s.appendChild(sv('line',{x1:yr(Y),x2:yr(Y),y1:y+12,y2:y+20,stroke:'var(--muted)'})); s.appendChild(sv('text',{x:yr(Y),y:y+32,'text-anchor':'middle','font-size':11,fill:'var(--muted)'},Y+'s')); }
+  s.appendChild(sv('line',{x1:x0,x2:x1,y1:y+12,y2:y+12,stroke:'var(--rule)'}));
+  const dots = [];
+  F.forEach((f,i)=>{
+    const fy = +f.rel.slice(0,4) + (+f.rel.slice(5,7)-1)/12;
+    const g = sv('g',{class:'tlf',style:'cursor:pointer'});
+    const c = sv('circle',{cx:yr(fy),cy:y,r:7,fill:col(f.a),stroke:'var(--bg)','stroke-width':2});
+    g.appendChild(c);
+    const tx = yr(fy)+2, ty = y-14;
+    g.appendChild(sv('text',{x:tx,y:ty,'font-size':12,fill:'var(--fg)',transform:`rotate(-72 ${tx} ${ty})`},f.s));
+    bindTip(g, ()=>`<b>${f.t}</b>${f.y} · ${ACT[f.a].name}<br>${f.dir}<br>RT ${f.rt}% · ${fmtM(f.ww)}`);
+    s.appendChild(g); dots.push(c);
+  });
+  // pattinson marker
+  const pg = sv('g',{});
+  pg.appendChild(sv('circle',{cx:yr(2026.87),cy:y,r:7,fill:'none',stroke:col('pattinson'),'stroke-width':2,'stroke-dasharray':'3 2'}));
+  pg.appendChild(sv('text',{x:yr(2026.87)+2,y:y-14,'font-size':12,fill:'var(--fg)',transform:`rotate(-72 ${yr(2026.87)+2} ${y-14})`},'Bond 26 · Pattinson'));
+  pg.appendChild(sv('text',{x:yr(2026.87),y:y+26,'text-anchor':'middle','font-size':9,fill:'var(--muted)'},'cast 2026'));
+  s.appendChild(pg);
+  // milestones under
+  $('#tl').appendChild(s);
+  const lg = $('#tl-legend'); Object.keys(ACT).forEach(k=>{ lg.appendChild(el('span',{},`<i style="background:${col(k)}"></i>${ACT[k].name}`)); });
+  onView($('#tl'), ()=>{ dots.forEach((d,i)=>{ d.style.transformOrigin = `${d.getAttribute('cx')}px ${d.getAttribute('cy')}px`; d.style.transformBox='view-box'; d.classList.remove('pop'); void d.getBBox(); d.style.animationDelay = (i*0.06)+'s'; d.classList.add('pop'); }); });
+})();
+
+/* ---------------- FILM REGISTER ---------------- */
+(function films(){
+  const list = $('#filmlist');
+  const maxWW = Math.max(...F.map(f=>f.ww));
+  F.forEach(f=>{
+    const a = ACT[f.a];
+    const art = el('article',{class:'film',id:'film-'+f.n,'data-a':f.a});
+    const chartPos = (p) => p ? '#'+p : '—';
+    art.innerHTML = `
+      <div>
+        <div class="no"><i style="background:${col(f.a)}"></i>No. ${String(f.n).padStart(2,'0')} · ${a.short}</div>
+        <h3>${f.t}</h3>
+        <div class="yr">${f.y} · dir. ${f.dir}</div>
+        <dl>
+          <dt>Villain</dt><dd>${f.vil}</dd>
+          <dt>Ally</dt><dd>${f.ally}</dd>
+          <dt>Places</dt><dd>${f.loc}</dd>
+          <dt>Score</dt><dd>${f.score}</dd>
+        </dl>
+        <div class="metrics">
+          <div class="metric"><span class="mv">${f.rt}%</span><span class="bar"><b style="width:${f.rt}%;background:${col(f.a)}"></b></span><span class="mk">RT</span></div>
+          <div class="metric"><span class="mv">${f.lb.toFixed(2)}</span><span class="bar"><b style="width:${f.lb/5*100}%;background:${col(f.a)}"></b></span><span class="mk">LB</span></div>
+          <div class="metric"><span class="mv">${f.imdb.toFixed(1)}</span><span class="bar"><b style="width:${f.imdb*10}%;background:${col(f.a)}"></b></span><span class="mk">IMDb ≈</span></div>
+          <div class="metric"><span class="mv">${fmtM(f.ww)}</span><span class="bar"><b style="width:${f.ww/maxWW*100}%;background:${col(f.a)}"></b></span><span class="mk">Gross</span></div>
+        </div>
+      </div>
+      <div class="text">
+        <p>${f.p}</p>
+        <div class="song"><span>♪ <b>“${f.song}”</b> · ${f.perf}</span><span>UK ${chartPos(f.uk)} · US ${chartPos(f.us)}</span><span>Budget ${fmtM(f.bud)}</span></div>
+        <p class="verdict">${f.v}</p>
+      </div>`;
+    list.appendChild(art);
+  });
+  // filter
+  const ff = $('#film-filter');
+  const mk = (k, label, color) => { const b = el('button',{class:'chip',type:'button','data-a':k,'aria-pressed':k==='all'?'true':'false'}, (color?`<span class="sw" style="background:${color}"></span>`:'')+label); ff.appendChild(b); };
+  mk('all','All 25');
+  ['connery','lazenby','moore','dalton','brosnan','craig'].forEach(k=>mk(k, ACT[k].short, col(k)));
+  ff.addEventListener('click', e=>{ const b = e.target.closest('button'); if (!b) return; ff.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x===b?'true':'false')); const k = b.dataset.a; list.querySelectorAll('.film').forEach(a=>{ a.hidden = !(k==='all' || a.dataset.a===k); }); });
+  const fs = $('#film-sort');
+  fs.addEventListener('click', e=>{ const b = e.target.closest('button'); if (!b) return; fs.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x===b?'true':'false')); const k = b.dataset.sort; const order = [...F].sort((p,q)=> k==='n' ? p.n-q.n : (q[k]-p[k]) || (p.n-q.n)); order.forEach(f=>list.appendChild($('#film-'+f.n))); });
+})();
+
+/* ---------------- BONDS ---------------- */
+const BONDS = [
+ {k:"connery",ord:"I",yrs:"1962–1967, 1971 (+1983 unofficial)",films:6,debut:32,best:"From Russia with Love / Goldfinger",worst:"Diamonds Are Forever",traits:[8,8,3,10,8,7],
+  p:"A former milkman, coffin polisher and Mr. Universe entrant from Edinburgh, coached by director Terence Young in how to wear a suit and eat in good restaurants. Connery's Bond moves like a big cat: relaxed, amused, then suddenly lethal. He set the template for the role's mixture of sex, menace and contempt, and for every actor since the question has been how far to step from his shadow. He wore a toupee in every Bond film, tired of the circus by 1967, returned once for money he gave away, and came back unofficially at 52 in Never Say Never Again. Knighted in 2000, he died in October 2020 aged 90."},
+ {k:"lazenby",ord:"II",yrs:"1969",films:1,debut:30,best:"On Her Majesty's Secret Service",worst:"—",traits:[5,4,7,6,9,7],
+  p:"An Australian car salesman and model with no film experience, Lazenby won the part partly by breaking a stuntman's nose in a screen-test fight. He is physically superb and visibly younger and more vulnerable than Connery, which serves the only Bond film in which Bond falls in love and marries. His line delivery is uneven, and his famous fourth-wall joke in the cold open (\"This never happened to the other fellow\") made him a trivia question for decades. Advised that Bond was obsolete in the counterculture, he walked away rather than sign a long-term contract, before the film had even opened. Critics now treat his one film as a classic."},
+ {k:"moore",ord:"III",yrs:"1973–1985",films:7,debut:45,best:"The Spy Who Loved Me",worst:"A View to a Kill",traits:[4,10,3,9,5,4],
+  p:"Already famous as The Saint, Moore was the oldest debut Bond at 45 and made the most official films, seven in twelve years. He knew he could not out-tough Connery, so he played Bond as a raised-eyebrow gentleman who finds the whole business faintly ridiculous, and the films followed him into comedy. His Bond is a lover rather than a killer: Moore disliked guns and the cruelty in Fleming. When he wanted to, as in For Your Eyes Only, he could be steely. He made the series a family entertainment, kept it profitable through the 1970s, and later became a dedicated UNICEF ambassador. Knighted in 2003, he died in 2017."},
+ {k:"dalton",ord:"IV",yrs:"1987–1989",films:2,debut:43,best:"The Living Daylights",worst:"—",traits:[9,4,7,6,7,10],
+  p:"A Welsh-born Shakespearean actor who had turned the role down in the late 1960s because he felt too young. Dalton reread the novels and played Fleming's Bond: tense, irritable, a chain-smoking professional who dislikes his job and is capable of real rage. In the late 1980s audiences raised on Moore found him humourless; a generation later, after Craig, he looks ahead of his time. Licence to Kill's weak American box office and six years of legal limbo cost him a third film, and he formally stepped down in 1994. Of all the Bonds, his reputation has risen the most."},
+ {k:"brosnan",ord:"V",yrs:"1995–2002",films:4,debut:42,best:"GoldenEye",worst:"Die Another Day",traits:[6,7,5,9,7,6],
+  p:"Brosnan met Cubby Broccoli on the set of For Your Eyes Only, where his first wife, Cassandra Harris, played a countess, and he was offered Bond in 1986 until NBC renewed Remington Steele at the last minute. When he finally arrived he combined the best of his predecessors: Connery's ease, Moore's humour, a flash of Dalton's darkness. His Bond is the polished global-brand version, at home in a post-Cold War world of media moguls and oil pipelines. He is often called a great Bond in uneven films. He was let go before the reboot and has said he heard the news by phone."},
+ {k:"craig",ord:"VI",yrs:"2006–2021",films:5,debut:38,best:"Casino Royale",worst:"Quantum of Solace / Spectre",traits:[9,6,9,7,10,8],
+  p:"Announced in October 2005 to a tabloid campaign against a blond, rugged, \"too short\" Bond, Craig answered with Casino Royale and became, by most measures, the most acclaimed Bond since Connery. His Bond is a blunt instrument who bleeds and breaks: a working-class bruiser in a dinner jacket, physically ferocious, emotionally damaged and capable of love. He is also the first Bond with a full story arc, from first kill to final sacrifice. His fifteen-year run is the longest by calendar time. In 2021 the Royal Navy made him an honorary commander, Bond's own rank."}
+];
+const AX = ["Menace","Wit","Vulnerability","Charm","Physicality","Fleming"];
+function radar(vals, color){
+  const S = 240, c = S/2, R = 82;
+  const s = sv('svg',{viewBox:`-30 -4 ${S+60} ${S+8}`,class:'radar',role:'img','aria-label':'Trait profile: '+AX.map((a,i)=>a+' '+vals[i]).join(', ')});
+  for (let k=1;k<=5;k++){ const pts = AX.map((_,i)=>{ const th = -Math.PI/2 + i*2*Math.PI/AX.length; return [c+R*k/5*Math.cos(th), c+R*k/5*Math.sin(th)]; }); s.appendChild(sv('polygon',{points:pts.map(p=>p.join(',')).join(' '),fill:'none',stroke:'var(--rule)','stroke-width':1})); }
+  AX.forEach((a,i)=>{ const th = -Math.PI/2 + i*2*Math.PI/AX.length; s.appendChild(sv('line',{x1:c,y1:c,x2:c+R*Math.cos(th),y2:c+R*Math.sin(th),stroke:'var(--rule)'})); const lx = c+(R+20)*Math.cos(th), ly = c+(R+16)*Math.sin(th)+3; s.appendChild(sv('text',{x:lx,y:ly,'text-anchor':Math.abs(Math.cos(th))<.2?'middle':(Math.cos(th)>0?'start':'end'),'font-size':9.5,fill:'var(--muted)'},a.toUpperCase())); });
+  const pts = vals.map((v,i)=>{ const th = -Math.PI/2 + i*2*Math.PI/AX.length; return [c+R*v/10*Math.cos(th), c+R*v/10*Math.sin(th)]; });
+  const poly = sv('polygon',{points:pts.map(p=>p.join(',')).join(' '),fill:color,'fill-opacity':.22,stroke:color,'stroke-width':2,'stroke-linejoin':'round'});
+  s.appendChild(poly);
+  pts.forEach(p=>s.appendChild(sv('circle',{cx:p[0],cy:p[1],r:2.8,fill:color})));
+  return {svg:s, poly, c};
+}
+(function bonds(){
+  const g = $('#bondgrid');
+  BONDS.forEach(b=>{
+    const a = ACT[b.k];
+    const card = el('article',{class:'bond'});
+    card.innerHTML = `<div class="top"><div><h3>${a.name}</h3><div class="yrs">${b.yrs}</div></div><div class="ord" style="color:${col(b.k)}">${b.ord}</div></div>
+      <div class="facts"><div><b class="num">${b.films}</b><span>Eon films</span></div><div><b class="num">${b.debut}</b><span>Age at debut</span></div><div><b class="num">${a.born.slice(0,4)}</b><span>Born</span></div></div>`;
+    const r = radar(b.traits, col(b.k)); card.appendChild(r.svg);
+    card.appendChild(el('p',{},b.p));
+    card.appendChild(el('div',{class:'bw'},`Best: <b>${b.best}</b><br>Weakest: <b>${b.worst}</b>`));
+    g.appendChild(card);
+    onView(card, ()=>{ r.poly.style.transformOrigin = `${r.c}px ${r.c}px`; r.poly.style.transformBox='view-box'; r.poly.animate([{transform:'scale(0.1)',opacity:0},{transform:'scale(1)',opacity:1}],{duration:900,easing:'cubic-bezier(.2,.8,.2,1.1)'}); });
+  });
+})();
+
+/* ---------------- AGE CHART ---------------- */
+(function ages(){
+  const W = 1120, H = 330, l = 50, r = 30, t = 20, b = 40;
+  const X = y => l + (y-1960)/(2030-1960)*(W-l-r);
+  const Y = a => t + (1-(a-25)/(60-25))*(H-t-b);
+  const s = sv('svg',{viewBox:`0 0 ${W} ${H}`,style:'min-width:760px;width:100%;height:auto;display:block',role:'img','aria-label':'Chart of each actor\'s age at each film release'});
+  for (let a=25;a<=60;a+=5){ s.appendChild(sv('line',{x1:l,x2:W-r,y1:Y(a),y2:Y(a),stroke:'var(--rule)','stroke-dasharray':a%10?'2 4':''})); s.appendChild(sv('text',{x:l-8,y:Y(a)+4,'text-anchor':'end','font-size':11,fill:'var(--muted)'},a)); }
+  for (let y=1960;y<=2030;y+=10){ s.appendChild(sv('text',{x:X(y),y:H-14,'text-anchor':'middle','font-size':11,fill:'var(--muted)'},y)); }
+  const age = (born, rel) => { const B = new Date(born), R = new Date(rel); return (R - B)/(365.2425*864e5); };
+  const byA = {};
+  F.forEach(f=>{ const yy = +f.rel.slice(0,4) + (+f.rel.slice(5,7)-1)/12; (byA[f.a]=byA[f.a]||[]).push({f, x:yy, a:age(ACT[f.a].born, f.rel)}); });
+  const paths = [];
+  Object.keys(byA).forEach(k=>{
+    const pts = byA[k];
+    // split Connery's comeback into separate segment
+    const segs = k==='connery' ? [pts.slice(0,5), pts.slice(5)] : [pts];
+    segs.forEach(sg=>{ if (sg.length>1){ const p = sv('path',{d:'M'+sg.map(q=>X(q.x)+','+Y(q.a)).join('L'),fill:'none',stroke:col(k),'stroke-width':2.5,class:'ln'}); s.appendChild(p); paths.push(p);} });
+    pts.forEach(q=>{ const c = sv('circle',{cx:X(q.x),cy:Y(q.a),r:5.5,fill:col(k),stroke:'var(--bg)','stroke-width':1.5,style:'cursor:pointer'}); bindTip(c, ()=>`<b>${q.f.t}</b>${ACT[k].name}, aged ${Math.floor(q.a)}`); s.appendChild(c); });
+    const last = pts[pts.length-1];
+    s.appendChild(sv('text',{x:X(pts[0].x)-4,y:Y(pts[0].a)+ (k==='lazenby'?18:-10),'text-anchor':'end','font-size':11,fill:col(k)},ACT[k].short));
+  });
+  // NSNA marker
+  const nx = X(1983.8), ny = Y(age(ACT.connery.born,'1983-10-07'));
+  s.appendChild(sv('circle',{cx:nx,cy:ny,r:5,fill:'none',stroke:col('connery'),'stroke-width':1.5,'stroke-dasharray':'2 2'}));
+  s.appendChild(sv('text',{x:nx+8,y:ny-8,'font-size':10,fill:'var(--muted)'},'Connery, Never Say Never Again (unofficial)'));
+  // Pattinson
+  const px = X(2026.87), py = Y(age(ACT.pattinson.born,'2026-11-16'));
+  s.appendChild(sv('circle',{cx:px,cy:py,r:6,fill:'none',stroke:col('pattinson'),'stroke-width':2,'stroke-dasharray':'3 2'}));
+  s.appendChild(sv('text',{x:px-10,y:py+20,'text-anchor':'end','font-size':11,fill:col('pattinson')},'Pattinson, cast at 40'));
+  $('#agechart').appendChild(s);
+  onView($('#agechart'), ()=>paths.forEach(drawIn));
+})();
+
+/* ---------------- SEISMOGRAPH ---------------- */
+(function seismo(){
+  const cats = [["space","Space & orbital weapons"],["nuclear","Nuclear blackmail"],["markets","Markets & resources"],["coldwar","Cold War intrigue"],["crime","Drugs, crime & terror money"],["info","Media, cyber & surveillance"],["bio","Biological weapons"]];
+  const personal = new Set([17,19,23,24,25,7,12,16]);
+  const W = 1120, rowH = 40, l = 230, r = 30, t = 26, H = t + cats.length*rowH + 30;
+  const X = y => l + (y-1960)/(2025-1960)*(W-l-r);
+  const s = sv('svg',{viewBox:`0 0 ${W} ${H}`,style:'min-width:820px;width:100%;height:auto;display:block',role:'img','aria-label':'Each film placed by the category of the villain\'s scheme over time'});
+  for (let y=1960;y<=2020;y+=10){ s.appendChild(sv('line',{x1:X(y),x2:X(y),y1:t-8,y2:H-26,stroke:'var(--rule)','stroke-dasharray':'2 4'})); s.appendChild(sv('text',{x:X(y),y:H-8,'text-anchor':'middle','font-size':11,fill:'var(--muted)'},y+'s')); }
+  const dots = [];
+  cats.forEach(([k,label],i)=>{
+    const yy = t + i*rowH + rowH/2;
+    s.appendChild(sv('text',{x:0,y:yy+4,'font-size':13,fill:'var(--fg)'},label));
+    // seismic line
+    const films = F.filter(f=>f.threat===k);
+    let d = `M${l},${yy}`;
+    const xs = films.map(f=>X(f.y));
+    for (let x=l; x<=W-r; x+=4){ let amp = 0; xs.forEach(fx=>{ const dx = (x-fx)/10; amp += Math.exp(-dx*dx)*13; }); d += `L${x},${(yy - amp*Math.sin(x*0.9)).toFixed(1)}`; }
+    const p = sv('path',{d,fill:'none',stroke:'var(--steel)','stroke-width':1.2,class:'ln',opacity:.8}); s.appendChild(p); dots.push(p);
+    films.forEach(f=>{ const g = sv('g',{style:'cursor:pointer'}); g.appendChild(sv('circle',{cx:X(f.y),cy:yy,r:7,fill:col(f.a)})); if (personal.has(f.n)) g.appendChild(sv('circle',{cx:X(f.y),cy:yy,r:11.5,fill:'none',stroke:'var(--blood)','stroke-width':1.6})); bindTip(g, ()=>`<b>${f.t}</b>${f.y} · ${f.vil.split('(')[0].trim()}`); s.appendChild(g); });
+  });
+  $('#seismo').appendChild(s);
+  onView($('#seismo'), ()=>dots.forEach(drawIn));
+})();
+
+/* ---------------- PENDULUM ---------------- */
+(function pend(){
+  const W = 1120, H = 330, l = 60, r = 20, t = 30, b = 60;
+  const X = i => l + (i)/(F.length-1)*(W-l-r);
+  const Y = v => t + (1-(v+5)/10)*(H-t-b);
+  const s = sv('svg',{viewBox:`0 0 ${W} ${H}`,style:'min-width:860px;width:100%;height:auto;display:block',role:'img','aria-label':'Tone of each film from camp to grit'});
+  const defs = sv('defs',{});
+  const lg = sv('linearGradient',{id:'pg',x1:0,y1:0,x2:0,y2:1});
+  lg.appendChild(sv('stop',{offset:'0%','stop-color':'var(--blood)','stop-opacity':.28}));
+  lg.appendChild(sv('stop',{offset:'50%','stop-color':'var(--blood)','stop-opacity':0}));
+  lg.appendChild(sv('stop',{offset:'50%','stop-color':'var(--gold)','stop-opacity':0}));
+  lg.appendChild(sv('stop',{offset:'100%','stop-color':'var(--gold)','stop-opacity':.3}));
+  defs.appendChild(lg); s.appendChild(defs);
+  [-5,0,5].forEach(v=>{ s.appendChild(sv('line',{x1:l,x2:W-r,y1:Y(v),y2:Y(v),stroke:'var(--rule)','stroke-dasharray':v?'2 4':''})); });
+  s.appendChild(sv('text',{x:l-8,y:Y(5)+4,'text-anchor':'end','font-size':11,fill:'var(--blood)'},'GRIT'));
+  s.appendChild(sv('text',{x:l-8,y:Y(-5)+4,'text-anchor':'end','font-size':11,fill:'var(--gold)'},'CAMP'));
+  // smooth path (catmull-rom)
+  const P = F.map((f,i)=>[X(i),Y(f.tone)]);
+  let d = `M${P[0][0]},${P[0][1]}`;
+  for (let i=0;i<P.length-1;i++){ const p0 = P[i-1]||P[i], p1 = P[i], p2 = P[i+1], p3 = P[i+2]||p2; const c1 = [p1[0]+(p2[0]-p0[0])/6, p1[1]+(p2[1]-p0[1])/6], c2 = [p2[0]-(p3[0]-p1[0])/6, p2[1]-(p3[1]-p1[1])/6]; d += `C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${p2[0]},${p2[1]}`; }
+  s.appendChild(sv('path',{d:d+`L${P[P.length-1][0]},${Y(0)}L${P[0][0]},${Y(0)}Z`,fill:'url(#pg)'}));
+  const line = sv('path',{d,fill:'none',stroke:'var(--fg)','stroke-width':2.2,class:'ln'}); s.appendChild(line);
+  const corr = new Set([6,12,15,21]);
+  F.forEach((f,i)=>{ const g = sv('g',{style:'cursor:pointer'}); g.appendChild(sv('circle',{cx:P[i][0],cy:P[i][1],r:corr.has(f.n)?7:5,fill:corr.has(f.n)?'var(--blood)':col(f.a),stroke:'var(--bg)','stroke-width':1.5})); bindTip(g, ()=>`<b>${f.t}</b>${f.y} · tone ${f.tone>0?'+':''}${f.tone}`); s.appendChild(g);
+    s.appendChild(sv('text',{x:P[i][0]+3,y:H-b+16,'text-anchor':'end','font-size':9.5,fill:'var(--muted)',transform:`rotate(-40 ${P[i][0]+3} ${H-b+16})`},f.s));
+  });
+  [[5,"Volcano → wedding"],[11,"Space → Meteora"],[14,"Moore → Dalton"],[20,"Invisible car → reboot"]].forEach(([i,lab])=>{ const x = (P[i-1][0]+P[i][0])/2; s.appendChild(sv('text',{x,y:Y(5)-8,'text-anchor':'middle','font-size':10,fill:'var(--blood)'},lab)); });
+  $('#pendulum').appendChild(s);
+  onView($('#pendulum'), ()=>drawIn(line));
+})();
+
+/* ---------------- ANATOMY ---------------- */
+(function anat(){
+  const beats = [
+    ["00:00","The gun-barrel","White dots, the rifled barrel, a figure turns and fires, blood runs down. Every film since 1962, moved to the end for most Craig films."],
+    ["00:01","The cold open","A self-contained mini-adventure, often the best stunt in the film: the ski jump, the dam bungee, the crane."],
+    ["00:10","Main titles","Maurice Binder's silhouettes, then Daniel Kleinman's from 1995. Women, guns and the theme song."],
+    ["00:15","M's office","Briefing, banter with Moneypenny, a hat on the coat stand. The mission in one scene."],
+    ["00:20","Q-Branch","\"Now pay attention, 007.\" Gadgets introduced so we know they will be used."],
+    ["00:30","The casino","A social duel with the villain at the baccarat or poker table: the war fought as etiquette."],
+    ["01:00","Capture","Bond captured, the villain explains the plan, an elaborate death that leaves time to escape."],
+    ["01:30","The lair","Ken Adam's volcano, the supertanker, the space station: a design showpiece built to be destroyed."],
+    ["01:50","Countdown","A timer, a raid, the lair explodes. In Goldfinger the bomb stops at 007."],
+    ["02:00","The clinch","An embrace in a lifeboat or a hotel bed, a last joke, and the card: James Bond will return."]
+  ];
+  const g = $('#anatomy');
+  beats.forEach(([tc,h,p])=>{ const b = el('div',{class:'beat'}); b.innerHTML = `<span class="bt">${tc}</span><h4>${h}</h4><p>${p}</p>`; g.appendChild(b); });
+})();
+
+/* ---------------- SWIMLANES ---------------- */
+(function swim(){
+  const rows = [
+    ["M",[["Bernard Lee",11],[null,1],["Robert Brown",4],["Judi Dench",7],["Ralph Fiennes",2]],["#5b6170","#3c62ad","#7350c0","#9a6d10"]],
+    ["Q",[["P. Burton",1],["Desmond Llewelyn",6],[null,1],["Desmond Llewelyn",11],["John Cleese",1],[null,2],["Ben Whishaw",3]],["#5b6170","#2a8576","#2a8576","#b8426a","#c0381f"]],
+    ["Moneypenny",[["Lois Maxwell",14],["C. Bliss",2],["Samantha Bond",4],[null,2],["Naomie Harris",3]],["#b8426a","#3c62ad","#7350c0","#c0381f"]],
+    ["Felix Leiter",[["J. Lord",1],[null,1],["C. Linder",1],["R. Van Nutter",1],[null,2],["N. Burton",1],["D. Hedison",1],[null,6],["J. Terry",1],["D. Hedison",1],[null,4],["Jeffrey Wright",2],[null,2],["J. Wright",1]],["#9a6d10","#9a6d10","#9a6d10","#9a6d10","#2a8576","#3c62ad","#2a8576","#c0381f","#c0381f"]]
+  ];
+  const g = $('#swim');
+  g.appendChild(el('div',{class:'rl'},''));
+  F.forEach(f=>g.appendChild(el('div',{class:'hd',title:f.t},f.n)));
+  rows.forEach(([name,segs,colors])=>{
+    g.appendChild(el('div',{class:'rl'},name));
+    let ci = 0;
+    segs.forEach(([who,n])=>{
+      const d = el('div',{class:'seg'+(who?'':' none'),style:`grid-column:span ${n};${who?`background:${colors[ci%colors.length]}`:''}`, title: who||'Not in film'}, who||'');
+      if (who) ci++;
+      g.appendChild(d);
+    });
+  });
+})();
+
+/* ---------------- MUSIC: audio ---------------- */
+(function audio(){
+  const keysEl = $('#keys');
+  // keys E3..G4 for display
+  const names = ['E3','F3','F#3','G3','G#3','A3','A#3','B3','C4','C#4','D4','D#4','E4','F4','F#4','G4'];
+  const keyNodes = {};
+  names.forEach(n=>{ const k = el('i',{class:n.includes('#')?'blk':''}); keysEl.appendChild(k); keyNodes[n]=k; });
+  const freq = n => { const map = {C:-9,'C#':-8,D:-7,'D#':-6,E:-5,F:-4,'F#':-3,G:-2,'G#':-1,A:0,'A#':1,B:2}; const m = n.match(/^([A-G]#?)(\d)$/); return 440*Math.pow(2,(map[m[1]] + (+m[2]-4)*12)/12); };
+  let ac = null;
+  function ctx(){ if (!ac){ const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null; ac = new AC(); } if (ac.state==='suspended') ac.resume(); return ac; }
+  function voice(a, f, t0, dur, type, gain, cutoff){
+    const o = a.createOscillator(), o2 = a.createOscillator(), g = a.createGain(), lp = a.createBiquadFilter();
+    o.type = type; o2.type = type; o.frequency.value = f; o2.frequency.value = f*1.004;
+    lp.type = 'lowpass'; lp.frequency.setValueAtTime(cutoff, t0); lp.frequency.exponentialRampToValueAtTime(Math.max(200,cutoff*0.35), t0+dur);
+    g.gain.setValueAtTime(0.0001,t0); g.gain.exponentialRampToValueAtTime(gain,t0+0.015); g.gain.exponentialRampToValueAtTime(gain*0.5,t0+dur*0.4); g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+    o.connect(lp); o2.connect(lp); lp.connect(g); g.connect(a.destination);
+    o.start(t0); o2.start(t0); o.stop(t0+dur+0.05); o2.stop(t0+dur+0.05);
+  }
+  function light(n, t0, dur, a){ const k = keyNodes[n]; if (!k) return; const now = a.currentTime; setTimeout(()=>k.classList.add('lit'), (t0-now)*1000); setTimeout(()=>k.classList.remove('lit'), (t0-now+dur)*1000); }
+  function chord(a, t0){ ['E3','G3','B3','D#4','F#4'].forEach((n,i)=>{ voice(a, freq(n), t0+i*0.012, 2.6, 'sawtooth', 0.06, 2600); light(n, t0, 2.2, a); }); voice(a, freq('E2'), t0, 2.6, 'triangle', 0.12, 900); }
+  $('#play-vamp').addEventListener('click', ()=>{
+    const a = ctx(); if (!a){ $('#play-info').textContent = 'This browser cannot play Web Audio.'; return; }
+    const t = a.currentTime + 0.08, step = 0.32; const seq = ['B3','C4','C#4','C4'];
+    for (let r=0;r<4;r++) seq.forEach((n,i)=>{ const t0 = t + (r*4+i)*step; voice(a, freq(n), t0, step*0.95, 'sawtooth', 0.07, 1800); light(n, t0, step*0.9, a); if (i===0) voice(a, freq('E2'), t0, step*3.9, 'triangle', 0.13, 700); });
+    chord(a, t + 16*step);
+  });
+  $('#play-chord').addEventListener('click', ()=>{ const a = ctx(); if (!a) return; chord(a, a.currentTime+0.05); });
+})();
+
+/* ---------------- MUSIC: chart ladder ---------------- */
+(function ladder(){
+  const W = 1120, H = 300, l = 50, r = 20, t = 20, b = 70;
+  const X = i => l + 14 + i*(W-l-r-28)/(F.length-1);
+  const Ylog = p => t + (Math.log10(p)/2)*(H-t-b-34);
+  const dnc = H-b-8;
+  const s = sv('svg',{viewBox:`0 0 ${W} ${H}`,style:'min-width:860px;width:100%;height:auto;display:block',role:'img','aria-label':'UK and US chart peaks for each Bond title song'});
+  [1,2,5,10,20,50,100].forEach(p=>{ s.appendChild(sv('line',{x1:l,x2:W-r,y1:Ylog(p),y2:Ylog(p),stroke:'var(--rule)','stroke-dasharray':p===1?'':'2 4'})); s.appendChild(sv('text',{x:l-8,y:Ylog(p)+4,'text-anchor':'end','font-size':11,fill:'var(--muted)'},'#'+p)); });
+  s.appendChild(sv('rect',{x:l,y:dnc-12,width:W-l-r,height:24,fill:'var(--bg2)'}));
+  s.appendChild(sv('text',{x:l-8,y:dnc+4,'text-anchor':'end','font-size':10,fill:'var(--muted)'},'DNC'));
+  const yv = p => p ? Ylog(p) : dnc;
+  // UK line
+  const uk = F.map((f,i)=>[X(i), yv(f.uk)]);
+  const pth = sv('path',{d:'M'+uk.map(p=>p.join(',')).join('L'),fill:'none',stroke:'var(--gold)','stroke-width':1.5,opacity:.6,class:'ln'}); s.appendChild(pth);
+  F.forEach((f,i)=>{
+    const g = sv('g',{style:'cursor:pointer'});
+    if (f.us || f.uk) g.appendChild(sv('line',{x1:X(i),x2:X(i),y1:yv(f.uk),y2:yv(f.us),stroke:'var(--rule)','stroke-width':1}));
+    g.appendChild(sv('circle',{cx:X(i),cy:yv(f.us),r:6,fill:'var(--bg)',stroke:'var(--fg)','stroke-width':2}));
+    g.appendChild(sv('circle',{cx:X(i),cy:yv(f.uk),r:6.5,fill:'var(--gold)'}));
+    g.appendChild(sv('rect',{x:X(i)-14,y:t,width:28,height:H-t-b+12,fill:'transparent'}));
+    bindTip(g, ()=>`<b>“${f.song}”</b>${f.perf} · ${f.y}<br>UK ${f.uk?'#'+f.uk:'did not chart'} · US ${f.us?'#'+f.us:'did not chart'}`);
+    s.appendChild(g);
+    const lab = f.perf.replace('Paul McCartney & Wings','McCartney').replace('John Barry & Orchestra','J. Barry Orch.').replace('Jack White & Alicia Keys','White & Keys').replace('Louis Armstrong','Armstrong').replace('Shirley Bassey','Bassey');
+    s.appendChild(sv('text',{x:X(i)+3,y:H-b+20,'text-anchor':'end','font-size':9.5,fill:'var(--muted)',transform:`rotate(-40 ${X(i)+3} ${H-b+20})`},lab));
+  });
+  $('#ladder').appendChild(s);
+  onView($('#ladder'), ()=>drawIn(pth));
+})();
+
+/* ---------------- MUSIC: composers & table ---------------- */
+(function composers(){
+  const C = [
+    ["John Barry",[2,3,4,5,6,7,9,11,13,14,15],"1963–1987","Arranged the theme in 1962, then defined the sound: brass, strings, jazz harmony. Five Oscars in his career, none for Bond."],
+    ["Monty Norman",[1],"1962","Wrote the James Bond Theme. Won a libel case in 2001 over who wrote it."],
+    ["George Martin",[8],"1973","The Beatles' producer, scoring around McCartney's song."],
+    ["Marvin Hamlisch",[10],"1977","Disco-era Bond (\"Bond 77\"); Oscar-nominated for score and song."],
+    ["Bill Conti",[12],"1981","Rocky's composer brought funk and a bigger pop sound."],
+    ["Michael Kamen",[16],"1989","Lethal Weapon's composer gave the darkest film a darker sound."],
+    ["Éric Serra",[17],"1995","Experimental, percussive and much criticised; the tank chase was re-scored."],
+    ["David Arnold",[18,19,20,21,22],"1997–2008","Barry's chosen heir. Brass and big-band swing with breakbeats."],
+    ["Thomas Newman",[23,24],"2012–2015","Marimbas, pulses and minimalism; Oscar-nominated for Skyfall."],
+    ["Hans Zimmer",[25],"2021","With Johnny Marr's guitar; closes on Barry's 1969 melody."]
+  ];
+  const g = $('#composers');
+  C.forEach(([n,films,yrs,p])=>{ const d = el('div',{class:'composer'}); d.innerHTML = `<b>${n}</b><span class="cn">${yrs} · ${films.length} ${films.length>1?'scores':'score'}</span><div class="pips">${films.map(i=>{ const f = F[i-1]; return `<i style="background:${col(f.a)}" title="${f.t}"></i>`; }).join('')}</div><p>${p}</p>`; g.appendChild(d); });
+  const AW = {3:"Grammy nom. (score)",8:"Oscar nom. · Grammy (arrangement)",10:"Oscar nom. (song & score)",12:"Oscar nom.",20:"Golden Globe nom.",23:"Oscar · Golden Globe · Grammy",24:"Oscar · Golden Globe",25:"Oscar · Golden Globe · Grammy"};
+  const SW = {1:"Monty Norman",2:"Lionel Bart",3:"Barry, Bricusse, Newley",4:"Barry, Don Black",5:"Barry, Bricusse",6:"Barry, Hal David",7:"Barry, Don Black",8:"Paul & Linda McCartney",9:"Barry, Don Black",10:"Hamlisch, Carole Bayer Sager",11:"Barry, Hal David",12:"Conti, Mick Leeson",13:"Barry, Tim Rice",14:"Barry, Duran Duran",15:"Barry, Pål Waaktaar",16:"Walden, Cohen, Afanasieff",17:"Bono, The Edge",18:"Sheryl Crow, Mitchell Froom",19:"Arnold, Don Black",20:"Madonna, Mirwais",21:"Chris Cornell, Arnold",22:"Jack White",23:"Adele, Paul Epworth",24:"Sam Smith, Jimmy Napes",25:"Billie Eilish, Finneas"};
+  const tb = $('#songtable');
+  tb.innerHTML = `<thead><tr><th>#</th><th>Film</th><th>Song</th><th>Performer</th><th>Written by</th><th style="text-align:right">UK</th><th style="text-align:right">US</th><th>Recognition</th></tr></thead>`;
+  const body = el('tbody');
+  F.forEach(f=>{ const tr = el('tr'); tr.innerHTML = `<td class="c">${f.n}</td><td><span class="dot" style="background:${col(f.a)}"></span>${f.t}</td><td>“${f.song}”</td><td>${f.perf}</td><td>${SW[f.n]||''}</td><td class="c">${f.uk?'#'+f.uk:'—'}</td><td class="c">${f.us?'#'+f.us:'—'}</td><td class="aw">${AW[f.n]||''}</td>`; body.appendChild(tr); });
+  tb.appendChild(body);
+})();
+
+/* ---------------- BOX OFFICE ---------------- */
+(function bo(){
+  const CPI = {1962:30.2,1963:30.6,1964:31.0,1965:31.5,1967:33.4,1969:36.7,1971:40.5,1973:44.4,1974:49.3,1977:60.6,1979:72.6,1981:90.9,1983:99.6,1985:107.6,1987:113.6,1989:124.0,1995:152.4,1997:160.5,1999:166.6,2002:179.9,2006:201.6,2008:215.3,2012:229.6,2015:237.0,2021:271.0};
+  const NOW = 322;
+  F.forEach(f=>{ const k = NOW/CPI[f.y]; f.wwa = f.ww*k; f.doma = f.dom*k; });
+  const box = $('#bo');
+  const bars = el('div',{class:'bo-bars'}); const xs = el('div',{class:'bo-x'});
+  const grid = [];
+  for (let i=0;i<4;i++){ const gl = el('div',{class:'bo-grid'},'<span></span>'); box.appendChild(gl); grid.push(gl); }
+  const items = F.map(f=>{ const bb = el('div',{class:'bo-bar',tabindex:'0','aria-label':f.t}); const b = el('b',{style:`background:${col(f.a)}`}); const v = el('span',{class:'bv'}); bb.appendChild(v); bb.appendChild(b); bars.appendChild(bb); xs.appendChild(el('span',{},String(f.y).slice(2))); return {f,bb,b,v}; });
+  box.appendChild(bars); box.appendChild(xs);
+  let mode = 'ww';
+  const label = {ww:'worldwide',wwa:'worldwide, 2025 $',doma:'US+Canada, 2025 $',bud:'budget'};
+  items.forEach(it=>bindTip(it.bb, ()=>`<b>${it.f.t}</b>${it.f.y} · ${ACT[it.f.a].name}<br>Worldwide ${fmtM(it.f.ww)} · adj. ${fmtM(it.f.wwa)}<br>US+Canada adj. ${fmtM(it.f.doma)}<br>Budget ${fmtM(it.f.bud)}`));
+  function render(anim){
+    const vals = F.map(f=>f[mode]); const max = Math.max(...vals);
+    const nice = max>1000? 400 : max>500? 200 : max>200? 100 : 50; const top = Math.ceil(max/nice)*nice;
+    const barH = bars.clientHeight - 24;
+    grid.forEach((g,i)=>{ const v = top*(i+1)/4; g.style.top = (24 + barH*(1-(i+1)/4))+'px'; g.firstChild.textContent = fmtM(v); });
+    const topK = [...vals].sort((a,b)=>b-a).slice(0,4);
+    items.forEach(it=>{ const v = it.f[mode]; const h = v/top*100; it.b.style.height = h+'%'; it.v.textContent = topK.includes(v) ? fmtM(v) : ''; it.v.style.bottom = `calc(${h}% + 4px)`; });
+  }
+  // resting state: draw immediately, then replay grow on first view
+  render();
+  onView(box, ()=>{ items.forEach(it=>{ it.b.style.transition='none'; it.b.style.height='0%'; }); bars.getBoundingClientRect(); items.forEach((it,i)=>{ it.b.style.transition=''; it.b.style.transitionDelay=(i*0.025)+'s'; }); render(); setTimeout(()=>items.forEach(it=>it.b.style.transitionDelay='0s'), 1800); });
+  $('#bo-mode').addEventListener('click', e=>{ const b = e.target.closest('button'); if (!b) return; $('#bo-mode').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x===b?'true':'false')); mode = b.dataset.mode; render(); });
+  window.addEventListener('resize', ()=>render());
+  const lg = $('#bo-legend'); ['connery','lazenby','moore','dalton','brosnan','craig'].forEach(k=>lg.appendChild(el('span',{},`<i style="background:${col(k)}"></i>${ACT[k].short}`)));
+})();
+
+/* ---------------- RATINGS: scatter ---------------- */
+(function scatter(){
+  const W = 1120, H = 440, l = 56, r = 30, t = 20, b = 50;
+  const X = v => l + (v-2.5)/(4.15-2.5)*(W-l-r);
+  const Y = v => t + (1-(v-30)/(100-30))*(H-t-b);
+  const s = sv('svg',{viewBox:`0 0 ${W} ${H}`,style:'min-width:700px;width:100%;height:auto;display:block',role:'img','aria-label':'Scatter of critics score against Letterboxd average for each film'});
+  for (let v=30; v<=100; v+=10){ s.appendChild(sv('line',{x1:l,x2:W-r,y1:Y(v),y2:Y(v),stroke:'var(--rule)','stroke-dasharray':'2 4'})); s.appendChild(sv('text',{x:l-8,y:Y(v)+4,'text-anchor':'end','font-size':11,fill:'var(--muted)'},v+'%')); }
+  for (let v=2.5; v<=4.01; v+=0.25){ s.appendChild(sv('line',{x1:X(v),x2:X(v),y1:t,y2:H-b,stroke:'var(--rule)','stroke-dasharray':'2 4'})); s.appendChild(sv('text',{x:X(v),y:H-b+18,'text-anchor':'middle','font-size':11,fill:'var(--muted)'},v.toFixed(2))); }
+  s.appendChild(sv('text',{x:W-r,y:H-8,'text-anchor':'end','font-size':11,fill:'var(--muted)'},'LETTERBOXD AVERAGE →'));
+  s.appendChild(sv('text',{x:l+4,y:t+12,'font-size':11,fill:'var(--muted)'},'↑ ROTTEN TOMATOES'));
+  const OFF = {1:[12,4,'start'],2:[-12,4,'end'],3:[12,4,'start'],21:[-12,4,'end'],23:[-12,10,'end'],10:[-12,-9,'end'],25:[12,-6,'start'],17:[12,12,'start'],6:[0,20,'middle'],16:[-12,-4,'end'],15:[-12,12,'end'],20:[12,4,'start'],14:[12,10,'start'],13:[12,-2,'start'],9:[12,4,'start'],22:[12,-4,'start'],4:[-12,4,'end'],24:[0,-14,'middle'],7:[-12,-6,'end'],11:[-12,12,'end']};
+  const pts = [];
+  F.forEach(f=>{
+    const g = sv('g',{style:'cursor:pointer'});
+    const c = sv('circle',{cx:X(f.lb),cy:Y(f.rt),r:8,fill:col(f.a),'fill-opacity':.85,stroke:'var(--bg)','stroke-width':1.5});
+    g.appendChild(c); pts.push(c);
+    if (OFF[f.n]){ const [dx,dy,an] = OFF[f.n]; g.appendChild(sv('text',{x:X(f.lb)+dx,y:Y(f.rt)+dy,'text-anchor':an,'font-size':12,fill:'var(--fg)'},f.s)); }
+    bindTip(g, ()=>`<b>${f.t}</b>${f.y} · ${ACT[f.a].short}<br>RT ${f.rt}% · audience ${f.pop}%<br>Letterboxd ${f.lb.toFixed(2)} · IMDb ≈${f.imdb.toFixed(1)}`);
+    s.appendChild(g);
+  });
+  $('#scatter').appendChild(s);
+  onView($('#scatter'), ()=>{ const t0 = performance.now(); pts.forEach(c=>c.setAttribute('r',0)); (function step(now){ let done = true; pts.forEach((c,i)=>{ const k = Math.min(1, Math.max(0,(now - t0 - i*35)/450)); if (k<1) done = false; c.setAttribute('r', (8*(1-Math.pow(1-k,3))).toFixed(2)); }); if (!done) requestAnimationFrame(step); })(t0); });
+})();
+
+/* ---------------- RATINGS: table ---------------- */
+(function rtable(){
+  const tb = $('#rtable');
+  const cols = [["n","#",1],["t","Film",0],["a","Bond",0],["rt","RT critics",1],["pop","RT audience",1],["imdb","IMDb ≈",1],["lb","Letterboxd",1],["lbn","LB ratings",1],["ww","Worldwide",1]];
+  const head = el('thead'); const hr = el('tr'); cols.forEach(([k,l])=>{ const th = el('th',{'data-k':k,scope:'col',tabindex:'0'},l); hr.appendChild(th); }); head.appendChild(hr); tb.appendChild(head);
+  const body = el('tbody'); tb.appendChild(body);
+  const bar = (v,max,c) => `<span class="mini"><b style="width:${v/max*100}%;background:${c}"></b></span>`;
+  let key = 'n', dir = 1;
+  function draw(){
+    const rows = [...F].sort((p,q)=>{ let a = p[key], b = q[key]; if (key==='a'){ a = ACT[p.a].short; b = ACT[q.a].short; } if (a==null) return 1; if (b==null) return -1; return (typeof a==='string' ? a.localeCompare(b) : a-b)*dir; });
+    body.innerHTML = rows.map(f=>`<tr><td class="c">${f.n}</td><td>${f.t} <span class="label" style="letter-spacing:0">${f.y}</span></td><td><span class="dot" style="background:${col(f.a)}"></span>${ACT[f.a].short}</td><td class="c"><span class="cell">${bar(f.rt,100,col(f.a))}${f.rt}%</span></td><td class="c">${f.pop}%</td><td class="c">${f.imdb.toFixed(1)}</td><td class="c"><span class="cell">${bar(f.lb-2,2.1,col(f.a))}${f.lb.toFixed(2)}</span></td><td class="c">${f.lbn? (f.lbn/1000).toFixed(0)+'k':'—'}</td><td class="c">${fmtM(f.ww)}</td></tr>`).join('');
+    head.querySelectorAll('th').forEach(th=>{ if (th.dataset.k===key) th.setAttribute('aria-sort', dir>0?'ascending':'descending'); else th.removeAttribute('aria-sort'); });
+  }
+  const sortBy = k => { if (key===k) dir = -dir; else { key = k; dir = (k==='t'||k==='a'||k==='n') ? 1 : -1; } draw(); };
+  head.addEventListener('click', e=>{ const th = e.target.closest('th'); if (th) sortBy(th.dataset.k); });
+  head.addEventListener('keydown', e=>{ if ((e.key==='Enter'||e.key===' ') && e.target.dataset.k){ e.preventDefault(); sortBy(e.target.dataset.k); } });
+  draw();
+})();
+
+/* ---------------- CRITICS ---------------- */
+(function crit(){
+  const N = [
+    ["Bosley Crowther · The New York Times · 1964","On Goldfinger: Crowther found it fast, furious fun, heavy on science-fiction gadgetry and mechanical melodrama and light on the bedroom farce of the earlier films. His mixed respect is typical of how serious critics first treated Bond: as an expensive, enjoyable toy."],
+    ["Roger Ebert · Great Movies essay","Ebert later named Goldfinger the best of the Bonds and the moment the series discovered its own formula, the film every later entry is measured against."],
+    ["Roger Ebert · RogerEbert.com · 2006","On Casino Royale: Ebert argued that Craig makes a superb Bond and that the film answered his long-running complaints about the series' gadgets and cartoon villains by giving the character a new, believable reality."],
+    ["David Denby · The New Yorker · 2012","The dissent on Skyfall: Denby admired the craft but felt Mendes had <i>“solemnized it with Freud,”</i> loading a pop entertainment with more psychological weight than it could carry. Most critics disagreed and called it the best Bond in decades."],
+    ["Peter Bradshaw · The Guardian · 2021","On No Time to Die: Bradshaw gave five stars and called it an epic barnstormer. The Daily Telegraph and The Times also gave five stars."],
+    ["The A.V. Club · 2021","The counterpoint: The A.V. Club called No Time to Die a sentimental, unsatisfying end to the Craig era, arguing that the serialised mythology had made Bond smaller. The split between British and American critics over the ending was notable."]
+  ];
+  const g = $('#critnotes');
+  N.forEach(([w,p])=>{ const d = el('div',{class:'note'}); d.innerHTML = `<span class="who">${w}</span><p>${p}</p>`; g.appendChild(d); });
+  const A = [
+    ["1965","Goldfinger wins the Oscar for Best Sound Effects (Norman Wanstall), the series' first Academy Award."],
+    ["1966","Thunderball wins the Oscar for Best Special Visual Effects (John Stears)."],
+    ["1974–82","Best Original Song nominations for Live and Let Die, Nobody Does It Better and For Your Eyes Only; The Spy Who Loved Me is also nominated for score and art direction, Moonraker for visual effects. In 1982 Cubby Broccoli receives the Irving G. Thalberg Memorial Award."],
+    ["2007","Casino Royale wins BAFTA's sound award, and Eva Green wins the BAFTA Rising Star Award."],
+    ["2013","Skyfall wins two Oscars, Best Original Song (Adele, Paul Epworth) and Sound Editing (tied with Zero Dark Thirty), from five nominations including Roger Deakins' cinematography and Thomas Newman's score. It also wins the BAFTA for Outstanding British Film."],
+    ["2016","Sam Smith and Jimmy Napes win the Oscar for \"Writing's on the Wall\"."],
+    ["2022","Billie Eilish and Finneas win the Oscar, Golden Globe and Grammy for \"No Time to Die\": three Oscar-winning Bond songs in a row."],
+    ["Razzie","Madonna wins the 2003 Razzie for Worst Supporting Actress for her fencing-instructor cameo in Die Another Day."]
+  ];
+  const a = $('#awards'); A.forEach(([k,v])=>{ const d = el('div'); d.innerHTML = `<span class="lk">${k}</span><span>${v}</span>`; a.appendChild(d); });
+  const C = [
+    ["Sex & consent","The Goldfinger hayloft scene, Thunderball's clinic scene and Skyfall's shower scene with Sévérine, a trafficking survivor, are the most cited examples of the series' treatment of women. Daniel Craig and Cary Fukunaga both spoke publicly about moving past it for No Time to Die, which brought in Phoebe Waller-Bridge to polish the script."],
+    ["Race","You Only Live Twice's yellowface disguise and Live and Let Die's voodoo villains and caricatured Harlem are now routinely discussed as the franchise's worst moments."],
+    ["\"James Blond\"","In 2005 tabloids and fan websites campaigned against Craig's casting as too blond, too short and too rough. Casino Royale's reviews ended the argument."],
+    ["The Spectre retcon","Making Blofeld Bond's foster brother and the hidden author of the earlier films' villains is still the most argued-over decision of the Craig era."],
+    ["Killing Bond","No Time to Die's ending split audiences, and the press, over whether Bond should be allowed to die at all."],
+    ["Product placement","Skyfall's reported Heineken deal (Bond drinking beer) drew mockery; brand partnerships now help fund each film."],
+    ["Who owns Bond","The sixty-year Thunderball rights fight with Kevin McClory, the MGM–Sony battle in the late 1990s, and in 2025 the Broccolis handing creative control to Amazon, a move many fans saw as the end of a family-run era."]
+  ];
+  const c = $('#contro'); C.forEach(([k,v])=>{ const d = el('div'); d.innerHTML = `<span class="lk">${k}</span><span>${v}</span>`; c.appendChild(d); });
+})();
+
+/* ---------------- COMMUNITY ---------------- */
+(function comm(){
+  const T = [
+    ["r/JamesBond · 2016","Consensus ranking of all 24 films", "https://www.reddit.com/r/JamesBond/comments/4f92e2/presenting_rjamesbonds_consensus_ranking_of_the/", "The subreddit's pooled ranking. Die Another Day was voted last by more members than any other film was voted into any single place; three films made nobody's top five."],
+    ["r/respectthreads · 2021","Respect James Bond, 007 (Timothy Dalton)", "https://www.reddit.com/r/respectthreads/comments/nhhyhj/", "A catalogue of Dalton's on-screen feats; the comments become an extended case for him as the most underrated Bond."],
+    ["r/JamesBond · live search","Pattinson casting reaction threads", "https://www.reddit.com/r/JamesBond/search/?q=pattinson&sort=top", "Opens the subreddit's current search. Reaction since 16 November has split between excitement about Villeneuve and scepticism about a superhero star."],
+    ["r/TrueFilm · live search","Long-form Bond discussions", "https://www.reddit.com/r/TrueFilm/search/?q=james%20bond&sort=top", "Opens r/TrueFilm's search, where the recurring essays are on Skyfall's obsolescence theme and whether the Craig continuity worked."],
+    ["MI6 Community forum","The Timothy Dalton appreciation thread", "https://www.mi6community.com/discussion/comment/143672", "One of the longest-running fan threads anywhere, arguing that Dalton's films were misunderstood on release."],
+    ["AJB007 forum","James Bond film rankings", "https://www.ajb007.co.uk/discussion/comment/1063405/", "A long-running British fan forum's ranking thread, useful for comparing with the Reddit consensus."]
+  ];
+  const g = $('#threads'); T.forEach(([where,title,url,p])=>{ const d = el('div'); d.innerHTML = `<span class="lk">${where}</span><span><a href="${url}" target="_blank" rel="noopener">${title}</a><br><span style="color:var(--muted);font-size:.92rem">${p}</span></span>`; g.appendChild(d); });
+  const X = [
+    ["The codename theory","A popular fan theory holds that \"James Bond\" is a codename passed between agents, which would explain the different faces and Lazenby's joke about \"the other fellow.\" Skyfall effectively ended it by showing Bond's parents' grave at the family home in Scotland."],
+    ["Shaken, not stirred","Dr. No himself first offers Bond the medium-dry martini, \"shaken not stirred,\" in 1962; Bond orders it in Goldfinger. Moore's Bond rarely does, and Craig's barman asks \"Shaken or stirred?\" to which he replies, \"Do I look like I give a damn?\""],
+    ["The corkscrew jump","The Man with the Golden Gun's 360° car jump was calculated by computer at Cornell's aeronautical lab and done in one take. Fans still complain about the slide-whistle."],
+    ["The gold paint myth","The legend that Shirley Eaton nearly died from skin suffocation while painted gold in Goldfinger is false: the make-up team left a patch of skin unpainted, and Eaton suffered no harm."],
+    ["Brosnan's long wait","Brosnan was announced as Bond in 1986 until NBC used his sudden fame to renew Remington Steele. Dalton got the role, and Brosnan waited nine years."],
+    ["Goldeneye, the house","Ian Fleming's Jamaican home, Goldeneye, gave its name to the 1995 film. Fleming named the house after a wartime contingency plan for Gibraltar, Operation Goldeneye."],
+    ["The 007 Stage","Pinewood's giant 007 Stage was built in 1976 for The Spy Who Loved Me's supertanker set. It has burned down twice, during Ridley Scott's Legend in 1984 and after filming on Casino Royale in 2006, and was rebuilt both times."],
+    ["Craig, Commander","Craig was made an honorary Commander in the Royal Navy in 2021, Bond's rank, and in 2022 was appointed CMG, the same honour Fleming gave Bond."]
+  ];
+  const tb = $('#tidbits'); X.forEach(([k,v])=>{ const d = el('div'); d.innerHTML = `<span class="lk">${k}</span><span>${v}</span>`; tb.appendChild(d); });
+})();
+
+/* ---------------- BOND 26 FACTS ---------------- */
+(function f7(){
+  const D = [["Actor","Robert Pattinson (born 13 May 1986, London), age 40 at casting"],["Announced","16 November 2026 by Amazon MGM Studios, partly via the official 007 Instagram account"],["Director","Denis Villeneuve, announced 25 June 2025"],["Writer","Steven Knight (Peaky Blinders), confirmed summer 2025"],["Producers","Amy Pascal and David Heyman; Tanya Lapointe executive producer"],["Rights","Amazon MGM took creative control from Barbara Broccoli and Michael G. Wilson: agreement February 2025, effective March 2025"],["Shooting","Expected 2027; studio deal with Pinewood not yet agreed"],["Release","Not announced; 2028 widely reported but unconfirmed"],["Title","Untitled"]];
+  const g = $('#facts7'); D.forEach(([k,v])=>{ const d = el('div'); d.innerHTML = `<span>${k}</span><span>${v}</span>`; g.appendChild(d); });
+})();
+
+/* ---------------- NAV highlight ---------------- */
+(function nav(){
+  if (!('IntersectionObserver' in window)) return;
+  const links = [...document.querySelectorAll('.topnav a.nl')]; const map = {}; links.forEach(a=>map[a.getAttribute('href').slice(1)] = a);
+  const io = new IntersectionObserver(es=>{ es.forEach(e=>{ if (e.isIntersecting){ links.forEach(a=>a.classList.remove('on')); const a = map[e.target.id]; if (a){ a.classList.add('on'); a.scrollIntoView({block:'nearest',inline:'nearest'}); } } }); }, {rootMargin:'-45% 0px -50% 0px'});
+  Object.keys(map).forEach(id=>{ const s = document.getElementById(id); if (s) io.observe(s); });
+})();
+})();
+</script>
